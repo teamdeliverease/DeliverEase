@@ -12,8 +12,22 @@ const config = {
 firebase.initializeApp(config);
 
 function init() {
+  initForms();
+  initAutocompleteForAddressFields();
+}
+
+function initForms() {
   document.getElementById('volunteer-form').addEventListener('submit', submitVolunteerForm);
   document.getElementById('requester-form').addEventListener('submit', submitRequesterForm);
+}
+
+function initAutocompleteForAddressFields() {
+  fields = document.getElementsByClassName("address-field");
+  for (field of fields) {
+    var autocomplete = new google.maps.places.Autocomplete(field);
+    autocomplete.setFields(['formatted_address']);
+    autocomplete.setTypes(['address']);
+  }
 }
 
 function submitVolunteerForm(e) {
@@ -33,7 +47,6 @@ function submitVolunteerForm(e) {
       alert('Geocode was not successful for the following reason: ' + status);
     }
   });
-
 }
 
 function submitRequesterForm(e) {
@@ -48,7 +61,6 @@ function submitRequesterForm(e) {
   geocoder.geocode({'address': address}, function(results, status) {
     if (status === google.maps.GeocoderStatus.OK) {
       var location = results[0].geometry.location;
-      console.log(results[0].formatted_address);
       var data = {name: name, phone: phone, address: results[0].formatted_address, list: list, lat: location.lat(), lng: location.lng()};
       addToFirebase('requesters', data);
     } else {
