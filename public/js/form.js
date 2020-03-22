@@ -27,7 +27,7 @@ function submitVolunteerForm(e) {
   geocoder.geocode({'address': address}, function(results, status) {
     if (status === google.maps.GeocoderStatus.OK) {
       var location = results[0].geometry.location;
-      var data = {name: name, phone: phone, address: address, lat: location.lat(), lng: location.lng()};
+      var data = {name: name, phone: phone, address: results[0].formatted_address, lat: location.lat(), lng: location.lng()};
       addToFirebase('volunteers', data);
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
@@ -48,7 +48,8 @@ function submitRequesterForm(e) {
   geocoder.geocode({'address': address}, function(results, status) {
     if (status === google.maps.GeocoderStatus.OK) {
       var location = results[0].geometry.location;
-      var data = {name: name, phone: phone, address: address, list: list, lat: location.lat(), lng: location.lng()};
+      console.log(results[0].formatted_address);
+      var data = {name: name, phone: phone, address: results[0].formatted_address, list: list, lat: location.lat(), lng: location.lng()};
       addToFirebase('requesters', data);
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
