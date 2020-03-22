@@ -51,7 +51,7 @@ function submitVolunteerForm(e) {
   var address = getInputValue('volunteer-address');
 
   try {
-    validatePhoneNumber(requesterPhoneInput);
+    validatePhoneNumber(volunteerPhoneInput);
   } catch (ex) {
     alert(ex);
     return;
