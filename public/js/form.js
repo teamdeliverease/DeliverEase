@@ -2,14 +2,14 @@ var requesterPhoneInput;
 var volunteerPhoneInput;
 
 const config = {
-  apiKey: "AIzaSyCdINEXNyFJrqzAlIG06Xd5XhT6Q-iZ0-c",
-  authDomain: "deliverease-f9eec.firebaseapp.com",
-  databaseURL: "https://deliverease-f9eec.firebaseio.com",
-  projectId: "deliverease-f9eec",
-  storageBucket: "deliverease-f9eec.appspot.com",
-  messagingSenderId: "436542528471",
-  appId: "1:436542528471:web:90e09ee2379187a34c4992",
-  measurementId: "G-KVEMXD2KHE"
+  apiKey: 'AIzaSyCdINEXNyFJrqzAlIG06Xd5XhT6Q-iZ0-c',
+  authDomain: 'deliverease-f9eec.firebaseapp.com',
+  databaseURL: 'https://deliverease-f9eec.firebaseio.com',
+  projectId: 'deliverease-f9eec',
+  storageBucket: 'deliverease-f9eec.appspot.com',
+  messagingSenderId: '436542528471',
+  appId: '1:436542528471:web:90e09ee2379187a34c4992',
+  measurementId: 'G-KVEMXD2KHE',
 };
 
 firebase.initializeApp(config);
@@ -26,7 +26,7 @@ function initForms() {
 }
 
 function initAutocompleteForAddressFields() {
-  fields = document.getElementsByClassName("address-field");
+  fields = document.getElementsByClassName('address-field');
   for (field of fields) {
     var autocomplete = new google.maps.places.Autocomplete(field);
     autocomplete.setFields(['formatted_address']);
@@ -36,13 +36,12 @@ function initAutocompleteForAddressFields() {
 
 function initPhoneValidation() {
   requesterPhoneInput = window.intlTelInput(document.querySelector('#requester-phone'), {
-    utilsScript: "assets/plugins/intl-tel-input/js/utils.js"
+    utilsScript: 'assets/plugins/intl-tel-input/js/utils.js',
   });
   volunteerPhoneInput = window.intlTelInput(document.querySelector('#volunteer-phone'), {
-    utilsScript: "assets/plugins/intl-tel-input/js/utils.js"
+    utilsScript: 'assets/plugins/intl-tel-input/js/utils.js',
   });
 }
-
 
 function submitVolunteerForm(e) {
   e.preventDefault();
@@ -52,17 +51,22 @@ function submitVolunteerForm(e) {
   var address = getInputValue('volunteer-address');
 
   var geocoder = new google.maps.Geocoder();
-  geocoder.geocode({'address': address}, function(results, status) {
+  geocoder.geocode({ address: address }, function(results, status) {
     if (status === google.maps.GeocoderStatus.OK) {
       var location = results[0].geometry.location;
-      var data = {name: name, phone: phone, address: results[0].formatted_address, lat: location.lat(), lng: location.lng()};
+      var data = {
+        name: name,
+        phone: phone,
+        address: results[0].formatted_address,
+        lat: location.lat(),
+        lng: location.lng(),
+      };
       addToFirebase('volunteers', data);
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
     }
   });
 }
-
 
 function submitRequesterForm(e) {
   e.preventDefault();
@@ -73,10 +77,17 @@ function submitRequesterForm(e) {
   var list = getInputValue('requester-shopping-list');
 
   var geocoder = new google.maps.Geocoder();
-  geocoder.geocode({'address': address}, function(results, status) {
+  geocoder.geocode({ address: address }, function(results, status) {
     if (status === google.maps.GeocoderStatus.OK) {
       var location = results[0].geometry.location;
-      var data = {name: name, phone: phone, address: results[0].formatted_address, list: list, lat: location.lat(), lng: location.lng()};
+      var data = {
+        name: name,
+        phone: phone,
+        address: results[0].formatted_address,
+        list: list,
+        lat: location.lat(),
+        lng: location.lng(),
+      };
       addToFirebase('requesters', data);
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
@@ -87,13 +98,19 @@ function submitRequesterForm(e) {
 function validatePhoneNumber(input) {
   var phoneError = input.getValidationError();
   // here, the index maps to the error code returned from getValidationError - see readme
-  var errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
-  
+  var errorMap = [
+    'Invalid number',
+    'Invalid country code',
+    'Too short',
+    'Too long',
+    'Invalid number',
+  ];
+
   if (phoneError && phoneError >= 0 && phoneError < 5) {
     return errorMap[phoneError];
-  } 
+  }
 
-  return "";
+  return '';
 }
 
 function getInputValue(id) {
@@ -101,9 +118,12 @@ function getInputValue(id) {
 }
 
 function addToFirebase(ref, data) {
-  var ref = firebase.database().ref(ref).push(data, function(err) {
-    if (err) {
-      console.warn(err);
-    }
-  });
+  var ref = firebase
+    .database()
+    .ref(ref)
+    .push(data, function(err) {
+      if (err) {
+        console.warn(err);
+      }
+    });
 }
