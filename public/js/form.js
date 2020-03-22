@@ -111,8 +111,6 @@ function validatePhoneNumber(input) {
   if (phoneError && phoneError >= 0 && phoneError < 5) {
     alert(errorMap[phoneError]);
   }
-
-  return '';
 }
 
 function getInputValue(id) {
