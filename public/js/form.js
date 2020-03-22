@@ -1,3 +1,6 @@
+var requesterPhoneInput;
+var volunteerPhoneInput;
+
 const config = {
   apiKey: "AIzaSyCdINEXNyFJrqzAlIG06Xd5XhT6Q-iZ0-c",
   authDomain: "deliverease-f9eec.firebaseapp.com",
@@ -14,6 +17,7 @@ firebase.initializeApp(config);
 function init() {
   initForms();
   initAutocompleteForAddressFields();
+  initPhoneValidation();
 }
 
 function initForms() {
@@ -30,11 +34,21 @@ function initAutocompleteForAddressFields() {
   }
 }
 
+function initPhoneValidation() {
+  requesterPhoneInput = window.intlTelInput(document.querySelector('#requester-phone'), {
+    utilsScript: "assets/plugins/intl-tel-input/js/utils.js"
+  });
+  volunteerPhoneInput = window.intlTelInput(document.querySelector('#volunteer-phone'), {
+    utilsScript: "assets/plugins/intl-tel-input/js/utils.js"
+  });
+}
+
+
 function submitVolunteerForm(e) {
   e.preventDefault();
 
   var name = getInputValue('volunteer-name');
-  var phone = getInputValue('volunteer-phone');
+  var phone = volunteerPhoneInput.getNumber();
   var address = getInputValue('volunteer-address');
 
   var geocoder = new google.maps.Geocoder();
@@ -49,11 +63,12 @@ function submitVolunteerForm(e) {
   });
 }
 
+
 function submitRequesterForm(e) {
   e.preventDefault();
 
   var name = getInputValue('requester-name');
-  var phone = getInputValue('requester-phone');
+  var phone = requesterPhoneInput.getNumber();
   var address = getInputValue('requester-address');
   var list = getInputValue('requester-shopping-list');
 
@@ -67,6 +82,18 @@ function submitRequesterForm(e) {
       alert('Geocode was not successful for the following reason: ' + status);
     }
   });
+}
+
+function validatePhoneNumber(input) {
+  var phoneError = input.getValidationError();
+  // here, the index maps to the error code returned from getValidationError - see readme
+  var errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+  
+  if (phoneError && phoneError >= 0 && phoneError < 5) {
+    return errorMap[phoneError];
+  } 
+
+  return "";
 }
 
 function getInputValue(id) {
