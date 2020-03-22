@@ -53,7 +53,7 @@ function submitVolunteerForm(e) {
   try {
     validatePhoneNumber(volunteerPhoneInput);
   } catch (ex) {
-    alert(ex);
+    alert(ex.message);
     return;
   }
   var geocoder = new google.maps.Geocoder();
@@ -85,7 +85,7 @@ function submitRequesterForm(e) {
   try {
     validatePhoneNumber(requesterPhoneInput);
   } catch (ex) {
-    alert(ex);
+    alert(ex.message);
     return;
   }
   var geocoder = new google.maps.Geocoder();
@@ -119,7 +119,7 @@ function validatePhoneNumber(input) {
   ];
 
   if (phoneError && phoneError >= 0 && phoneError < 5) {
-    throw errorMap[phoneError];
+    throw new Error(errorMap[phoneError]);
   }
 }
 
