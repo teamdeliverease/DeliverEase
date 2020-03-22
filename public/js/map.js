@@ -41,22 +41,12 @@ function initMap() {
   }
 
   placeVolunteerMarkers();
+  placeRequesterMarkers();
 }
-
-// function addToFirebase(data) {
-//   var ref = firebase.database().ref('volunteers').push(data, function(err) {
-//     if (err) {
-//       console.warn(err);
-//     }
-//   });
-// }
 
 function placeVolunteerMarkers() {
   var volunteersRef = firebase.database().ref('volunteers');
   placeMarkers(volunteersRef, volunteerMarkerIcon);
-  // volunteersRef.on('value', function(snapshot) {
-  //   placeMarkers();
-  // });
 }
 
 function placeRequesterMarkers() {
