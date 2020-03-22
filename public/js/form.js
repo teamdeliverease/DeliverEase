@@ -118,6 +118,7 @@ function getInputValue(id) {
 }
 
 function addToFirebase(ref, data) {
+  data.timestamp = firebase.database.ServerValue.TIMESTAMP;
   var ref = firebase
     .database()
     .ref(ref)
