@@ -50,7 +50,12 @@ function submitVolunteerForm(e) {
   var phone = volunteerPhoneInput.getNumber();
   var address = getInputValue('volunteer-address');
 
-  validatePhoneNumber(volunteerPhoneInput);
+  try {
+    validatePhoneNumber(volunteerPhoneInput);
+  } catch (ex) {
+    alert(ex.message);
+    return;
+  }
   var geocoder = new google.maps.Geocoder();
   geocoder.geocode({ address: address }, function(results, status) {
     if (status === google.maps.GeocoderStatus.OK) {
@@ -77,7 +82,12 @@ function submitRequesterForm(e) {
   var address = getInputValue('requester-address');
   var list = getInputValue('requester-shopping-list');
 
-  validatePhoneNumber(requesterPhoneInput);
+  try {
+    validatePhoneNumber(requesterPhoneInput);
+  } catch (ex) {
+    alert(ex.message);
+    return;
+  }
   var geocoder = new google.maps.Geocoder();
   geocoder.geocode({ address: address }, function(results, status) {
     if (status === google.maps.GeocoderStatus.OK) {
@@ -109,7 +119,7 @@ function validatePhoneNumber(input) {
   ];
 
   if (phoneError && phoneError >= 0 && phoneError < 5) {
-    alert(errorMap[phoneError]);
+    throw new Error(errorMap[phoneError]);
   }
 }
 
