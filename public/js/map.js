@@ -58,7 +58,19 @@ function placeMarkers(ref, icon) {
   ref.once('value', function(snapshot) {
     snapshot.forEach(function(user) {
       var userData = user.val();
-      new google.maps.Marker({position: {lat: userData.lat, lng: userData.lng}, map: map, icon: icon});
+      var marker = new google.maps.Marker({position: {lat: userData.lat, lng: userData.lng}, map: map, icon: icon});
+      addInfoWindow(userData, marker);
     });
+  });
+}
+
+function addInfoWindow(userData, marker) {
+  var infowindow = new google.maps.InfoWindow({
+    content: "<p>Name: "+userData.name+"<br />Phone: "+userData.phone+"<br />Address: "+userData.address
+  });
+
+  marker.addListener('click', function() {
+    if (true) {}
+    infowindow.open(map, marker);
   });
 }
