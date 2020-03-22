@@ -50,6 +50,7 @@ function submitVolunteerForm(e) {
   var phone = volunteerPhoneInput.getNumber();
   var address = getInputValue('volunteer-address');
 
+  validatePhoneNumber(volunteerPhoneInput);
   var geocoder = new google.maps.Geocoder();
   geocoder.geocode({ address: address }, function(results, status) {
     if (status === google.maps.GeocoderStatus.OK) {
@@ -76,6 +77,7 @@ function submitRequesterForm(e) {
   var address = getInputValue('requester-address');
   var list = getInputValue('requester-shopping-list');
 
+  validatePhoneNumber(requesterPhoneInput);
   var geocoder = new google.maps.Geocoder();
   geocoder.geocode({ address: address }, function(results, status) {
     if (status === google.maps.GeocoderStatus.OK) {
@@ -99,18 +101,16 @@ function validatePhoneNumber(input) {
   var phoneError = input.getValidationError();
   // here, the index maps to the error code returned from getValidationError - see readme
   var errorMap = [
-    'Invalid number',
+    'Invalid phone number',
     'Invalid country code',
-    'Too short',
-    'Too long',
-    'Invalid number',
+    'Phone number too short',
+    'Phone number too long',
+    'Invalid phone number',
   ];
 
   if (phoneError && phoneError >= 0 && phoneError < 5) {
-    return errorMap[phoneError];
+    alert(errorMap[phoneError]);
   }
-
-  return '';
 }
 
 function getInputValue(id) {
