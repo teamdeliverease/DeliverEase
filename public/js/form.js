@@ -49,6 +49,14 @@ function submitVolunteerForm(e) {
   });
 }
 
+
+
+// Phone validation plugin
+var requesterPhone = document.querySelector('#requester-phone');
+var iti = window.intlTelInput(requesterPhone, {
+  utilsScript: "assets/plugins/intl-tel-input/js/utils.js"
+});
+
 function submitRequesterForm(e) {
   e.preventDefault();
 
@@ -56,6 +64,14 @@ function submitRequesterForm(e) {
   var phone = getInputValue('requester-phone');
   var address = getInputValue('requester-address');
   var list = getInputValue('requester-shopping-list');
+
+  var phoneError = iti.getValidationError();
+  // here, the index maps to the error code returned from getValidationError - see readme
+  var errorMap = [ "Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+  
+  if (phoneError && phoneError >= 0 && phoneError < 5) {
+    console.log(errorMap[phoneError]);
+  }
 
   var geocoder = new google.maps.Geocoder();
   geocoder.geocode({'address': address}, function(results, status) {
@@ -80,3 +96,4 @@ function addToFirebase(ref, data) {
     }
   });
 }
+
