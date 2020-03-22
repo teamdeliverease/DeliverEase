@@ -1,9 +1,13 @@
-.send-container {
-  width: 100%;
+.full-width {
+  width: 100% !important;
 }
 
-.send-container button {
+.full-width button {
   width: 30%;
+}
+
+.terms-link {
+  color: #007bff !important;
 }
 
 .iti__flag {
