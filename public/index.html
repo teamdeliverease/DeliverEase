@@ -19,7 +19,6 @@
 
     <!-- Theme CSS -->
     <link id="theme-style" rel="stylesheet" href="assets/css/theme.css">
-
 </head>
 
 <body>
@@ -125,22 +124,22 @@
 							    <h2 class="form-heading text-center">We'll route your request to a volunteer who is going to the store soon.</h2>
 							    <div class="form-intro text-center mb-3">Then they'll drop off your items directly to your front door! Simple as that.</div>
 							    <div class="form-wrapper">
-								    <form class="form-inline justify-content-center flex-wrap">
+								    <form class="form-inline justify-content-center flex-wrap" id="requester-form">
 										<div class="form-group mr-md-2 mb-3 mb-md-0">
 											<label for="name" class="sr-only">Name</label>
-											<input type="name" class="form-control " id="name" placeholder="Name">
+											<input type="name" class="form-control " id="requester-name" placeholder="Name">
 										</div>
 										<div class="form-group mr-md-2 mb-3 mb-md-0">
 											<label for="phone" class="sr-only">Phone Number</label>
-											<input type="phone" class="form-control " id="phone" placeholder="Phone Number">
+											<input type="phone" class="form-control " id="requester-phone" placeholder="Phone Number">
 										</div>
 										<div class="form-group mr-md-2 mb-3 mb-md-0">
 											<label for="address" class="sr-only">Address</label>
-											<input type="address" class="form-control " id="address" placeholder="Address">
+											<input type="address" class="form-control " id="requester-address" placeholder="Address">
 										</div>
 										<div class="form-group">
-									    <label for="shoppingList" class="sr-only">Enter shopping list here.</label>
-									    <textarea class="form-control" id="shoppingList" placeholder="Enter shopping list here." 	rows="4"></textarea>
+									    <label for="shopping-list" class="sr-only">Enter shopping list here.</label>
+									    <textarea class="form-control" id="requester-shopping-list" placeholder="Enter shopping list here." 	rows="4"></textarea>
 									  </div>
 										<button type="submit" class="btn btn-primary btn-submit">Send</button>
 									</form>
@@ -164,18 +163,18 @@
 									    <h2 class="form-heading text-center">More description here</h2>
 									    <div class="form-intro text-center mb-3">More description here too</div>
 									    <div class="form-wrapper">
-										    <form class="form-inline justify-content-center flex-wrap">
+										    <form class="form-inline justify-content-center flex-wrap" id="volunteer-form">
 												<div class="form-group mr-md-2 mb-3 mb-md-0">
 													<label for="name" class="sr-only">Name</label>
-													<input type="name" class="form-control " id="name" placeholder="Name">
+													<input type="name" class="form-control " id="volunteer-name" placeholder="Name">
 												</div>
 												<div class="form-group mr-md-2 mb-3 mb-md-0">
 													<label for="phone" class="sr-only">Phone Number</label>
-													<input type="phone" class="form-control " id="phone" placeholder="Phone Number">
+													<input type="phone" class="form-control " id="volunteer-phone" placeholder="Phone Number">
 												</div>
 												<div class="form-group mr-md-2 mb-3 mb-md-0">
 													<label for="address" class="sr-only">Address</label>
-													<input type="address" class="form-control " id="address" placeholder="Address">
+													<input type="address" class="form-control " id="volunteer-address" placeholder="Address">
 												</div>
 												<button type="submit" class="btn btn-primary btn-submit mb-3 mb-md-0">Send</button>
 											</form>
@@ -213,12 +212,12 @@
 
     <footer class="footer">
 
-	    <div class="footer-bottom text-center py-5">
+      <div class="footer-bottom text-center py-5">
 
-	        <!--/* This template is released under the Creative Commons Attribution 3.0 License. Please keep the attribution link below when using for your own project. Thank you for your support. :) If you'd like to use the template without the attribution, you can buy the commercial license via our website: themes.3rdwavemedia.com */-->
+          <!--/* This template is released under the Creative Commons Attribution 3.0 License. Please keep the attribution link below when using for your own project. Thank you for your support. :) If you'd like to use the template without the attribution, you can buy the commercial license via our website: themes.3rdwavemedia.com */-->
             <small class="copyright">Designed with <i class="fas fa-heart" style="color: #fb866a;"></i> by <a class="theme-link" href="http://themes.3rdwavemedia.com" target="_blank">Xiaoying Riley</a> for developers</small>
 
-	    </div>
+      </div>
 
     </footer>
 
@@ -231,6 +230,10 @@
 
     <script src="assets/js/main.js"></script>
 
+    <script defer src="/__/firebase/7.12.0/firebase-app.js"></script>
+    <script defer src="/__/firebase/7.12.0/firebase-database.js"></script>
+    <script defer src="js/form.js"></script>
+    <script async defer src="http://maps.google.com/maps/api/js?key=AIzaSyBnw4vCWKTZgb-OMJPJ15ptB4dEa5zxQnQ&callback=init"></script>
+
 </body>
 </html>
-
