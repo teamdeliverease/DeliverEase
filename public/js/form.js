@@ -49,6 +49,8 @@ function submitVolunteerForm(e) {
   var name = getInputValue('volunteer-name');
   var phone = volunteerPhoneInput.getNumber();
   var address = getInputValue('volunteer-address');
+  var volunteerForm = document.getElementById('volunteer-form-wrapper');
+  var volunteerConfirmation = document.getElementById('volunteer-confirmation');
 
   try {
     validatePhoneNumber(volunteerPhoneInput);
@@ -68,6 +70,10 @@ function submitVolunteerForm(e) {
         lng: location.lng(),
       };
       addToFirebase('volunteers', data);
+
+      volunteerForm.classList.add('hidden');
+      volunteerForm.style.visibility = 'hidden';
+      volunteerConfirmation.style.display = 'block';
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
     }
@@ -81,6 +87,8 @@ function submitRequesterForm(e) {
   var phone = requesterPhoneInput.getNumber();
   var address = getInputValue('requester-address');
   var list = getInputValue('requester-shopping-list');
+  var requestForm = document.getElementById('request-form-wrapper');
+  var requestConfirmation = document.getElementById('request-confirmation');
 
   try {
     validatePhoneNumber(requesterPhoneInput);
@@ -101,6 +109,10 @@ function submitRequesterForm(e) {
         lng: location.lng(),
       };
       addToFirebase('requesters', data);
+
+      requestForm.classList.add('hidden');
+      requestForm.style.visibility = 'hidden';
+      requestConfirmation.style.display = 'block';
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
     }

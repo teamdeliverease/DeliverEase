@@ -10,6 +10,23 @@
   color: #007bff !important;
 }
 
+.confirmation-message {
+  display: none;
+}
+
+.confirmation-message h3 {
+  color: #008000 !important;
+}
+
+.form-wrapper {
+  max-height: 500px;
+}
+
+.hidden {
+  transition: max-height 0.5s ease-in;
+  max-height: 0;
+}
+
 .iti__flag {
   background-image: url("public/assets/plugins/intl-tel-input/build/img/flags.png");
 }
