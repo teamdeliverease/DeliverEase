@@ -1,6 +1,17 @@
 {
   "rules": {
-    ".read": true,
-    ".write": true
+    ".read": false,
+    "volunteers": {
+      "$volunteer": {
+        ".validate": "newData.hasChildren(['address', 'lat', 'lng', 'name', 'phone', 'timestamp'])",
+        ".write": true
+      }
+    },
+    "requesters": {
+      "$requester": {
+        ".validate": "newData.hasChildren(['address', 'lat', 'lng', 'name', 'phone', 'timestamp', 'list'])",
+        ".write": true
+      }
+    }
   }
 }
