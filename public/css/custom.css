@@ -3,7 +3,13 @@
 }
 
 .full-width button {
-  width: 30%;
+  width: 50%;
+}
+
+@media only screen and (max-width: 600px) {
+  .full-width button {
+    width: 100%;
+  }
 }
 
 .terms-link {
@@ -18,12 +24,12 @@
   color: #008000 !important;
 }
 
+
 .form-wrapper {
-  max-height: 500px;
+  max-height: 1000px;
 }
 
 .hidden {
-  transition: max-height 0.5s ease-in;
   max-height: 0;
 }
 
