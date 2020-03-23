@@ -13,6 +13,8 @@
     />
     <meta name="author" content="Xiaoying Riley at 3rd Wave Media" />
     <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="import" href="html/requester-modal.html" />
+    <link rel="import" href="html/volunteer-modal.html" />
 
     <!-- Google Font -->
     <link
@@ -257,7 +259,21 @@
                           rows="4"
                         ></textarea>
                       </div>
-                      <div class="form-group mr-md-2 send-container">
+                      <div class="form-check mr-md-2  mb-3 full-width">
+                        <input
+                          required
+                          type="checkbox"
+                          class="form-check-input"
+                          id="requester-terms"
+                        />
+                        <label class="form-check-label" for="requester-terms">
+                          I agree to the&nbsp;
+                          <a data-toggle="modal" data-target="#requesterModal" class="terms-link"
+                            >Terms of Use</a
+                          >
+                        </label>
+                      </div>
+                      <div class="form-group mr-md-2 full-width">
                         <button type="submit" class="btn btn-primary btn-submit mx-auto">
                           Send
                         </button>
@@ -322,7 +338,21 @@
                           placeholder="Address"
                         />
                       </div>
-                      <div class="form-group mr-md-2 send-container">
+                      <div class="form-check full-width mb-3">
+                        <input
+                          required
+                          type="checkbox"
+                          class="form-check-input"
+                          id="volunteer-terms"
+                        />
+                        <label class="form-check-label" for="volunteer-terms">
+                          I agree to the&nbsp;
+                          <a data-toggle="modal" data-target="#volunteerModal" class="terms-link"
+                            >Terms of Use</a
+                          >
+                        </label>
+                      </div>
+                      <div class="full-width form-group mr-md-2">
                         <button type="submit" class="btn btn-primary btn-submit mx-auto">
                           Send
                         </button>
@@ -376,6 +406,100 @@
       <!--//container-->
     </section>
     <!--//author-section-->
+
+    <!-- Requester Modal -->
+    <div
+      class="modal fade"
+      id="requesterModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="requesterModalCenterTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="requesterModalLongTitle">Requester Terms and Conditions</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Consequat id porta
+            nibh venenatis. Scelerisque varius morbi enim nunc faucibus a pellentesque sit amet.
+            Suspendisse in est ante in nibh mauris. Posuere urna nec tincidunt praesent. Consectetur
+            adipiscing elit ut aliquam purus sit amet luctus. Cras sed felis eget velit aliquet
+            sagittis. Iaculis nunc sed augue lacus viverra vitae congue eu consequat. Egestas
+            maecenas pharetra convallis posuere morbi leo urna. Nam libero justo laoreet sit amet
+            cursus sit amet. At elementum eu facilisis sed odio morbi quis. Suspendisse in est ante
+            in nibh mauris. At ultrices mi tempus imperdiet nulla malesuada pellentesque. Lorem
+            donec massa sapien faucibus et molestie ac feugiat sed. Risus sed vulputate odio ut.
+            Arcu odio ut sem nulla pharetra.
+            <br />
+            <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tellus elementum sagittis vitae et leo duis ut diam.
+            Curabitur gravida arcu ac tortor. Malesuada fames ac turpis egestas. Pulvinar neque
+            laoreet suspendisse interdum consectetur libero id faucibus nisl. Cursus eget nunc
+            scelerisque viverra. Adipiscing bibendum est ultricies integer quis auctor elit sed
+            vulputate. Sit amet mauris commodo quis imperdiet. Turpis massa tincidunt dui ut.
+            Sollicitudin nibh sit amet commodo nulla. Consequat interdum varius sit amet mattis
+            vulputate enim nulla. Sit amet consectetur adipiscing elit duis tristique. Bibendum enim
+            facilisis gravida neque. Odio eu feugiat pretium nibh ipsum consequat nisl vel pretium.
+            In nibh mauris cursus mattis molestie a iaculis at. Elementum tempus egestas sed sed.
+            Ultrices vitae auctor eu augue ut lectus arcu. Blandit massa enim nec dui nunc. Id diam
+            vel quam elementum.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Volunteer Modal -->
+    <div
+      class="modal fade"
+      id="volunteerModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="volunteerModalCenterTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="volunteerModalLongTitle">Volunteer Terms and Conditions</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Consequat id porta
+            nibh venenatis. Scelerisque varius morbi enim nunc faucibus a pellentesque sit amet.
+            Suspendisse in est ante in nibh mauris. Posuere urna nec tincidunt praesent. Consectetur
+            adipiscing elit ut aliquam purus sit amet luctus. Cras sed felis eget velit aliquet
+            sagittis. Iaculis nunc sed augue lacus viverra vitae congue eu consequat. Egestas
+            maecenas pharetra convallis posuere morbi leo urna. Nam libero justo laoreet sit amet
+            cursus sit amet. At elementum eu facilisis sed odio morbi quis. Suspendisse in est ante
+            in nibh mauris. At ultrices mi tempus imperdiet nulla malesuada pellentesque. Lorem
+            donec massa sapien faucibus et molestie ac feugiat sed. Risus sed vulputate odio ut.
+            Arcu odio ut sem nulla pharetra.
+            <br />
+            <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tellus elementum sagittis vitae et leo duis ut diam.
+            Curabitur gravida arcu ac tortor. Malesuada fames ac turpis egestas. Pulvinar neque
+            laoreet suspendisse interdum consectetur libero id faucibus nisl. Cursus eget nunc
+            scelerisque viverra. Adipiscing bibendum est ultricies integer quis auctor elit sed
+            vulputate. Sit amet mauris commodo quis imperdiet. Turpis massa tincidunt dui ut.
+            Sollicitudin nibh sit amet commodo nulla. Consequat interdum varius sit amet mattis
+            vulputate enim nulla. Sit amet consectetur adipiscing elit duis tristique. Bibendum enim
+            facilisis gravida neque. Odio eu feugiat pretium nibh ipsum consequat nisl vel pretium.
+            In nibh mauris cursus mattis molestie a iaculis at. Elementum tempus egestas sed sed.
+            Ultrices vitae auctor eu augue ut lectus arcu. Blandit massa enim nec dui nunc. Id diam
+            vel quam elementum.
+          </div>
+        </div>
+      </div>
+    </div>
 
     <footer class="footer">
       <div class="footer-bottom text-center py-5">
