@@ -48,6 +48,7 @@ function submitVolunteerForm(e) {
 
   var name = getInputValue('volunteer-name');
   var phone = volunteerPhoneInput.getNumber();
+  var email = getInputValue('volunteer-email');
   var address = getInputValue('volunteer-address');
   var volunteerForm = document.getElementById('volunteer-form-wrapper');
   var volunteerConfirmation = document.getElementById('volunteer-confirmation');
@@ -65,6 +66,7 @@ function submitVolunteerForm(e) {
       var data = {
         name: name,
         phone: phone,
+        email: email,
         address: results[0].formatted_address,
         lat: location.lat(),
         lng: location.lng(),
@@ -85,6 +87,7 @@ function submitRequesterForm(e) {
 
   var name = getInputValue('requester-name');
   var phone = requesterPhoneInput.getNumber();
+  var email = getInputValue('requester-email');
   var address = getInputValue('requester-address');
   var list = getInputValue('requester-shopping-list');
   var requestForm = document.getElementById('request-form-wrapper');
@@ -103,6 +106,7 @@ function submitRequesterForm(e) {
       var data = {
         name: name,
         phone: phone,
+        email: email,
         address: results[0].formatted_address,
         list: list,
         lat: location.lat(),
