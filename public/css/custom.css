@@ -41,3 +41,13 @@
     background-image: url('public/assets/plugins/intl-tel-input/build/img/flags@2x.png');
   }
 }
+
+/* Prevents iOS Safari from making phone number orange */
+a[href^=tel] {
+  text-decoration:inherit;
+  color: inherit;
+}
+
+.iti {
+  display: flex !important;
+}
