@@ -44,83 +44,75 @@ function initPhoneValidation() {
 }
 
 function submitVolunteerForm(e) {
+  submitForm(e, 'volunteers', getVolunteerFormData, showVolunteerFormSuccessMessage);
+}
+
+function submitRequesterForm(e) {
+  submitForm(e, 'requesters', getRequesterFormData, showRequesterFormSuccessMessage);
+}
+
+function submitForm(e, ref, getFormData, showSuccessMessage) {
   e.preventDefault();
 
-  var name = getInputValue('volunteer-name');
-  var phone = volunteerPhoneInput.getNumber();
-  var email = getInputValue('volunteer-email');
-  var address = getInputValue('volunteer-address');
-  var volunteerForm = document.getElementById('volunteer-form-wrapper');
-  var volunteerConfirmation = document.getElementById('volunteer-confirmation');
+  data = getFormData();
+  console.log(data);
 
   try {
-    validatePhoneNumber(volunteerPhoneInput);
+    validatePhoneNumber(data.phone);
   } catch (ex) {
     alert(ex.message);
     return;
   }
+
   var geocoder = new google.maps.Geocoder();
-  geocoder.geocode({ address: address }, function(results, status) {
+  geocoder.geocode({ address: data.address }, function(results, status) {
     if (status === google.maps.GeocoderStatus.OK) {
       var location = results[0].geometry.location;
-      var data = {
-        name: name,
-        phone: phone,
-        email: email,
-        address: results[0].formatted_address,
-        lat: location.lat(),
-        lng: location.lng(),
-      };
-      addToFirebase('volunteers', data);
-
-      volunteerForm.classList.add('hidden');
-      volunteerForm.style.visibility = 'hidden';
-      volunteerConfirmation.style.display = 'block';
+      data.phone = data.phone.getNumber();
+      data.address = results[0].formatted_address;
+      data.lat = location.lat();
+      data.lng = location.lng();
+      addToFirebase(ref, data);
+      showSuccessMessage();
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
     }
   });
 }
 
-function submitRequesterForm(e) {
-  e.preventDefault();
+function getVolunteerFormData() {
+  return {
+    name: getInputValue('volunteer-name'),
+    phone: volunteerPhoneInput,
+    email: getInputValue('volunteer-email'),
+    address: getInputValue('volunteer-address'),
+  };
+}
 
-  var name = getInputValue('requester-name');
-  var phone = requesterPhoneInput.getNumber();
-  var email = getInputValue('requester-email');
-  var address = getInputValue('requester-address');
-  var list = getInputValue('requester-shopping-list');
+function getRequesterFormData() {
+  return {
+    name: getInputValue('requester-name'),
+    phone: requesterPhoneInput,
+    email: getInputValue('requester-email'),
+    address: getInputValue('requester-address'),
+    list: getInputValue('requester-shopping-list'),
+  };
+}
+
+function showVolunteerFormSuccessMessage() {
+  var volunteerForm = document.getElementById('volunteer-form-wrapper');
+  var volunteerConfirmation = document.getElementById('volunteer-confirmation');
+  volunteerForm.classList.add('hidden');
+  volunteerForm.style.visibility = 'hidden';
+  volunteerConfirmation.style.display = 'block';
+}
+
+function showRequesterFormSuccessMessage() {
   var requestForm = document.getElementById('request-form-wrapper');
   var requestConfirmation = document.getElementById('request-confirmation');
-
-  try {
-    validatePhoneNumber(requesterPhoneInput);
-  } catch (ex) {
-    alert(ex.message);
-    return;
-  }
-  var geocoder = new google.maps.Geocoder();
-  geocoder.geocode({ address: address }, function(results, status) {
-    if (status === google.maps.GeocoderStatus.OK) {
-      var location = results[0].geometry.location;
-      var data = {
-        name: name,
-        phone: phone,
-        email: email,
-        address: results[0].formatted_address,
-        list: list,
-        lat: location.lat(),
-        lng: location.lng(),
-      };
-      addToFirebase('requesters', data);
-
-      requestForm.classList.add('hidden');
-      requestForm.style.visibility = 'hidden';
-      requestConfirmation.style.display = 'block';
-    } else {
-      alert('Geocode was not successful for the following reason: ' + status);
-    }
-  });
+  requestForm.classList.add('hidden');
+  requestForm.style.visibility = 'hidden';
+  requestConfirmation.style.display = 'block';
 }
 
 function validatePhoneNumber(input) {
@@ -139,10 +131,6 @@ function validatePhoneNumber(input) {
   }
 }
 
-function getInputValue(id) {
-  return document.getElementById(id).value;
-}
-
 function addToFirebase(ref, data) {
   data.timestamp = firebase.database.ServerValue.TIMESTAMP;
   var ref = firebase
@@ -153,4 +141,8 @@ function addToFirebase(ref, data) {
         console.warn(err);
       }
     });
+}
+
+function getInputValue(id) {
+  return document.getElementById(id).value;
 }
