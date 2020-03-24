@@ -33,7 +33,8 @@ firebase serve
 ```
 
 Check out the project at `http://localhost:5000`
-set googlemaps `api_key` in index.html to `AIzaSyAhjz4PFetOQjeGA8I-sR3ROYDg3Zovlpg`
+
+Set googlemaps `api_key` in index.html to `AIzaSyAhjz4PFetOQjeGA8I-sR3ROYDg3Zovlpg`
 
 ### Notes
 
