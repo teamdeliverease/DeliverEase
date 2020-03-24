@@ -33,3 +33,7 @@ firebase serve
 ```
 
 Check out the project at `http://localhost:5000`
+
+### Notes
+
+To test google maps api functionality locally, get the local api key from one of the maintainers and replace `key=` in the google maps api import with the local key.
