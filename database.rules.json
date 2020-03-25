@@ -3,7 +3,7 @@
     ".read": false,
     "volunteers": {
       "$volunteer": {
-        ".validate": "newData.hasChildren(['address', 'lat', 'lng', 'name', 'phone', 'timestamp'])",
+        ".validate": "newData.hasChildren(['address', 'lat', 'lng', 'name', 'phone', 'email', 'timestamp'])",
         ".write": true
       }
     },
