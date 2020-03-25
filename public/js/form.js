@@ -44,14 +44,26 @@ function initPhoneValidation() {
 }
 
 function submitVolunteerForm(e) {
-  submitForm(e, 'volunteers', getVolunteerFormData, showVolunteerFormSuccessMessage);
+  submitForm(
+    e,
+    'volunteers',
+    getVolunteerFormData,
+    'volunteer-form-wrapper',
+    'volunteer-confirmation',
+  );
 }
 
 function submitRequesterForm(e) {
-  submitForm(e, 'requesters', getRequesterFormData, showRequesterFormSuccessMessage);
+  submitForm(
+    e,
+    'requesters',
+    getRequesterFormData,
+    'requester-form-wrapper',
+    'requester-confirmation',
+  );
 }
 
-function submitForm(e, ref, getFormData, showSuccessMessage) {
+function submitForm(e, ref, getFormData, formSelector, confirmationSelector) {
   e.preventDefault();
 
   data = getFormData();
@@ -71,7 +83,7 @@ function submitForm(e, ref, getFormData, showSuccessMessage) {
       data.lat = location.lat();
       data.lng = location.lng();
       addToFirebase(ref, data);
-      showSuccessMessage();
+      showSuccessMessage(formSelector, confirmationSelector);
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
     }
@@ -97,20 +109,12 @@ function getRequesterFormData() {
   };
 }
 
-function showVolunteerFormSuccessMessage() {
-  var volunteerForm = document.getElementById('volunteer-form-wrapper');
-  var volunteerConfirmation = document.getElementById('volunteer-confirmation');
-  volunteerForm.classList.add('hidden');
-  volunteerForm.style.visibility = 'hidden';
-  volunteerConfirmation.style.display = 'block';
-}
-
-function showRequesterFormSuccessMessage() {
-  var requestForm = document.getElementById('request-form-wrapper');
-  var requestConfirmation = document.getElementById('request-confirmation');
-  requestForm.classList.add('hidden');
-  requestForm.style.visibility = 'hidden';
-  requestConfirmation.style.display = 'block';
+function showSuccessMessage(formSelector, confirmationSelector) {
+  var formElement = document.getElementById(formSelector);
+  var confElement = document.getElementById(confirmationSelector);
+  formElement.classList.add('hidden');
+  formElement.style.visibility = 'hidden';
+  confElement.style.display = 'block';
 }
 
 function validatePhoneNumber(input) {
