@@ -36,6 +36,17 @@ Check out the project at `http://localhost:5000`
 
 Set googlemaps `api_key` in index.html to `AIzaSyAhjz4PFetOQjeGA8I-sR3ROYDg3Zovlpg`
 
+### Contributing
+1) checkout and pull master: `git checkout master && git pull`
+2) create a branch: `git checkout -b <branch_name>`
+3) commit to branch: `git commit -m "<commit_message>`
+4) push branch: `git push --set-upstream origin <branch_name>`
+5) create a pr to master (I find it easy to do on github.com) and assign reviewers
+6) once pr is merged, delete remote branch (also easy to do on github.com)
+7) checkout and pull master: `git checkout master && git pull`
+8) delete local branch: `git branch -d <branch_name>`
+9) prune deleted branches: `git prune`
+
 ### Notes
 
-To test google maps api functionality locally, get the local api key from one of the maintainers and replace `key=` in the google maps api import with the local key.
+To test google maps api functionality locally, put `AIzaSyAhjz4PFetOQjeGA8I-sR3ROYDg3Zovlpg` in the `key=` param in index.html at the bottom where the google maps api is imported.
