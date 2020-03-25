@@ -55,8 +55,6 @@ function submitForm(e, ref, getFormData, showSuccessMessage) {
   e.preventDefault();
 
   data = getFormData();
-  console.log(data);
-
   try {
     validatePhoneNumber(data.phone);
   } catch (ex) {
