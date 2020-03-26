@@ -9,19 +9,6 @@ const fulfillment_status = {
 var requesterPhoneInput;
 var volunteerPhoneInput;
 
-// const config = {
-//   apiKey: 'AIzaSyCdINEXNyFJrqzAlIG06Xd5XhT6Q-iZ0-c',
-//   authDomain: 'deliverease-f9eec.firebaseapp.com',
-//   databaseURL: 'https://deliverease-f9eec.firebaseio.com',
-//   projectId: 'deliverease-f9eec',
-//   storageBucket: 'deliverease-f9eec.appspot.com',
-//   messagingSenderId: '436542528471',
-//   appId: '1:436542528471:web:90e09ee2379187a34c4992',
-//   measurementId: 'G-KVEMXD2KHE',
-// };
-
-// firebase.initializeApp(config);
-
 function init() {
   initForms();
   initAutocompleteForAddressFields();
@@ -30,7 +17,7 @@ function init() {
 
 function initForms() {
   document.getElementById('volunteer-form').addEventListener('submit', submitVolunteerForm);
-  // document.getElementById('requester-form').addEventListener('submit', submitRequesterForm);
+  document.getElementById('requester-form').addEventListener('submit', submitRequesterForm);
 }
 
 function initAutocompleteForAddressFields() {
@@ -66,10 +53,12 @@ function submitRequesterForm(e) {
 }
 
 async function submitForm(e, ref, getFormData, formSelector, confirmationSelector) {
+  e.preventDefault();
+
   data = getFormData();
   const formData = { ...data };
   try {
-    // validatePhoneNumber(data.phone);
+    validatePhoneNumber(data.phone);
     formData.phone = data.phone.getNumber();
   } catch (ex) {
     alert(ex.message);
@@ -81,11 +70,10 @@ async function submitForm(e, ref, getFormData, formSelector, confirmationSelecto
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
       },
       body: JSON.stringify(formData),
     });
-    console.log(response);
+    showSuccessMessage(formSelector, confirmationSelector);
   } catch (err) {
     console.error(err);
   }
@@ -135,21 +123,6 @@ function validatePhoneNumber(input) {
     throw new Error(errorMap[phoneError]);
   }
 }
-
-// function addToFirebase(ref, data) {
-//   data.timestamp = firebase.database.ServerValue.TIMESTAMP;
-//   if ('fulfillment_status_timestamp' in data) {
-//     data.fulfillment_status_timestamp = data.timestamp;
-//   }
-//   var ref = firebase
-//     .database()
-//     .ref(ref)
-//     .push(data, function(err) {
-//       if (err) {
-//         console.warn(err);
-//       }
-//     });
-// }
 
 function getInputValue(id) {
   return document.getElementById(id).value;

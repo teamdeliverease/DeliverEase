@@ -2,17 +2,23 @@ const functions = require('firebase-functions');
 const firebase = require('firebase-admin');
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors');
+const cors = require('cors')({ origin: true });
 const googleMapsClient = require('@googlemaps/google-maps-services-js').Client;
+const serviceAccount = require('./serviceAccountKey.json');
 
-const firebaseApp = firebase.initializeApp(functions.config().firebase);
+firebase.initializeApp({
+  credential: firebase.credential.cert(serviceAccount),
+  databaseURL:
+    process.env.CUSTOM_ENV === 'dev'
+      ? 'https://deliverease-f9eec-staging.firebaseio.com/'
+      : 'https://deliverease-f9eec.firebaseio.com/',
+});
 const mapsClient = new googleMapsClient({});
 
 // initialize express app
 const app = express();
 // Automatically allow cross-origin requests
-app.use(cors({ origin: true }));
-
+app.use(cors);
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // app.post('/submit/volunteer', (request, response) => {
@@ -28,8 +34,6 @@ app.post('/requesters', async (req, res) => {
 
   // TODO: insert server side validation
 
-  // const results = await mapsClient.geocode({ address: data.address });
-
   mapsClient
     .geocode({
       params: {
@@ -38,8 +42,6 @@ app.post('/requesters', async (req, res) => {
       },
     })
     .then(result => {
-      return res.sendStatus(200);
-
       const { results, status } = result.data;
       if (status === 'OK') {
         var location = results[0].geometry.location;
@@ -47,8 +49,7 @@ app.post('/requesters', async (req, res) => {
         data.lat = location.lat;
         data.lng = location.lng;
         try {
-          // addToFirebase(ref, data);
-          res.set('Access-Control-Allow-Origin', '*');
+          addToFirebase('requesters', data);
           return res.sendStatus(200);
         } catch (e) {
           console.error(e.message);

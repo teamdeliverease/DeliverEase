@@ -6,6 +6,7 @@
     "serve": "firebase emulators:start --only functions",
     "shell": "firebase functions:shell",
     "start": "npm run shell",
+    "start-local": "CUSTOM_ENV=dev firebase serve --only functions,hosting",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log"
   },
