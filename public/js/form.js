@@ -1,3 +1,11 @@
+const fulfillment_status = {
+  NEW: 'new',
+  SOURCING_VOLUNTEER: 'sourcing_volunteer',
+  PENDING_FULFILLMENT: 'pending_fullfilment',
+  FULFILLING: 'fulfilling',
+  COMPLETE: 'complete',
+};
+
 var requesterPhoneInput;
 var volunteerPhoneInput;
 
@@ -54,13 +62,7 @@ function submitVolunteerForm(e) {
 }
 
 function submitRequesterForm(e) {
-  submitForm(
-    e,
-    'requesters',
-    getRequesterFormData,
-    'requester-form-wrapper',
-    'requester-confirmation',
-  );
+  submitForm(e, 'requesters', getRequesterFormData, 'request-form-wrapper', 'request-confirmation');
 }
 
 function submitForm(e, ref, getFormData, formSelector, confirmationSelector) {
@@ -106,6 +108,8 @@ function getRequesterFormData() {
     email: getInputValue('requester-email'),
     address: getInputValue('requester-address'),
     list: getInputValue('requester-shopping-list'),
+    fulfillment_status: fulfillment_status.NEW,
+    fulfillment_status_timestamp: null,
   };
 }
 
@@ -135,6 +139,9 @@ function validatePhoneNumber(input) {
 
 function addToFirebase(ref, data) {
   data.timestamp = firebase.database.ServerValue.TIMESTAMP;
+  if ('fulfillment_status_timestamp' in data) {
+    data.fulfillment_status_timestamp = data.timestamp;
+  }
   var ref = firebase
     .database()
     .ref(ref)
