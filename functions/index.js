@@ -14,40 +14,29 @@ firebase.initializeApp({
       : 'https://deliverease-f9eec.firebaseio.com/',
 });
 const mapsClient = new googleMapsClient({});
-
-// initialize express app
 const app = express();
 // Automatically allow cross-origin requests
 app.use(cors);
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// app.post('/submit/volunteer', (request, response) => {
-//   // console.log(functions.config().someservice.id);
-
-//   console.log(process.env.FIREBASE_CONFIG);
-
-//   response.send(config);
-// });
+const fulfillment_status = {
+  NEW: 'new',
+  SOURCING_VOLUNTEER: 'sourcing_volunteer',
+  PENDING_FULFILLMENT: 'pending_fullfilment',
+  FULFILLING: 'fulfilling',
+  COMPLETE: 'complete',
+};
 
 app.post('/requesters', async (req, res) => {
   const data = req.body;
+  validateData(data);
 
-  // TODO: insert server side validation
-
-  mapsClient
-    .geocode({
-      params: {
-        address: '425 Wessex Way, Belmont, CA 94002',
-        key: 'AIzaSyCdINEXNyFJrqzAlIG06Xd5XhT6Q-iZ0-c',
-      },
-    })
+  geocode(data.address)
     .then(result => {
       const { results, status } = result.data;
       if (status === 'OK') {
-        var location = results[0].geometry.location;
-        data.address = results[0].formatted_address;
-        data.lat = location.lat;
-        data.lng = location.lng;
+        addLocationPayload(results[0], data);
+        addFulfillmentStatusPayload(data);
         try {
           addToFirebase('requesters', data);
           return res.sendStatus(200);
@@ -61,14 +50,61 @@ app.post('/requesters', async (req, res) => {
         return res.send(mapsError);
       }
     })
-    .catch(err => console.log(err));
+    .catch(err => console.error(err));
 });
+
+app.post('/volunteers', async (req, res) => {
+  const data = req.body;
+  validateData(data);
+
+  geocode(data.address)
+    .then(result => {
+      const { results, status } = result.data;
+      if (status === 'OK') {
+        addLocationPayload(results[0], data);
+        try {
+          addToFirebase('volunteers', data);
+          return res.sendStatus(200);
+        } catch (e) {
+          console.error(e.message);
+          return res.send(e.message);
+        }
+      } else {
+        const mapsError = 'Geocode was not successful for the following reason: ' + status;
+        console.error(mapsError);
+        return res.send(mapsError);
+      }
+    })
+    .catch(err => console.error(err));
+});
+
+function geocode(address) {
+  return mapsClient.geocode({
+    params: {
+      address: address,
+      key: 'AIzaSyCdINEXNyFJrqzAlIG06Xd5XhT6Q-iZ0-c',
+    },
+  });
+}
+
+function addLocationPayload(geocodeResult, data) {
+  var location = geocodeResult.geometry.location;
+  data.address = geocodeResult.formatted_address;
+  data.lat = location.lat;
+  data.lng = location.lng;
+}
+
+function addFulfillmentStatusPayload(data) {
+  data.fulfillment_status = fulfillment_status.NEW;
+  data.fulfillment_status_timestamp = firebase.database.ServerValue.TIMESTAMP;
+}
+
+function validateData(data) {
+  // TODO validate server side
+}
 
 function addToFirebase(ref, data) {
   data.timestamp = firebase.database.ServerValue.TIMESTAMP;
-  if ('fulfillment_status_timestamp' in data) {
-    data.fulfillment_status_timestamp = data.timestamp;
-  }
   firebase
     .database()
     .ref(ref)

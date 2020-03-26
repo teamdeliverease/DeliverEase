@@ -1,11 +1,3 @@
-const fulfillment_status = {
-  NEW: 'new',
-  SOURCING_VOLUNTEER: 'sourcing_volunteer',
-  PENDING_FULFILLMENT: 'pending_fullfilment',
-  FULFILLING: 'fulfilling',
-  COMPLETE: 'complete',
-};
-
 var requesterPhoneInput;
 var volunteerPhoneInput;
 
@@ -60,8 +52,8 @@ async function submitForm(e, ref, getFormData, formSelector, confirmationSelecto
   try {
     validatePhoneNumber(data.phone);
     formData.phone = data.phone.getNumber();
-  } catch (ex) {
-    alert(ex.message);
+  } catch (err) {
+    alert(err.message);
     return;
   }
 
@@ -95,8 +87,6 @@ function getRequesterFormData() {
     email: getInputValue('requester-email'),
     address: getInputValue('requester-address'),
     list: getInputValue('requester-shopping-list'),
-    fulfillment_status: fulfillment_status.NEW,
-    fulfillment_status_timestamp: null,
   };
 }
 
