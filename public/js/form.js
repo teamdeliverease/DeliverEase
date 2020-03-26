@@ -9,18 +9,18 @@ const fulfillment_status = {
 var requesterPhoneInput;
 var volunteerPhoneInput;
 
-const config = {
-  apiKey: 'AIzaSyCdINEXNyFJrqzAlIG06Xd5XhT6Q-iZ0-c',
-  authDomain: 'deliverease-f9eec.firebaseapp.com',
-  databaseURL: 'https://deliverease-f9eec.firebaseio.com',
-  projectId: 'deliverease-f9eec',
-  storageBucket: 'deliverease-f9eec.appspot.com',
-  messagingSenderId: '436542528471',
-  appId: '1:436542528471:web:90e09ee2379187a34c4992',
-  measurementId: 'G-KVEMXD2KHE',
-};
+// const config = {
+//   apiKey: 'AIzaSyCdINEXNyFJrqzAlIG06Xd5XhT6Q-iZ0-c',
+//   authDomain: 'deliverease-f9eec.firebaseapp.com',
+//   databaseURL: 'https://deliverease-f9eec.firebaseio.com',
+//   projectId: 'deliverease-f9eec',
+//   storageBucket: 'deliverease-f9eec.appspot.com',
+//   messagingSenderId: '436542528471',
+//   appId: '1:436542528471:web:90e09ee2379187a34c4992',
+//   measurementId: 'G-KVEMXD2KHE',
+// };
 
-firebase.initializeApp(config);
+// firebase.initializeApp(config);
 
 function init() {
   initForms();
@@ -30,7 +30,7 @@ function init() {
 
 function initForms() {
   document.getElementById('volunteer-form').addEventListener('submit', submitVolunteerForm);
-  document.getElementById('requester-form').addEventListener('submit', submitRequesterForm);
+  // document.getElementById('requester-form').addEventListener('submit', submitRequesterForm);
 }
 
 function initAutocompleteForAddressFields() {
@@ -65,31 +65,30 @@ function submitRequesterForm(e) {
   submitForm(e, 'requesters', getRequesterFormData, 'request-form-wrapper', 'request-confirmation');
 }
 
-function submitForm(e, ref, getFormData, formSelector, confirmationSelector) {
-  e.preventDefault();
-
+async function submitForm(e, ref, getFormData, formSelector, confirmationSelector) {
   data = getFormData();
+  const formData = { ...data };
   try {
-    validatePhoneNumber(data.phone);
+    // validatePhoneNumber(data.phone);
+    formData.phone = data.phone.getNumber();
   } catch (ex) {
     alert(ex.message);
     return;
   }
 
-  var geocoder = new google.maps.Geocoder();
-  geocoder.geocode({ address: data.address }, function(results, status) {
-    if (status === google.maps.GeocoderStatus.OK) {
-      var location = results[0].geometry.location;
-      data.phone = data.phone.getNumber();
-      data.address = results[0].formatted_address;
-      data.lat = location.lat();
-      data.lng = location.lng();
-      addToFirebase(ref, data);
-      showSuccessMessage(formSelector, confirmationSelector);
-    } else {
-      alert('Geocode was not successful for the following reason: ' + status);
-    }
-  });
+  try {
+    const response = await fetch(`/${ref}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
+      body: JSON.stringify(formData),
+    });
+    console.log(response);
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 function getVolunteerFormData() {
@@ -137,20 +136,20 @@ function validatePhoneNumber(input) {
   }
 }
 
-function addToFirebase(ref, data) {
-  data.timestamp = firebase.database.ServerValue.TIMESTAMP;
-  if ('fulfillment_status_timestamp' in data) {
-    data.fulfillment_status_timestamp = data.timestamp;
-  }
-  var ref = firebase
-    .database()
-    .ref(ref)
-    .push(data, function(err) {
-      if (err) {
-        console.warn(err);
-      }
-    });
-}
+// function addToFirebase(ref, data) {
+//   data.timestamp = firebase.database.ServerValue.TIMESTAMP;
+//   if ('fulfillment_status_timestamp' in data) {
+//     data.fulfillment_status_timestamp = data.timestamp;
+//   }
+//   var ref = firebase
+//     .database()
+//     .ref(ref)
+//     .push(data, function(err) {
+//       if (err) {
+//         console.warn(err);
+//       }
+//     });
+// }
 
 function getInputValue(id) {
   return document.getElementById(id).value;
