@@ -40,7 +40,7 @@ exports.sendVolunteerConfirmation = functions.database.ref('/volunteers/{volunte
 <p>If you ever have any questions or feedback, please do reach out to us at <a href="mailto:teamdeliverease@gmail.com">teamdeliverease@gmail.com</a> or (415) 633-6261. You are the lifeline of your respective neighborhoods. We recognize that and want to make sure we&rsquo;re doing everything we can to make your service to the community go smoothly.</p>
 <p>Also, there is a downloadable PDF &ldquo;I Volunteered&rdquo; flyer on our <a href="http://teamdeliverease.com">website</a>, we encourage you to share with your friends and network that you signed up to volunteer! You can tag us on Instagram <a href="https://www.instagram.com/team.deliverease/">@team.deliverease</a>.</p>
 <p>Stay safe and thank you,</p>
-<p>Team Deliverease</p>`
+<p>Team DeliverEase</p>`
 return mailTransport.sendMail(mailOptionsVolunteer);
 
 });
