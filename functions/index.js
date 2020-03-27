@@ -3,7 +3,6 @@ const nodemailer = require('nodemailer');
 // Configure the email transport using the default SMTP transport and a GMail account.
 const gmailEmail = functions.config().gmail.email;
 const gmailPassword = functions.config().gmail.password;
-console.log(gmailEmail + gmailPassword)
 const mailTransport = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -15,8 +14,6 @@ const mailTransport = nodemailer.createTransport({
 // Sends an email confirmation when a volunteer signs up.
 exports.sendVolunteerConfirmation = functions.database.ref('/volunteers/{volunteer}').onCreate(async(snapshot) => {
   const volunteer = snapshot.val();
-  console.log("sending to volunteer")
-
   const mailOptionsVolunteer = {
     from: '"DeliverEase" <teamDeliverEase@gmail.com>',
     to: volunteer.email,
@@ -48,9 +45,7 @@ return mailTransport.sendMail(mailOptionsVolunteer);
 
 // Send an email to deliverEase when request comes in.
 exports.sendRequestConfirmation =  functions.database.ref('/requesters/{request}').onCreate(async(snapshot) => {
-  console.log("doing something")
   const request = snapshot.val();
-
   const mailOptionsRequest = {
     from: '"deliverEase" <deliverEase@gmail.com>',
     to: "teamdeliverEase@gmail.com",
