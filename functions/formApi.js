@@ -2,7 +2,7 @@ const functions = require('firebase-functions');
 const firebase = require('firebase-admin');
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors')({ origin: true });
+const cors = require('cors');
 const googleMapsClient = require('@googlemaps/google-maps-services-js').Client;
 const serviceAccount = require('./serviceAccountKey.json');
 
