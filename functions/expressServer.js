@@ -4,21 +4,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const googleMapsClient = require('@googlemaps/google-maps-services-js').Client;
-const serviceAccount = require('./serviceAccountKey.json');
-
-if (!process.env.DB_URL) {
-  // If no DB env is set, use server defaults
-  firebase.initializeApp();
-} else {
-  // If we're local use specified DB env and credentials
-  firebase.initializeApp({
-    credential: firebase.credential.cert(serviceAccount),
-    databaseURL: process.env.DB_URL,
-  });
-}
 
 const mapsClient = new googleMapsClient({});
 const app = express();
+
 // Automatically allow cross-origin requests
 app.use(cors({ origin: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -86,7 +75,7 @@ function geocode(address) {
   return mapsClient.geocode({
     params: {
       address: address,
-      key: 'AIzaSyCdINEXNyFJrqzAlIG06Xd5XhT6Q-iZ0-c',
+      key: functions.config().apikeys.maps,
     },
   });
 }
