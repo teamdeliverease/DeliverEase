@@ -22,7 +22,7 @@ function initShareButton(shareSelector) {
     try {
       await navigator.share(shareData);
     } catch (err) {
-      successMessage.textContent = 'Error: ' + err;
+      console.error(err);
     }
   });
 }

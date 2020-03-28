@@ -2,7 +2,6 @@ const functions = require('firebase-functions');
 const firebase = require('firebase-admin');
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors')({ origin: true });
 const googleMapsClient = require('@googlemaps/google-maps-services-js').Client;
 const serviceAccount = require('./serviceAccountKey.json');
 
@@ -13,7 +12,6 @@ firebase.initializeApp({
 const mapsClient = new googleMapsClient({});
 const app = express();
 // Automatically allow cross-origin requests
-app.use(cors);
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const fulfillment_status = {
