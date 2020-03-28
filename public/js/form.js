@@ -3,11 +3,29 @@ var volunteerPhoneInput;
 
 const analytics = firebase.analytics();
 
+const volunteerShareContent = {
+  title: 'DeliverEase',
+  text: 'Sign up to volunteer or request with DeliverEase',
+  url: 'https://teamdeliverease.com',
+};
+
+const requesterShareContent = {
+  title: 'DeliverEase',
+  text: 'Sign up to volunteer or request with DeliverEase',
+  url: 'https://teamdeliverease.com',
+};
+
+firebase.initializeApp(config);
+
 function init() {
   initForms();
   initTracking();
   initAutocompleteForAddressFields();
   initPhoneValidation();
+  if (navigator.share !== undefined) {
+    initShareButton('requester-share');
+    initShareButton('volunteer-share');
+  }
 }
 
 function initForms() {
@@ -19,6 +37,18 @@ function initTracking() {
   trackClick('requester-cta', 'call_to_action', { type: 'requester' });
   trackClick('volunteer-cta', 'call_to_action', { type: 'volunteer' });
   trackClick('volunteer-flyer', 'click_flyer', { type: 'promo' });
+}
+
+function initShareButton(shareSelector) {
+  const volunteerShareLink = document.getElementById(shareSelector);
+
+  document.getElementById(shareSelector).addEventListener('click', async () => {
+    try {
+      await navigator.share(shareData);
+    } catch (err) {
+      successMessage.textContent = 'Error: ' + err;
+    }
+  });
 }
 
 function initAutocompleteForAddressFields() {
@@ -113,9 +143,14 @@ function getRequesterFormData() {
 function showSuccessMessage(formSelector, confirmationSelector) {
   var formElement = document.getElementById(formSelector);
   var confElement = document.getElementById(confirmationSelector);
+  var shareElement = document.querySelector(`#${confirmationSelector} button`);
+
   formElement.classList.add('hidden');
   formElement.style.visibility = 'hidden';
   confElement.style.display = 'block';
+  if (navigator.share !== undefined) {
+    shareElement.style.display = 'block';
+  }
 }
 
 function validatePhoneNumber(input) {
