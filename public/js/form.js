@@ -6,9 +6,10 @@ function init() {
   initAutocompleteForAddressFields();
   initPhoneValidation();
   if (navigator.share !== undefined) {
-    initShareLink('requester-share');
-    initShareLink('volunteer-share');
+    initShareButton('requester-share');
+    initShareButton('volunteer-share');
   }
+  showSuccessMessage('volunteer-form', 'volunteer-confirmation');
 }
 
 function initForms() {
@@ -17,8 +18,6 @@ function initForms() {
 }
 
 function initShareButton(shareSelector) {
-  const volunteerShareLink = document.getElementById(shareSelector);
-
   document.getElementById(shareSelector).addEventListener('click', async () => {
     try {
       await navigator.share(shareData);
@@ -114,6 +113,7 @@ function showSuccessMessage(formSelector, confirmationSelector) {
   formElement.classList.add('hidden');
   formElement.style.visibility = 'hidden';
   confElement.style.display = 'block';
+  console.log(navigator.share);
   if (navigator.share !== undefined) {
     shareElement.style.display = 'block';
   }
