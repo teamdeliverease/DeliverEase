@@ -6,13 +6,17 @@ const cors = require('cors')({ origin: true });
 const googleMapsClient = require('@googlemaps/google-maps-services-js').Client;
 const serviceAccount = require('./serviceAccountKey.json');
 
-firebase.initializeApp({
-  credential: firebase.credential.cert(serviceAccount),
-  databaseURL:
-    process.env.CUSTOM_ENV === 'dev'
-      ? 'https://deliverease-f9eec-staging.firebaseio.com/'
-      : 'https://deliverease-f9eec.firebaseio.com/',
-});
+if (location.hostname === 'localhost') {
+  var firebaseConfig = {
+    // Point to the RTDB emulator running on localhost.
+    databaseURL: 'http://localhost:9000?ns=deliverease-f9eec',
+  };
+
+  var myApp = firebase.initializeApp(firebaseConfig);
+  var db = myApp.database();
+}
+
+firebase.initializeApp();
 const mapsClient = new googleMapsClient({});
 const app = express();
 // Automatically allow cross-origin requests
@@ -105,7 +109,7 @@ function validateData(data) {
 
 function addToFirebase(ref, data) {
   data.timestamp = firebase.database.ServerValue.TIMESTAMP;
-  firebase
+  myApp
     .database()
     .ref(ref)
     .push(data, err => {
