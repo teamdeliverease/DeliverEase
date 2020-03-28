@@ -35,12 +35,12 @@ app.post('/requesters', async (req, res) => {
           return res.sendStatus(200);
         } catch (e) {
           console.error(e.message);
-          return res.send(e.message);
+          return res.status(500).send(e.message);
         }
       } else {
         const mapsError = 'Geocode was not successful for the following reason: ' + status;
         console.error(mapsError);
-        return res.send(mapsError);
+        return res.status(500).send(mapsError);
       }
     })
     .catch(err => console.error(err));
@@ -60,7 +60,7 @@ app.post('/volunteers', async (req, res) => {
           return res.sendStatus(200);
         } catch (e) {
           console.error(e.message);
-          return res.send(e.message);
+          return res.status(500).send(e.message);
         }
       } else {
         const mapsError = 'Geocode was not successful for the following reason: ' + status;
