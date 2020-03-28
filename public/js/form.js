@@ -15,7 +15,6 @@ function init() {
     initShareButton('requester-share');
     initShareButton('volunteer-share');
   }
-  showSuccessMessage('volunteer-form', 'volunteer-confirmation');
 }
 
 function initForms() {
