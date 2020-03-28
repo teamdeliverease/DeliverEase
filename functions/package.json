@@ -6,8 +6,9 @@
     "serve": "firebase emulators:start --only functions",
     "shell": "firebase functions:shell",
     "start": "npm run shell",
-    "start-local": "CUSTOM_ENV=dev firebase serve --only functions,hosting",
-    "deploy": "firebase deploy --only functions",
+    "start-local": "DB_URL=http://localhost:9000?ns=deliverease-staging firebase emulators:start",
+    "deploy-staging": "DB_URL=https://deliverease-staging.firebaseio.com firebase deploy -P staging",
+    "deploy-prod": "DB_URL=https://deliverease-f9eec.firebaseio.com firebase deploy -P production",
     "logs": "firebase functions:log"
   },
   "engines": {

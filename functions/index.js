@@ -1,2 +1,5 @@
+const functions = require('firebase-functions');
+const form = require('./formApi');
+
 exports.emailer = require('./emailApi');
-exports.form = require('./formApi');
+exports.app = functions.https.onRequest(form);
