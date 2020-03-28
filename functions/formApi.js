@@ -13,7 +13,7 @@ firebase.initializeApp({
 const mapsClient = new googleMapsClient({});
 const app = express();
 // Automatically allow cross-origin requests
-app.use(cors);
+app.use(cors({ origin: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const fulfillment_status = {
