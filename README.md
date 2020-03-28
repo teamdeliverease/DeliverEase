@@ -14,6 +14,8 @@ node > 10: https://nodejs.org/en/download/
 
 ### Installing
 
+⚠️ All commands should be run from within the `functions` folder.
+
 Install firebase cli
 
 ```
@@ -47,6 +49,16 @@ npm run start
 
 Check out the project at `http://localhost:5000`
 Check out the database at `http://localhost:9000/volunteers.json?ns=deliverease-staging`
+
+
+### Deployment
+
+Use the following npm scripts to deploy hosting and functions to firebase
+```
+npm run deploy-staging
+npm run deploy-prod
+```
+❗Only run deploy-prod with approval of all team members ❗
 
 ### Contributing
 1) checkout and pull master: `git checkout master && git pull`
