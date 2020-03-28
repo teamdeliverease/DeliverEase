@@ -65,7 +65,7 @@ app.post('/volunteers', async (req, res) => {
       } else {
         const mapsError = 'Geocode was not successful for the following reason: ' + status;
         console.error(mapsError);
-        return res.send(mapsError);
+        return res.status(500).send(mapsError);
       }
     })
     .catch(err => console.error(err));
