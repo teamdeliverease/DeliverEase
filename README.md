@@ -14,7 +14,7 @@ node > 10: https://nodejs.org/en/download/
 
 ### Installing
 
-⚠️ All commands should be run from within the `functions` folder.
+⚠️ All commands should be run from within the `functions` folder. ⚠️
 
 Install firebase cli
 
@@ -58,7 +58,8 @@ Use the following npm scripts to deploy hosting and functions to firebase
 npm run deploy-staging
 npm run deploy-prod
 ```
-❗Only run deploy-prod with approval of all team members ❗
+
+🚨 Only run `deploy-prod` with approval of all team members 🚨
 
 ### Contributing
 1) checkout and pull master: `git checkout master && git pull`
