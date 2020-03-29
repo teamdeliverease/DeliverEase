@@ -33,11 +33,15 @@ Store config locally
 ```
 firebase functions:config:get > .runtimeconfig.json
 ```
+Install project dependencies
+```
+npm install
+```
 
 Start the firebase local server
 
 ```
-npm run start
+npm start
 ```
 
 Check out the project at `http://localhost:5000`
