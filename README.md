@@ -14,6 +14,8 @@ node > 10: https://nodejs.org/en/download/
 
 ### Installing
 
+⚠️ All commands should be run from within the `functions` folder. ⚠️
+
 Install firebase cli
 
 ```
@@ -26,15 +28,39 @@ Log in to firebase
 firebase login
 ```
 
+Set config 
+
+```
+firebase functions:config:set gmail.email="teamdeliverease@gmail.com"
+firebase functions:config:set gmail.password=<ASK_FOR_PASSWORD>
+```
+
+Store config locally 
+
+```
+firebase functions:config:get > .runtimeconfig.json
+```
+
 Start the firebase local server
 
 ```
-firebase serve
+npm run start
 ```
 
 Check out the project at `http://localhost:5000`
 
-Set googlemaps `api_key` in index.html to `AIzaSyAhjz4PFetOQjeGA8I-sR3ROYDg3Zovlpg`
+Check out the database at `http://localhost:9000/volunteers.json?ns=deliverease-staging`
+
+
+### Deployment
+
+Use the following npm scripts to deploy hosting and functions to firebase
+```
+npm run deploy-staging
+npm run deploy-prod
+```
+
+🚨 Only run `deploy-prod` with approval of all team members 🚨
 
 ### Contributing
 1) checkout and pull master: `git checkout master && git pull`
@@ -46,7 +72,3 @@ Set googlemaps `api_key` in index.html to `AIzaSyAhjz4PFetOQjeGA8I-sR3ROYDg3Zovl
 7) checkout and pull master: `git checkout master && git pull`
 8) delete local branch: `git branch -d <branch_name>`
 9) prune deleted branches: `git prune`
-
-### Notes
-
-To test google maps api functionality locally, put `AIzaSyAhjz4PFetOQjeGA8I-sR3ROYDg3Zovlpg` in the `key=` param in index.html at the bottom where the google maps api is imported.
