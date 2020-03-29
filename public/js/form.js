@@ -1,26 +1,5 @@
-const fulfillment_status = {
-  NEW: 'new',
-  SOURCING_VOLUNTEER: 'sourcing_volunteer',
-  PENDING_FULFILLMENT: 'pending_fullfilment',
-  FULFILLING: 'fulfilling',
-  COMPLETE: 'complete',
-};
-
 var requesterPhoneInput;
 var volunteerPhoneInput;
-
-const config = {
-  apiKey: 'AIzaSyCdINEXNyFJrqzAlIG06Xd5XhT6Q-iZ0-c',
-  authDomain: 'deliverease-f9eec.firebaseapp.com',
-  databaseURL: 'https://deliverease-f9eec.firebaseio.com',
-  projectId: 'deliverease-f9eec',
-  storageBucket: 'deliverease-f9eec.appspot.com',
-  messagingSenderId: '436542528471',
-  appId: '1:436542528471:web:90e09ee2379187a34c4992',
-  measurementId: 'G-KVEMXD2KHE',
-};
-
-firebase.initializeApp(config);
 
 function init() {
   initForms();
@@ -65,31 +44,31 @@ function submitRequesterForm(e) {
   submitForm(e, 'requesters', getRequesterFormData, 'request-form-wrapper', 'request-confirmation');
 }
 
-function submitForm(e, ref, getFormData, formSelector, confirmationSelector) {
+async function submitForm(e, ref, getFormData, formSelector, confirmationSelector) {
   e.preventDefault();
 
   data = getFormData();
+  const formData = { ...data };
   try {
     validatePhoneNumber(data.phone);
-  } catch (ex) {
-    alert(ex.message);
+    formData.phone = data.phone.getNumber();
+  } catch (err) {
+    alert(err.message);
     return;
   }
 
-  var geocoder = new google.maps.Geocoder();
-  geocoder.geocode({ address: data.address }, function(results, status) {
-    if (status === google.maps.GeocoderStatus.OK) {
-      var location = results[0].geometry.location;
-      data.phone = data.phone.getNumber();
-      data.address = results[0].formatted_address;
-      data.lat = location.lat();
-      data.lng = location.lng();
-      addToFirebase(ref, data);
-      showSuccessMessage(formSelector, confirmationSelector);
-    } else {
-      alert('Geocode was not successful for the following reason: ' + status);
-    }
-  });
+  try {
+    const response = await fetch(`/${ref}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
+    showSuccessMessage(formSelector, confirmationSelector);
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 function getVolunteerFormData() {
@@ -108,8 +87,6 @@ function getRequesterFormData() {
     email: getInputValue('requester-email'),
     address: getInputValue('requester-address'),
     list: getInputValue('requester-shopping-list'),
-    fulfillment_status: fulfillment_status.NEW,
-    fulfillment_status_timestamp: null,
   };
 }
 
@@ -135,21 +112,6 @@ function validatePhoneNumber(input) {
   if (phoneError && phoneError >= 0 && phoneError < 5) {
     throw new Error(errorMap[phoneError]);
   }
-}
-
-function addToFirebase(ref, data) {
-  data.timestamp = firebase.database.ServerValue.TIMESTAMP;
-  if ('fulfillment_status_timestamp' in data) {
-    data.fulfillment_status_timestamp = data.timestamp;
-  }
-  var ref = firebase
-    .database()
-    .ref(ref)
-    .push(data, function(err) {
-      if (err) {
-        console.warn(err);
-      }
-    });
 }
 
 function getInputValue(id) {
