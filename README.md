@@ -64,4 +64,4 @@ npm run deploy-prod
 6) once pr is merged, delete remote branch (also easy to do on github.com)
 7) checkout and pull master: `git checkout master && git pull`
 8) delete local branch: `git branch -d <branch_name>`
-9) prune deleted branches: `git prune`
+9) prune deleted branches: `git remote prune origin`
