@@ -77,6 +77,7 @@ function getVolunteerFormData() {
     phone: volunteerPhoneInput,
     email: getInputValue('volunteer-email'),
     address: getInputValue('volunteer-address'),
+    termsAgreement: document.getElementById('volunteer-terms').checked,
   };
 }
 
@@ -87,6 +88,7 @@ function getRequesterFormData() {
     email: getInputValue('requester-email'),
     address: getInputValue('requester-address'),
     list: getInputValue('requester-shopping-list'),
+    termsAgreement: document.getElementById('requester-terms').checked,
   };
 }
 
