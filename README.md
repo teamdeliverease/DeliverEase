@@ -46,7 +46,7 @@ npm start
 
 Check out the project at `http://localhost:5000`
 
-Check out the database at `http://localhost:9000/volunteers.json?ns=deliverease-staging`
+Check out the database at `http://localhost:9000/path/to/data.json?ns=deliverease-staging`
 
 
 ### Deployment
