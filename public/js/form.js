@@ -1,6 +1,8 @@
 var requesterPhoneInput;
 var volunteerPhoneInput;
 
+const analytics = firebase.analytics();
+
 function init() {
   initForms();
   initAutocompleteForAddressFields();
