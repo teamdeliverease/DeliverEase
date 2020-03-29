@@ -28,13 +28,6 @@ Log in to firebase
 firebase login
 ```
 
-Set config 
-
-```
-firebase functions:config:set gmail.email="teamdeliverease@gmail.com"
-firebase functions:config:set gmail.password=<ASK_FOR_PASSWORD>
-```
-
 Store config locally 
 
 ```
