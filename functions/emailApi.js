@@ -62,6 +62,9 @@ function getRequestConfirmationToDeliverEaseMailOptions(snapshot) {
       'UUID: ' +
       snapshot.key +
       '\n' +
+      'Email: ' +
+      requestData.email +
+      '\n' +
       'Address: ' +
       requestData.address +
       '\n' +
@@ -77,7 +80,9 @@ exports.sendRequestConfirmationToRequester = functions.database
   .ref('/requesters/{request}')
   .onCreate(async snapshot => {
     mailOptions = getRequestConfirmationToRequesterMailOptions(snapshot);
-    return mailTransport.sendMail(mailOptions);
+    if (mailOptions.to.trim() !== '') {
+      return mailTransport.sendMail(mailOptions);
+    }
   });
 
 function getRequestConfirmationToRequesterMailOptions(snapshot) {
