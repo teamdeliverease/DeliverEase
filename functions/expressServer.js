@@ -1,6 +1,8 @@
 const functions = require('firebase-functions');
 const firebase = require('firebase-admin');
 const express = require('express');
+const validationMiddleware = require('./validationMiddleware.js');
+const schemas = require('./schemas.js');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const googleMapsClient = require('@googlemaps/google-maps-services-js').Client;
@@ -20,10 +22,8 @@ const fulfillment_status = {
   COMPLETE: 'complete',
 };
 
-app.post('/requesters', async (req, res) => {
+app.post('/requesters', validationMiddleware(schemas.requester, 'body'), async (req, res) => {
   const data = req.body;
-  validateData(data);
-
   geocode(data.address)
     .then(result => {
       const { results, status } = result.data;
@@ -46,10 +46,8 @@ app.post('/requesters', async (req, res) => {
     .catch(err => console.error(err));
 });
 
-app.post('/volunteers', async (req, res) => {
+app.post('/volunteers', validationMiddleware(schemas.volunteer, 'body'), async (req, res) => {
   const data = req.body;
-  validateData(data);
-
   geocode(data.address)
     .then(result => {
       const { results, status } = result.data;
@@ -90,10 +88,6 @@ function addLocationPayload(geocodeResult, data) {
 function addFulfillmentStatusPayload(data) {
   data.fulfillment_status = fulfillment_status.NEW;
   data.fulfillment_status_timestamp = firebase.database.ServerValue.TIMESTAMP;
-}
-
-function validateData(data) {
-  // TODO validate server side
 }
 
 function addToFirebase(ref, data) {
