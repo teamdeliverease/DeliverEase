@@ -59,6 +59,8 @@ async function submitForm(e, ref, getFormData, formSelector, confirmationSelecto
     return;
   }
 
+  const submitButton = document.querySelector(`#${formSelector} button`);
+  submitButton.disabled = true;
   try {
     const response = await fetch(`/${ref}`, {
       method: 'POST',
@@ -70,7 +72,8 @@ async function submitForm(e, ref, getFormData, formSelector, confirmationSelecto
     if (response.status === 200) {
       showSuccessMessage(formSelector, confirmationSelector);
     } else {
-      alert(response.status)
+      submitButton.disabled = false;
+      alert(response.status);
     }
   } catch (err) {
     console.error(err);
