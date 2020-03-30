@@ -1,6 +1,7 @@
 {
   "name": "functions",
   "description": "Cloud Functions for Firebase",
+  "private": true,
   "scripts": {
     "lint": "eslint .",
     "start": "firebase emulators:start",
@@ -23,7 +24,17 @@
   "devDependencies": {
     "eslint": "^5.12.0",
     "eslint-plugin-promise": "^4.0.1",
-    "firebase-functions-test": "^0.1.6"
+    "firebase-functions-test": "^0.1.6",
+    "husky": "^4.2.3",
+    "lint-staged": "^10.0.10",
+    "prettier": "^2.0.2"
   },
-  "private": true
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": ["eslint", "prettier --write"]
+  }
 }
