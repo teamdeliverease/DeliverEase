@@ -6,9 +6,11 @@ const schemas = {
       .max(64)
       .required(),
     email: Joi.string()
-      .max(64)
+      .max(256)
       .email(),
-    address: Joi.string().required(),
+    address: Joi.string()
+      .max(256)
+      .required(),
     phone: Joi.string()
       .phoneNumber()
       .required(),
@@ -24,10 +26,12 @@ const schemas = {
       .max(64)
       .required(),
     email: Joi.string()
-      .max(64)
+      .max(256)
       .email()
       .required(),
-    address: Joi.string().required(),
+    address: Joi.string()
+      .max(256)
+      .required(),
     phone: Joi.string()
       .phoneNumber()
       .required(),
