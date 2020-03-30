@@ -7,15 +7,16 @@ const schemas = {
       .required(),
     email: Joi.string()
       .max(256)
+      .empty('')
       .email(),
     address: Joi.string()
       .max(256)
       .required(),
     phone: Joi.string()
-      .phoneNumber()
+      .phoneNumber({ format: 'e164' })
       .required(),
     termsAgreement: Joi.boolean()
-      .truthy()
+      .valid(true)
       .required(),
     list: Joi.string()
       .max(1024)
@@ -33,10 +34,10 @@ const schemas = {
       .max(256)
       .required(),
     phone: Joi.string()
-      .phoneNumber()
+      .phoneNumber({ format: 'e164' })
       .required(),
     termsAgreement: Joi.boolean()
-      .truthy()
+      .valid(true)
       .required(),
   }),
 };
