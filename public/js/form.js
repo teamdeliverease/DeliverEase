@@ -67,7 +67,11 @@ async function submitForm(e, ref, getFormData, formSelector, confirmationSelecto
       },
       body: JSON.stringify(formData),
     });
-    showSuccessMessage(formSelector, confirmationSelector);
+    if (response.status === 200) {
+      showSuccessMessage(formSelector, confirmationSelector);
+    } else {
+      alert(response.status)
+    }
   } catch (err) {
     console.error(err);
   }
