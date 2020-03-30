@@ -7,6 +7,8 @@ const shareData = {
   url: 'https://teamdeliverease.com',
 };
 
+const analytics = firebase.analytics();
+
 function init() {
   initForms();
   initAutocompleteForAddressFields();
@@ -85,7 +87,11 @@ async function submitForm(e, ref, getFormData, formSelector, confirmationSelecto
       },
       body: JSON.stringify(formData),
     });
-    showSuccessMessage(formSelector, confirmationSelector);
+    if (response.status === 200) {
+      showSuccessMessage(formSelector, confirmationSelector);
+    } else {
+      alert(response.status)
+    }
   } catch (err) {
     console.error(err);
   }
@@ -97,6 +103,7 @@ function getVolunteerFormData() {
     phone: volunteerPhoneInput,
     email: getInputValue('volunteer-email'),
     address: getInputValue('volunteer-address'),
+    termsAgreement: document.getElementById('volunteer-terms').checked,
   };
 }
 
@@ -107,6 +114,7 @@ function getRequesterFormData() {
     email: getInputValue('requester-email'),
     address: getInputValue('requester-address'),
     list: getInputValue('requester-shopping-list'),
+    termsAgreement: document.getElementById('requester-terms').checked,
   };
 }
 

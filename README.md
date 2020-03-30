@@ -28,28 +28,25 @@ Log in to firebase
 firebase login
 ```
 
-Set config 
-
-```
-firebase functions:config:set gmail.email="teamdeliverease@gmail.com"
-firebase functions:config:set gmail.password=<ASK_FOR_PASSWORD>
-```
-
 Store config locally 
 
 ```
 firebase functions:config:get > .runtimeconfig.json
 ```
+Install project dependencies
+```
+npm install
+```
 
 Start the firebase local server
 
 ```
-npm run start
+npm start
 ```
 
 Check out the project at `http://localhost:5000`
 
-Check out the database at `http://localhost:9000/volunteers.json?ns=deliverease-staging`
+Check out the database at `http://localhost:9000/path/to/data.json?ns=deliverease-staging`
 
 
 ### Deployment
@@ -71,4 +68,4 @@ npm run deploy-prod
 6) once pr is merged, delete remote branch (also easy to do on github.com)
 7) checkout and pull master: `git checkout master && git pull`
 8) delete local branch: `git branch -d <branch_name>`
-9) prune deleted branches: `git prune`
+9) prune deleted branches: `git remote prune origin`

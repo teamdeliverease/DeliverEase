@@ -51,3 +51,7 @@ a[href^=tel] {
 .iti {
   display: flex !important;
 }
+
+.text-orange {
+  color: #e55712;
+}
