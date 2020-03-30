@@ -10,9 +10,9 @@ const googleMapsClient = require('@googlemaps/google-maps-services-js').Client;
 const mapsClient = new googleMapsClient({});
 const app = express();
 
-// Automatically allow cross-origin requests
-app.use(cors({ origin: true }));
+app.use(cors({ origin: true })); // Automatically allow cross-origin requests
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use('/pdf', express.static('public/assets/flyers/'));
 
 const fulfillment_status = {
   NEW: 'new',
