@@ -16,15 +16,9 @@ function initForms() {
 }
 
 function initTracking() {
-  document.getElementById('requester-cta').addEventListener('click', function() {
-    analytics.logEvent('call_to_action', { type: 'requester' });
-  });
-  document.getElementById('volunteer-cta').addEventListener('click', function() {
-    analytics.logEvent('call_to_action', { type: 'volunteer' });
-  });
-  document.getElementById('volunteer-flyer').addEventListener('click', function() {
-    analytics.logEvent('click_flyer', { type: 'volunteer' });
-  });
+  trackClick('requester-cta', 'call_to_action', { type: 'requester' });
+  trackClick('volunteer-cta', 'call_to_action', { type: 'volunteer' });
+  trackClick('click_flyer', 'call_to_action', { type: 'promo' });
 }
 
 function initAutocompleteForAddressFields() {
@@ -84,11 +78,11 @@ async function submitForm(e, ref, getFormData, formSelector, confirmationSelecto
     });
     if (response.status === 200) {
       showSuccessMessage(formSelector, confirmationSelector);
-      analytics.logEvent('sign_up', { method: ref.slice(0, -1) });
+      trackSignUp({ method: ref.slice(0, -1) });
     } else {
       submitButton.disabled = false;
       alert(response.status);
-      analytics.logEvent(exception, { description: response.message, fatal: true });
+      trackException({ description: response.message, fatal: true });
     }
   } catch (err) {
     console.error(err);
@@ -142,4 +136,16 @@ function validatePhoneNumber(input) {
 
 function getInputValue(id) {
   return document.getElementById(id).value;
+}
+
+function trackClick(elementId, event, payload) {
+  document.getElementById(elementId).addEventListener('click', function() {
+    analytics.logEvent(event, payload);
+  });
+}
+function trackSignUp(payload) {
+  analytics.logEvent('sign_up', payload);
+}
+function trackException(payload) {
+  analytics.logEvent(exception, payload);
 }
