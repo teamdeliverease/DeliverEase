@@ -18,7 +18,7 @@ function initForms() {
 function initTracking() {
   trackClick('requester-cta', 'call_to_action', { type: 'requester' });
   trackClick('volunteer-cta', 'call_to_action', { type: 'volunteer' });
-  trackClick('click_flyer', 'call_to_action', { type: 'promo' });
+  trackClick('volunteer-flyer', 'click_flyer', { type: 'promo' });
 }
 
 function initAutocompleteForAddressFields() {
@@ -147,5 +147,5 @@ function trackSignUp(payload) {
   analytics.logEvent('sign_up', payload);
 }
 function trackException(payload) {
-  analytics.logEvent(exception, payload);
+  analytics.logEvent('exception', payload);
 }
