@@ -5,6 +5,7 @@ const analytics = firebase.analytics();
 
 function init() {
   initForms();
+  initTracking();
   initAutocompleteForAddressFields();
   initPhoneValidation();
 }
@@ -12,6 +13,18 @@ function init() {
 function initForms() {
   document.getElementById('volunteer-form').addEventListener('submit', submitVolunteerForm);
   document.getElementById('requester-form').addEventListener('submit', submitRequesterForm);
+}
+
+function initTracking() {
+  document.getElementById('requester-cta').addEventListener('click', function() {
+    analytics.logEvent('call_to_action', { type: 'requester' });
+  });
+  document.getElementById('volunteer-cta').addEventListener('click', function() {
+    analytics.logEvent('call_to_action', { type: 'volunteer' });
+  });
+  document.getElementById('volunteer-flyer').addEventListener('click', function() {
+    analytics.logEvent('click_flyer', { type: 'volunteer' });
+  });
 }
 
 function initAutocompleteForAddressFields() {
@@ -71,9 +84,11 @@ async function submitForm(e, ref, getFormData, formSelector, confirmationSelecto
     });
     if (response.status === 200) {
       showSuccessMessage(formSelector, confirmationSelector);
+      analytics.logEvent('sign_up', { method: ref.slice(0, -1) });
     } else {
       submitButton.disabled = false;
       alert(response.status);
+      analytics.logEvent(exception, { description: response.message, fatal: true });
     }
   } catch (err) {
     console.error(err);
