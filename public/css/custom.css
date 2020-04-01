@@ -20,7 +20,7 @@
   display: none;
 }
 
-.confirmation-message h3 {
+.confirmation-message h4 {
   color: #008000 !important;
 }
 
@@ -29,7 +29,13 @@
 }
 
 .hidden {
-  max-height: 0;
+  visibility: hidden;
+  display: none;  
+}
+
+.visible {
+  visibility: visible;
+  display: block;
 }
 
 .iti__flag {
