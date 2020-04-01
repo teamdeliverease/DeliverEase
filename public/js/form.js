@@ -103,7 +103,7 @@ async function submitForm(e, ref, getFormData, sectionSelector) {
     return;
   }
 
-  const submitButton = document.querySelector(`#${sectionSelector} .button-submit`);
+  const submitButton = document.querySelector(`#${sectionSelector} button[type="submit"]`);
   submitButton.disabled = true;
   try {
     const response = await fetch(`/${ref}`, {
