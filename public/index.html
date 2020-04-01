@@ -73,7 +73,7 @@
               <!--//subheading-->
 
               <div class="cta-holder">
-                <a class="btn btn-primary mr-lg-2 mb-2 scrollto" href="#request-section" id="requester-cta"
+                <a class="btn btn-primary mr-lg-2 mb-2 scrollto" href="#requester-section" id="requester-cta"
                   >Submit a Request</a
                 >
                 <a class="btn btn-secondary mb-2 scrollto" href="#volunteer-section" id="volunteer-cta"
@@ -240,7 +240,7 @@
       <!--//container-->
     </section>
     <!--//benefits-section-->
-    <section id="request-section" class="request-section">
+    <section id="requester-section">
       <div class="container">
         <div class="single-col-max mx-auto">
           <h2 class="section-heading text-center mb-3">Submit a Request</h2>
@@ -252,17 +252,18 @@
                     DeliverEase will find you a volunteer in your neighborhood
                   </h2>
                   <div class="form-intro text-center mb-3">
-                    You’ll get notified once we find a match for your request and a volunteer will
+                    You'll get notified once we find a match for your request and a volunteer will
                     drop off your items directly to your front door.
                   </div>
-                  <div id="request-confirmation" class="confirmation-message mt-5">
-                    <h3 class="form-heading text-center">
-                      Thanks for submitting your request, we’ll do our best to fulfill it! We’ll
-                      reach out when a volunteer in your neighborhood can deliver your items.
-                      <button id="volunteer-share" class="btn btn-success btn-submit mx-auto share-button mt-4" style="display: none">Share DeliverEase</a>
-                    </h3>
+                  <div class="confirmation-message mt-5">
+                    <h4 class="form-heading text-center">
+                      Thanks for submitting your request! Our team will reach out when a volunteer in your neighborhood can deliver your items.
+                    </h4>
+                    <br/>
+                    <h5 class="text-center">In the meantime, please spread the word!</h5>
+                    <button id="requester-share" class="btn btn-success btn-submit mx-auto share-button mt-4 hidden">Share DeliverEase</a>
                   </div>
-                  <div class="form-wrapper" id="request-form-wrapper">
+                  <div class="form-wrapper" id="requester-form-wrapper">
                     <form class="text-center flex-wrap" id="requester-form">
                       <div class="form-group mr-md-2 mb-3 mb-md-2">
                         <label for="name" class="sr-only">Name</label>
@@ -371,12 +372,12 @@
     </section>
     <!--//content-section-->
 
-    <section id="volunteer-section" class="volunteer-section py-5">
+    <section id="volunteer-section" class="py-5">
       <div class="container">
         <div class="single-col-max mx-auto">
           <h2 class="section-heading text-center mb-3">Become a Volunteer</h2>
           <div class="row">
-            <section class="form-sect theme-bg-light">
+            <section class="form-sect theme-bg-light" id="requester-section">
               <div class="container py-3">
                 <div
                   class="lead-form-wrapper single-col-max mx-auto theme-bg-light rounded p-lg-5 p-md-3"
@@ -385,11 +386,13 @@
                   <div class="form-intro text-center mb-3">
                     Fill in your information and we'll let you know when a neighbor needs help.
                   </div>
-                  <div id="volunteer-confirmation" class="confirmation-message mt-5">
-                    <h3 class="form-heading text-center">
-                      Thanks for signing up to volunteer! We'll reach out when a neighbor needs
-                      help. <button id="volunteer-share" class="btn btn-success btn-submit mx-auto share-button mt-4" style="display: none">Share DeliverEase</a>
-                    </h3>
+                  <div class="confirmation-message mt-5">
+                    <h4 class="form-heading text-center">
+                      Thanks for signing up to volunteer! We’ll reach out when a neighbor needs help.
+                    </h4>
+                    <br/>
+                    <h5 class="text-center">In the meantime, please spread the word!</h5>
+                    <button id="volunteer-share" class="btn btn-success btn-submit mx-auto share-button mt-4 hidden">Share DeliverEase</a>
                   </div>
                   <div class="form-wrapper" id="volunteer-form-wrapper">
                     <form class="text-center flex-wrap" id="volunteer-form">
@@ -760,7 +763,7 @@
     <script
       async
       defer
-      src="https://maps.google.com/maps/api/js?key=AIzaSyAhjz4PFetOQjeGA8I-sR3ROYDg3Zovlpg&libraries=places&callback=init"
+      src="https://maps.google.com/maps/api/js?key=AIzaSyBnw4vCWKTZgb-OMJPJ15ptB4dEa5zxQnQ&libraries=places&callback=init"
     ></script>
   </body>
 </html>
