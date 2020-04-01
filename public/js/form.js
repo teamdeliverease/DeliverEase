@@ -5,6 +5,7 @@ const analytics = firebase.analytics();
 
 function init() {
   initForms();
+  initTracking();
   initAutocompleteForAddressFields();
   initPhoneValidation();
 }
@@ -12,6 +13,12 @@ function init() {
 function initForms() {
   document.getElementById('volunteer-form').addEventListener('submit', submitVolunteerForm);
   document.getElementById('requester-form').addEventListener('submit', submitRequesterForm);
+}
+
+function initTracking() {
+  trackClick('requester-cta', 'call_to_action', { type: 'requester' });
+  trackClick('volunteer-cta', 'call_to_action', { type: 'volunteer' });
+  trackClick('volunteer-flyer', 'click_flyer', { type: 'promo' });
 }
 
 function initAutocompleteForAddressFields() {
@@ -71,9 +78,11 @@ async function submitForm(e, ref, getFormData, formSelector, confirmationSelecto
     });
     if (response.status === 200) {
       showSuccessMessage(formSelector, confirmationSelector);
+      trackSignUp({ method: ref.slice(0, -1) });
     } else {
       submitButton.disabled = false;
       alert(response.status);
+      trackException({ description: response.message, fatal: true });
     }
   } catch (err) {
     console.error(err);
@@ -127,4 +136,16 @@ function validatePhoneNumber(input) {
 
 function getInputValue(id) {
   return document.getElementById(id).value;
+}
+
+function trackClick(elementId, event, payload) {
+  document.getElementById(elementId).addEventListener('click', function() {
+    analytics.logEvent(event, payload);
+  });
+}
+function trackSignUp(payload) {
+  analytics.logEvent('sign_up', payload);
+}
+function trackException(payload) {
+  analytics.logEvent('exception', payload);
 }
