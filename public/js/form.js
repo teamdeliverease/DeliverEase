@@ -1,36 +1,43 @@
+const analytics = firebase.analytics();
+
 var requesterPhoneInput;
 var volunteerPhoneInput;
 
-const analytics = firebase.analytics();
+const VOLUNTEER_SECTION_SELECTOR = 'volunteer-section';
+const REQUESTER_SECTION_SELECTOR = 'requester-section';
 
 const volunteerShareContent = {
-  title: 'DeliverEase',
-  text: 'Sign up to volunteer or request with DeliverEase',
-  url: 'https://teamdeliverease.com',
+  text: 'Going the social distance for my neighborhood with DeliverEase! You can too!',
+  url: `${window.location.href}/assets/flyers/IVolunteered.pdf`,
 };
 
 const requesterShareContent = {
-  title: 'DeliverEase',
-  text: 'Sign up to volunteer or request with DeliverEase',
-  url: 'https://teamdeliverease.com',
+  text:
+    'One less thing to worry about this week knowing local volunteers will deliver my groceries for free. Thank you DeliverEase!',
+  url: `${window.location.href}assets/flyers/IReceivedADelivery.pdf`,
 };
-
-firebase.initializeApp(config);
 
 function init() {
   initForms();
   initTracking();
   initAutocompleteForAddressFields();
   initPhoneValidation();
-  if (navigator.share !== undefined) {
-    initShareButton('requester-share');
-    initShareButton('volunteer-share');
-  }
+  initShareButtons();
 }
 
 function initForms() {
   document.getElementById('volunteer-form').addEventListener('submit', submitVolunteerForm);
   document.getElementById('requester-form').addEventListener('submit', submitRequesterForm);
+}
+
+function initShareButtons() {
+  if (navigator.share !== undefined) {
+    initMobileShare(VOLUNTEER_SECTION_SELECTOR, volunteerShareContent);
+    initMobileShare(REQUESTER_SECTION_SELECTOR, requesterShareContent);
+  } else {
+    initDesktopShare(VOLUNTEER_SECTION_SELECTOR, volunteerShareContent);
+    initDesktopShare(REQUESTER_SECTION_SELECTOR, requesterShareContent);
+  }
 }
 
 function initTracking() {
@@ -39,15 +46,21 @@ function initTracking() {
   trackClick('volunteer-flyer', 'click_flyer', { type: 'promo' });
 }
 
-function initShareButton(shareSelector) {
-  const volunteerShareLink = document.getElementById(shareSelector);
+function initMobileShare(sectionSelector, shareContent) {
+  document
+    .querySelector(`#${sectionSelector} .share-button`)
+    .addEventListener('click', async () => {
+      try {
+        await navigator.share(shareContent);
+      } catch (err) {
+        successMessage.textContent = 'Error: ' + err;
+      }
+    });
+}
 
-  document.getElementById(shareSelector).addEventListener('click', async () => {
-    try {
-      await navigator.share(shareData);
-    } catch (err) {
-      successMessage.textContent = 'Error: ' + err;
-    }
+function initDesktopShare(sectionSelector, shareContent) {
+  document.querySelector(`#${sectionSelector} .share-button`).addEventListener('click', () => {
+    location.href = shareContent.url;
   });
 }
 
@@ -70,20 +83,14 @@ function initPhoneValidation() {
 }
 
 function submitVolunteerForm(e) {
-  submitForm(
-    e,
-    'volunteers',
-    getVolunteerFormData,
-    'volunteer-form-wrapper',
-    'volunteer-confirmation',
-  );
+  submitForm(e, 'volunteers', getVolunteerFormData, VOLUNTEER_SECTION_SELECTOR);
 }
 
 function submitRequesterForm(e) {
-  submitForm(e, 'requesters', getRequesterFormData, 'request-form-wrapper', 'request-confirmation');
+  submitForm(e, 'requesters', getRequesterFormData, REQUESTER_SECTION_SELECTOR);
 }
 
-async function submitForm(e, ref, getFormData, formSelector, confirmationSelector) {
+async function submitForm(e, ref, getFormData, sectionSelector) {
   e.preventDefault();
 
   data = getFormData();
@@ -96,7 +103,7 @@ async function submitForm(e, ref, getFormData, formSelector, confirmationSelecto
     return;
   }
 
-  const submitButton = document.querySelector(`#${formSelector} button`);
+  const submitButton = document.querySelector(`#${sectionSelector} .button-submit`);
   submitButton.disabled = true;
   try {
     const response = await fetch(`/${ref}`, {
@@ -107,7 +114,7 @@ async function submitForm(e, ref, getFormData, formSelector, confirmationSelecto
       body: JSON.stringify(formData),
     });
     if (response.status === 200) {
-      showSuccessMessage(formSelector, confirmationSelector);
+      showSuccessMessage(sectionSelector);
       trackSignUp({ method: ref.slice(0, -1) });
     } else {
       submitButton.disabled = false;
@@ -140,17 +147,25 @@ function getRequesterFormData() {
   };
 }
 
-function showSuccessMessage(formSelector, confirmationSelector) {
-  var formElement = document.getElementById(formSelector);
-  var confElement = document.getElementById(confirmationSelector);
-  var shareElement = document.querySelector(`#${confirmationSelector} button`);
+function showSuccessMessage(sectionSelector) {
+  const section = document.getElementById(sectionSelector);
+  const form = section.querySelector('.form-wrapper');
+  const subtitle = section.querySelector('.form-intro');
+  const shareButton = section.querySelector('.share-button');
+  const confirmationMessage = section.querySelector('.confirmation-message');
 
-  formElement.classList.add('hidden');
-  formElement.style.visibility = 'hidden';
-  confElement.style.display = 'block';
-  if (navigator.share !== undefined) {
-    shareElement.style.display = 'block';
-  }
+  hideElement(form);
+  hideElement(subtitle);
+  showElement(confirmationMessage);
+  showElement(shareButton);
+}
+
+function hideElement(element) {
+  element.classList.add('hidden');
+}
+
+function showElement(element) {
+  element.classList.add('visible');
 }
 
 function validatePhoneNumber(input) {
