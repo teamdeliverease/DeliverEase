@@ -118,7 +118,8 @@ async function submitForm(e, ref, getFormData, sectionSelector) {
       trackSignUp({ method: ref.slice(0, -1) });
     } else {
       submitButton.disabled = false;
-      alert(response.status);
+      const errorMessage = await response.text();
+      alert(errorMessage);
       trackException({ description: response.message, fatal: true });
     }
   } catch (err) {
