@@ -33,7 +33,7 @@ app.post('/requesters', validationMiddleware(schemas.requester, 'body'), async (
           addToFirebase('requesters', data);
           return res.sendStatus(200);
         } catch (e) {
-          console.error(e.message);
+          console.error(e);
           return res.status(500).send(e.message);
         }
       } else {
