@@ -24,7 +24,7 @@ const fulfillment_status = {
 app.post('/requesters', validationMiddleware(schemas.requester, 'body'), async (req, res) => {
   const data = req.body;
   geocode(data.address)
-    .then(result => {
+    .then((result) => {
       const { results, status } = result.data;
       if (status === 'OK') {
         addLocationPayload(results[0], data);
@@ -33,22 +33,24 @@ app.post('/requesters', validationMiddleware(schemas.requester, 'body'), async (
           addToFirebase('requesters', data);
           return res.sendStatus(200);
         } catch (e) {
-          console.error(e.message);
+          console.error(e);
           return res.status(500).send(e.message);
         }
       } else {
-        const mapsError = 'Geocode was not successful for the following reason: ' + status;
+        const mapsError = new Error(
+          'Geocode was not successful for the following reason: ' + status,
+        );
         console.error(mapsError);
-        return res.status(500).send(mapsError);
+        return res.status(500).send(mapsError.message);
       }
     })
-    .catch(err => console.error(err));
+    .catch((err) => console.error(err));
 });
 
 app.post('/volunteers', validationMiddleware(schemas.volunteer, 'body'), async (req, res) => {
   const data = req.body;
   geocode(data.address)
-    .then(result => {
+    .then((result) => {
       const { results, status } = result.data;
       if (status === 'OK') {
         addLocationPayload(results[0], data);
@@ -56,16 +58,18 @@ app.post('/volunteers', validationMiddleware(schemas.volunteer, 'body'), async (
           addToFirebase('volunteers', data);
           return res.sendStatus(200);
         } catch (e) {
-          console.error(e.message);
+          console.error(e);
           return res.status(500).send(e.message);
         }
       } else {
-        const mapsError = 'Geocode was not successful for the following reason: ' + status;
+        const mapsError = new Error(
+          'Geocode was not successful for the following reason: ' + status,
+        );
         console.error(mapsError);
-        return res.status(500).send(mapsError);
+        return res.status(500).send(mapsError.message);
       }
     })
-    .catch(err => console.error(err));
+    .catch((err) => console.error(err));
 });
 
 function geocode(address) {
@@ -94,7 +98,7 @@ function addToFirebase(ref, data) {
   firebase
     .database()
     .ref(ref)
-    .push(data, err => {
+    .push(data, (err) => {
       if (err) {
         throw new Error('error writing to database');
       }
