@@ -6,6 +6,10 @@
   width: 30%;
 }
 
+.navbar-brand {
+  margin-right: 0;
+}
+
 @media only screen and (max-width: 600px) {
   .full-width button {
     width: 100%;
