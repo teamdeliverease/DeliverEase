@@ -24,7 +24,8 @@
 }
 
 .title-container .title::after {
-  content: '   |';
+  margin-left: 5px;
+  content: '|';
 }
 
 @media only screen and (max-width: 600px) {
