@@ -37,7 +37,8 @@
     }
   },
   "lint-staged": {
-    "*.html": "prettier --write",
-    "*.js": ["eslint", "prettier --write"]
+    "*.{js,json,css,scss,html,md}": [
+      "prettier --write"
+    ]
   }
 }
