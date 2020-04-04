@@ -19,6 +19,10 @@
   display: flex;
 }
 
+.title-container a:hover {
+  text-decoration: none;
+}
+
 .title-container .title {
   margin-right: 5px;
 }
@@ -26,6 +30,11 @@
 .title-container .title::after {
   margin-left: 5px;
   content: '|';
+}
+
+.logo-icon {
+  height: 65px;
+  width: 65px;
 }
 
 @media only screen and (max-width: 600px) {
