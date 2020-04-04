@@ -6,10 +6,53 @@
   width: 30%;
 }
 
+.navbar-brand {
+  margin-right: 0;
+}
+
+.site-logo {
+  display: flex;
+  align-items: center;
+}
+
+.title-container {
+  display: flex;
+}
+
+.title-container a:hover {
+  text-decoration: none;
+}
+
+.title-container .title {
+  margin-right: 5px;
+}
+
+.title-container .title::after {
+  margin-left: 5px;
+  content: '|';
+}
+
+.logo-icon {
+  height: 65px;
+  width: 65px;
+}
+
 @media only screen and (max-width: 600px) {
+  .title-container {
+    flex-direction: column;
+  }
+
+  .title-container .title::after {
+    content: '';
+  }
+
   .full-width button {
     width: 100%;
   }
+
+  .logo-text {
+    font-size: 1.3rem !important;
+  } 
 }
 
 .terms-link {
