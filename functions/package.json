@@ -38,6 +38,6 @@
   },
   "lint-staged": {
     "*.js": ["eslint", "prettier --write"],
-    "public/*.html": ["prettier --write"]
+    "*.html": ["prettier --write"]
   }
 }
