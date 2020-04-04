@@ -1,624 +1,809 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <title>DeliverEase</title>
 
-<head>
-  <title>DeliverEase</title>
+    <!-- Meta -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="DeliverEase - helping connect local volunteers with community members in need"
+    />
+    <meta name="author" content="Xiaoying Riley at 3rd Wave Media" />
+    <meta property="og:title" content="DeliverEase" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="assets/images/shareThumbnail.png" />
+    <meta
+      property="og:description"
+      content="Helping connect local volunteers with community members in need."
+    />
+    <meta property="og:url" content="https://deliverease-staging.firebaseapp.com" />
+    <link rel="shortcut icon" href="favicon.ico" />
 
-  <!-- Meta -->
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="DeliverEase - helping connect local volunteers with community members in need" />
-  <meta name="author" content="Xiaoying Riley at 3rd Wave Media" />
-  <meta property="og:title" content="DeliverEase" />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="assets/images/shareThumbnail.png" />
-  <meta property="og:description" content="Helping connect local volunteers with community members in need." />
-  <meta property="og:url" content="https://deliverease-staging.firebaseapp.com" />
-  <link rel="shortcut icon" href="favicon.ico" />
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Quicksand:700|Roboto:400,400i,700&display=swap"
+      rel="stylesheet"
+    />
 
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css?family=Quicksand:700|Roboto:400,400i,700&display=swap"
-    rel="stylesheet" />
+    <!-- FontAwesome JS-->
+    <script defer src="assets/fontawesome/js/all.min.js"></script>
 
-  <!-- FontAwesome JS-->
-  <script defer src="assets/fontawesome/js/all.min.js"></script>
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="assets/css/theme.css" />
 
-  <!-- Theme CSS -->
-  <link id="theme-style" rel="stylesheet" href="assets/css/theme.css" />
+    <!-- Custom CSS overrides -->
+    <link id="theme-style" rel="stylesheet" href="css/custom.css" />
 
-  <!-- Custom CSS overrides -->
-  <link id="theme-style" rel="stylesheet" href="css/custom.css" />
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" href="assets/plugins/intl-tel-input/css/intlTelInput.min.css" />
+  </head>
 
-  <!-- Vendor CSS -->
-  <link rel="stylesheet" href="assets/plugins/intl-tel-input/css/intlTelInput.min.css" />
-</head>
-
-<body>
-  <header class="header">
-    <div class="branding">
-      <div class="container-fluid position-relative py-3">
-        <div class="logo-wrapper">
-          <div class="site-logo">
-            <a href="index.html"><img class="logo-icon mr-2" src="assets/images/logo.png" alt="logo" /></a>
-            <div class="title-container">
-              <a href="index.html"><span class="logo-text title">DeliverEase</span></a>
-              <a href="tel:415-633-6261"><span class="logo-text">(415) 633-6261</span></a>
+  <body>
+    <header class="header">
+      <div class="branding">
+        <div class="container-fluid position-relative py-3">
+          <div class="logo-wrapper">
+            <div class="site-logo">
+              <a href="index.html"
+                ><img class="logo-icon mr-2" src="assets/images/logo.png" alt="logo"
+              /></a>
+              <div class="title-container">
+                <a href="index.html"><span class="logo-text title">DeliverEase</span></a>
+                <a href="tel:415-633-6261"><span class="logo-text">(415) 633-6261</span></a>
+              </div>
             </div>
           </div>
+          <!--//docs-logo-wrapper-->
         </div>
-        <!--//docs-logo-wrapper-->
+        <!--//container-->
+      </div>
+      <!--//branding-->
+    </header>
+    <!--//header-->
+    <section class="hero-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 col-md-7 pt-5 mb-5 align-self-center">
+            <div class="promo pr-md-3 pr-lg-5">
+              <h1 class="headline mb-3">
+                Welcome to DeliverEase!
+              </h1>
+              <!--//headline-->
+              <div class="subheadline mb-4">
+                We connect local volunteers with community members who have a hard time getting
+                groceries and other essentials.
+              </div>
+              <!--//subheading-->
+
+              <div class="cta-holder">
+                <a
+                  class="btn btn-primary mr-lg-2 mb-2 scrollto"
+                  href="#requester-section"
+                  id="requester-cta"
+                  >Submit a Request</a
+                >
+                <a
+                  class="btn btn-secondary mb-2 scrollto"
+                  href="#volunteer-section"
+                  id="volunteer-cta"
+                  >Become a Volunteer</a
+                >
+              </div>
+              <div class="mt-5">
+                Can't volunteer but still want to help? Please spread the word by sharing our
+                <a
+                  id="volunteer-flyer"
+                  class="text-orange font-weight-bold"
+                  target="_blank"
+                  href="/assets/flyers/GeneralPromoFlyer_printerFriendly.pdf"
+                  >flyer</a
+                >!
+              </div>
+              <!--//cta-holder-->
+
+              <div class="hero-quotes mt-5">
+                <div
+                  id="quotes-carousel"
+                  class="quotes-carousel carousel slide carousel-fade mb-5"
+                  data-ride="carousel"
+                  data-interval="8000"
+                ></div>
+                <!--//quotes-carousel-->
+              </div>
+              <!--//hero-quotes-->
+            </div>
+            <!--//promo-->
+          </div>
+          <!--col-->
+          <div class="col-12 col-md-5 mb-5 align-self-center">
+            <div class="book-cover-holder">
+              <img class="img-fluid book-cover" src="assets/images/pumpkin.jpg" alt="book cover" />
+            </div>
+            <!--//book-cover-holder-->
+          </div>
+          <!--col-->
+        </div>
+        <!--//row-->
       </div>
       <!--//container-->
-    </div>
-    <!--//branding-->
-  </header>
-  <!--//header-->
-  <section class="hero-section">
-    <div class="container">
-      <div class="row">
-        <div class="col-12 col-md-7 pt-5 mb-5 align-self-center">
-          <div class="promo pr-md-3 pr-lg-5">
-            <h1 class="headline mb-3">
-              Welcome to DeliverEase!
-            </h1>
-            <!--//headline-->
-            <div class="subheadline mb-4">
-              We connect local volunteers with community members who have a hard time getting
-              groceries and other essentials.
-            </div>
-            <!--//subheading-->
+    </section>
+    <!--//hero-section-->
 
-            <div class="cta-holder">
-              <a class="btn btn-primary mr-lg-2 mb-2 scrollto" href="#requester-section" id="requester-cta">Submit a
-                Request</a>
-              <a class="btn btn-secondary mb-2 scrollto" href="#volunteer-section" id="volunteer-cta">Become a
-                Volunteer</a>
-            </div>
-            <div class="mt-5">
-              Can't volunteer but still want to help? Please spread the word by sharing our
-              <a id="volunteer-flyer" class="text-orange font-weight-bold" target="_blank"
-                href="/assets/flyers/GeneralPromoFlyer_printerFriendly.pdf">flyer</a>!
-            </div>
-            <!--//cta-holder-->
-
-            <div class="hero-quotes mt-5">
-              <div id="quotes-carousel" class="quotes-carousel carousel slide carousel-fade mb-5" data-ride="carousel"
-                data-interval="8000"></div>
-              <!--//quotes-carousel-->
-            </div>
-            <!--//hero-quotes-->
-          </div>
-          <!--//promo-->
+    <section id="benefits-section" class="benefits-section theme-bg-light-gradient py-5">
+      <div class="container">
+        <h2 class="section-heading text-center">How It Works</h2>
+        <div class="section-intro single-col-max mx-auto text-center mb-3">
+          Turning the quarantine into a quaranteam
         </div>
-        <!--col-->
-        <div class="col-12 col-md-5 mb-5 align-self-center">
-          <div class="book-cover-holder">
-            <img class="img-fluid book-cover" src="assets/images/pumpkin.jpg" alt="book cover" />
-          </div>
-          <!--//book-cover-holder-->
-        </div>
-        <!--col-->
-      </div>
-      <!--//row-->
-    </div>
-    <!--//container-->
-  </section>
-  <!--//hero-section-->
-
-  <section id="benefits-section" class="benefits-section theme-bg-light-gradient py-5">
-    <div class="container">
-      <h2 class="section-heading text-center">How It Works</h2>
-      <div class="section-intro single-col-max mx-auto text-center mb-3">
-        Turning the quarantine into a quaranteam
-      </div>
-      <div class="row text-center">
-        <div class="item col-12 col-md-6 col-lg-6">
-          <div class="item-inner p-3 p-lg-4">
-            <div class="item-header mb-3">
-              <div class="item-icon mb-3">
-                <img class="img-fluid" src="assets/images/lightbulb.png" height="50" width="50" alt="light bulb" />
-              </div>
-              <h3 class="item-heading">
-                Volunteers sign up to make deliveries
-              </h3>
-            </div>
-            <!--//item-heading-->
-            <div class="item-desc">
-              Volunteers rock! They’ll fulfill requests whenever they were originally planning on
-              going to a store themselves, making it convenient to pick up requested items.
-            </div>
-            <!--//item-desc-->
-          </div>
-          <!--//item-inner-->
-        </div>
-        <!--//item-->
-        <div class="item col-12 col-md-6 col-lg-6">
-          <div class="item-inner p-3 p-lg-4">
-            <div class="item-header mb-3">
-              <div class="item-icon mb-3">
-                <img class="img-fluid" src="assets/images/notepad.png" height="50" width="50" alt="notepad" />
-              </div>
-              <h3 class="item-heading">
-                Anyone who could use help can submit a request below
-              </h3>
-            </div>
-            <!--//item-heading-->
-            <div class="item-desc">
-              Whether you have a particular vulnerability or are a healthcare practitioner
-              intentionally staying away from public areas, we’re here to help.
-            </div>
-            <!--//item-desc-->
-          </div>
-          <!--//item-inner-->
-        </div>
-        <!--//item-->
-      </div>
-      <!--//row-->
-      <div class="row text-center">
-        <div class="item col-12 col-md-6 col-lg-6">
-          <div class="item-inner p-3 p-lg-4">
-            <div class="item-header mb-3">
-              <div class="item-icon mb-3">
-                <img class="img-fluid" src="assets/images/heart.png" height="50" width="50" alt="light bulb" />
-              </div>
-              <h3 class="item-heading">
-                We’ll pass requests to volunteers in your neighborhood
-              </h3>
-            </div>
-            <!--//item-heading-->
-            <div class="item-desc">
-              They’ll let us know when they can fulfill your request, and we’ll let you know when
-              to expect your delivery.
-            </div>
-            <!--//item-desc-->
-          </div>
-          <!--//item-inner-->
-        </div>
-        <!--//item-->
-        <div class="item col-12 col-md-6 col-lg-6">
-          <div class="item-inner p-3 p-lg-4">
-            <div class="item-header mb-3">
-              <div class="item-icon mb-3">
-                <img class="img-fluid" src="assets/images/piggyBank.png" height="50" width="65" alt="notepad" />
-              </div>
-              <h3 class="item-heading">
-                Zero fees
-              </h3>
-            </div>
-            <!--//item-heading-->
-            <div class="item-desc">
-              No service or delivery fees! That means $0. Payments for groceries and purchased
-              goods will be arranged between the volunteer and community members.
-            </div>
-            <!--//item-desc-->
-          </div>
-          <!--//item-inner-->
-        </div>
-        <!--//item-->
-      </div>
-      <!--//row-->
-    </div>
-    <!--//container-->
-  </section>
-  <!--//benefits-section-->
-  <section id="requester-section">
-    <div class="container">
-      <div class="single-col-max mx-auto">
-        <h2 class="section-heading text-center mb-3">Submit a Request</h2>
-        <div class="row">
-          <section class="form-section theme-bg-light">
-            <div class="container py-3">
-              <div class="lead-form-wrapper single-col-max mx-auto rounded p-lg-5 p-md-3 p-2">
-                <h2 class="form-heading text-center" id="request-title">
-                  DeliverEase will find you a volunteer in your neighborhood
-                </h2>
-                <div class="form-intro text-center mb-3">
-                  You'll get notified once we find a match for your request and a volunteer will
-                  drop off your items directly to your front door.
+        <div class="row text-center">
+          <div class="item col-12 col-md-6 col-lg-6">
+            <div class="item-inner p-3 p-lg-4">
+              <div class="item-header mb-3">
+                <div class="item-icon mb-3">
+                  <img
+                    class="img-fluid"
+                    src="assets/images/lightbulb.png"
+                    height="50"
+                    width="50"
+                    alt="light bulb"
+                  />
                 </div>
-                <div class="confirmation-message mt-5">
-                  <h4 class="form-heading text-center">
-                    Thanks for submitting your request! Our team will reach out when a volunteer in your neighborhood
-                    can deliver your items.
-                  </h4>
-                  <br />
-                  <h5 class="text-center">In the meantime, please spread the word!</h5>
-                  <button id="requester-share" class="btn btn-success btn-submit mx-auto share-button mt-4 hidden">Share
-                    DeliverEase</a>
+                <h3 class="item-heading">
+                  Volunteers sign up to make deliveries
+                </h3>
+              </div>
+              <!--//item-heading-->
+              <div class="item-desc">
+                Volunteers rock! They’ll fulfill requests whenever they were originally planning on
+                going to a store themselves, making it convenient to pick up requested items.
+              </div>
+              <!--//item-desc-->
+            </div>
+            <!--//item-inner-->
+          </div>
+          <!--//item-->
+          <div class="item col-12 col-md-6 col-lg-6">
+            <div class="item-inner p-3 p-lg-4">
+              <div class="item-header mb-3">
+                <div class="item-icon mb-3">
+                  <img
+                    class="img-fluid"
+                    src="assets/images/notepad.png"
+                    height="50"
+                    width="50"
+                    alt="notepad"
+                  />
                 </div>
-                <div class="form-wrapper" id="requester-form-wrapper">
-                  <form class="text-center flex-wrap" id="requester-form">
-                    <div class="form-group mr-md-2 mb-3 mb-md-2">
-                      <label for="name" class="sr-only">Name</label>
-                      <input required maxlength="64" type="text" class="form-control" id="requester-name"
-                        placeholder="Name*" />
-                    </div>
-                    <div class="form-group mr-md-2 mb-3 mb-md-2">
-                      <label for="phone" class="sr-only">Phone Number</label>
-                      <input required maxlength="16" type="tel" id="requester-phone" class="form-control"
-                        placeholder="Phone Number*" />
-                    </div>
-                    <div class="form-group mr-md-2 mb-3 mb-md-2">
-                      <label for="address" class="sr-only">Street Address</label>
-                      <input required type="text" maxlength="256" class="form-control address-field"
-                        id="requester-address" placeholder="Street Address*" />
-                    </div>
-                    <div class="form-group mr-md-2 mb-3 mb-md-2">
-                      <label for="phone" class="sr-only">Email</label>
-                      <input type="email" maxlength="256" id="requester-email" class="form-control"
-                        placeholder="Email" />
-                    </div>
-                    <div class="form-group mr-md-2 mb-3 mb-md-2">
-                      <label for="shopping-list" class="sr-only">Enter shopping list here.</label>
-                      <textarea required maxlength="1024" class="form-control" id="requester-shopping-list"
-                        placeholder="Enter shopping list here*" rows="4"></textarea>
-                    </div>
-                    <div class="form-check mr-md-2 mb-3 full-width">
-                      <input required type="checkbox" class="form-check-input" id="requester-terms" />
-                      <label class="form-check-label" for="requester-terms">
-                        I agree to the
-                        <a href data-toggle="modal" data-target="#requesterModal" class="terms-link">Terms of Use</a>
-                      </label>
-                    </div>
-                    <div class="form-group mr-md-2 full-width mx-auto">
-                      <button type="submit" class="btn btn-primary btn-submit mx-auto">
-                        Submit request
-                      </button>
-                    </div>
+                <h3 class="item-heading">
+                  Anyone who could use help can submit a request below
+                </h3>
+              </div>
+              <!--//item-heading-->
+              <div class="item-desc">
+                Whether you have a particular vulnerability or are a healthcare practitioner
+                intentionally staying away from public areas, we’re here to help.
+              </div>
+              <!--//item-desc-->
+            </div>
+            <!--//item-inner-->
+          </div>
+          <!--//item-->
+        </div>
+        <!--//row-->
+        <div class="row text-center">
+          <div class="item col-12 col-md-6 col-lg-6">
+            <div class="item-inner p-3 p-lg-4">
+              <div class="item-header mb-3">
+                <div class="item-icon mb-3">
+                  <img
+                    class="img-fluid"
+                    src="assets/images/heart.png"
+                    height="50"
+                    width="50"
+                    alt="light bulb"
+                  />
+                </div>
+                <h3 class="item-heading">
+                  We’ll pass requests to volunteers in your neighborhood
+                </h3>
+              </div>
+              <!--//item-heading-->
+              <div class="item-desc">
+                They’ll let us know when they can fulfill your request, and we’ll let you know when
+                to expect your delivery.
+              </div>
+              <!--//item-desc-->
+            </div>
+            <!--//item-inner-->
+          </div>
+          <!--//item-->
+          <div class="item col-12 col-md-6 col-lg-6">
+            <div class="item-inner p-3 p-lg-4">
+              <div class="item-header mb-3">
+                <div class="item-icon mb-3">
+                  <img
+                    class="img-fluid"
+                    src="assets/images/piggyBank.png"
+                    height="50"
+                    width="65"
+                    alt="notepad"
+                  />
+                </div>
+                <h3 class="item-heading">
+                  Zero fees
+                </h3>
+              </div>
+              <!--//item-heading-->
+              <div class="item-desc">
+                No service or delivery fees! That means $0. Payments for groceries and purchased
+                goods will be arranged between the volunteer and community members.
+              </div>
+              <!--//item-desc-->
+            </div>
+            <!--//item-inner-->
+          </div>
+          <!--//item-->
+        </div>
+        <!--//row-->
+      </div>
+      <!--//container-->
+    </section>
+    <!--//benefits-section-->
+    <section id="requester-section">
+      <div class="container">
+        <div class="single-col-max mx-auto">
+          <h2 class="section-heading text-center mb-3">Submit a Request</h2>
+          <div class="row">
+            <section class="form-section theme-bg-light">
+              <div class="container py-3">
+                <div class="lead-form-wrapper single-col-max mx-auto rounded p-lg-5 p-md-3 p-2">
+                  <h2 class="form-heading text-center" id="request-title">
+                    DeliverEase will find you a volunteer in your neighborhood
+                  </h2>
+                  <div class="form-intro text-center mb-3">
+                    You'll get notified once we find a match for your request and a volunteer will
+                    drop off your items directly to your front door.
+                  </div>
+                  <div class="confirmation-message mt-5">
+                    <h4 class="form-heading text-center">
+                      Thanks for submitting your request! Our team will reach out when a volunteer
+                      in your neighborhood can deliver your items.
+                    </h4>
                     <br />
-                    <div class="text-left form-group">
-                      <i>You will be expected to pay for the items you ordered upon receipt of the
-                        delivery and coordinate with your volunteer on the methods of payment. If
-                        you have an online money transfer account (Paypal, Venmo, etc) please be
-                        prepared to share this information with your volunteer. If you can, try
-                        calling the store ahead and paying for your groceries over the phone. If
-                        you only have cash to pay for your groceries, please be prepared with
-                        exact change and put your cash in an envelope for your volunteer.</i>
-                    </div>
-                  </form>
-                </div>
-                <!--//form-wrapper-->
-              </div>
-              <!--//lead-form-wrapper-->
-            </div>
-            <!--//container-->
-          </section>
-          <!--//form-section-->
-        </div>
-        <!--//row-->
-      </div>
-      <!--//single-col-max-->
-    </div>
-    <!--//container-->
-  </section>
-  <!--//content-section-->
-
-  <section id="volunteer-section" class="py-5">
-    <div class="container">
-      <div class="single-col-max mx-auto">
-        <h2 class="section-heading text-center mb-3">Become a Volunteer</h2>
-        <div class="row">
-          <section class="form-sect theme-bg-light" id="requester-section">
-            <div class="container py-3">
-              <div class="lead-form-wrapper single-col-max mx-auto theme-bg-light rounded p-lg-5 p-md-3">
-                <h2 class="form-heading text-center">Sign up to help your community</h2>
-                <div class="form-intro text-center mb-3">
-                  Fill in your information and we'll let you know when a neighbor needs help.
-                </div>
-                <div class="confirmation-message mt-5">
-                  <h4 class="form-heading text-center">
-                    Thanks for signing up to volunteer! We’ll reach out when a neighbor needs help.
-                  </h4>
-                  <br />
-                  <h5 class="text-center">In the meantime, please spread the word!</h5>
-                  <button id="volunteer-share" class="btn btn-success btn-submit mx-auto share-button mt-4 hidden">Share
-                    DeliverEase</a>
-                </div>
-                <div class="form-wrapper" id="volunteer-form-wrapper">
-                  <form class="text-center flex-wrap" id="volunteer-form">
-                    <div class="form-group mr-md-2 mb-3 mb-md-2">
-                      <label for="name" class="sr-only">Name</label>
-                      <input required type="text" maxlength="64" class="form-control" id="volunteer-name"
-                        placeholder="Name*" />
-                    </div>
-                    <div class="form-group mr-md-2 mb-3 mb-md-2">
-                      <label for="phone" class="sr-only">Phone Number</label>
-                      <input required type="tel" maxlength="16" class="form-control" id="volunteer-phone"
-                        placeholder="Phone Number*" />
-                    </div>
-                    <div class="form-group mr-md-2 mb-3 mb-md-2">
-                      <label for="address" class="sr-only">Street Address</label>
-                      <input required type="text" maxlength="256" class="form-control address-field"
-                        id="volunteer-address" placeholder="Street Address*" />
-                    </div>
-                    <div class="form-group mr-md-2 mb-3 mb-md-2">
-                      <label for="phone" class="sr-only">Email</label>
-                      <input required type="email" maxlength="256" id="volunteer-email" class="form-control"
-                        placeholder="Email*" />
-                    </div>
-                    <div class="form-check mb-3">
-                      <input required type="checkbox" class="form-check-input" id="volunteer-terms" />
-                      <label class="form-check-label" for="volunteer-terms">
-                        I agree and certify to the
-                        <a href data-toggle="modal" data-target="#volunteerModal" class="terms-link">Terms of Use</a>
-                      </label>
-                    </div>
-                    <div class="form-group mr-md-2">
-                      <button type="submit" class="btn btn-primary btn-submit mx-auto">
-                        Sign up
-                      </button>
-                    </div>
-                    <div class="text-left form-group">
-                      Reminders to volunteers:
-                      <ul>
-                        <li>
-                          Drop off deliveries at the doorstep to avoid coming in contact with the
-                          community member. If there are special delivery instructions (i.e. gate
-                          access), you will receive instructions from the DeliverEase team.
-                        </li>
-                        <li>
-                          Maintain at least 6 feet distance between others while you grocery shop.
-                        </li>
-                        <li>
-                          Avoid touching your face and wash your hands frequently for at least 20
-                          seconds.
-                        </li>
-                        <li>Please wear protective gear (masks, gloves, etc.) as needed.</li>
-                      </ul>
+                    <h5 class="text-center">In the meantime, please spread the word!</h5>
+                    <button
+                      id="requester-share"
+                      class="btn btn-success btn-submit mx-auto share-button mt-4 hidden"
+                    >
+                      Share DeliverEase
+                    </button>
+                  </div>
+                  <div class="form-wrapper" id="requester-form-wrapper">
+                    <form class="text-center flex-wrap" id="requester-form">
+                      <div class="form-group mr-md-2 mb-3 mb-md-2">
+                        <label for="name" class="sr-only">Name</label>
+                        <input
+                          required
+                          maxlength="64"
+                          type="text"
+                          class="form-control"
+                          id="requester-name"
+                          placeholder="Name*"
+                        />
+                      </div>
+                      <div class="form-group mr-md-2 mb-3 mb-md-2">
+                        <label for="phone" class="sr-only">Phone Number</label>
+                        <input
+                          required
+                          maxlength="16"
+                          type="tel"
+                          id="requester-phone"
+                          class="form-control"
+                          placeholder="Phone Number*"
+                        />
+                      </div>
+                      <div class="form-group mr-md-2 mb-3 mb-md-2">
+                        <label for="address" class="sr-only">Street Address</label>
+                        <input
+                          required
+                          type="text"
+                          maxlength="256"
+                          class="form-control address-field"
+                          id="requester-address"
+                          placeholder="Street Address*"
+                        />
+                      </div>
+                      <div class="form-group mr-md-2 mb-3 mb-md-2">
+                        <label for="phone" class="sr-only">Email</label>
+                        <input
+                          type="email"
+                          maxlength="256"
+                          id="requester-email"
+                          class="form-control"
+                          placeholder="Email"
+                        />
+                      </div>
+                      <div class="form-group mr-md-2 mb-3 mb-md-2">
+                        <label for="shopping-list" class="sr-only">Enter shopping list here.</label>
+                        <textarea
+                          required
+                          maxlength="1024"
+                          class="form-control"
+                          id="requester-shopping-list"
+                          placeholder="Enter shopping list here*"
+                          rows="4"
+                        ></textarea>
+                      </div>
+                      <div class="form-check mr-md-2 mb-3 full-width">
+                        <input
+                          required
+                          type="checkbox"
+                          class="form-check-input"
+                          id="requester-terms"
+                        />
+                        <label class="form-check-label" for="requester-terms">
+                          I agree to the
+                          <a
+                            href
+                            data-toggle="modal"
+                            data-target="#requesterModal"
+                            class="terms-link"
+                            >Terms of Use</a
+                          >
+                        </label>
+                      </div>
+                      <div class="form-group mr-md-2 full-width mx-auto">
+                        <button type="submit" class="btn btn-primary btn-submit mx-auto">
+                          Submit request
+                        </button>
+                      </div>
                       <br />
-                      <i>As a volunteer you will be expected to coordinate the payment transaction
-                        directly with the community member. Community members may or may not have
-                        access to Paypal or Venmo, so be prepared to figure out payment with
-                        them.</i>
-                    </div>
-                  </form>
+                      <div class="text-left form-group">
+                        <i
+                          >You will be expected to pay for the items you ordered upon receipt of the
+                          delivery and coordinate with your volunteer on the methods of payment. If
+                          you have an online money transfer account (Paypal, Venmo, etc) please be
+                          prepared to share this information with your volunteer. If you can, try
+                          calling the store ahead and paying for your groceries over the phone. If
+                          you only have cash to pay for your groceries, please be prepared with
+                          exact change and put your cash in an envelope for your volunteer.</i
+                        >
+                      </div>
+                    </form>
+                  </div>
+                  <!--//form-wrapper-->
                 </div>
-                <!--//form-wrapper-->
+                <!--//lead-form-wrapper-->
               </div>
-              <!--//lead-form-wrapper-->
-            </div>
-            <!--//container-->
-          </section>
-          <!--//form-section-->
+              <!--//container-->
+            </section>
+            <!--//form-section-->
+          </div>
+          <!--//row-->
         </div>
-        <!--//row-->
+        <!--//single-col-max-->
       </div>
-      <!--//single-col-max-->
-    </div>
-    <!--//container-->
-  </section>
-  <!--//content-section-->
+      <!--//container-->
+    </section>
+    <!--//content-section-->
 
-  <section class="author-section section theme-bg-primary py-5">
-    <div class="container py-3">
-      <!--//About Us-->
-      <h2 class="section-heading text-center text-white mb-3">About Us</h2>
-      <div class="author-bio single-col-max mx-auto text-center">
-        <p>
-          We are you. Community members who believe a moment of concern is also an opportunity for
-          compassion. Next door neighbors who want to do the most we can to help others impacted
-          by COVID-19. Passionate volunteers who thrive on furthering a sense of community and
-          connection.
-        </p>
-        <br />
-        <h3 class="text-center text-white">
-          Looking for open grocery stores?
-        </h3>
-        <p>
-          <a href="https://wosostories.com/" class="text-white" target="_blank">Check out our friends at WOSO who are
-            putting together a map of local restaurants and
-            stores that are still open during COVID-19.</a>
-        </p>
-        <div class="author-links text-center pt-5">
-          <h5 class="text-white mb-4">Follow Us</h5>
-          <ul class="social-list list-unstyled">
-            <li class="list-inline-item">
-              <a href="https://www.instagram.com/team.deliverease/"><i class="fab fa-instagram"></i></a>
-            </li>
-            <li class="list-inline-item">
-              <a href="https://www.facebook.com/DeliverEase-108843084091890"><i class="fab fa-facebook"></i></a>
-            </li>
-          </ul>
+    <section id="volunteer-section" class="py-5">
+      <div class="container">
+        <div class="single-col-max mx-auto">
+          <h2 class="section-heading text-center mb-3">Become a Volunteer</h2>
+          <div class="row">
+            <section class="form-sect theme-bg-light" id="requester-section">
+              <div class="container py-3">
+                <div
+                  class="lead-form-wrapper single-col-max mx-auto theme-bg-light rounded p-lg-5 p-md-3"
+                >
+                  <h2 class="form-heading text-center">Sign up to help your community</h2>
+                  <div class="form-intro text-center mb-3">
+                    Fill in your information and we'll let you know when a neighbor needs help.
+                  </div>
+                  <div class="confirmation-message mt-5">
+                    <h4 class="form-heading text-center">
+                      Thanks for signing up to volunteer! We’ll reach out when a neighbor needs
+                      help.
+                    </h4>
+                    <br />
+                    <h5 class="text-center">In the meantime, please spread the word!</h5>
+                    <button
+                      id="volunteer-share"
+                      class="btn btn-success btn-submit mx-auto share-button mt-4 hidden"
+                    >
+                      Share DeliverEase
+                    </button>
+                  </div>
+                  <div class="form-wrapper" id="volunteer-form-wrapper">
+                    <form class="text-center flex-wrap" id="volunteer-form">
+                      <div class="form-group mr-md-2 mb-3 mb-md-2">
+                        <label for="name" class="sr-only">Name</label>
+                        <input
+                          required
+                          type="text"
+                          maxlength="64"
+                          class="form-control"
+                          id="volunteer-name"
+                          placeholder="Name*"
+                        />
+                      </div>
+                      <div class="form-group mr-md-2 mb-3 mb-md-2">
+                        <label for="phone" class="sr-only">Phone Number</label>
+                        <input
+                          required
+                          type="tel"
+                          maxlength="16"
+                          class="form-control"
+                          id="volunteer-phone"
+                          placeholder="Phone Number*"
+                        />
+                      </div>
+                      <div class="form-group mr-md-2 mb-3 mb-md-2">
+                        <label for="address" class="sr-only">Street Address</label>
+                        <input
+                          required
+                          type="text"
+                          maxlength="256"
+                          class="form-control address-field"
+                          id="volunteer-address"
+                          placeholder="Street Address*"
+                        />
+                      </div>
+                      <div class="form-group mr-md-2 mb-3 mb-md-2">
+                        <label for="phone" class="sr-only">Email</label>
+                        <input
+                          required
+                          type="email"
+                          maxlength="256"
+                          id="volunteer-email"
+                          class="form-control"
+                          placeholder="Email*"
+                        />
+                      </div>
+                      <div class="form-check mb-3">
+                        <input
+                          required
+                          type="checkbox"
+                          class="form-check-input"
+                          id="volunteer-terms"
+                        />
+                        <label class="form-check-label" for="volunteer-terms">
+                          I agree and certify to the
+                          <a
+                            href
+                            data-toggle="modal"
+                            data-target="#volunteerModal"
+                            class="terms-link"
+                            >Terms of Use</a
+                          >
+                        </label>
+                      </div>
+                      <div class="form-group mr-md-2">
+                        <button type="submit" class="btn btn-primary btn-submit mx-auto">
+                          Sign up
+                        </button>
+                      </div>
+                      <div class="text-left form-group">
+                        Reminders to volunteers:
+                        <ul>
+                          <li>
+                            Drop off deliveries at the doorstep to avoid coming in contact with the
+                            community member. If there are special delivery instructions (i.e. gate
+                            access), you will receive instructions from the DeliverEase team.
+                          </li>
+                          <li>
+                            Maintain at least 6 feet distance between others while you grocery shop.
+                          </li>
+                          <li>
+                            Avoid touching your face and wash your hands frequently for at least 20
+                            seconds.
+                          </li>
+                          <li>Please wear protective gear (masks, gloves, etc.) as needed.</li>
+                        </ul>
+                        <br />
+                        <i
+                          >As a volunteer you will be expected to coordinate the payment transaction
+                          directly with the community member. Community members may or may not have
+                          access to Paypal or Venmo, so be prepared to figure out payment with
+                          them.</i
+                        >
+                      </div>
+                    </form>
+                  </div>
+                  <!--//form-wrapper-->
+                </div>
+                <!--//lead-form-wrapper-->
+              </div>
+              <!--//container-->
+            </section>
+            <!--//form-section-->
+          </div>
+          <!--//row-->
+        </div>
+        <!--//single-col-max-->
+      </div>
+      <!--//container-->
+    </section>
+    <!--//content-section-->
+
+    <section class="author-section section theme-bg-primary py-5">
+      <div class="container py-3">
+        <!--//About Us-->
+        <h2 class="section-heading text-center text-white mb-3">About Us</h2>
+        <div class="author-bio single-col-max mx-auto text-center">
           <p>
-            (415) 633-6261&nbsp;&nbsp;|&nbsp;&nbsp;
-            <a class="text-white"
-              href="mailto:teamdeliverease@gmail.com?Subject=Website%20Inquiry">teamdeliverease@gmail.com</a>
+            We are you. Community members who believe a moment of concern is also an opportunity for
+            compassion. Next door neighbors who want to do the most we can to help others impacted
+            by COVID-19. Passionate volunteers who thrive on furthering a sense of community and
+            connection.
           </p>
+          <br />
+          <h3 class="text-center text-white">
+            Looking for open grocery stores?
+          </h3>
+          <p>
+            <a href="https://wosostories.com/" class="text-white" target="_blank"
+              >Check out our friends at WOSO who are putting together a map of local restaurants and
+              stores that are still open during COVID-19.</a
+            >
+          </p>
+          <div class="author-links text-center pt-5">
+            <h5 class="text-white mb-4">Follow Us</h5>
+            <ul class="social-list list-unstyled">
+              <li class="list-inline-item">
+                <a href="https://www.instagram.com/team.deliverease/"
+                  ><i class="fab fa-instagram"></i
+                ></a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://www.facebook.com/DeliverEase-108843084091890"
+                  ><i class="fab fa-facebook"></i
+                ></a>
+              </li>
+            </ul>
+            <p>
+              (415) 633-6261&nbsp;&nbsp;|&nbsp;&nbsp;
+              <a
+                class="text-white"
+                href="mailto:teamdeliverease@gmail.com?Subject=Website%20Inquiry"
+                >teamdeliverease@gmail.com</a
+              >
+            </p>
+          </div>
+          <div class="text-center pt-4">
+            <a href class="text-white" data-toggle="modal" data-target="#privacyModal"
+              >Privacy Statement</a
+            >
+          </div>
+          <!--//author-links-->
         </div>
-        <div class="text-center pt-4">
-          <a href class="text-white" data-toggle="modal" data-target="#privacyModal">Privacy Statement</a>
-        </div>
-        <!--//author-links-->
+        <!--//author-bio-->
       </div>
-      <!--//author-bio-->
-    </div>
-    <!--//container-->
-  </section>
-  <!--//author-section-->
+      <!--//container-->
+    </section>
+    <!--//author-section-->
 
-  <!-- Requester Modal -->
-  <div class="modal fade" id="requesterModal" tabindex="-1" role="dialog" aria-labelledby="requesterModalCenterTitle"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="requesterModalLongTitle">Requester Terms and Conditions</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          This is a volunteer effort. As such, deliveries are completed entirely by volunteers and
-          not medical professionals. We’re all community members, working together to help the
-          most vulnerable access items that would be too risky for them to get themselves. While
-          we take every effort to make these deliveries work, we assume no liability for any
-          mishandling, incorrect orders, theft, or resulting injury.
-          <br />
-          <br />
-          We make all volunteers affirmatively guarantee that they:
-          <ol>
-            <li>Are not exhibiting any symptoms of COVID-19.</li>
-            <li>
-              Have not, in the past 14 days, participated in gatherings with more than 10 people
-              or traveled through heavily populated areas (ie. airports, train stations, public
-              transit centers, etc).
-            </li>
-            <li>Have not, in the past 14 days, come in contact with a sick person.</li>
-            <li>Have been social distancing.</li>
-            <li>
-              Will inform us upon experiencing any symptoms of being sick or coming in contact
-              with a sick person.
-            </li>
-          </ol>
-          Nonetheless, the volunteers will be entering grocery, appliance, and public stores of
-          the like to fulfill the delivery requests. As a result, you assume any risk associated
-          with their delivery.
-          <br />
-          <br />
-          DeliverEase is not an authority on health or medical practices. Before helping your
-          community, be sure to familiarize and follow all local government guidelines. Health and
-          safety guidance from the CDC can be found
-          <a target="_blank" href="https://www.cdc.gov/coronavirus/2019-ncov/prepare/disinfecting-your-home.html">
-            here</a>.
-          <br />
-          <br />
-          If you represent a group of people that need help in a certain way beyond the
-          capabilities of a volunteer delivery, please reach out and tell us your story at
-          teamdeliverease@gmail.com. We will help however we can.
-          <br />
-          <br />
-          If you are submitting this request for another party, you certify that you have obtained
-          consent to share their contact information with DeliverEase, and that DeliverEase has
-          permission to share it with its volunteers for the purpose of fulfilling a request.
-          <br />
-          <br />
-          <i>Waiver</i>
-          <br />
-          I am voluntarily participating in the DeliverEase service and I do so entirely at my own
-          risk. I am aware of the risks associated with receiving supplies from someone who has
-          traveled to and from public and private areas in order to complete these deliveries
-          which include, but are not limited to, contracting COVID-19. I understand that these
-          injuries may arise out of my own or someone else’s negligence, conditions related to
-          going into public or private places, or interacting with others. Nonetheless, I assume
-          all related risks, known or unknown to me, of my participation with DeliverEase. I
-          further waive DeliverEase, individuals within it, and all of its affiliates from any
-          claims or causes of action and I agree to voluntarily give up or waive any right that I
-          otherwise have to bring legal action against DeliverEase or its participating community
-          members.
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Volunteer Modal -->
-  <div class="modal fade" id="volunteerModal" tabindex="-1" role="dialog" aria-labelledby="volunteerModalCenterTitle"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="volunteerModalLongTitle">Volunteer Terms and Conditions</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <i>Guarantees</i>
-          <br />
-          I certify that:
-          <ol>
-            <li>I am not exhibiting any symptoms of COVID-19.</li>
-            <li>
-              In the past 14 days, I have not: participated in social gatherings with more than 10
-              people or traveled through heavily populated areas (ie. airports, train stations,
-              public transit centers, etc).
-            </li>
-            <li>In the past 14 days, I have not come in contact with a sick person.</li>
-            <li>I have been social distancing.</li>
-            <li>
-              I agree to inform DeliverEase upon developing any symptoms of being sick or finding
-              out I have come in contact with a sick person, whichever comes first.
-            </li>
-          </ol>
-          DeliverEase is not an authority on health or medical practices. Before helping your
-          community, be sure to familiarize and follow all local government guidelines. Health and
-          safety guidance from the CDC can be found
-          <a target="_blank" href="https://www.cdc.gov/coronavirus/2019-ncov/prepare/disinfecting-your-home.html">
-            here</a>.
-          <br />
-          <br />
-          <i>Waiver</i>
-          <br />
-          I am voluntarily participating in the DeliverEase service and I do so entirely at my own
-          risk. I am aware of the risks associated with traveling to and from public and private
-          areas in order to complete these deliveries which include, but are not limited to,
-          contracting COVID-19. I understand that these injuries may arise out of my own or
-          someone else’s negligence, conditions related to going into public or private places, or
-          interacting with others. Nonetheless, I assume all related risks, known or unknown to
-          me, of my participation with DeliverEase. I further waive DeliverEase, individuals
-          within it, and all of its affiliates from any claims or causes of action and I agree to
-          voluntarily give up or waive any right that I otherwise have to bring legal action
-          against DeliverEase or its participating community members.
+    <!-- Requester Modal -->
+    <div
+      class="modal fade"
+      id="requesterModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="requesterModalCenterTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="requesterModalLongTitle">Requester Terms and Conditions</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            This is a volunteer effort. As such, deliveries are completed entirely by volunteers and
+            not medical professionals. We’re all community members, working together to help the
+            most vulnerable access items that would be too risky for them to get themselves. While
+            we take every effort to make these deliveries work, we assume no liability for any
+            mishandling, incorrect orders, theft, or resulting injury.
+            <br />
+            <br />
+            We make all volunteers affirmatively guarantee that they:
+            <ol>
+              <li>Are not exhibiting any symptoms of COVID-19.</li>
+              <li>
+                Have not, in the past 14 days, participated in gatherings with more than 10 people
+                or traveled through heavily populated areas (ie. airports, train stations, public
+                transit centers, etc).
+              </li>
+              <li>Have not, in the past 14 days, come in contact with a sick person.</li>
+              <li>Have been social distancing.</li>
+              <li>
+                Will inform us upon experiencing any symptoms of being sick or coming in contact
+                with a sick person.
+              </li>
+            </ol>
+            Nonetheless, the volunteers will be entering grocery, appliance, and public stores of
+            the like to fulfill the delivery requests. As a result, you assume any risk associated
+            with their delivery.
+            <br />
+            <br />
+            DeliverEase is not an authority on health or medical practices. Before helping your
+            community, be sure to familiarize and follow all local government guidelines. Health and
+            safety guidance from the CDC can be found
+            <a
+              target="_blank"
+              href="https://www.cdc.gov/coronavirus/2019-ncov/prepare/disinfecting-your-home.html"
+            >
+              here</a
+            >.
+            <br />
+            <br />
+            If you represent a group of people that need help in a certain way beyond the
+            capabilities of a volunteer delivery, please reach out and tell us your story at
+            teamdeliverease@gmail.com. We will help however we can.
+            <br />
+            <br />
+            If you are submitting this request for another party, you certify that you have obtained
+            consent to share their contact information with DeliverEase, and that DeliverEase has
+            permission to share it with its volunteers for the purpose of fulfilling a request.
+            <br />
+            <br />
+            <i>Waiver</i>
+            <br />
+            I am voluntarily participating in the DeliverEase service and I do so entirely at my own
+            risk. I am aware of the risks associated with receiving supplies from someone who has
+            traveled to and from public and private areas in order to complete these deliveries
+            which include, but are not limited to, contracting COVID-19. I understand that these
+            injuries may arise out of my own or someone else’s negligence, conditions related to
+            going into public or private places, or interacting with others. Nonetheless, I assume
+            all related risks, known or unknown to me, of my participation with DeliverEase. I
+            further waive DeliverEase, individuals within it, and all of its affiliates from any
+            claims or causes of action and I agree to voluntarily give up or waive any right that I
+            otherwise have to bring legal action against DeliverEase or its participating community
+            members.
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Privacy Modal -->
-  <div class="modal fade" id="privacyModal" tabindex="-1" role="dialog" aria-labelledby="privacyModalCenterTitle"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="privacyModalLongTitle">Privacy Statement</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          Your privacy is incredibly important to us. We store your address and contact
-          information only to more accurately match you with a volunteer in your given area. The
-          only point at which contact information is shared is upon a volunteer’s agreement to
-          fulfill a delivery. At that point, the requester’s name, phone number, and address will
-          be shared for the volunteer to better communicate about the request and know where to
-          deliver it. You can reach out to us at teamdeliverease@gmail.com if you have any
-          questions about how we share your information with volunteers or if you would like your
-          information removed from our database.
+    <!-- Volunteer Modal -->
+    <div
+      class="modal fade"
+      id="volunteerModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="volunteerModalCenterTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="volunteerModalLongTitle">Volunteer Terms and Conditions</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <i>Guarantees</i>
+            <br />
+            I certify that:
+            <ol>
+              <li>I am not exhibiting any symptoms of COVID-19.</li>
+              <li>
+                In the past 14 days, I have not: participated in social gatherings with more than 10
+                people or traveled through heavily populated areas (ie. airports, train stations,
+                public transit centers, etc).
+              </li>
+              <li>In the past 14 days, I have not come in contact with a sick person.</li>
+              <li>I have been social distancing.</li>
+              <li>
+                I agree to inform DeliverEase upon developing any symptoms of being sick or finding
+                out I have come in contact with a sick person, whichever comes first.
+              </li>
+            </ol>
+            DeliverEase is not an authority on health or medical practices. Before helping your
+            community, be sure to familiarize and follow all local government guidelines. Health and
+            safety guidance from the CDC can be found
+            <a
+              target="_blank"
+              href="https://www.cdc.gov/coronavirus/2019-ncov/prepare/disinfecting-your-home.html"
+            >
+              here</a
+            >.
+            <br />
+            <br />
+            <i>Waiver</i>
+            <br />
+            I am voluntarily participating in the DeliverEase service and I do so entirely at my own
+            risk. I am aware of the risks associated with traveling to and from public and private
+            areas in order to complete these deliveries which include, but are not limited to,
+            contracting COVID-19. I understand that these injuries may arise out of my own or
+            someone else’s negligence, conditions related to going into public or private places, or
+            interacting with others. Nonetheless, I assume all related risks, known or unknown to
+            me, of my participation with DeliverEase. I further waive DeliverEase, individuals
+            within it, and all of its affiliates from any claims or causes of action and I agree to
+            voluntarily give up or waive any right that I otherwise have to bring legal action
+            against DeliverEase or its participating community members.
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <footer class="footer">
-    <div class="footer-bottom text-center py-5">
-      <!--/* This template is released under the Creative Commons Attribution 3.0 License. Please keep the attribution link below when using for your own project. Thank you for your support. :) If you'd like to use the template without the attribution, you can buy the commercial license via our website: themes.3rdwavemedia.com */-->
-      <small class="copyright">template designed with <i class="fas fa-heart" style="color: #fb866a;"></i> by
-        <a class="theme-link" href="http://themes.3rdwavemedia.com" target="_blank">Xiaoying Riley</a>
-        for developers</small>
+    <!-- Privacy Modal -->
+    <div
+      class="modal fade"
+      id="privacyModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="privacyModalCenterTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="privacyModalLongTitle">Privacy Statement</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Your privacy is incredibly important to us. We store your address and contact
+            information only to more accurately match you with a volunteer in your given area. The
+            only point at which contact information is shared is upon a volunteer’s agreement to
+            fulfill a delivery. At that point, the requester’s name, phone number, and address will
+            be shared for the volunteer to better communicate about the request and know where to
+            deliver it. You can reach out to us at teamdeliverease@gmail.com if you have any
+            questions about how we share your information with volunteers or if you would like your
+            information removed from our database.
+          </div>
+        </div>
+      </div>
     </div>
-  </footer>
 
-  <!-- Javascript -->
-  <script src="assets/plugins/jquery-3.4.1.min.js"></script>
-  <script src="assets/plugins/popper.min.js"></script>
-  <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-  <script src="assets/plugins/jquery.scrollTo.min.js"></script>
-  <script src="assets/plugins/back-to-top.js"></script>
-  <script src="assets/plugins/jquery.scrollTo.min.js"></script>
+    <footer class="footer">
+      <div class="footer-bottom text-center py-5">
+        <!--/* This template is released under the Creative Commons Attribution 3.0 License. Please keep the attribution link below when using for your own project. Thank you for your support. :) If you'd like to use the template without the attribution, you can buy the commercial license via our website: themes.3rdwavemedia.com */-->
+        <small class="copyright"
+          >template designed with <i class="fas fa-heart" style="color: #fb866a;"></i> by
+          <a class="theme-link" href="http://themes.3rdwavemedia.com" target="_blank"
+            >Xiaoying Riley</a
+          >
+          for developers</small
+        >
+      </div>
+    </footer>
 
-  <!-- Smooth scrolling  -->
-  <script src="assets/js/main.js"></script>
+    <!-- Javascript -->
+    <script src="assets/plugins/jquery-3.4.1.min.js"></script>
+    <script src="assets/plugins/popper.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/plugins/jquery.scrollTo.min.js"></script>
+    <script src="assets/plugins/back-to-top.js"></script>
+    <script src="assets/plugins/jquery.scrollTo.min.js"></script>
 
-  <!-- Firebase configuations -->
-  <script src="/__/firebase/7.13.1/firebase-app.js"></script>
-  <script src="/__/firebase/7.13.1/firebase-analytics.js"></script>
-  <script src="/__/firebase/init.js"></script>
+    <!-- Smooth scrolling  -->
+    <script src="assets/js/main.js"></script>
 
-  <!-- Phone validation -->
-  <script src="assets/plugins/intl-tel-input/js/intlTelInput.min.js"></script>
-  <script src="js/form.js"></script>
-  <script async defer
-    src="https://maps.google.com/maps/api/js?key=AIzaSyBnw4vCWKTZgb-OMJPJ15ptB4dEa5zxQnQ&libraries=places&callback=init"></script>
-</body>
+    <!-- Firebase configuations -->
+    <script src="/__/firebase/7.13.1/firebase-app.js"></script>
+    <script src="/__/firebase/7.13.1/firebase-analytics.js"></script>
+    <script src="/__/firebase/init.js"></script>
 
+    <!-- Phone validation -->
+    <script src="assets/plugins/intl-tel-input/js/intlTelInput.min.js"></script>
+    <script src="js/form.js"></script>
+    <script
+      async
+      defer
+      src="https://maps.google.com/maps/api/js?key=AIzaSyBnw4vCWKTZgb-OMJPJ15ptB4dEa5zxQnQ&libraries=places&callback=init"
+    ></script>
+  </body>
+
+
+  
 </html>
