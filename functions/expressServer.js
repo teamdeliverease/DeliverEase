@@ -109,4 +109,26 @@ function addNamePayload(data) {
   return Object.assign(data, { name: fullName });
 }
 
+app.get('/requesters', (req, res) => {
+  getRequest('requesters', req, res);
+});
+
+app.get('/volunteers', (req, res) => {
+  getRequest('volunteers', req, res);
+});
+
+function getRequest(ref, req, res) {
+  try {
+    firebase
+      .database()
+      .ref(ref)
+      .once('value', (snapshot) => {
+        res.status(200).send(snapshot.val());
+      });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send(err);
+  }
+}
+
 module.exports = app;
