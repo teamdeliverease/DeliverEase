@@ -4,5 +4,5 @@ const firebase = require('firebase-admin');
 
 firebase.initializeApp();
 
-exports.emailer = require('./emailApi');
+exports.dbTriggers = require('./dbTriggers');
 exports.app = functions.https.onRequest(expressServer);
