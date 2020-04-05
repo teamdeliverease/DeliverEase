@@ -26,7 +26,11 @@ const REQUESTER_EMAIL_CONTENT = `<p>Hello!</p>
 <p>Stay safe and thank you,</p>
 <p>DeliverEase</p>`;
 
+const GENERIC_ERROR_MESSAGE =
+  'Whoops! Something went wrong, sorry about that. If this problem continues, please call us at (415) 633-6261';
+
 module.exports = {
   VOLUNTEER_EMAIL_CONTENT,
   REQUESTER_EMAIL_CONTENT,
+  GENERIC_ERROR_MESSAGE,
 };
