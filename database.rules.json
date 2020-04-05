@@ -2,13 +2,13 @@
   "rules": {
     ".read": false,
     "volunteers": {
-      "$volunteer": {
+      "$uid": {
         ".validate": "newData.hasChildren(['address', 'lat', 'lng', 'name', 'phone', 'email', 'timestamp'])",
         ".write": true
       }
     },
     "requesters": {
-      "$requester": {
+      "$uid": {
         ".validate": "newData.hasChildren(['address', 'lat', 'lng', 'name', 'phone', 'timestamp', 'list'])",
         ".write": true
       }
