@@ -102,4 +102,26 @@ function addFulfillmentStatusPayload(data) {
   data.fulfillment_status_timestamp = firebase.database.ServerValue.TIMESTAMP;
 }
 
+app.get('/requesters', (req, res) => {
+  getRequest('requesters', req, res);
+});
+
+app.get('/volunteers', (req, res) => {
+  getRequest('volunteers', req, res);
+});
+
+function getRequest(ref, req, res) {
+  try {
+    firebase
+      .database()
+      .ref(ref)
+      .once('value', snapshot => {
+        res.status(200).send(snapshot.val());
+      });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send(err);
+  }
+}
+
 module.exports = app;
