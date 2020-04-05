@@ -25,29 +25,27 @@ const GENERIC_ERROR_MESSAGE =
   'Whoops! Something went wrong, sorry about that. If this problem continues, please call us at (415) 633-6261';
 
 app.post('/requesters', validationMiddleware(schemas.requester, 'body'), async (req, res) => {
-  const data = req.body;
-  try {
-    await prepareAndAddToFirebase('requesters', data, (geocodeResult, data) => {
-      addLocationPayload(geocodeResult, data);
-      addFulfillmentStatusPayload(data);
-    });
-    res.sendStatus(200);
-  } catch (err) {
-    res.status(500).send(err.message);
-  }
+  submitFormPostRequest(req, res, (geocodeResult, data) => {
+    addLocationPayload(geocodeResult, data);
+    addFulfillmentStatusPayload(data);
+  });
 });
 
 app.post('/volunteers', validationMiddleware(schemas.volunteer, 'body'), async (req, res) => {
+  submitFormPostRequest(req, res, (geocodeResult, data) => {
+    addLocationPayload(geocodeResult, data);
+  });
+});
+
+async function submitFormPostRequest(req, res, prepare) {
   const data = req.body;
   try {
-    await prepareAndAddToFirebase('volunteers', data, (geocodeResult, data) => {
-      addLocationPayload(geocodeResult, data);
-    });
+    await prepareAndAddToFirebase('volunteers', data, prepare);
     res.sendStatus(200);
   } catch (err) {
     res.status(500).send(err.message);
   }
-});
+}
 
 async function prepareAndAddToFirebase(ref, data, prepare) {
   try {
@@ -75,18 +73,6 @@ function geocode(address) {
   });
 }
 
-function addLocationPayload(geocodeResult, data) {
-  const location = geocodeResult.geometry.location;
-  data.address = geocodeResult.formatted_address;
-  data.lat = location.lat;
-  data.lng = location.lng;
-}
-
-function addFulfillmentStatusPayload(data) {
-  data.fulfillment_status = fulfillment_status.NEW;
-  data.fulfillment_status_timestamp = firebase.database.ServerValue.TIMESTAMP;
-}
-
 function addToFirebase(ref, data) {
   try {
     data.timestamp = firebase.database.ServerValue.TIMESTAMP;
@@ -102,6 +88,18 @@ function addToFirebase(ref, data) {
     console.error(err);
     throw new Error();
   }
+}
+
+function addLocationPayload(geocodeResult, data) {
+  const location = geocodeResult.geometry.location;
+  data.address = geocodeResult.formatted_address;
+  data.lat = location.lat;
+  data.lng = location.lng;
+}
+
+function addFulfillmentStatusPayload(data) {
+  data.fulfillment_status = fulfillment_status.NEW;
+  data.fulfillment_status_timestamp = firebase.database.ServerValue.TIMESTAMP;
 }
 
 module.exports = app;
