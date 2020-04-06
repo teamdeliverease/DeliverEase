@@ -1,5 +1,23 @@
 const STAGING_PROJECT_ID = 'deliverease-staging';
 
+// FIXME: replace with prod board ids before pushing
+const VOLUNTEER_BOARD_ID = 518840707;
+const REQUESTER_BOARD_ID = 518724473;
+const REQUESTER_GROUP_ID = 'topics';
+
+const REQUESTER_COLUMN_MAPPING = {
+  name: 'text6',
+  uuid: 'text',
+  location: 'location',
+  email: 'text69',
+  phone: 'phone43',
+  request: 'request',
+  status: 'status2',
+  resolution: 'status8',
+};
+
+const VOLUNTEER_COLUMN_MAPPING = {};
+
 const VOLUNTEER_EMAIL_CONTENT = `<p>Hello,</p>
 <p>Thank you so much for signing up to be a volunteer in your community, you rock! Just like your neighbors, we at DeliverEase are grateful to have you on the team. We&rsquo;ll reach out whenever there&rsquo;s a delivery request in your area.</p>
 <p>Before going out on any delivery, remember that the people asking for your assistance are most likely immunocompromised or elderly, so please take extra precautions:</p>
@@ -32,4 +50,8 @@ module.exports = {
   STAGING_PROJECT_ID,
   VOLUNTEER_EMAIL_CONTENT,
   REQUESTER_EMAIL_CONTENT,
+  VOLUNTEER_BOARD_ID,
+  REQUESTER_BOARD_ID,
+  REQUESTER_GROUP_ID,
+  REQUESTER_COLUMN_MAPPING,
 };

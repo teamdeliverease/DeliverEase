@@ -16,6 +16,9 @@ const mailTransport = nodemailer.createTransport({
   },
 });
 
+const monday = mondaySdk();
+monday.setToken(functions.config().apikeys.monday);
+
 exports.volunteerPostProcess = functions.database
   .ref('/volunteers/{volunteer}')
   .onCreate((snapshot) => {
@@ -31,8 +34,59 @@ exports.requesterPostProcess = functions.database
     const deliverEaseMailOptions = getRequestConfirmationToDeliverEaseMailOptions(snapshot);
     sendEmail(requesterMailOptions);
     sendEmail(deliverEaseMailOptions);
+    createRequesterMondayItem(snapshot);
     return 0;
   });
+
+async function createRequesterMondayItem(snapshot) {
+  const {
+    name,
+    uuid,
+    location,
+    email,
+    phone,
+    request,
+    status,
+    resolution,
+  } = constants.REQUESTER_COLUMN_MAPPING;
+  const requestData = snapshot.val();
+  const lastSlashIndex = snapshot._path.lastIndexOf('/');
+  const requestUuid = snapshot._path.substring(lastSlashIndex + 1);
+
+  const result = await monday.api(
+    `mutation createItem($boardId: Int!, $groupId: String!, $itemName: String!, $columnValues: JSON!) {
+      create_item(board_id: $boardId, group_id: $groupId, item_name: $itemName, column_values: $columnValues) {
+        id
+      } 
+    }
+  `,
+    {
+      variables: {
+        boardId: constants.REQUESTER_BOARD_ID,
+        groupId: constants.REQUESTER_GROUP_ID,
+        itemName: 'New Request',
+        columnValues: JSON.stringify({
+          [name]: requestData.name,
+          [uuid]: requestUuid,
+          [location]: requestData.address,
+          [email]: requestData.email || '',
+          [phone]: requestData.phone,
+          [request]: { text: requestData.list },
+          [status]: { label: 'New' },
+          [resolution]: { label: 'N/A' },
+        }),
+      },
+    },
+  );
+
+  if (result.error_code) {
+    console.error(new Error(result));
+    return -1;
+  }
+
+  console.log(result);
+  return 0;
+}
 
 function sendEmail(mailOptions) {
   if (mailOptions.to.trim() !== '') {
