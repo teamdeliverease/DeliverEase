@@ -1,7 +1,6 @@
 const functions = require('firebase-functions');
 const nodemailer = require('nodemailer');
 const constants = require('./constants');
-const mondaySdk = require('monday-sdk-js');
 
 const FIREBASE_PROJECT_ID = JSON.parse(process.env.FIREBASE_CONFIG).projectId;
 
