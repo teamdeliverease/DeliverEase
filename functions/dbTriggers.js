@@ -1,3 +1,4 @@
+const fetch = require('node-fetch');
 const functions = require('firebase-functions');
 const nodemailer = require('nodemailer');
 const constants = require('./constants');
@@ -14,6 +15,8 @@ exports.volunteerPostProcess = functions.database
   .ref('/volunteers/{volunteer}')
   .onCreate((snapshot) => {
     const volunteerMailOptions = getVolunteerConfirmationMailOptions(snapshot);
+    const volunteerContactDataAvochado = getAvochatoContactInfo(snapshot, "Volunteer");
+    updateContact(volunteerContactDataAvochado);
     sendEmail(volunteerMailOptions);
   });
 
@@ -22,6 +25,8 @@ exports.requesterPostProcess = functions.database
   .onCreate((snapshot) => {
     const requesterMailOptions = getRequestConfirmationToRequesterMailOptions(snapshot);
     const deliverEaseMailOptions = getRequestConfirmationToDeliverEaseMailOptions(snapshot);
+    const requestContactDataAvochado = getAvochatoContactInfo(snapshot, "Requester");
+    updateContact(requestContactDataAvochado);
     sendEmail(requesterMailOptions);
     sendEmail(deliverEaseMailOptions);
   });
@@ -30,6 +35,16 @@ function sendEmail(mailOptions) {
   if (mailOptions.to.trim() !== '') {
     mailTransport.sendMail(mailOptions);
   }
+}
+
+function updateContact(contactInfo){
+  fetch('www.avochato.com/v1/contacts', {
+          method: 'post',
+          body: JSON.stringify(contactInfo),
+          headers: {'Content-Type': 'application/json'}
+  })
+          .then(res => res.json())
+          .then(json => console.log(json));
 }
 
 function getVolunteerConfirmationMailOptions(snapshot) {
@@ -59,6 +74,23 @@ function getRequestConfirmationToDeliverEaseMailOptions(snapshot) {
   };
 }
 
+
+function getAvochatoContactInfo(snapshot , tags){
+  const contactData = snapshot.val();
+  return{
+    "auth_id": functions.config().apikeys.avochatoid,
+    "auth_secret": functions.config().apikeys.avochatosecret,
+    "contacts" : [
+      {
+        "phone": contactData.phone,
+        "name": contactData.name,
+        "email": contactData.email,
+        "tags": tags,
+        "uuid": snapshot.key,
+      }
+    ]
+  };
+}
 function getRequestConfirmationToRequesterMailOptions(snapshot) {
   const requestData = snapshot.val();
   return {
