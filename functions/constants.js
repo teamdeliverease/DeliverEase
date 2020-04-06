@@ -1,3 +1,5 @@
+const STAGING_PROJECT_ID = 'deliverease-staging';
+
 const VOLUNTEER_EMAIL_CONTENT = `<p>Hello,</p>
 <p>Thank you so much for signing up to be a volunteer in your community, you rock! Just like your neighbors, we at DeliverEase are grateful to have you on the team. We&rsquo;ll reach out whenever there&rsquo;s a delivery request in your area.</p>
 <p>Before going out on any delivery, remember that the people asking for your assistance are most likely immunocompromised or elderly, so please take extra precautions:</p>
@@ -27,6 +29,7 @@ const REQUESTER_EMAIL_CONTENT = `<p>Hello!</p>
 <p>DeliverEase</p>`;
 
 module.exports = {
+  STAGING_PROJECT_ID,
   VOLUNTEER_EMAIL_CONTENT,
   REQUESTER_EMAIL_CONTENT,
 };
