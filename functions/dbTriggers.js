@@ -2,6 +2,12 @@ const functions = require('firebase-functions');
 const nodemailer = require('nodemailer');
 const constants = require('./constants');
 
+const FIREBASE_PROJECT_ID = JSON.parse(process.env.FIREBASE_CONFIG).projectId;
+
+function isEnvironmentStaging() {
+  return FIREBASE_PROJECT_ID === constants.STAGING_PROJECT_ID;
+}
+
 const mailTransport = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -15,6 +21,7 @@ exports.volunteerPostProcess = functions.database
   .onCreate((snapshot) => {
     const volunteerMailOptions = getVolunteerConfirmationMailOptions(snapshot);
     sendEmail(volunteerMailOptions);
+    return 0;
   });
 
 exports.requesterPostProcess = functions.database
@@ -24,6 +31,7 @@ exports.requesterPostProcess = functions.database
     const deliverEaseMailOptions = getRequestConfirmationToDeliverEaseMailOptions(snapshot);
     sendEmail(requesterMailOptions);
     sendEmail(deliverEaseMailOptions);
+    return 0;
   });
 
 function sendEmail(mailOptions) {
@@ -32,12 +40,14 @@ function sendEmail(mailOptions) {
   }
 }
 
+const stagingSubject = `${isEnvironmentStaging ? '[STAGING] ' : ''}`;
+
 function getVolunteerConfirmationMailOptions(snapshot) {
   const volunteerData = snapshot.val();
   return {
     from: '"DeliverEase" <TeamDeliverEase@gmail.com>',
     to: volunteerData.email,
-    subject: 'Welcome to DeliverEase!',
+    subject: `${stagingSubject}Welcome to DeliverEase!`,
     text:
       'Thank you for signing up to be a volunteer! We will reach out whenever there is a delivery request in your area.',
     html: constants.VOLUNTEER_EMAIL_CONTENT,
@@ -49,7 +59,7 @@ function getRequestConfirmationToDeliverEaseMailOptions(snapshot) {
   return {
     from: '"DeliverEase" <TeamDeliverEase@gmail.com>',
     to: 'TeamDeliverEase@gmail.com',
-    subject: `New Request! ${snapshot.key}`,
+    subject: `${stagingSubject}New Request! ${snapshot.key}`,
     text: `Name: ${requestData.name} 
       UUID: ${snapshot.key}
       Email: ${requestData.email}
@@ -64,7 +74,7 @@ function getRequestConfirmationToRequesterMailOptions(snapshot) {
   return {
     from: '"DeliverEase" <deliverEase@gmail.com>',
     to: requestData.email,
-    subject: 'Thanks for your request!',
+    subject: `${stagingSubject} Thanks for your request!`,
     text: 'Thank you so much for requesting a delivery. We will be in touch shortly.',
     html: constants.REQUESTER_EMAIL_CONTENT,
   };
