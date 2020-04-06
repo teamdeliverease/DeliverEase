@@ -25,22 +25,22 @@ const GENERIC_ERROR_MESSAGE =
   'Whoops! Something went wrong, sorry about that. If this problem continues, please call us at (415) 633-6261';
 
 app.post('/requesters', validationMiddleware(schemas.requester, 'body'), async (req, res) => {
-  submitFormPostRequest(req, res, (geocodeResult, data) => {
+  submitFormPostRequest('requesters', req, res, (geocodeResult, data) => {
     addLocationPayload(geocodeResult, data);
     addFulfillmentStatusPayload(data);
   });
 });
 
 app.post('/volunteers', validationMiddleware(schemas.volunteer, 'body'), async (req, res) => {
-  submitFormPostRequest(req, res, (geocodeResult, data) => {
+  submitFormPostRequest('volunteers', req, res, (geocodeResult, data) => {
     addLocationPayload(geocodeResult, data);
   });
 });
 
-async function submitFormPostRequest(req, res, prepare) {
+async function submitFormPostRequest(ref, req, res, prepare) {
   const data = req.body;
   try {
-    await prepareAndAddToFirebase('volunteers', data, prepare);
+    await prepareAndAddToFirebase(ref, data, prepare);
     res.sendStatus(200);
   } catch (err) {
     res.status(500).send(err.message);
