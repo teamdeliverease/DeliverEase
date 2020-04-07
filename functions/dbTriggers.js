@@ -25,6 +25,7 @@ exports.volunteerPostProcess = functions.database
   .onCreate((snapshot) => {
     const volunteerMailOptions = getVolunteerConfirmationMailOptions(snapshot);
     sendEmail(volunteerMailOptions);
+    createVolunteerMondayItem(snapshot);
     return true;
   });
 
@@ -43,7 +44,7 @@ async function createRequesterMondayItem(snapshot) {
   const {
     name,
     uuid,
-    location,
+    address,
     email,
     phone,
     request,
@@ -67,12 +68,46 @@ async function createRequesterMondayItem(snapshot) {
         columnValues: JSON.stringify({
           [name]: requestData.name,
           [uuid]: snapshot.key,
-          [location]: requestData.address,
+          [address]: requestData.address,
           [email]: requestData.email || '',
           [phone]: requestData.phone,
           [request]: { text: requestData.list },
           [status]: { label: 'New' },
           [resolution]: { label: 'N/A' },
+        }),
+      },
+    },
+  );
+
+  if (result.error_code) {
+    console.error(new Error(result));
+  }
+
+  console.log(result);
+}
+
+async function createVolunteerMondayItem(snapshot) {
+  const { name, uuid, address, email, phone } = constants.VOLUNTEER_COLUMN_MAPPING;
+  const requestData = snapshot.val();
+
+  const result = await monday.api(
+    `mutation createItem($boardId: Int!, $groupId: String!, $itemName: String!, $columnValues: JSON!) {
+      create_item(board_id: $boardId, group_id: $groupId, item_name: $itemName, column_values: $columnValues) {
+        id
+      } 
+    }
+  `,
+    {
+      variables: {
+        boardId: constants.VOLUNTEER_BOARD_ID,
+        groupId: constants.VOLUNTEER_GROUP_ID,
+        itemName: requestData.name,
+        columnValues: JSON.stringify({
+          [name]: requestData.name,
+          [uuid]: snapshot.key,
+          [address]: requestData.address,
+          [email]: requestData.email,
+          [phone]: requestData.phone,
         }),
       },
     },
