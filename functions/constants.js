@@ -1,28 +1,28 @@
 const STAGING_PROJECT_ID = 'deliverease-staging';
+const PROD_PROJECT_ID = 'deliverease-f9eec';
 
-// FIXME: replace with prod board ids before pushing
-const VOLUNTEER_BOARD_ID = 518840707;
-const REQUESTER_BOARD_ID = 518724473;
+const VOLUNTEER_BOARD_ID = 519301527;
+const REQUESTER_BOARD_ID = 508460665;
 const VOLUNTEER_GROUP_ID = 'topics';
 const REQUESTER_NEW_GROUP_ID = 'topics';
 
 const REQUESTER_COLUMN_MAPPING = {
-  name: 'text6',
+  name: 'name1',
   uuid: 'text',
-  address: 'location',
+  address: 'location28',
   email: 'text69',
-  phone: 'phone43',
+  phone: 'phone1',
   request: 'request',
   status: 'status2',
   resolution: 'status8',
 };
 
 const VOLUNTEER_COLUMN_MAPPING = {
-  name: 'text',
+  name: 'name7',
   uuid: 'uuid',
   address: 'address',
   email: 'email',
-  phone: 'phone',
+  phone: 'phone0',
 };
 
 const VOLUNTEER_EMAIL_CONTENT = `<p>Hello,</p>
@@ -54,6 +54,7 @@ const REQUESTER_EMAIL_CONTENT = `<p>Hello!</p>
 <p>DeliverEase</p>`;
 
 module.exports = {
+  PROD_PROJECT_ID,
   STAGING_PROJECT_ID,
   VOLUNTEER_EMAIL_CONTENT,
   REQUESTER_EMAIL_CONTENT,

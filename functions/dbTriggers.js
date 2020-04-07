@@ -9,6 +9,10 @@ function isEnvironmentStaging() {
   return FIREBASE_PROJECT_ID === constants.STAGING_PROJECT_ID;
 }
 
+function isEnvironmentProduction() {
+  return FIREBASE_PROJECT_ID === constants.PROD_PROJECT_ID;
+}
+
 const mailTransport = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -25,8 +29,9 @@ exports.volunteerPostProcess = functions.database
   .onCreate((snapshot) => {
     const volunteerMailOptions = getVolunteerConfirmationMailOptions(snapshot);
     sendEmail(volunteerMailOptions);
-    // TODO: check if staging before calling
-    createVolunteerMondayItem(snapshot);
+    if (isEnvironmentProduction()) {
+      createVolunteerMondayItem(snapshot);
+    }
     return true;
   });
 
@@ -37,8 +42,9 @@ exports.requesterPostProcess = functions.database
     const deliverEaseMailOptions = getRequestConfirmationToDeliverEaseMailOptions(snapshot);
     sendEmail(requesterMailOptions);
     sendEmail(deliverEaseMailOptions);
-    // TODO: check if staging before calling
-    createRequesterMondayItem(snapshot);
+    if (isEnvironmentProduction()) {
+      createVolunteerMondayItem(snapshot);
+    }
     return true;
   });
 
