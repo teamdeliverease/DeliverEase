@@ -44,7 +44,6 @@ function updateContact(contactInfo) {
     headers: { 'Content-Type': 'application/json' },
   })
     .then((res) => res.json())
-    .then((json) => console.log(json))
     .catch((err) => console.error(err));
 }
 
@@ -77,7 +76,7 @@ function getRequestConfirmationToDeliverEaseMailOptions(snapshot) {
 
 function getAvochatoContactInfo(snapshot, tags) {
   const contactData = snapshot.val();
-  var uuidTag = tags.toLowerCase();
+  const uuidTag = tags.toLowerCase();
   return {
     auth_id: functions.config().apikeys.avochatoid,
     auth_secret: functions.config().apikeys.avochatosecret,
@@ -85,7 +84,7 @@ function getAvochatoContactInfo(snapshot, tags) {
       {
         phone: contactData.phone,
         name: contactData.name,
-        email: contactData.email,
+        email: contactData.email || '',
         tags: tags,
         [`${uuidTag}_uuid`]: `${snapshot.key}`,
       },
