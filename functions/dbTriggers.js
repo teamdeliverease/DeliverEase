@@ -1,3 +1,4 @@
+const fetch = require('node-fetch');
 const functions = require('firebase-functions');
 const nodemailer = require('nodemailer');
 const constants = require('./constants');
@@ -28,6 +29,8 @@ exports.volunteerPostProcess = functions.database
   .ref('/volunteers/{volunteer}')
   .onCreate((snapshot) => {
     const volunteerMailOptions = getVolunteerConfirmationMailOptions(snapshot);
+    const volunteerAvochatoContactInfo = getAvochatoContactInfo(snapshot, 'Volunteer');
+    updateContact(volunteerAvochatoContactInfo);
     sendEmail(volunteerMailOptions);
     if (isEnvironmentProduction()) {
       createVolunteerMondayItem(snapshot);
@@ -40,6 +43,8 @@ exports.requesterPostProcess = functions.database
   .onCreate((snapshot) => {
     const requesterMailOptions = getRequestConfirmationToRequesterMailOptions(snapshot);
     const deliverEaseMailOptions = getRequestConfirmationToDeliverEaseMailOptions(snapshot);
+    const requestAvochatoContactInfo = getAvochatoContactInfo(snapshot, 'Requester');
+    updateContact(requestAvochatoContactInfo);
     sendEmail(requesterMailOptions);
     sendEmail(deliverEaseMailOptions);
     if (isEnvironmentProduction()) {
@@ -130,6 +135,15 @@ function sendEmail(mailOptions) {
   }
 }
 
+function updateContact(contactInfo) {
+  fetch('https://www.avochato.com/v1/contacts', {
+    method: 'post',
+    body: JSON.stringify(contactInfo),
+    headers: { 'Content-Type': 'application/json' },
+  })
+    .then((res) => res.json())
+    .catch((err) => console.error(err));
+}
 const stagingSubject = `${isEnvironmentStaging ? '[STAGING] ' : ''}`;
 
 function getVolunteerConfirmationMailOptions(snapshot) {
@@ -156,6 +170,24 @@ function getRequestConfirmationToDeliverEaseMailOptions(snapshot) {
       Address: ${requestData.address}
       Phone: ${requestData.phone}
       List:  ${requestData.list}`,
+  };
+}
+
+function getAvochatoContactInfo(snapshot, tags) {
+  const contactData = snapshot.val();
+  const uuidTag = tags.toLowerCase();
+  return {
+    auth_id: functions.config().apikeys.avochatoid,
+    auth_secret: functions.config().apikeys.avochatosecret,
+    contacts: [
+      {
+        phone: contactData.phone,
+        name: contactData.name,
+        email: contactData.email || '',
+        tags: tags,
+        [`${uuidTag}_uuid`]: `${snapshot.key}`,
+      },
+    ],
   };
 }
 

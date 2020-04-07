@@ -21,6 +21,7 @@
     "firebase-admin": "^8.6.0",
     "firebase-functions": "^3.3.0",
     "joi-phone-number": "^4.1.0",
+    "node-fetch": "^2.6.0",
     "monday-sdk-js": "0.0.13",
     "nodemailer": "^6.4.6"
   },
