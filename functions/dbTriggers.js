@@ -1,5 +1,4 @@
 const fetch = require('node-fetch');
-const { createWriteStream } = require('fs');
 const functions = require('firebase-functions');
 const nodemailer = require('nodemailer');
 const constants = require('./constants');
