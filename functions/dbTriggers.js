@@ -6,11 +6,11 @@ const mondaySDK = require('monday-sdk-js');
 
 const FIREBASE_PROJECT_ID = JSON.parse(process.env.FIREBASE_CONFIG).projectId;
 
-function isEnvironmentStaging() {
+function isStagingEnvironment() {
   return FIREBASE_PROJECT_ID === constants.STAGING_PROJECT_ID;
 }
 
-function isEnvironmentProduction() {
+function isProductionEnvironment() {
   return FIREBASE_PROJECT_ID === constants.PROD_PROJECT_ID;
 }
 
@@ -31,7 +31,7 @@ exports.volunteerPostProcess = functions.database
     const volunteerMailOptions = getVolunteerConfirmationMailOptions(snapshot);
     const volunteerAvochatoContactInfo = getAvochatoContactInfo(snapshot, 'Volunteer');
     sendEmail(volunteerMailOptions);
-    if (isEnvironmentProduction()) {
+    if (isProductionEnvironment()) {
       updateContact(volunteerAvochatoContactInfo);
       createVolunteerMondayItem(snapshot);
     }
@@ -46,7 +46,7 @@ exports.requesterPostProcess = functions.database
     const requestAvochatoContactInfo = getAvochatoContactInfo(snapshot, 'Requester');
     sendEmail(requesterMailOptions);
     sendEmail(deliverEaseMailOptions);
-    if (isEnvironmentProduction()) {
+    if (isProductionEnvironment()) {
       updateContact(requestAvochatoContactInfo);
       createRequesterMondayItem(snapshot);
     }
@@ -144,7 +144,7 @@ function updateContact(contactInfo) {
     .then((res) => res.json())
     .catch((err) => console.error(err));
 }
-const stagingSubject = `${isEnvironmentStaging ? '[STAGING] ' : ''}`;
+const stagingSubject = `${isStagingEnvironment() ? '[STAGING] ' : ''}`;
 
 function getVolunteerConfirmationMailOptions(snapshot) {
   const volunteerData = snapshot.val();
