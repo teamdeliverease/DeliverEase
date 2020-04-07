@@ -144,14 +144,13 @@ function updateContact(contactInfo) {
     .then((res) => res.json())
     .catch((err) => console.error(err));
 }
-const stagingSubject = `${isStagingEnvironment() ? '[STAGING] ' : ''}`;
 
 function getVolunteerConfirmationMailOptions(snapshot) {
   const volunteerData = snapshot.val();
   return {
     from: '"DeliverEase" <TeamDeliverEase@gmail.com>',
     to: volunteerData.email,
-    subject: `${stagingSubject}Welcome to DeliverEase!`,
+    subject: `Welcome to DeliverEase!`,
     text:
       'Thank you for signing up to be a volunteer! We will reach out whenever there is a delivery request in your area.',
     html: constants.VOLUNTEER_EMAIL_CONTENT,
@@ -163,7 +162,7 @@ function getRequestConfirmationToDeliverEaseMailOptions(snapshot) {
   return {
     from: '"DeliverEase" <TeamDeliverEase@gmail.com>',
     to: 'TeamDeliverEase@gmail.com',
-    subject: `${stagingSubject}New Request! ${snapshot.key}`,
+    subject: `New Request! ${snapshot.key}`,
     text: `Name: ${requestData.name} 
       UUID: ${snapshot.key}
       Email: ${requestData.email}
@@ -196,7 +195,7 @@ function getRequestConfirmationToRequesterMailOptions(snapshot) {
   return {
     from: '"DeliverEase" <deliverEase@gmail.com>',
     to: requestData.email,
-    subject: `${stagingSubject} Thanks for your request!`,
+    subject: `Thanks for your request!`,
     text: 'Thank you so much for requesting a delivery. We will be in touch shortly.',
     html: constants.REQUESTER_EMAIL_CONTENT,
   };
