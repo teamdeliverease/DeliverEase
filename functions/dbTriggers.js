@@ -1,6 +1,7 @@
 const functions = require('firebase-functions');
 const nodemailer = require('nodemailer');
 const constants = require('./constants');
+const mondaySDK = require('monday-sdk-js');
 
 const FIREBASE_PROJECT_ID = JSON.parse(process.env.FIREBASE_CONFIG).projectId;
 
@@ -16,7 +17,7 @@ const mailTransport = nodemailer.createTransport({
   },
 });
 
-const monday = mondaySdk();
+const monday = mondaySDK();
 monday.setToken(functions.config().apikeys.monday);
 
 exports.volunteerPostProcess = functions.database
@@ -24,7 +25,7 @@ exports.volunteerPostProcess = functions.database
   .onCreate((snapshot) => {
     const volunteerMailOptions = getVolunteerConfirmationMailOptions(snapshot);
     sendEmail(volunteerMailOptions);
-    return 0;
+    return true;
   });
 
 exports.requesterPostProcess = functions.database
@@ -35,7 +36,7 @@ exports.requesterPostProcess = functions.database
     sendEmail(requesterMailOptions);
     sendEmail(deliverEaseMailOptions);
     createRequesterMondayItem(snapshot);
-    return 0;
+    return true;
   });
 
 async function createRequesterMondayItem(snapshot) {
@@ -50,8 +51,6 @@ async function createRequesterMondayItem(snapshot) {
     resolution,
   } = constants.REQUESTER_COLUMN_MAPPING;
   const requestData = snapshot.val();
-  const lastSlashIndex = snapshot._path.lastIndexOf('/');
-  const requestUuid = snapshot._path.substring(lastSlashIndex + 1);
 
   const result = await monday.api(
     `mutation createItem($boardId: Int!, $groupId: String!, $itemName: String!, $columnValues: JSON!) {
@@ -63,11 +62,11 @@ async function createRequesterMondayItem(snapshot) {
     {
       variables: {
         boardId: constants.REQUESTER_BOARD_ID,
-        groupId: constants.REQUESTER_GROUP_ID,
+        groupId: constants.REQUESTER_NEW_GROUP_ID,
         itemName: 'New Request',
         columnValues: JSON.stringify({
           [name]: requestData.name,
-          [uuid]: requestUuid,
+          [uuid]: snapshot.key,
           [location]: requestData.address,
           [email]: requestData.email || '',
           [phone]: requestData.phone,
@@ -81,11 +80,9 @@ async function createRequesterMondayItem(snapshot) {
 
   if (result.error_code) {
     console.error(new Error(result));
-    return -1;
   }
 
   console.log(result);
-  return 0;
 }
 
 function sendEmail(mailOptions) {

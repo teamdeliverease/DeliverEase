@@ -3,7 +3,7 @@ const STAGING_PROJECT_ID = 'deliverease-staging';
 // FIXME: replace with prod board ids before pushing
 const VOLUNTEER_BOARD_ID = 518840707;
 const REQUESTER_BOARD_ID = 518724473;
-const REQUESTER_GROUP_ID = 'topics';
+const REQUESTER_NEW_GROUP_ID = 'topics';
 
 const REQUESTER_COLUMN_MAPPING = {
   name: 'text6',
@@ -52,6 +52,6 @@ module.exports = {
   REQUESTER_EMAIL_CONTENT,
   VOLUNTEER_BOARD_ID,
   REQUESTER_BOARD_ID,
-  REQUESTER_GROUP_ID,
+  REQUESTER_NEW_GROUP_ID,
   REQUESTER_COLUMN_MAPPING,
 };
