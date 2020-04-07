@@ -90,8 +90,6 @@ async function createRequesterMondayItem(snapshot) {
   if (result.error_code) {
     console.error(new Error(result));
   }
-
-  console.log(result);
 }
 
 async function createVolunteerMondayItem(snapshot) {
@@ -124,8 +122,6 @@ async function createVolunteerMondayItem(snapshot) {
   if (result.error_code) {
     console.error(new Error(result));
   }
-
-  console.log(result);
 }
 
 function sendEmail(mailOptions) {
