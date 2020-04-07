@@ -7,7 +7,7 @@ const VOLUNTEER_GROUP_ID = 'topics';
 const REQUESTER_NEW_GROUP_ID = 'topics';
 
 const REQUESTER_COLUMN_MAPPING = {
-  name: 'name1',
+  name: 'text6',
   uuid: 'text',
   address: 'location28',
   email: 'text69',

@@ -43,7 +43,7 @@ exports.requesterPostProcess = functions.database
     sendEmail(requesterMailOptions);
     sendEmail(deliverEaseMailOptions);
     if (isEnvironmentProduction()) {
-      createVolunteerMondayItem(snapshot);
+      createRequesterMondayItem(snapshot);
     }
     return true;
   });
@@ -72,7 +72,7 @@ async function createRequesterMondayItem(snapshot) {
       variables: {
         boardId: constants.REQUESTER_BOARD_ID,
         groupId: constants.REQUESTER_NEW_GROUP_ID,
-        itemName: 'New Request',
+        itemName: 'Request ',
         columnValues: JSON.stringify({
           [name]: requestData.name,
           [uuid]: snapshot.key,
