@@ -1,3 +1,30 @@
+const STAGING_PROJECT_ID = 'deliverease-staging';
+const PROD_PROJECT_ID = 'deliverease-f9eec';
+
+const VOLUNTEER_BOARD_ID = 519301527;
+const REQUESTER_BOARD_ID = 508460665;
+const VOLUNTEER_GROUP_ID = 'topics';
+const REQUESTER_NEW_GROUP_ID = 'topics';
+
+const REQUESTER_COLUMN_MAPPING = {
+  name: 'text6',
+  uuid: 'text',
+  address: 'location28',
+  email: 'text69',
+  phone: 'phone1',
+  request: 'request',
+  status: 'status2',
+  resolution: 'status8',
+};
+
+const VOLUNTEER_COLUMN_MAPPING = {
+  name: 'name7',
+  uuid: 'uuid',
+  address: 'address',
+  email: 'email',
+  phone: 'phone0',
+};
+
 const VOLUNTEER_EMAIL_CONTENT = `<p>Hello,</p>
 <p>Thank you so much for signing up to be a volunteer in your community, you rock! Just like your neighbors, we at DeliverEase are grateful to have you on the team. We&rsquo;ll reach out whenever there&rsquo;s a delivery request in your area.</p>
 <p>Before going out on any delivery, remember that the people asking for your assistance are most likely immunocompromised or elderly, so please take extra precautions:</p>
@@ -27,6 +54,14 @@ const REQUESTER_EMAIL_CONTENT = `<p>Hello!</p>
 <p>DeliverEase</p>`;
 
 module.exports = {
+  PROD_PROJECT_ID,
+  STAGING_PROJECT_ID,
   VOLUNTEER_EMAIL_CONTENT,
   REQUESTER_EMAIL_CONTENT,
+  VOLUNTEER_BOARD_ID,
+  REQUESTER_BOARD_ID,
+  REQUESTER_NEW_GROUP_ID,
+  VOLUNTEER_GROUP_ID,
+  REQUESTER_COLUMN_MAPPING,
+  VOLUNTEER_COLUMN_MAPPING,
 };

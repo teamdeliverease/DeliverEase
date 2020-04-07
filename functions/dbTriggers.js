@@ -2,6 +2,17 @@ const fetch = require('node-fetch');
 const functions = require('firebase-functions');
 const nodemailer = require('nodemailer');
 const constants = require('./constants');
+const mondaySDK = require('monday-sdk-js');
+
+const FIREBASE_PROJECT_ID = JSON.parse(process.env.FIREBASE_CONFIG).projectId;
+
+function isEnvironmentStaging() {
+  return FIREBASE_PROJECT_ID === constants.STAGING_PROJECT_ID;
+}
+
+function isEnvironmentProduction() {
+  return FIREBASE_PROJECT_ID === constants.PROD_PROJECT_ID;
+}
 
 const mailTransport = nodemailer.createTransport({
   service: 'gmail',
@@ -11,6 +22,9 @@ const mailTransport = nodemailer.createTransport({
   },
 });
 
+const monday = mondaySDK();
+monday.setToken(functions.config().apikeys.monday);
+
 exports.volunteerPostProcess = functions.database
   .ref('/volunteers/{volunteer}')
   .onCreate((snapshot) => {
@@ -18,6 +32,10 @@ exports.volunteerPostProcess = functions.database
     const volunteerContactDataAvochado = getAvochatoContactInfo(snapshot, 'Volunteer');
     updateContact(volunteerContactDataAvochado);
     sendEmail(volunteerMailOptions);
+    if (isEnvironmentProduction()) {
+      createVolunteerMondayItem(snapshot);
+    }
+    return true;
   });
 
 exports.requesterPostProcess = functions.database
@@ -29,7 +47,87 @@ exports.requesterPostProcess = functions.database
     updateContact(requestContactDataAvochado);
     sendEmail(requesterMailOptions);
     sendEmail(deliverEaseMailOptions);
+    if (isEnvironmentProduction()) {
+      createRequesterMondayItem(snapshot);
+    }
+    return true;
   });
+
+async function createRequesterMondayItem(snapshot) {
+  const {
+    name,
+    uuid,
+    address,
+    email,
+    phone,
+    request,
+    status,
+    resolution,
+  } = constants.REQUESTER_COLUMN_MAPPING;
+  const requestData = snapshot.val();
+
+  const result = await monday.api(
+    `mutation createItem($boardId: Int!, $groupId: String!, $itemName: String!, $columnValues: JSON!) {
+      create_item(board_id: $boardId, group_id: $groupId, item_name: $itemName, column_values: $columnValues) {
+        id
+      } 
+    }
+  `,
+    {
+      variables: {
+        boardId: constants.REQUESTER_BOARD_ID,
+        groupId: constants.REQUESTER_NEW_GROUP_ID,
+        itemName: 'Request ',
+        columnValues: JSON.stringify({
+          [name]: requestData.name,
+          [uuid]: snapshot.key,
+          [address]: requestData.address,
+          [email]: requestData.email || '',
+          [phone]: requestData.phone,
+          [request]: { text: requestData.list },
+          [status]: { label: 'New' },
+          [resolution]: { label: 'N/A' },
+        }),
+      },
+    },
+  );
+
+  if (result.error_code) {
+    console.error(new Error(result));
+  }
+}
+
+async function createVolunteerMondayItem(snapshot) {
+  const { name, uuid, address, email, phone } = constants.VOLUNTEER_COLUMN_MAPPING;
+  const requestData = snapshot.val();
+
+  const result = await monday.api(
+    `mutation createItem($boardId: Int!, $groupId: String!, $itemName: String!, $columnValues: JSON!) {
+      create_item(board_id: $boardId, group_id: $groupId, item_name: $itemName, column_values: $columnValues) {
+        id
+      } 
+    }
+  `,
+    {
+      variables: {
+        boardId: constants.VOLUNTEER_BOARD_ID,
+        groupId: constants.VOLUNTEER_GROUP_ID,
+        itemName: requestData.name,
+        columnValues: JSON.stringify({
+          [name]: requestData.name,
+          [uuid]: snapshot.key,
+          [address]: requestData.address,
+          [email]: requestData.email,
+          [phone]: requestData.phone,
+        }),
+      },
+    },
+  );
+
+  if (result.error_code) {
+    console.error(new Error(result));
+  }
+}
 
 function sendEmail(mailOptions) {
   if (mailOptions.to.trim() !== '') {
@@ -46,13 +144,14 @@ function updateContact(contactInfo) {
     .then((res) => res.json())
     .catch((err) => console.error(err));
 }
+const stagingSubject = `${isEnvironmentStaging ? '[STAGING] ' : ''}`;
 
 function getVolunteerConfirmationMailOptions(snapshot) {
   const volunteerData = snapshot.val();
   return {
     from: '"DeliverEase" <TeamDeliverEase@gmail.com>',
     to: volunteerData.email,
-    subject: 'Welcome to DeliverEase!',
+    subject: `${stagingSubject}Welcome to DeliverEase!`,
     text:
       'Thank you for signing up to be a volunteer! We will reach out whenever there is a delivery request in your area.',
     html: constants.VOLUNTEER_EMAIL_CONTENT,
@@ -64,7 +163,7 @@ function getRequestConfirmationToDeliverEaseMailOptions(snapshot) {
   return {
     from: '"DeliverEase" <TeamDeliverEase@gmail.com>',
     to: 'TeamDeliverEase@gmail.com',
-    subject: `New Request! ${snapshot.key}`,
+    subject: `${stagingSubject}New Request! ${snapshot.key}`,
     text: `Name: ${requestData.name} 
       UUID: ${snapshot.key}
       Email: ${requestData.email}
@@ -97,7 +196,7 @@ function getRequestConfirmationToRequesterMailOptions(snapshot) {
   return {
     from: '"DeliverEase" <deliverEase@gmail.com>',
     to: requestData.email,
-    subject: 'Thanks for your request!',
+    subject: `${stagingSubject} Thanks for your request!`,
     text: 'Thank you so much for requesting a delivery. We will be in touch shortly.',
     html: constants.REQUESTER_EMAIL_CONTENT,
   };
