@@ -94,6 +94,7 @@ async function submitForm(e, ref, getFormData, sectionSelector) {
   e.preventDefault();
 
   data = getFormData();
+  console.log(data);
   const formData = { ...data };
   try {
     validatePhoneNumber(data.phone);
@@ -128,29 +129,27 @@ async function submitForm(e, ref, getFormData, sectionSelector) {
 }
 
 function getVolunteerFormData() {
-  const firstName = getInputValue('volunteer-first-name');
-  const lastName = getInputValue('volunteer-last-name');
   return {
-    firstName: firstName,
-    lastName: lastName,
+    firstName: getInputValue('volunteer-first-name'),
+    lastName: getInputValue('volunteer-last-name'),
     phone: volunteerPhoneInput,
     email: getInputValue('volunteer-email'),
     address: getInputValue('volunteer-address'),
+    language: $('#volunteer-language').val(),
     hasCar: document.querySelector('input[name="volunteer-car"]:checked').value === 'yes',
     termsAgreement: document.getElementById('volunteer-terms').checked,
   };
 }
 
 function getRequesterFormData() {
-  const firstName = getInputValue('requester-first-name');
-  const lastName = getInputValue('requester-last-name');
   return {
-    firstName: firstName,
-    lastName: lastName,
+    firstName: getInputValue('requester-first-name'),
+    lastName: getInputValue('requester-last-name'),
     phone: requesterPhoneInput,
     email: getInputValue('requester-email'),
     address: getInputValue('requester-address'),
     list: getInputValue('requester-shopping-list'),
+    language: $('#requester-language').val(),
     termsAgreement: document.getElementById('requester-terms').checked,
   };
 }
