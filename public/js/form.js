@@ -137,6 +137,7 @@ function getVolunteerFormData() {
     phone: volunteerPhoneInput,
     email: getInputValue('volunteer-email'),
     address: getInputValue('volunteer-address'),
+    hasCar: document.querySelector('input[name="volunteer-car"]:checked').value === 'yes',
     termsAgreement: document.getElementById('volunteer-terms').checked,
   };
 }
@@ -198,7 +199,7 @@ function getInputValue(id) {
 }
 
 function trackClick(elementId, event, payload) {
-  document.getElementById(elementId).addEventListener('click', function() {
+  document.getElementById(elementId).addEventListener('click', function () {
     analytics.logEvent(event, payload);
   });
 }

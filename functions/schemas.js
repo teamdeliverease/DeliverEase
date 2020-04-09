@@ -18,6 +18,7 @@ const schemas = {
     email: Joi.string().max(256).email().required(),
     address: Joi.string().max(256).required(),
     phone: Joi.string().phoneNumber({ format: 'e164' }).required(),
+    hasCar: Joi.boolean().required(),
     termsAgreement: Joi.boolean().valid(true).required(),
   }),
 };
