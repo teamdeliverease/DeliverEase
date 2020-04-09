@@ -131,8 +131,8 @@ function getVolunteerFormData() {
   const firstName = getInputValue('volunteer-first-name');
   const lastName = getInputValue('volunteer-last-name');
   return {
-    firstName,
-    lastName,
+    firstName: firstName,
+    lastName: lastName,
     name: `${firstName} ${lastName}`,
     phone: volunteerPhoneInput,
     email: getInputValue('volunteer-email'),
@@ -145,8 +145,8 @@ function getRequesterFormData() {
   const firstName = getInputValue('requester-first-name');
   const lastName = getInputValue('requester-last-name');
   return {
-    firstName,
-    lastName,
+    firstName: firstName,
+    lastName: lastName,
     name: `${firstName} ${lastName}`,
     phone: requesterPhoneInput,
     email: getInputValue('requester-email'),
