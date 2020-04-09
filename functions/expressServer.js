@@ -28,12 +28,14 @@ app.post('/requesters', validationMiddleware(schemas.requester, 'body'), async (
   submitFormPostRequest('requesters', req, res, (geocodeResult, data) => {
     addLocationPayload(geocodeResult, data);
     addFulfillmentStatusPayload(data);
+    addNamePayload(data);
   });
 });
 
 app.post('/volunteers', validationMiddleware(schemas.volunteer, 'body'), async (req, res) => {
   submitFormPostRequest('volunteers', req, res, (geocodeResult, data) => {
     addLocationPayload(geocodeResult, data);
+    addNamePayload(data);
   });
 });
 
@@ -79,7 +81,7 @@ function addToFirebase(ref, data) {
     firebase
       .database()
       .ref(ref)
-      .push(data, err => {
+      .push(data, (err) => {
         if (err) {
           throw new Error('error writing to database');
         }
@@ -100,6 +102,11 @@ function addLocationPayload(geocodeResult, data) {
 function addFulfillmentStatusPayload(data) {
   data.fulfillment_status = fulfillment_status.NEW;
   data.fulfillment_status_timestamp = firebase.database.ServerValue.TIMESTAMP;
+}
+
+function addNamePayload(data) {
+  const fullName = `${data.firstName} ${data.lastName}`;
+  return Object.assign(data, { name: fullName });
 }
 
 module.exports = app;

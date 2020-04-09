@@ -133,7 +133,6 @@ function getVolunteerFormData() {
   return {
     firstName: firstName,
     lastName: lastName,
-    name: `${firstName} ${lastName}`,
     phone: volunteerPhoneInput,
     email: getInputValue('volunteer-email'),
     address: getInputValue('volunteer-address'),
@@ -148,7 +147,6 @@ function getRequesterFormData() {
   return {
     firstName: firstName,
     lastName: lastName,
-    name: `${firstName} ${lastName}`,
     phone: requesterPhoneInput,
     email: getInputValue('requester-email'),
     address: getInputValue('requester-address'),
