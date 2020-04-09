@@ -128,8 +128,12 @@ async function submitForm(e, ref, getFormData, sectionSelector) {
 }
 
 function getVolunteerFormData() {
+  const firstName = getInputValue('volunteer-first-name');
+  const lastName = getInputValue('volunteer-last-name');
   return {
-    name: getInputValue('volunteer-name'),
+    firstName: firstName,
+    lastName: lastName,
+    name: `${firstName} ${lastName}`,
     phone: volunteerPhoneInput,
     email: getInputValue('volunteer-email'),
     address: getInputValue('volunteer-address'),
@@ -138,8 +142,12 @@ function getVolunteerFormData() {
 }
 
 function getRequesterFormData() {
+  const firstName = getInputValue('requester-first-name');
+  const lastName = getInputValue('requester-last-name');
   return {
-    name: getInputValue('requester-name'),
+    firstName: firstName,
+    lastName: lastName,
+    name: `${firstName} ${lastName}`,
     phone: requesterPhoneInput,
     email: getInputValue('requester-email'),
     address: getInputValue('requester-address'),
