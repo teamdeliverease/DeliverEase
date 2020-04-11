@@ -19,6 +19,14 @@
   color: #7f84b1;
 }
 
+.dropdown-item:hover {
+  background-color: #f8f9fa !important;
+}
+
+.dropdown-item:active {
+  color: black;
+}
+
 .full-width button {
   width: 30%;
 }
