@@ -9,6 +9,9 @@ const schemas = {
     phone: Joi.string().phoneNumber({ format: 'e164' }).required(),
     termsAgreement: Joi.boolean().valid(true).required(),
     list: Joi.string().max(1024).required(),
+    language: Joi.array().items(
+      Joi.string().valid('English', 'Spanish', 'Mandarin', 'Cantonese', 'Other'),
+    ),
   }),
   volunteer: Joi.object().keys({
     firstName: Joi.string().max(64).required(),
@@ -18,6 +21,9 @@ const schemas = {
     phone: Joi.string().phoneNumber({ format: 'e164' }).required(),
     hasCar: Joi.boolean().required(),
     termsAgreement: Joi.boolean().valid(true).required(),
+    language: Joi.array().items(
+      Joi.string().valid('English', 'Spanish', 'Mandarin', 'Cantonese', 'Other'),
+    ),
   }),
 };
 
