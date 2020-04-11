@@ -2,6 +2,23 @@
   width: 100% !important;
 }
 
+.language-dropdown {
+  border-radius: 0;
+  background-color: white;
+  padding: .375rem .75rem!important;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgb(227, 233, 246);
+  border-radius: .25rem;
+}
+
+.language-dropdown .filter-option-inner-inner {
+  color: #7f84b1;
+}
+
 .full-width button {
   width: 30%;
 }
