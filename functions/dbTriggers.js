@@ -29,9 +29,9 @@ exports.volunteerPostProcess = functions.database
   .ref('/volunteers/{volunteer}')
   .onCreate((snapshot) => {
     const volunteerMailOptions = getVolunteerConfirmationMailOptions(snapshot);
-    const volunteerAvochatoContactInfo = getAvochatoContactInfo(snapshot, 'Volunteer');
     sendEmail(volunteerMailOptions);
     if (isProductionEnvironment()) {
+      const volunteerAvochatoContactInfo = getAvochatoContactInfo(snapshot, 'Volunteer');
       createAvochatoContact(volunteerAvochatoContactInfo);
       createVolunteerMondayItem(snapshot);
     }
@@ -43,10 +43,10 @@ exports.requesterPostProcess = functions.database
   .onCreate((snapshot) => {
     const requesterMailOptions = getRequestConfirmationToRequesterMailOptions(snapshot);
     const deliverEaseMailOptions = getRequestConfirmationToDeliverEaseMailOptions(snapshot);
-    const requestAvochatoContactInfo = getAvochatoContactInfo(snapshot, 'Requester');
     sendEmail(requesterMailOptions);
     sendEmail(deliverEaseMailOptions);
     if (isProductionEnvironment()) {
+      const requestAvochatoContactInfo = getAvochatoContactInfo(snapshot, 'Requester');
       createAvochatoContact(requestAvochatoContactInfo);
       createRequesterMondayItem(snapshot);
     }
