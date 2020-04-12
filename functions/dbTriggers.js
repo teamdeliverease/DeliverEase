@@ -32,7 +32,7 @@ exports.volunteerPostProcess = functions.database
     const volunteerAvochatoContactInfo = getAvochatoContactInfo(snapshot, 'Volunteer');
     sendEmail(volunteerMailOptions);
     if (isProductionEnvironment()) {
-      updateContact(volunteerAvochatoContactInfo);
+      createAvochatoContact(volunteerAvochatoContactInfo);
       createVolunteerMondayItem(snapshot);
     }
     return true;
@@ -47,7 +47,7 @@ exports.requesterPostProcess = functions.database
     sendEmail(requesterMailOptions);
     sendEmail(deliverEaseMailOptions);
     if (isProductionEnvironment()) {
-      updateContact(requestAvochatoContactInfo);
+      createAvochatoContact(requestAvochatoContactInfo);
       createRequesterMondayItem(snapshot);
     }
     return true;
@@ -135,15 +135,16 @@ function sendEmail(mailOptions) {
   }
 }
 
-function updateContact(contactInfo) {
+function createAvochatoContact(contactInfo) {
   fetch('https://www.avochato.com/v1/contacts', {
-    method: 'post',
+    method: 'POST',
     body: JSON.stringify(contactInfo),
     headers: { 'Content-Type': 'application/json' },
   })
     .then((res) => res.json())
     .catch((err) => console.error(err));
 }
+
 const stagingSubject = `${isStagingEnvironment() ? '[STAGING] ' : ''}`;
 
 function getVolunteerConfirmationMailOptions(snapshot) {
@@ -186,6 +187,8 @@ function getAvochatoContactInfo(snapshot, tags) {
         email: contactData.email || '',
         tags: tags,
         [`${uuidTag}_uuid`]: `${snapshot.key}`,
+        has_car: contactData.hasCar.toString(),
+        language: contactData.language.join(', '),
       },
     ],
   };
