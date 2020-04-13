@@ -177,7 +177,7 @@ function getRequestConfirmationToDeliverEaseMailOptions(snapshot) {
 function getAvochatoContactInfo(snapshot, tags) {
   const contactData = snapshot.val();
   const uuidTag = tags.toLowerCase();
-  return {
+  const info = {
     auth_id: functions.config().apikeys.avochatoid,
     auth_secret: functions.config().apikeys.avochatosecret,
     contacts: [
@@ -187,11 +187,14 @@ function getAvochatoContactInfo(snapshot, tags) {
         email: contactData.email || '',
         tags: tags,
         [`${uuidTag}_uuid`]: `${snapshot.key}`,
-        has_car: contactData.hasCar.toString(),
         language: contactData.language.join(', '),
       },
     ],
   };
+  if ('hasCar' in contactData) {
+    info.contacts[0].has_car = contactData.hasCar.toString();
+  }
+  return info;
 }
 
 function getRequestConfirmationToRequesterMailOptions(snapshot) {
