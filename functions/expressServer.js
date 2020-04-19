@@ -1,5 +1,6 @@
 const functions = require('firebase-functions');
 const firebase = require('firebase-admin');
+const firebaseAuth = require('firebase-auth');
 const express = require('express');
 const validationMiddleware = require('./validationMiddleware.js');
 const schemas = require('./schemas.js');
@@ -7,12 +8,14 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const googleMapsClient = require('@googlemaps/google-maps-services-js').Client;
 const checkIfAuthenticated = require('./authMiddleware.js');
+const path = require('path');
 
 const mapsClient = new googleMapsClient({});
 const app = express();
 
 app.use(cors({ origin: true })); // Automatically allow cross-origin requests
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, '/private/map.html')));
 
 const fulfillment_status = {
   NEW: 'new',
@@ -40,8 +43,27 @@ app.post('/volunteers', validationMiddleware(schemas.volunteer, 'body'), async (
   });
 });
 
+app.post('/login', checkIfAuthenticated, async (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+
+  firebaseAuth
+    .signInWithEmailAndPassword(email, password)
+    .then(function (user) {
+      if (user) {
+        response.redirect;
+      }
+    })
+    .catch(function (error) {
+      alert('A login error occured.');
+      return;
+    });
+
+  res.redirect('/map');
+});
+
 app.get('/map', checkIfAuthenticated, async (req, res) => {
-  res.send('welcome');
+  res.sendFile(path.join(__dirname, '/private/map.html'));
 });
 
 async function submitFormPostRequest(ref, req, res, prepare) {
