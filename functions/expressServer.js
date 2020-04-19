@@ -6,6 +6,7 @@ const schemas = require('./schemas.js');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const googleMapsClient = require('@googlemaps/google-maps-services-js').Client;
+const checkIfAuthenticated = require('./authMiddleware.js');
 
 const mapsClient = new googleMapsClient({});
 const app = express();
@@ -37,6 +38,10 @@ app.post('/volunteers', validationMiddleware(schemas.volunteer, 'body'), async (
     addLocationPayload(geocodeResult, data);
     addNamePayload(data);
   });
+});
+
+app.get('/map', checkIfAuthenticated, async (req, res) => {
+  res.send('welcome');
 });
 
 async function submitFormPostRequest(ref, req, res, prepare) {
