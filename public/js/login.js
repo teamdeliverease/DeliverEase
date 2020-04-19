@@ -36,15 +36,11 @@ const login = async () => {
   }
 };
 
-firebase.auth().onAuthStateChanged((user) => {
+auth.onAuthStateChanged(async (user) => {
   if (user) {
-    return firebase.auth.currentUser
-      .getIdToken()
-      .then((idToken) => {
-        axios.defaults.headers.common['Authorization'] = idToken;
-        // Any extra code
-      })
-      .catch();
+    window.location.href = 'map.html';
+  } else {
+    console.log('no user found');
   }
 });
 
