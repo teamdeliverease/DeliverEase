@@ -47,22 +47,10 @@ app.post('/login', checkIfAuthenticated, async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
 
-  firebaseAuth
-    .signInWithEmailAndPassword(email, password)
-    .then(function (user) {
-      if (user) {
-        response.redirect;
-      }
-    })
-    .catch(function (error) {
-      alert('A login error occured.');
-      return;
-    });
-
   res.redirect('/map');
 });
 
-app.get('/map', checkIfAuthenticated, async (req, res) => {
+app.get('/map', async (req, res) => {
   res.sendFile(path.join(__dirname, '/private/map.html'));
 });
 
