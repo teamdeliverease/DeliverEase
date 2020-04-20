@@ -15,7 +15,7 @@ const checkIfAuthenticated = (req, res, next) => {
       const sessionCookie = req.cookies.__session || '';
       const userInfo = await firebaseAdmin.auth().verifyIdToken(sessionCookie);
       req.authId = userInfo.uid;
-      return next();
+      next();
     } catch (e) {
       return res.status(401).send({ error: 'You are not authorized to make this request' });
     }

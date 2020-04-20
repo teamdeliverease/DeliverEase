@@ -23,10 +23,7 @@ app.use(cookieParser());
 // Attach CSRF token on each request.
 app.use(attachCsrfToken('/', 'csrfToken', (Math.random() * 100000000000000000).toString()));
 // Serve static content from public folder.
-
-app.use('/private', checkIfAuthenticated);
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'private')));
 
 const fulfillment_status = {
   NEW: 'new',
@@ -54,9 +51,11 @@ app.post('/volunteers', validationMiddleware(schemas.volunteer, 'body'), async (
   });
 });
 
-app.get('/secure/map', async (req, res) => {
+app.get('/map', checkIfAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname, 'private/map.html'));
 });
+
+app.use(express.static(path.join(__dirname, 'private')));
 
 /**
  * Attaches a CSRF token to the request.
@@ -79,21 +78,21 @@ app.get('/login', (req, res) => {
 });
 
 // Whenever a user is accessing restricted content that requires authentication.
-app.post('/map', (req, res) => {
-  const sessionCookie = req.cookies.session || '';
-  // Verify the session cookie. In this case an additional check is added to detect
-  // if the user's Firebase session was revoked, user deleted/disabled, etc.
-  firebase
-    .auth()
-    .verifySessionCookie(sessionCookie, true /** checkRevoked */)
-    .then((decodedClaims) => {
-      return express.static(path.join(__dirname, 'private/map'));
-    })
-    .catch((error) => {
-      // Session cookie is unavailable or invalid. Force user to login.
-      res.redirect('/login');
-    });
-});
+// app.post('/map', (req, res) => {
+//   const sessionCookie = req.cookies.session || '';
+//   // Verify the session cookie. In this case an additional check is added to detect
+//   // if the user's Firebase session was revoked, user deleted/disabled, etc.
+//   firebase
+//     .auth()
+//     .verifySessionCookie(sessionCookie, true /** checkRevoked */)
+//     .then((decodedClaims) => {
+//       return express.static(path.join(__dirname, 'private/map'));
+//     })
+//     .catch((error) => {
+//       // Session cookie is unavailable or invalid. Force user to login.
+//       res.redirect('/login');
+//     });
+// });
 
 app.post('/sessionLogin', (req, res) => {
   // Get the ID token passed and the CSRF token.
