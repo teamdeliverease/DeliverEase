@@ -16,17 +16,15 @@ const login = async () => {
   try {
     const token = await auth.currentUser.getIdToken();
 
-    const response = await fetch(`/login`, {
-      method: 'POST',
+    const response = await fetch(`/map`, {
+      method: 'GET',
       redirect: 'follow',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
     });
-    if (response.status === 200) {
-      window.location.href = response.url;
-    } else {
+    if (response.status !== 200) {
       const errorMessage = await response.text();
       console.error(new Error(errorMessage));
       alert('Oops! Something went wrong :(');
@@ -36,17 +34,11 @@ const login = async () => {
   }
 };
 
-firebase.auth().onAuthStateChanged((user) => {
-  if (user) {
-    return firebase.auth.currentUser
-      .getIdToken()
-      .then((idToken) => {
-        axios.defaults.headers.common['Authorization'] = idToken;
-        // Any extra code
-      })
-      .catch();
-  }
-});
+// firebase.auth().onAuthStateChanged((user) => {
+//   if (user) {
+//     login();
+//   }
+// });
 
 const getInputValue = (id) => document.getElementById(id).value;
 
