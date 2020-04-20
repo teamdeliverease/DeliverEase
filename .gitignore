@@ -67,4 +67,4 @@ node_modules/
 .DS_Store
 
 # firebase service key
-serviceAccountKey.json
+serviceAccountKeys.json

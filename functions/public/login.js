@@ -29,10 +29,15 @@ const login = async (user) => {
     // CSRF token should be sent along with request.
     // const csrfToken = getCookie('csrfToken');
 
-    const response = await axios.post('/sessionLogin', {
-      idToken: token,
-      // csrfToken: csrfToken,
-    });
+    const response = await axios.post(
+      '/sessionLogin',
+      {
+        idToken: token,
+      },
+      { headers: { 'content-type': 'application/x-www-form-urlencoded' } },
+    );
+
+    console.log(response);
 
     if (response.status !== 200) {
       const errorMessage = await response.text();
