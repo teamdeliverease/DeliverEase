@@ -1,23 +1,37 @@
 const auth = firebase.auth();
 
+/**
+ * @param {string} name The cookie name.
+ * @return {?string} The corresponding cookie value to lookup.
+ */
+function getCookie(name) {
+  var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+  return v ? v[2] : null;
+}
+
 const validateLogin = async (e) => {
   e.preventDefault();
   const email = getInputValue('email');
   const password = getInputValue('password');
-  await auth.signInWithEmailAndPassword(email, password).catch(function (error) {
+  const user = await auth.signInWithEmailAndPassword(email, password).catch((error) => {
     alert('A login error occured.');
     return;
   });
 
-  login();
+  login(user.user);
 };
 
 const login = async (user) => {
   try {
-    const token = await auth.currentUser.getIdToken();
+    const token = await user.getIdToken();
+
+    // Session login endpoint is queried and the session cookie is set.
+    // CSRF token should be sent along with request.
+    // const csrfToken = getCookie('csrfToken');
 
     const response = await axios.post('/sessionLogin', {
-      idToken: `${token}`,
+      idToken: token,
+      // csrfToken: csrfToken,
     });
 
     if (response.status !== 200) {
@@ -29,12 +43,6 @@ const login = async (user) => {
     console.error(err);
   }
 };
-
-// firebase.auth().onAuthStateChanged((user) => {
-//   if (user) {
-//     login();
-//   }
-// });
 
 const getInputValue = (id) => document.getElementById(id).value;
 

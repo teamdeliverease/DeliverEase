@@ -5,6 +5,7 @@ const express = require('express');
 const validationMiddleware = require('./validationMiddleware.js');
 const schemas = require('./schemas.js');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const googleMapsClient = require('@googlemaps/google-maps-services-js').Client;
 const checkIfAuthenticated = require('./authMiddleware.js');
@@ -13,9 +14,16 @@ const path = require('path');
 const mapsClient = new googleMapsClient({});
 const app = express();
 
-app.use(cors({ origin: true })); // Automatically allow cross-origin requests
+// Automatically allow cross-origin requests
+app.use(cors({ origin: true }));
+// Support URL-encoded bodies.
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
+// Support cookie manipulation.
+app.use(cookieParser());
+// Attach CSRF token on each request.
+app.use(attachCsrfToken('/', 'csrfToken', (Math.random() * 100000000000000000).toString()));
+// Serve static content from public folder.
+app.use('/', express.static(path.join(__dirname, 'public')));
 
 const fulfillment_status = {
   NEW: 'new',
@@ -51,6 +59,22 @@ app.post('/volunteers', validationMiddleware(schemas.volunteer, 'body'), async (
 //   res.sendFile(path.join(__dirname, '/private/map.html'));
 // });
 
+/**
+ * Attaches a CSRF token to the request.
+ * @param {string} url The URL to check.
+ * @param {string} cookie The CSRF token name.
+ * @param {string} value The CSRF token value to save.
+ * @return {function} The middleware function to run.
+ */
+function attachCsrfToken(url, cookie, value) {
+  return function (req, res, next) {
+    if (req.url === url) {
+      res.cookie(cookie, value);
+    }
+    next();
+  };
+}
+
 app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/login.html'));
 });
@@ -75,15 +99,13 @@ app.post('/map', (req, res) => {
 app.post('/sessionLogin', (req, res) => {
   // Get the ID token passed and the CSRF token.
   const idToken = req.body.idToken.toString();
-  console.log(idToken);
-  res.send('good');
-
-  const csrfToken = req.body.csrfToken.toString();
+  // const csrfToken = req.body.csrfToken.toString();
   // Guard against CSRF attacks.
-  if (csrfToken !== req.cookies.csrfToken) {
-    res.status(401).send('UNAUTHORIZED REQUEST!');
-    return;
-  }
+  // if (csrfToken !== req.cookies.csrfToken) {
+  //   res.status(401).send('UNAUTHORIZED REQUEST!');
+  //   return;
+  // }
+
   // Set session expiration to 5 days.
   const expiresIn = 60 * 60 * 24 * 5 * 1000;
   // Create the session cookie. This will also verify the ID token in the process.
@@ -95,15 +117,18 @@ app.post('/sessionLogin', (req, res) => {
     .createSessionCookie(idToken, { expiresIn })
     .then(
       (sessionCookie) => {
+        console.log(sessionCookie);
         // Set cookie policy for session cookie.
         const options = { maxAge: expiresIn, httpOnly: true, secure: true };
         res.cookie('session', sessionCookie, options);
-        res.end(JSON.stringify({ status: 'success' }));
+        return res.end(JSON.stringify({ status: 'success' }));
       },
       (error) => {
+        console.error(error);
         res.status(401).send('UNAUTHORIZED REQUEST!');
       },
-    );
+    )
+    .catch((err) => console.error(err));
 });
 
 async function submitFormPostRequest(ref, req, res, prepare) {
