@@ -15,8 +15,6 @@ const app = express();
 
 app.use(cors({ origin: true })); // Automatically allow cross-origin requests
 app.use(bodyParser.urlencoded({ extended: true }));
-// app.use('/map', [checkIfAuthenticated, express.static(path.join(__dirname, '/private/map'))]);
-
 const fulfillment_status = {
   NEW: 'new',
   SOURCING_VOLUNTEER: 'sourcing_volunteer',
@@ -51,8 +49,10 @@ app.post('/volunteers', validationMiddleware(schemas.volunteer, 'body'), async (
 //   res.sendFile(path.join(__dirname, '/private/map.html'));
 // });
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.get('/login', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/login'));
+  res.sendFile(path.join(__dirname, 'public/login.html'));
 });
 
 // Whenever a user is accessing restricted content that requires authentication.
