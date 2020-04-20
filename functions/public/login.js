@@ -18,7 +18,9 @@ const validateLogin = async (e) => {
     return;
   });
 
-  login(user.user);
+  const token = await user.user.getIdToken();
+
+  document.cookie = `__session=${token};max-age=3600`;
 };
 
 const login = async (user) => {
@@ -29,13 +31,9 @@ const login = async (user) => {
     // CSRF token should be sent along with request.
     // const csrfToken = getCookie('csrfToken');
 
-    const response = await axios.post(
-      '/sessionLogin',
-      {
-        idToken: token,
-      },
-      { headers: { 'content-type': 'application/x-www-form-urlencoded' } },
-    );
+    const response = await axios.post('/sessionLogin', {
+      idToken: token,
+    });
 
     console.log(response);
 

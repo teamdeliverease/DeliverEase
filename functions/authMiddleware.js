@@ -12,8 +12,8 @@ const getAuthToken = (req, res, next) => {
 const checkIfAuthenticated = (req, res, next) => {
   getAuthToken(req, res, async () => {
     try {
-      const { authToken } = req;
-      const userInfo = await firebaseAdmin.auth().verifyIdToken(authToken);
+      const sessionCookie = req.cookies.__session || '';
+      const userInfo = await firebaseAdmin.auth().verifyIdToken(sessionCookie);
       req.authId = userInfo.uid;
       return next();
     } catch (e) {

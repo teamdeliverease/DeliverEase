@@ -18,7 +18,7 @@ async function initMap() {
   });
 
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
+    navigator.geolocation.getCurrentPosition((position) => {
       var pos = {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
@@ -38,7 +38,7 @@ async function placeMarkers(ref, icon = null) {
     },
   });
   const data = await res.json();
-  Object.values(data).forEach(user => {
+  Object.values(data).forEach((user) => {
     var marker = new google.maps.Marker({
       position: { lat: user.lat, lng: user.lng },
       map: map,
@@ -59,7 +59,7 @@ function addInfoWindow(userData, marker) {
       userData.address,
   });
 
-  marker.addListener('click', function() {
+  marker.addListener('click', () => {
     if (true) {
     }
     infowindow.open(map, marker);

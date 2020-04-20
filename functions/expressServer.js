@@ -23,7 +23,10 @@ app.use(cookieParser());
 // Attach CSRF token on each request.
 app.use(attachCsrfToken('/', 'csrfToken', (Math.random() * 100000000000000000).toString()));
 // Serve static content from public folder.
-app.use('/', express.static(path.join(__dirname, 'public')));
+
+app.use('/private', checkIfAuthenticated);
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'private')));
 
 const fulfillment_status = {
   NEW: 'new',
@@ -51,13 +54,9 @@ app.post('/volunteers', validationMiddleware(schemas.volunteer, 'body'), async (
   });
 });
 
-// app.post('/login', checkIfAuthenticated, async (req, res) => {
-//   res.redirect('/map');
-// });
-
-// app.get('/map', checkIfAuthenticated, async (req, res) => {
-//   res.sendFile(path.join(__dirname, '/private/map.html'));
-// });
+app.get('/secure/map', async (req, res) => {
+  res.sendFile(path.join(__dirname, 'private/map.html'));
+});
 
 /**
  * Attaches a CSRF token to the request.
