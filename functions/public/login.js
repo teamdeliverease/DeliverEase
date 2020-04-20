@@ -12,18 +12,14 @@ const validateLogin = async (e) => {
   login();
 };
 
-const login = async () => {
+const login = async (user) => {
   try {
     const token = await auth.currentUser.getIdToken();
 
-    const response = await fetch(`/map`, {
-      method: 'GET',
-      redirect: 'follow',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
+    const response = await axios.post('/sessionLogin', {
+      idToken: `${token}`,
     });
+
     if (response.status !== 200) {
       const errorMessage = await response.text();
       console.error(new Error(errorMessage));

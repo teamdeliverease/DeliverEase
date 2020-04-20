@@ -15,6 +15,8 @@ const app = express();
 
 app.use(cors({ origin: true })); // Automatically allow cross-origin requests
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
+
 const fulfillment_status = {
   NEW: 'new',
   SOURCING_VOLUNTEER: 'sourcing_volunteer',
@@ -49,8 +51,6 @@ app.post('/volunteers', validationMiddleware(schemas.volunteer, 'body'), async (
 //   res.sendFile(path.join(__dirname, '/private/map.html'));
 // });
 
-app.use(express.static(path.join(__dirname, 'public')));
-
 app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/login.html'));
 });
@@ -75,6 +75,9 @@ app.post('/map', (req, res) => {
 app.post('/sessionLogin', (req, res) => {
   // Get the ID token passed and the CSRF token.
   const idToken = req.body.idToken.toString();
+  console.log(idToken);
+  res.send('good');
+
   const csrfToken = req.body.csrfToken.toString();
   // Guard against CSRF attacks.
   if (csrfToken !== req.cookies.csrfToken) {
