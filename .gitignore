@@ -66,5 +66,7 @@ node_modules/
 
 .DS_Store
 
-# firebase service key
+# firebase specific files
 serviceAccountKey.json
+.runtimeconfig.json
+.next
