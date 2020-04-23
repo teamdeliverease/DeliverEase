@@ -1,8 +1,8 @@
 const fetch = require('node-fetch');
 const functions = require('firebase-functions');
 const nodemailer = require('nodemailer');
-const constants = require('./constants');
 const mondaySDK = require('monday-sdk-js');
+const constants = require('./constants');
 
 const FIREBASE_PROJECT_ID = JSON.parse(process.env.FIREBASE_CONFIG).projectId;
 
@@ -24,34 +24,6 @@ const mailTransport = nodemailer.createTransport({
 
 const monday = mondaySDK();
 monday.setToken(functions.config().apikeys.monday);
-
-exports.volunteerPostProcess = functions.database
-  .ref('/volunteers/{volunteer}')
-  .onCreate((snapshot) => {
-    const volunteerMailOptions = getVolunteerConfirmationMailOptions(snapshot);
-    const volunteerAvochatoContactInfo = getAvochatoContactInfo(snapshot, 'Volunteer');
-    sendEmail(volunteerMailOptions);
-    if (isProductionEnvironment()) {
-      createAvochatoContact(volunteerAvochatoContactInfo);
-      createVolunteerMondayItem(snapshot);
-    }
-    return true;
-  });
-
-exports.requesterPostProcess = functions.database
-  .ref('/requesters/{request}')
-  .onCreate((snapshot) => {
-    const requesterMailOptions = getRequestConfirmationToRequesterMailOptions(snapshot);
-    const deliverEaseMailOptions = getRequestConfirmationToDeliverEaseMailOptions(snapshot);
-    const requestAvochatoContactInfo = getAvochatoContactInfo(snapshot, 'Requester');
-    sendEmail(requesterMailOptions);
-    sendEmail(deliverEaseMailOptions);
-    if (isProductionEnvironment()) {
-      createAvochatoContact(requestAvochatoContactInfo);
-      createRequesterMondayItem(snapshot);
-    }
-    return true;
-  });
 
 async function createRequesterMondayItem(snapshot) {
   const {
@@ -185,7 +157,7 @@ function getAvochatoContactInfo(snapshot, tags) {
         phone: contactData.phone,
         name: contactData.name,
         email: contactData.email || '',
-        tags: tags,
+        tags,
         [`${uuidTag}_uuid`]: `${snapshot.key}`,
         language: contactData.language.join(', '),
       },
@@ -207,3 +179,33 @@ function getRequestConfirmationToRequesterMailOptions(snapshot) {
     html: constants.REQUESTER_EMAIL_CONTENT,
   };
 }
+
+// FIREBASE CLOUD FUNCTIONS
+
+exports.volunteerPostProcess = functions.database
+  .ref('/volunteers/{volunteer}')
+  .onCreate((snapshot) => {
+    const volunteerMailOptions = getVolunteerConfirmationMailOptions(snapshot);
+    const volunteerAvochatoContactInfo = getAvochatoContactInfo(snapshot, 'Volunteer');
+    sendEmail(volunteerMailOptions);
+    if (isProductionEnvironment()) {
+      createAvochatoContact(volunteerAvochatoContactInfo);
+      createVolunteerMondayItem(snapshot);
+    }
+    return true;
+  });
+
+exports.requesterPostProcess = functions.database
+  .ref('/requesters/{request}')
+  .onCreate((snapshot) => {
+    const requesterMailOptions = getRequestConfirmationToRequesterMailOptions(snapshot);
+    const deliverEaseMailOptions = getRequestConfirmationToDeliverEaseMailOptions(snapshot);
+    const requestAvochatoContactInfo = getAvochatoContactInfo(snapshot, 'Requester');
+    sendEmail(requesterMailOptions);
+    sendEmail(deliverEaseMailOptions);
+    if (isProductionEnvironment()) {
+      createAvochatoContact(requestAvochatoContactInfo);
+      createRequesterMondayItem(snapshot);
+    }
+    return true;
+  });

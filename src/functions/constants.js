@@ -25,6 +25,17 @@ const VOLUNTEER_COLUMN_MAPPING = {
   phone: 'phone0',
 };
 
+const FULFILLMENT_STATUS = {
+  NEW: 'new',
+  SOURCING_VOLUNTEER: 'sourcing_volunteer',
+  PENDING_FULFILLMENT: 'pending_fullfilment',
+  FULFILLING: 'fulfilling',
+  COMPLETE: 'complete',
+};
+
+const GENERIC_ERROR_MESSAGE =
+  'Whoops! Something went wrong, sorry about that. If this problem continues, please call us at (415) 633-6261';
+
 const VOLUNTEER_EMAIL_CONTENT = `<p>Hello,</p>
 <p>Thank you so much for signing up to be a volunteer in your community, you rock! Just like your neighbors, we at DeliverEase are grateful to have you on the team. We&rsquo;ll reach out whenever there&rsquo;s a delivery request in your area.</p>
 <p>Before going out on any delivery, remember that the people asking for your assistance are most likely immunocompromised or elderly, so please take extra precautions:</p>
@@ -64,4 +75,6 @@ module.exports = {
   VOLUNTEER_GROUP_ID,
   REQUESTER_COLUMN_MAPPING,
   VOLUNTEER_COLUMN_MAPPING,
+  FULFILLMENT_STATUS,
+  GENERIC_ERROR_MESSAGE,
 };
