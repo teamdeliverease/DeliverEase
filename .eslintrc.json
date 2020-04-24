@@ -6,6 +6,10 @@
   "extends": ["airbnb", "airbnb/hooks", "prettier", "prettier/react"],
   "rules": {
     "no-console": "off",
+    "react/react-in-jsx-scope": "off",
     "no-param-reassign": "warn"
+  },
+  "globals": {
+    "React": "writable"
   }
 }
