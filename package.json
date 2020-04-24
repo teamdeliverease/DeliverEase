@@ -7,17 +7,17 @@
   "private": true,
   "main": "dist/server/index.js",
   "scripts": {
-    "start": "firebase emulators:start",
-    "setup": "yarn firebase use --add",
+    "start": "NODE_ENV=production firebase emulators:start --inspect-functions --only functions,hosting",
+    "setup": "firebase use --add",
     "build:client": "next build src/client",
     "build:server": "babel src/server --out-dir dist/server --source-maps",
-    "build": "yarn build:client && yarn build:server",
+    "build": "npm run build:client && npm run build:server",
     "watch:client": "next src/client",
     "watch:server": "babel src/server --out-dir dist/server --source-maps --watch",
-    "watch": "yarn watch:client & yarn watch:server",
-    "serve": "cross-env NODE_ENV=production yarn firebase serve --only functions,hosting",
-    "predeploy": "rimraf dist/ && yarn build",
-    "deploy": "yarn firebase deploy --only functions,hosting"
+    "watch": "npm run watch:client & npm run watch:server",
+    "serve": "cross-env NODE_ENV=production firebase serve --only functions,hosting",
+    "predeploy": "rimraf dist/ && npm run build",
+    "deploy": "npm run firebase deploy --only functions,hosting"
   },
   "engines": {
     "node": "10"
