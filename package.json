@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "We connect helpful volunteers with individuals who have a hard time accessing food and other essentials.",
   "repository": "https://github.com/shaibruhis/DeliverEase",
+  "license": "UNLICENSED",
+  "private": true,
   "main": "dist/server/index.js",
   "scripts": {
     "start": "firebase emulators:start",
