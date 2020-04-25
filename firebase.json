@@ -3,12 +3,12 @@
     "rules": "database.rules.json"
   },
   "hosting": {
-    "public": "src/public",
+    "public": "public",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
         "source": "**/**",
-        "function": "next"
+        "function": "nextjs-server"
       }
     ]
   },

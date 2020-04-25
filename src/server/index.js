@@ -20,8 +20,7 @@ const server = functions.https.onRequest((req, res) => {
   return app.prepare().then(() => handle(req, res));
 });
 
-const express = functions.https.onRequest(expressServer);
-
+const main = functions.https.onRequest(expressServer);
 const nextjs = { server };
 
-export { nextjs, express, dbTriggers };
+export { nextjs, main, dbTriggers };
