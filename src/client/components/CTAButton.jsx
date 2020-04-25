@@ -4,7 +4,7 @@ import Link from 'next/link';
 function CTAButton({ type, href, text }) {
   const btnClassType = type === 'primary' ? 'btn-primary' : 'btn-secondary';
   return (
-    <a className="btn {btnClassType} scrollto" href={href}>
+    <a className={'btn scrollto ' + btnClassType} href={href}>
       {text}
     </a>
   );
