@@ -1,9 +1,11 @@
 import App from '../components/App';
+import WelcomeSection from '../components/WelcomeSection';
 import InfoCard from '../components/InfoCard';
 
 export default () => (
   <App>
     <p>Index Page</p>
+    <WelcomeSection></WelcomeSection>
     <div>
       <InfoCard
         image="/assets/images/piggyBank.png"
