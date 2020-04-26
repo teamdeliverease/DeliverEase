@@ -6,7 +6,6 @@ const setSession = (user) => {
   // Log in.
   if (user) {
     return user.getIdToken().then((token) => {
-      console.log(token);
       return axios.post('/api/login', { token }, { credentials: 'same-origin' });
     });
   }
