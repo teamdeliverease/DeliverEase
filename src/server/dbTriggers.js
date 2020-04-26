@@ -1,4 +1,4 @@
-const fetch = require('node-fetch');
+const axios = require('axios');
 const functions = require('firebase-functions');
 const nodemailer = require('nodemailer');
 const mondaySDK = require('monday-sdk-js');
@@ -108,11 +108,8 @@ function sendEmail(mailOptions) {
 }
 
 function createAvochatoContact(contactInfo) {
-  fetch('https://www.avochato.com/v1/contacts', {
-    method: 'POST',
-    body: JSON.stringify(contactInfo),
-    headers: { 'Content-Type': 'application/json' },
-  })
+  axios
+    .post('https://www.avochato.com/v1/contacts', { contactInfo })
     .then((res) => res.json())
     .catch((err) => console.error(err));
 }
