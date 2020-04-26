@@ -5,7 +5,7 @@ import HowItWorksSection from '../components/IndexSections/HowItWorksSection';
 export default () => (
   <App>
     <p>Index Page</p>
-    <WelcomeSection></WelcomeSection>
-    <HowItWorksSection></HowItWorksSection>
+    <WelcomeSection />
+    <HowItWorksSection />
   </App>
 );

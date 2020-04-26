@@ -1,4 +1,4 @@
-function InfoCard({ image, title, text }) {
+const InfoCard = ({ image, title, text }) => {
   return (
     <div className="item col-12 col-md-6 col-lg-6">
       <div className="item-inner p-3 p-lg-4">
@@ -12,5 +12,6 @@ function InfoCard({ image, title, text }) {
       </div>
     </div>
   );
-}
+};
+
 export default InfoCard;
