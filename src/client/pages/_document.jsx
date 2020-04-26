@@ -21,6 +21,7 @@ class CustomDocument extends Document {
               __html: JSON.stringify(AuthUserInfo, null, 2),
             }}
           />
+          {/* bootstrap CSS import */}
           <link
             rel="stylesheet"
             href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
