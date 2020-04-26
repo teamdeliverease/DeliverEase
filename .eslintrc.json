@@ -11,5 +11,9 @@
   },
   "globals": {
     "React": "writable"
+  },
+  "env": {
+    "browser": true,
+    "node": true
   }
 }
