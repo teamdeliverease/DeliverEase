@@ -15,16 +15,12 @@ export default () => (
           </div>
 
           <div className="cta-holder">
-            <CTAButton text="Submit a Request" href="#submit-request" type="primary"></CTAButton>
-            <CTAButton text="Become a Volunteer" href="#volunteer" type="secondary"></CTAButton>
+            <CTAButton text="Submit a Request" href="#submit-request" type="primary" />
+            <CTAButton text="Become a Volunteer" href="#volunteer" type="secondary" />
           </div>
           <div className="mt-5">
             Can't volunteer but still want to help? Please spread the word by sharing our{' '}
-            <ThemedLink
-              text="flyer"
-              href="/assets/flyers/GeneralPromoFlyer_printerFriendly.pdf"
-            ></ThemedLink>
-            !
+            <ThemedLink text="flyer" href="assets/flyers/GeneralPromoFlyer_printerFriendly.pdf" />!
           </div>
         </div>
       </div>
