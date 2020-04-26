@@ -37,8 +37,7 @@
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.1",
     "react-dom": "^16.8.6",
-    "sass": "^1.26.5",
-    "yup": "^0.28.4"
+    "sass": "^1.26.5"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
