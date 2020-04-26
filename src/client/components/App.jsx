@@ -1,4 +1,3 @@
-import Button from 'react-bootstrap/Button';
 import Header from './Header';
 
 const App = ({ children }) => (
