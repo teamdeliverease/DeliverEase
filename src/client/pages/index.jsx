@@ -6,7 +6,6 @@ import SubmitRequestSection from '../components/IndexSections/SubmitRequestSecti
 
 export default () => (
   <App>
-    <p>Index Page</p>
     <WelcomeSection />
     <HowItWorksSection />
     <SubmitRequestSection />

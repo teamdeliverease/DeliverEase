@@ -1,15 +1,21 @@
 {
   "parserOptions": {
     // Required for certain syntax usages
-    "ecmaVersion": 2017
+    "ecmaVersion": 2018
   },
   "extends": ["airbnb", "airbnb/hooks", "prettier", "prettier/react"],
   "rules": {
     "no-console": "off",
     "react/react-in-jsx-scope": "off",
-    "no-param-reassign": "warn"
+    "no-param-reassign": "warn",
+    "react/jsx-props-no-spreading": "off",
+    "global-require": "off"
   },
   "globals": {
     "React": "writable"
+  },
+  "env": {
+    "browser": true,
+    "node": true
   }
 }
