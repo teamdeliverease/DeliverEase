@@ -3,7 +3,15 @@ import { Formik, Form } from 'formik';
 import TextInput from '../FormPrimitives/TextInput';
 // import PhoneInput from '../FormPrimitives/PhoneInput';
 // import AddressInput from '../FormPrimitives/AddressInput';
-import LanguageSelector from '../FormPrimitives/LanguageSelector';
+import SelectInput from '../FormPrimitives/SelectInput';
+
+const languageOptions = [
+  { value: 'enlish', label: 'English' },
+  { value: 'spanish', label: 'Spanish' },
+  { value: 'mandarin', label: 'Mandarin' },
+  { value: 'cantonese', label: 'Cantonese' },
+  { value: 'other', label: 'Other' },
+];
 
 const RequestForm = () => {
   return (
@@ -25,20 +33,26 @@ const RequestForm = () => {
       <div className="form-wrapper">
         <Form className="text-center flex-wrap px-lg-5">
           <div className="form-row">
-            <TextInput colWidth="6" maxlength="64" name="firstName" placeholder="First Name" />
-            <TextInput colWidth="6" maxlength="64" name="lastName" placeholder="Last Name" />
+            <TextInput colWidth="6" maxLength="64" name="firstName" placeholder="First Name" />
+            <TextInput colWidth="6" maxLength="64" name="lastName" placeholder="Last Name" />
           </div>
-          <TextInput maxlength="16" type="tel" name="phoneNumber" placeholder="Phone Number" />
+          <TextInput maxLength="16" type="tel" name="phoneNumber" placeholder="Phone Number" />
           {/* <AddressInput name="address" type="text" placeholder="Street Address" /> */}
-          {/* <TextInput name="email" type="email" placeholder="Email" /> */}
+          <TextInput
+            maxLength="256"
+            isRequired={false}
+            type="email"
+            name="email"
+            placeholder="Email"
+          />
+          <SelectInput name="language" options={languageOptions} placeholder="Languages Spoken" />
           <TextInput
             inputType="long"
-            maxlength="1024"
+            maxLength="1024"
             rows="4"
             name="shoppingList"
             placeholder="Enter shopping list here"
           />
-          <LanguageSelector />
           <button className="btn btn-primary btn-submit mx-auto" type="submit">
             Submit
           </button>

@@ -24,6 +24,9 @@ const TextInput = ({
   ...props
 }) => {
   props.type = props.type || 'text';
+  if (isRequired && props.placeholder) {
+    props.placeholder = props.placeholder + '*';
+  }
   const [field, meta] = useField(props);
 
   return (
