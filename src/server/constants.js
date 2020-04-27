@@ -25,14 +25,6 @@ const VOLUNTEER_COLUMN_MAPPING = {
   phone: 'phone0',
 };
 
-const FULFILLMENT_STATUS = {
-  NEW: 'new',
-  SOURCING_VOLUNTEER: 'sourcing_volunteer',
-  PENDING_FULFILLMENT: 'pending_fullfilment',
-  FULFILLING: 'fulfilling',
-  COMPLETE: 'complete',
-};
-
 const GENERIC_ERROR_MESSAGE =
   'Whoops! Something went wrong, sorry about that. If this problem continues, please call us at (415) 633-6261';
 
@@ -75,6 +67,5 @@ module.exports = {
   VOLUNTEER_GROUP_ID,
   REQUESTER_COLUMN_MAPPING,
   VOLUNTEER_COLUMN_MAPPING,
-  FULFILLMENT_STATUS,
   GENERIC_ERROR_MESSAGE,
 };
