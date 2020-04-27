@@ -1,7 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 
-const localConfig = {
+const config = {
   apiKey: process.env.FIREBASE_PUBLIC_API_KEY,
   authDomain: process.env.FIREBASE_AUTH_DOMAIN,
   databaseURL: process.env.FIREBASE_DATABASE_URL,
@@ -9,12 +9,8 @@ const localConfig = {
 };
 
 export default () => {
-  const dev = process.env.NODE_ENV !== 'production';
+  console.log(config);
   if (!firebase.apps.length) {
-    if (dev) {
-      firebase.initializeApp(localConfig);
-    } else {
-      firebase.initializeApp();
-    }
+    firebase.initializeApp(config);
   }
 };
