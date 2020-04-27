@@ -53,7 +53,7 @@ const submitFormPostRequest = async (ref, req, res, prepare) => {
   try {
     await prepareAndAddToFirebase(ref, data, prepare);
     console.log('sending');
-    res.status(200);
+    res.status(200).end();
   } catch (err) {
     res.status(500).send(err.message);
   }
