@@ -1,4 +1,7 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faInstagram, faFacebookF } from '@fortawesome/free-brands-svg-icons';
 import PrivacyModal from '../PrivacyModal';
+
 const AboutSection = () => {
   return (
     <section className="author-section section theme-bg-primary py-5">
@@ -24,12 +27,12 @@ const AboutSection = () => {
             <ul className="social-list list-unstyled">
               <li className="list-inline-item">
                 <a href="https://www.instagram.com/team.deliverease/">
-                  <i className="fab fa-instagram"></i>
+                  <FontAwesomeIcon icon={faInstagram} />
                 </a>
               </li>
               <li className="list-inline-item">
                 <a href="https://www.facebook.com/Team.DeliverEase">
-                  <i className="fab fa-facebook"></i>
+                  <FontAwesomeIcon icon={faFacebookF} />
                 </a>
               </li>
             </ul>
