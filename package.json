@@ -33,6 +33,7 @@
     "firebase": "^7.14.2",
     "firebase-admin": "^8.6.0",
     "firebase-functions": "^3.6.1",
+    "formik": "^2.1.4",
     "google-map-react": "^1.1.7",
     "joi-phone-number": "^4.1.0",
     "lodash": "^4.17.15",
@@ -44,8 +45,8 @@
     "react-bootstrap": "^1.0.1",
     "react-dom": "^16.8.6",
     "react-firebaseui": "^4.1.0",
-    "sass": "^1.26.5",
-    "swr": "^0.2.0"
+    "react-select": "^3.1.0",
+    "sass": "^1.26.5"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
