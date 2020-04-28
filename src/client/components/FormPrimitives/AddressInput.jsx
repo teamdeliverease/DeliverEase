@@ -14,7 +14,7 @@ const AddressInput = ({ label, isRequired = true, colWidth = '13', ...props }) =
         {label || props.placeholder || props.name}
       </label>
       <AddressSearch
-        updateFun={helpers.setValue}
+        onChangeInput={helpers.setValue}
         className="text-input form-control"
         {...field}
         {...props}

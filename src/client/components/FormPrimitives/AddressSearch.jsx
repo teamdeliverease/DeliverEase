@@ -40,21 +40,18 @@ class AddressSearch extends Component {
         query: address,
       });
 
-      this.props.updateFun !== undefined && this.props.updateFun(address);
+      this.props.onChangeInput !== undefined && this.props.onChangeInput(address);
     }
   };
 
   onChange = (event) => {
     const value = event.target.value;
     this.setState({ query: value });
-    this.props.updateFun !== undefined && this.props.updateFun(value);
+    this.props.onChangeInput !== undefined && this.props.onChangeInput(value);
   };
 
   render() {
-    let mutableProps = { ...this.props };
-    if (mutableProps.updateFun !== undefined) {
-      delete mutableProps.updateFun;
-    }
+    const { onChangeInput, ...elementProps } = this.props;
 
     return (
       <div>
@@ -70,7 +67,7 @@ class AddressSearch extends Component {
             margin: '0 auto',
             maxWidth: 800,
           }}
-          {...mutableProps}
+          {...elementProps}
         />
       </div>
     );
