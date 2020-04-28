@@ -1,4 +1,5 @@
 import React from 'react';
+import App from '../components/App';
 import FirebaseAuth from '../components/FirebaseAuth';
 
 const authStyle = {
@@ -6,12 +7,14 @@ const authStyle = {
   paddingTop: '4rem',
 };
 
-const Auth = () => {
+const LoginPage = () => {
   return (
-    <div style={authStyle}>
-      <FirebaseAuth />
-    </div>
+    <App>
+      <div style={authStyle}>
+        <FirebaseAuth />
+      </div>
+    </App>
   );
 };
 
-export default Auth;
+export default LoginPage;
