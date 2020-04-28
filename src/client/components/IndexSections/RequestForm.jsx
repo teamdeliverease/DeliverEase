@@ -2,7 +2,8 @@ import { Formik, Form } from 'formik';
 
 import TextInput from '../FormPrimitives/TextInput';
 // import PhoneInput from '../FormPrimitives/PhoneInput';
-// import AddressInput from '../FormPrimitives/AddressInput';
+import AddressInput from '../FormPrimitives/AddressInput';
+import AddressSearch from '../FormPrimitives/AddressSearch';
 import SelectInput from '../FormPrimitives/SelectInput';
 
 const languageOptions = [
@@ -37,7 +38,7 @@ const RequestForm = () => {
             <TextInput colWidth="6" maxLength="64" name="lastName" placeholder="Last Name" />
           </div>
           <TextInput maxLength="16" type="tel" name="phoneNumber" placeholder="Phone Number" />
-          {/* <AddressInput name="address" type="text" placeholder="Street Address" /> */}
+          <AddressInput name="address" placeholder="Street Address" />
           <TextInput
             maxLength="256"
             isRequired={false}

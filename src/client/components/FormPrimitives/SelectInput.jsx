@@ -9,7 +9,7 @@ const SelectInput = ({ label, isRequired = true, colWidth = '13', ...props }) =>
   const [field, meta, helpers] = useField(props);
 
   if (isRequired && props.placeholder) {
-    props.placeholder = props.placeholder + '*';
+    props.placeholder += '*';
   }
 
   return (
