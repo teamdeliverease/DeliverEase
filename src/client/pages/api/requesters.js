@@ -6,6 +6,7 @@ import {
 } from '../../utils/routeHelpers';
 import validationMiddleware from '../../utils/middleware/validationMiddleware';
 import { requester as requesterSchema } from '../../utils/schemas';
+import { REQUESTERS_REF } from '../../constants';
 
 export const config = {
   api: {
@@ -18,7 +19,7 @@ const handler = (req, res) => {
     return res.status(400);
   }
 
-  return submitFormPostRequest('requesters', req, res, (geocodeResult, data) => {
+  return submitFormPostRequest(REQUESTERS_REF, req, res, (geocodeResult, data) => {
     addLocationPayload(geocodeResult, data);
     addFulfillmentStatusPayload(data);
     addNamePayload(data);

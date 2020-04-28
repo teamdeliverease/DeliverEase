@@ -5,6 +5,7 @@ import {
 } from '../../utils/routeHelpers';
 import validationMiddleware from '../../utils/middleware/validationMiddleware';
 import { volunteer as volunteerSchema } from '../../utils/schemas';
+import { VOLUNTEERS_REF } from '../../constants';
 
 export const config = {
   api: {
@@ -17,7 +18,7 @@ const handler = (req, res) => {
     return res.status(400);
   }
 
-  return submitFormPostRequest('volunteers', req, res, (geocodeResult, data) => {
+  return submitFormPostRequest(VOLUNTEERS_REF, req, res, (geocodeResult, data) => {
     addLocationPayload(geocodeResult, data);
     addNamePayload(data);
   });
