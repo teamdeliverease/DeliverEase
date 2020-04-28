@@ -52,7 +52,6 @@ const submitFormPostRequest = async (ref, req, res, prepare) => {
   const data = req.body;
   try {
     await prepareAndAddToFirebase(ref, data, prepare);
-    console.log('sending');
     res.status(200).end();
   } catch (err) {
     res.status(500).send(err.message);
@@ -76,4 +75,10 @@ const addNamePayload = (data) => {
   return Object.assign(data, { name: fullName });
 };
 
-export { submitFormPostRequest, addLocationPayload, addFulfillmentStatusPayload, addNamePayload };
+export {
+  submitFormPostRequest,
+  addLocationPayload,
+  addFulfillmentStatusPayload,
+  addNamePayload,
+  prepareAndAddToFirebase,
+};

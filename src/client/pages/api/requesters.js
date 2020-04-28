@@ -2,9 +2,10 @@ import {
   submitFormPostRequest,
   addLocationPayload,
   addNamePayload,
+  addFulfillmentStatusPayload,
 } from '../../utils/routeHelpers';
 import validationMiddleware from '../../utils/middleware/validationMiddleware';
-import { volunteer as volunteerSchema } from '../../utils/schemas';
+import { requester as requesterSchema } from '../../utils/schemas';
 
 export const config = {
   api: {
@@ -17,10 +18,11 @@ const handler = (req, res) => {
     return res.status(400);
   }
 
-  return submitFormPostRequest('volunteers', req, res, (geocodeResult, data) => {
+  return submitFormPostRequest('requesters', req, res, (geocodeResult, data) => {
     addLocationPayload(geocodeResult, data);
+    addFulfillmentStatusPayload(data);
     addNamePayload(data);
   });
 };
 
-export default validationMiddleware(handler, volunteerSchema);
+export default validationMiddleware(handler, requesterSchema);
