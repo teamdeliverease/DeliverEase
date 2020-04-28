@@ -75,10 +75,25 @@ const addNamePayload = (data) => {
   return Object.assign(data, { name: fullName });
 };
 
+const getFromFirebase = (ref, res) => {
+  try {
+    admin
+      .database()
+      .ref(ref)
+      .once('value', (snapshot) => {
+        res.status(200).json(snapshot.val());
+      });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send(err);
+  }
+};
+
 export {
   submitFormPostRequest,
   addLocationPayload,
   addFulfillmentStatusPayload,
   addNamePayload,
   prepareAndAddToFirebase,
+  getFromFirebase,
 };
