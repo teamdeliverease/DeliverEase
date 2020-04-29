@@ -13,7 +13,7 @@ const languageOptions = [
   { value: 'other', label: 'Other' },
 ];
 
-const RequestForm = () => {
+const RequestForm = ({ onSubmit }) => {
   return (
     <Formik
       initialValues={{
@@ -28,6 +28,7 @@ const RequestForm = () => {
       onSubmit={(values, { setSubmitting }) => {
         console.log(JSON.stringify(values, null, 2));
         setSubmitting(false);
+        onSubmit();
       }}
     >
       <div className="form-wrapper">
