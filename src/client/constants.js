@@ -11,6 +11,7 @@ export const GENERIC_ERROR_MESSAGE =
 
 export const REQUESTERS_REF = 'requesters';
 export const VOLUNTEERS_REF = 'volunteers';
+export const MAPS_API_KEY = 'AIzaSyBnw4vCWKTZgb-OMJPJ15ptB4dEa5zxQnQ';
 
 export const REQUESTER_SHARE_CONTENT = {
   text:
@@ -28,3 +29,4 @@ export const REQUESTER_SHARE_MESSAGE =
 
 export const VOLUNTEER_SHARE_MESSAGE =
   'Thanks for signing up to volunteer! We’ll reach out when a neighbor needs help.';
+
