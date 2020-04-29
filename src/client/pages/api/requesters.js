@@ -14,11 +14,12 @@ export const config = {
   },
 };
 
-const handler = (req, res) => {
+const handler = async (req, res) => {
   if (!req.body) {
     return res.status(400);
   }
 
+  await validationMiddleware(req, res, requesterSchema);
   return submitFormPostRequest(REQUESTERS_REF, req, res, (geocodeResult, data) => {
     addLocationPayload(geocodeResult, data);
     addFulfillmentStatusPayload(data);
@@ -26,4 +27,4 @@ const handler = (req, res) => {
   });
 };
 
-export default validationMiddleware(handler, requesterSchema);
+export default handler;
