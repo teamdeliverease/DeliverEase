@@ -4,4 +4,7 @@ import cookieSessionRefresh from './cookieSessionRefresh';
 // Load environment variables.
 require('../../../../env');
 
-export default (handler) => cookieSession(cookieSessionRefresh(handler));
+export default (req, res) => {
+  cookieSessionRefresh(req);
+  cookieSession(res, req);
+};
