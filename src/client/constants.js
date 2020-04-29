@@ -29,4 +29,3 @@ export const REQUESTER_SHARE_MESSAGE =
 
 export const VOLUNTEER_SHARE_MESSAGE =
   'Thanks for signing up to volunteer! We’ll reach out when a neighbor needs help.';
-

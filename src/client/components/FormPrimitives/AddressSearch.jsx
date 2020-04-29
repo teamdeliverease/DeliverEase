@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Head from 'next/head';
-import MAPS_API_KEY from '../../constants';
+import { MAPS_API_KEY } from '../../constants';
 
 class AddressSearch extends Component {
   // Define Constructor
