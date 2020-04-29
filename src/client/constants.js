@@ -11,3 +11,20 @@ export const GENERIC_ERROR_MESSAGE =
 
 export const REQUESTERS_REF = 'requesters';
 export const VOLUNTEERS_REF = 'volunteers';
+
+export const REQUESTER_SHARE_CONTENT = {
+  text:
+    'One less thing to worry about this week knowing local volunteers will deliver my groceries for free. Thank you DeliverEase!',
+  url: '/assets/flyers/IReceivedADelivery.pdf',
+};
+
+export const VOLUNTEER_SHARE_CONTENT = {
+  text: 'Going the social distance for my neighborhood with DeliverEase! You can too!',
+  url: '/assets/flyers/IVolunteered.pdf',
+};
+
+export const REQUESTER_SHARE_MESSAGE =
+  'Thanks for submitting your request! Our team will reach out when a volunteer in your neighborhood can deliver your items.';
+
+export const VOLUNTEER_SHARE_MESSAGE =
+  'Thanks for signing up to volunteer! We’ll reach out when a neighbor needs help.';
