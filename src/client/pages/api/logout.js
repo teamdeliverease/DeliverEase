@@ -1,5 +1,11 @@
 import commonMiddleware from '../../utils/middleware/commonMiddleware';
 
+export const config = {
+  api: {
+    bodyParser: process.env.NODE_ENV !== 'production',
+  },
+};
+
 const handler = (req, res) => {
   // Destroy the session.
   // https://github.com/expressjs/cookie-session#destroying-a-session

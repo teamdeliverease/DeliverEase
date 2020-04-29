@@ -1,6 +1,12 @@
 import commonMiddleware from '../../utils/middleware/commonMiddleware';
 import verifyIdToken from '../../utils/auth/firebaseAdmin';
 
+export const config = {
+  api: {
+    bodyParser: process.env.NODE_ENV !== 'production',
+  },
+};
+
 const handler = (req, res) => {
   if (!req.body) {
     return res.status(400);
