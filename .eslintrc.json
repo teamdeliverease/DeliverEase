@@ -9,7 +9,8 @@
     "react/react-in-jsx-scope": "off",
     "no-param-reassign": "warn",
     "react/jsx-props-no-spreading": "off",
-    "global-require": "off"
+    "global-require": "off",
+    "no-alert": "off"
   },
   "globals": {
     "React": "writable"
