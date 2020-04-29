@@ -20,7 +20,9 @@ const WelcomeSection = () => {
             </div>
             <div className="mt-5">
               Can&apos;t volunteer but still want to help? Please spread the word by sharing our{' '}
-              <ThemedLink text="flyer" href="assets/flyers/GeneralPromoFlyer_printerFriendly.pdf" />
+              <ThemedLink href="assets/flyers/GeneralPromoFlyer_printerFriendly.pdf">
+                flyer
+              </ThemedLink>
               !
             </div>
           </div>
