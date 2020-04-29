@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Head from 'next/head';
+import MAPS_API_KEY from '../../constants';
 
 class AddressSearch extends Component {
   // Define Constructor
@@ -35,7 +36,6 @@ class AddressSearch extends Component {
     const address = addressObject.formatted_address;
 
     if (address) {
-      console.log('inside, ', address);
       this.setState({
         query: address,
       });
@@ -56,7 +56,9 @@ class AddressSearch extends Component {
     return (
       <div>
         <Head>
-          <script src="https://maps.google.com/maps/api/js?key=AIzaSyBnw4vCWKTZgb-OMJPJ15ptB4dEa5zxQnQ&libraries=places"></script>
+          <script
+            src={`https://maps.google.com/maps/api/js?key=${MAPS_API_KEY}&libraries=places`}
+          ></script>
         </Head>
         <input
           required

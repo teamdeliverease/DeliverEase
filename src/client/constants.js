@@ -11,3 +11,4 @@ export const GENERIC_ERROR_MESSAGE =
 
 export const REQUESTERS_REF = 'requesters';
 export const VOLUNTEERS_REF = 'volunteers';
+export const MAPS_API_KEY = 'AIzaSyBnw4vCWKTZgb-OMJPJ15ptB4dEa5zxQnQ';
