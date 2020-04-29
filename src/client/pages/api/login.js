@@ -12,7 +12,7 @@ const handler = async (req, res) => {
     return res.status(400);
   }
 
-  commonMiddleware(req, res);
+  await commonMiddleware(req, res);
 
   const { token } = req.body;
 

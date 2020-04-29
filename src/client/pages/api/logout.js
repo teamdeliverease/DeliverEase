@@ -6,8 +6,8 @@ export const config = {
   },
 };
 
-const handler = (req, res) => {
-  commonMiddleware(req, res);
+const handler = async (req, res) => {
+  await commonMiddleware(req, res);
   // Destroy the session.
   // https://github.com/expressjs/cookie-session#destroying-a-session
   req.session = null;
