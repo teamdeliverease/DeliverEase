@@ -16,7 +16,8 @@
     "watch:server": "babel src/server --out-dir dist/server --source-maps --watch",
     "watch": "npm run watch:client & npm run watch:server",
     "predeploy": "rimraf dist/ && npm run build",
-    "deploy": "NODE_ENV=production firebase deploy --only functions,hosting"
+    "deploy": "NODE_ENV=production firebase deploy --only functions,hosting",
+    "test": "firebase emulators:exec --only database 'mocha --timeout=10000'"
   },
   "engines": {
     "node": "10"
@@ -56,6 +57,7 @@
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.5",
+    "@firebase/testing": "^0.19.2",
     "cpx": "^1.5.0",
     "cross-env": "^5.2.0",
     "eslint": "^6.8.0",
@@ -70,6 +72,7 @@
     "firebase-tools": "^7.2.1",
     "husky": "^4.2.3",
     "lint-staged": "^10.0.10",
+    "mocha": "^7.1.2",
     "prettier": "^2.0.2",
     "rimraf": "^2.6.3"
   },

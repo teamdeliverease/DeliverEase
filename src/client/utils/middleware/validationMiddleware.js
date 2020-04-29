@@ -6,7 +6,8 @@ export default (req, res, schema) => {
   try {
     return Joi.assert(req.body, schema);
   } catch (err) {
-    console.error(err);
-    return res.status(500).send(GENERIC_ERROR_MESSAGE);
+    console.error(new Error(err.message));
+    res.status(500);
+    throw new Error(GENERIC_ERROR_MESSAGE);
   }
 };

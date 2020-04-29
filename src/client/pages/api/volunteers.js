@@ -1,3 +1,4 @@
+import * as firebase from 'firebase';
 import {
   submitFormPostRequest,
   addLocationPayload,
@@ -6,7 +7,6 @@ import {
 } from '../../utils/routeHelpers';
 import validationMiddleware from '../../utils/middleware/validationMiddleware';
 import { volunteer as volunteerSchema } from '../../utils/schemas';
-import commonMiddleware from '../../utils/middleware/commonMiddleware';
 import { VOLUNTEERS_REF } from '../../constants';
 
 export const config = {
@@ -25,17 +25,31 @@ const post = async (req, res) => {
       addLocationPayload(geocodeResult, data);
       addNamePayload(data);
     });
-  } catch (e) {
-    return e;
+  } catch (err) {
+    return res.send({ error: err.message });
   }
 };
 
 const get = async (req, res) => {
   try {
-    await commonMiddleware(req, res);
-    return getFromFirebase(VOLUNTEERS_REF, res);
-  } catch (e) {
-    return e;
+    firebase
+      .database()
+      .ref('volunteers')
+      .once(
+        'value',
+        (snapshot) => {
+          console.log(snapshot.val());
+          res.status(200).json(snapshot.val());
+        },
+        (err) => {
+          console.error(err);
+          res.status(500).send('fuck');
+        },
+      );
+    // const data = await getFromFirebase(VOLUNTEERS_REF, res);
+    // return res.json(data);
+  } catch (err) {
+    return res.send({ error: err.message });
   }
 };
 

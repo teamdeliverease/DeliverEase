@@ -1,9 +1,11 @@
+import * as firebase from 'firebase';
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 import next from 'next';
 import dbTriggers from './dbTriggers';
 
 admin.initializeApp();
+firebase.initializeApp(JSON.parse(process.env.FIREBASE_CONFIG));
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({

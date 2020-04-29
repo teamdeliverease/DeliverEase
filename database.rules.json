@@ -1,6 +1,6 @@
 {
   "rules": {
-    ".read": false,
+    ".read": "auth.uid == '5ZsnS3HzTAdini5YXbDKN4pNGmt2'",
     "volunteers": {
       "$uid": {
         ".validate": "newData.hasChildren(['address', 'lat', 'lng', 'name', 'phone', 'email', 'timestamp'])",

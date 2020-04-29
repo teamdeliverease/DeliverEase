@@ -19,6 +19,7 @@ const verifyIdToken = (token) => {
     .auth()
     .verifyIdToken(token)
     .catch((error) => {
+      console.log('firebaeAdmind error');
       throw error;
     });
 };

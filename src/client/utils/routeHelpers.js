@@ -1,4 +1,5 @@
 import * as admin from 'firebase-admin';
+import * as firebase from 'firebase';
 import * as functions from 'firebase-functions';
 import { Client } from '@googlemaps/google-maps-services-js';
 import { GENERIC_ERROR_MESSAGE, FULFILLMENT_STATUS } from '../constants';
@@ -54,7 +55,7 @@ const submitFormPostRequest = async (ref, req, res, prepare) => {
     await prepareAndAddToFirebase(ref, data, prepare);
     res.status(200).end();
   } catch (err) {
-    res.status(500).send(err.message);
+    res.status(500);
   }
 };
 
@@ -76,17 +77,22 @@ const addNamePayload = (data) => {
 };
 
 const getFromFirebase = (ref, res) => {
-  try {
-    admin
-      .database()
-      .ref(ref)
-      .once('value', (snapshot) => {
-        res.status(200).json(snapshot.val());
-      });
-  } catch (err) {
-    console.error(err);
-    res.status(500).send(err);
-  }
+  firebase
+    .database()
+    .ref(ref)
+    .once(
+      'value',
+      (snapshot) => {
+        console.log(snapshot.val());
+        res.status(200);
+        return snapshot.val();
+      },
+      (err) => {
+        console.error(err);
+        res.status(500);
+        throw new Error(GENERIC_ERROR_MESSAGE);
+      },
+    );
 };
 
 export {
