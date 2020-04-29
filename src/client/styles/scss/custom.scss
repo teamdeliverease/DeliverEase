@@ -115,3 +115,16 @@ a[href^='tel'] {
 .text-orange {
   color: #e55712;
 }
+
+.PhoneInputInput {
+  border: none;
+}
+
+.PhoneInputCountryIcon--border {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.PhoneInputCountryIcon {
+  height: 100%;
+}

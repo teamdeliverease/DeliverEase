@@ -37,7 +37,7 @@ const RequestForm = ({ onSubmit }) => {
             <TextInput colWidth="6" maxLength="64" name="firstName" placeholder="First Name" />
             <TextInput colWidth="6" maxLength="64" name="lastName" placeholder="Last Name" />
           </div>
-          <PhoneNumberInput maxLength="16" name="phoneNumber" placeholder="Phone Number" />
+          <PhoneNumberInput maxLength="16" name="phoneNumber" placeholder=" Phone Number" />
           <AddressInput name="address" placeholder="Street Address" />
           <TextInput
             maxLength="256"
