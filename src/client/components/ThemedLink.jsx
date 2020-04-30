@@ -22,17 +22,6 @@ const ThemedLink = ({ children, color = 'theme', bold = true, ...props }) => {
       {children}
     </a>
   );
-  // href === undefined ? (
-  //   <div className={`${elementClass}`} {...props}>
-  //     {children}
-  //   </div>
-  // ) : (
-  //   <a className={`${elementClass}`} {...props}>
-  //     {children}
-  //   </a>
-  // )
-  // }
-  // )
 };
 
 export default ThemedLink;
