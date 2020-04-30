@@ -28,7 +28,7 @@ const SelectInput = ({ label, isRequired = true, colWidth = '13', ...props }) =>
         className="basic-multi-select"
         classNamePrefix="select"
         onChange={(selectedOptions) =>
-          helpers.setValue((selectedOptions || []).map((option) => option.value).join(','))
+          helpers.setValue((selectedOptions || []).map((option) => option.value))
         }
       />
       {isRequired && (
