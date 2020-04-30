@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import GoogleMapReact from 'google-map-react';
 import PropTypes from 'prop-types';
-import MAPS_API_KEY from '../constants';
+import { MAPS_API_KEY } from '../constants';
 
 const options = {
   styles: [

@@ -19,22 +19,13 @@ const PhoneNumberInput = ({
         {label || props.placeholder || props.name}
       </label>
 
-      {isRequired ? (
-        <PhoneInput
-          required
-          className="form-control"
-          defaultCountry="US"
-          placeholder={props.placeholder}
-          onChange={(phone) => helpers.setValue(phone)}
-        />
-      ) : (
-        <PhoneInput
-          className="form-control"
-          defaultCountry="US"
-          placeholder={props.placeholder}
-          onChange={(phone) => helpers.setValue(phone)}
-        />
-      )}
+      <PhoneInput
+        required={isRequired}
+        className="form-control"
+        defaultCountry="US"
+        placeholder={props.placeholder}
+        onChange={(phone) => helpers.setValue(phone)}
+      />
 
       {meta.touched && meta.error ? <div className="error">{meta.error}</div> : null}
     </div>
