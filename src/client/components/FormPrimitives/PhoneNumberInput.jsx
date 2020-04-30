@@ -1,5 +1,5 @@
 import { useField } from 'formik';
-import PhoneInput from 'react-phone-input-2';
+import PhoneInput from 'react-phone-number-input';
 
 const PhoneNumberInput = ({
   label,
@@ -8,7 +8,6 @@ const PhoneNumberInput = ({
   inputType = 'short',
   ...props
 }) => {
-  props.type = props.type || 'text';
   if (isRequired && props.placeholder) {
     props.placeholder += '*';
   }
@@ -21,11 +20,10 @@ const PhoneNumberInput = ({
       </label>
 
       <PhoneInput
-        inputExtraProps={{
-          required: true,
-        }}
-        country={'us'}
-        // value={this.state.phone}
+        required={isRequired}
+        className="form-control"
+        defaultCountry="US"
+        placeholder={props.placeholder}
         onChange={(phone) => helpers.setValue(phone)}
       />
 
