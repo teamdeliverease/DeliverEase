@@ -29,10 +29,11 @@ export const addSession = (req, res) => {
   includeSession(req, res, () => {});
 };
 
-export default (req, res) => {
+export default (handler) => (req, res) => {
   try {
-    return addSession(req, res);
+    addSession(req, res);
   } catch (e) {
     return res.status(500).json({ error: 'Could not get user session.' });
   }
+  return handler(req, res);
 };
