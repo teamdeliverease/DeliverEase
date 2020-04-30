@@ -58,6 +58,23 @@ const SubmitRequestSection = () => {
                       will drop off your items directly to your front door.
                     </div>
                     <RequestForm onSubmit={handleSubmit} submitDisabled={submitting} />
+                    <div className="text-left small mt-4">
+                      By clicking &quot;Submit Request&quot;, you consent to recieving text messages
+                      and phone calls from the DeliverEase team and its volunteers. Standard
+                      messaging and data rates apply.
+                    </div>
+                    <br />
+                    <div className="text-left">
+                      <i>
+                        You will be expected to pay for the items you ordered upon receipt of the
+                        delivery and coordinate with your volunteer on the methods of payment. If
+                        you have an online money transfer account (Paypal, Venmo, etc) please be
+                        prepared to share this information with your volunteer. If you can, try
+                        calling the store ahead and paying for your groceries over the phone. If you
+                        only have cash to pay for your groceries, please be prepared with exact
+                        change and put your cash in an envelope for your volunteer.
+                      </i>
+                    </div>
                   </>
                 )}
               </div>
