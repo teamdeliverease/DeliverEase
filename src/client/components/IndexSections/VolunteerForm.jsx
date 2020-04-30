@@ -44,6 +44,7 @@ const VolunteerForm = ({ onSubmit, submitDisabled }) => {
           <AddressInput name="address" placeholder="Street Address" />
           <TextInput maxLength="256" type="email" name="email" placeholder="Email" />
           <SelectInput name="language" options={languageOptions} placeholder="Languages Spoken" />
+          <RadioInput>
           <CheckBoxInput name="termsOfUse">
             <>
               I agree and certify to the{' '}

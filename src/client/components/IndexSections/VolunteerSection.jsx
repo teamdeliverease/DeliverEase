@@ -17,7 +17,7 @@ const VolunteerSection = () => {
     try {
       // disable submit button while waiting on api call
       setSubmitting(true);
-      const response = await axios.post('/api/requesters', {
+      const response = await axios.post('/api/volunteers', {
         ...formData,
         phone: '+19162061598',
         termsAgreement: true,
@@ -64,7 +64,7 @@ const VolunteerSection = () => {
                       apply.
                     </div>
                     <br />
-                    <div class="text-left ">
+                    <div className="text-left ">
                       Reminders to volunteers:
                       <ul>
                         <li>
