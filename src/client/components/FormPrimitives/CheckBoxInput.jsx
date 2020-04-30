@@ -14,11 +14,7 @@ const CheckBoxInput = ({ label, isRequired = true, ...props }) => {
       </label>
 
       <div className="form-check mb-3 full-width">
-        {isRequired ? (
-          <input required type="checkbox" className="form-check-input" />
-        ) : (
-          <input type="checkbox" className="form-check-input" />
-        )}
+        <input required={isRequired} type="checkbox" className="form-check-input" />
 
         <label className="form-check-label" htmlFor="requester-terms">
           {props.children}
