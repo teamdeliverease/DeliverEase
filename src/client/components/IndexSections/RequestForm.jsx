@@ -9,29 +9,29 @@ import Modal from '../Modal';
 import RequestTermsOfUse from '../FormPrimitives/RequestTermsOfUse';
 
 const languageOptions = [
-  { value: 'enlish', label: 'English' },
-  { value: 'spanish', label: 'Spanish' },
-  { value: 'mandarin', label: 'Mandarin' },
-  { value: 'cantonese', label: 'Cantonese' },
-  { value: 'other', label: 'Other' },
+  { value: 'English', label: 'English' },
+  { value: 'Spanish', label: 'Spanish' },
+  { value: 'Mandarin', label: 'Mandarin' },
+  { value: 'Cantonese', label: 'Cantonese' },
+  { value: 'Other', label: 'Other' },
 ];
 
-const RequestForm = ({ onSubmit }) => {
+const RequestForm = ({ onSubmit, submitDisabled }) => {
   return (
     <Formik
       initialValues={{
         firstName: '',
         lastName: '',
-        phoneNumber: '',
+        phone: '',
         address: '',
         email: '',
-        shoppingList: '',
+        list: '',
         language: '',
       }}
       onSubmit={(values, { setSubmitting }) => {
         console.log(JSON.stringify(values, null, 2));
         setSubmitting(false);
-        onSubmit();
+        onSubmit(values);
       }}
     >
       <div className="form-wrapper">
@@ -40,7 +40,7 @@ const RequestForm = ({ onSubmit }) => {
             <TextInput colWidth="6" maxLength="64" name="firstName" placeholder="First Name" />
             <TextInput colWidth="6" maxLength="64" name="lastName" placeholder="Last Name" />
           </div>
-          <PhoneNumberInput name="phoneNumber" placeholder=" Phone Number" />
+          <PhoneNumberInput name="phone" placeholder="Phone Number" />
           <AddressInput name="address" placeholder="Street Address" />
           <TextInput
             maxLength="256"
@@ -54,7 +54,7 @@ const RequestForm = ({ onSubmit }) => {
             inputType="long"
             maxLength="1024"
             rows="4"
-            name="shoppingList"
+            name="list"
             placeholder="Enter shopping list here"
           />
           <CheckBoxInput name="termsOfUse">
@@ -69,7 +69,11 @@ const RequestForm = ({ onSubmit }) => {
               </Modal>
             </>
           </CheckBoxInput>
-          <button className="btn btn-primary btn-submit mx-auto" type="submit">
+          <button
+            disabled={submitDisabled}
+            className="btn btn-primary btn-submit mx-auto"
+            type="submit"
+          >
             Submit Request
           </button>
         </Form>

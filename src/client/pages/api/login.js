@@ -7,12 +7,10 @@ export const config = {
   },
 };
 
-const handler = async (req, res) => {
+const handler = (req, res) => {
   if (!req.body) {
     return res.status(400);
   }
-
-  await commonMiddleware(req, res);
 
   const { token } = req.body;
 
@@ -42,4 +40,4 @@ const handler = async (req, res) => {
     });
 };
 
-export default handler;
+export default commonMiddleware(handler);
