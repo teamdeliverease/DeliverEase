@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faFacebookF } from '@fortawesome/free-brands-svg-icons';
-import PrivacyModal from '../PrivacyModal';
+import Modal from '../Modal';
+import ThemedLink from '../ThemedLink';
 
 const AboutSection = () => {
   return (
@@ -38,30 +39,31 @@ const AboutSection = () => {
             </ul>
             <p>
               (415) 633-6261&nbsp;&nbsp;|&nbsp;&nbsp;
-              <a
-                className="text-white"
+              <ThemedLink
+                color="white"
+                bold={false}
                 href="mailto:teamdeliverease@gmail.com?Subject=Website%20Inquiry"
               >
                 teamdeliverease@gmail.com
-              </a>
+              </ThemedLink>
             </p>
           </div>
           <div className="text-center pt-4">
-            <PrivacyModal
-              button=" Privacy Statement "
-              title="Privacy Statement"
-              body="Your privacy is incredibly important to us. We store your address and contact
+            <Modal button=" Privacy Statement " linkText="Privacy Statement" linkColor="white" bold>
+              Your privacy is incredibly important to us. We store your address and contact
               information only to more accurately match you with a volunteer in your given area. The
               only point at which contact information is shared is upon a volunteer’s agreement to
-              fulfill a delivery. At that point, the requester’s name, phone number, and address will
-              be shared for the volunteer to better communicate about the request and know where to
-              deliver it. You can reach out to us at teamdeliverease@gmail.com if you have any
-              questions about how we share your information with volunteers or if you would like your
-              information removed from our database."
-            />
-            {/* <a href className="text-white" data-toggle="modal" data-target="#privacyModal">
-              Privacy Statement
-            </a> */}
+              fulfill a delivery. At that point, the requester’s name, phone number, and address
+              will be shared for the volunteer to better communicate about the request and know
+              where to deliver it. You can reach out to us at{' '}
+              <ThemedLink>
+                <a href="mailto:teamdeliverease@gmail.com?Subject=Website%20Inquiry">
+                  teamdeliverease@gmail.com
+                </a>{' '}
+              </ThemedLink>
+              if you have any questions about how we share your information with volunteers or if
+              you would like your information removed from our database.
+            </Modal>
           </div>
         </div>
       </div>

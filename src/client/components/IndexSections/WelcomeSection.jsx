@@ -15,12 +15,24 @@ const WelcomeSection = () => {
               groceries and other essentials.
             </div>
             <div className="cta-holder">
-              <CTAButton text="Submit a Request" href="#submit-request" type="primary" />
-              <CTAButton text="Become a Volunteer" href="#volunteer" type="secondary" />
+              <CTAButton
+                text="Submit a Request"
+                href="#submit-request"
+                type="primary"
+                classes="mr-lg-2 mb-2"
+              />
+              <CTAButton
+                text="Become a Volunteer"
+                href="#volunteer"
+                type="secondary"
+                classes="mb-2"
+              />
             </div>
             <div className="mt-5">
               Can&apos;t volunteer but still want to help? Please spread the word by sharing our{' '}
-              <ThemedLink text="flyer" href="assets/flyers/GeneralPromoFlyer_printerFriendly.pdf" />
+              <ThemedLink href="assets/flyers/GeneralPromoFlyer_printerFriendly.pdf">
+                flyer
+              </ThemedLink>
               !
             </div>
           </div>

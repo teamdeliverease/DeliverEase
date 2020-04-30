@@ -4,6 +4,9 @@ import TextInput from '../FormPrimitives/TextInput';
 import PhoneNumberInput from '../FormPrimitives/PhoneNumberInput';
 import AddressInput from '../FormPrimitives/AddressInput';
 import SelectInput from '../FormPrimitives/SelectInput';
+import CheckBoxInput from '../FormPrimitives/CheckBoxInput';
+import Modal from '../Modal';
+import RequestTermsOfUse from '../FormPrimitives/RequestTermsOfUse';
 
 const languageOptions = [
   { value: 'English', label: 'English' },
@@ -54,12 +57,24 @@ const RequestForm = ({ onSubmit, submitDisabled }) => {
             name="list"
             placeholder="Enter shopping list here"
           />
+          <CheckBoxInput name="termsOfUse">
+            <>
+              I agree to the{' '}
+              <Modal
+                title="Requester Terms and Conditions"
+                linkText="Terms of Use"
+                linkColor="blue"
+              >
+                <RequestTermsOfUse />
+              </Modal>
+            </>
+          </CheckBoxInput>
           <button
             disabled={submitDisabled}
             className="btn btn-primary btn-submit mx-auto"
             type="submit"
           >
-            Submit
+            Submit Request
           </button>
         </Form>
       </div>
