@@ -25,12 +25,3 @@ const CheckBoxInput = ({ label, isRequired = true, ...props }) => {
 };
 
 export default CheckBoxInput;
-
-{
-  /* <label class="form-check-label" for="requester-terms">
-          I agree to the
-          <a href data-toggle="modal" data-target="#requesterModal" class="terms-link">
-            Terms of Use
-          </a>
-        </label> */
-}
