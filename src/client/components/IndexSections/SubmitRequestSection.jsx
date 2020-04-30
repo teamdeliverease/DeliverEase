@@ -7,7 +7,7 @@ import {
 } from '../../constants';
 
 const SubmitRequestSection = () => {
-  const [submitted, setSubmitted] = useState(true);
+  const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = () => {
     // make api call
