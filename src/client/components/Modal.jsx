@@ -2,7 +2,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import ThemedLink from './ThemedLink';
 
-const PrivacyModal = ({ title, linkText, linkColor, ...props }) => {
+const PrivacyModal = ({ title, linkText, linkColor, bold = false, ...props }) => {
   const [show, setShow] = React.useState(false);
 
   const handleClose = () => setShow(false);
@@ -10,7 +10,7 @@ const PrivacyModal = ({ title, linkText, linkColor, ...props }) => {
 
   return (
     <>
-      <ThemedLink color={linkColor} onClick={handleShow}>
+      <ThemedLink color={linkColor} onClick={handleShow} bold={bold}>
         {linkText}
       </ThemedLink>
 
