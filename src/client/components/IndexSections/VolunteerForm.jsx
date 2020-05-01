@@ -5,6 +5,7 @@ import PhoneNumberInput from '../FormPrimitives/PhoneNumberInput';
 import AddressInput from '../FormPrimitives/AddressInput';
 import SelectInput from '../FormPrimitives/SelectInput';
 import CheckBoxInput from '../FormPrimitives/CheckBoxInput';
+import RadioInput from '../FormPrimitives/RadioInput';
 import Modal from '../Modal';
 import VolunteerTermsOfUse from '../FormPrimitives/VolunteerTermsOfUse';
 
@@ -25,7 +26,7 @@ const VolunteerForm = ({ onSubmit, submitDisabled }) => {
         phone: '',
         address: '',
         email: '',
-        list: '',
+        car: '',
         language: '',
       }}
       onSubmit={(values, { setSubmitting }) => {
@@ -44,7 +45,7 @@ const VolunteerForm = ({ onSubmit, submitDisabled }) => {
           <AddressInput name="address" placeholder="Street Address" />
           <TextInput maxLength="256" type="email" name="email" placeholder="Email" />
           <SelectInput name="language" options={languageOptions} placeholder="Languages Spoken" />
-          <RadioInput>
+          <RadioInput name="car">Do you have a car you&apos;d be willing to drive?</RadioInput>
           <CheckBoxInput name="termsOfUse">
             <>
               I agree and certify to the{' '}
