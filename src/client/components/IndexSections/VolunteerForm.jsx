@@ -42,7 +42,7 @@ const VolunteerForm = ({ onSubmit, submitDisabled }) => {
             <TextInput colWidth="6" maxLength="64" name="lastName" placeholder="Last Name" />
           </div>
           <PhoneNumberInput name="phone" placeholder="Phone Number" />
-          <AddressInput name="address" placeholder="Street Address" />
+          <AddressInput name="address" id="volunteerAddress" placeholder="Street Address" />
           <TextInput maxLength="256" type="email" name="email" placeholder="Email" />
           <SelectInput name="language" options={languageOptions} placeholder="Languages Spoken" />
           <RadioInput name="car">Do you have a car you&apos;d be willing to drive?</RadioInput>

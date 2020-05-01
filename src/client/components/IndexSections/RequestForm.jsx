@@ -41,7 +41,7 @@ const RequestForm = ({ onSubmit, submitDisabled }) => {
             <TextInput colWidth="6" maxLength="64" name="lastName" placeholder="Last Name" />
           </div>
           <PhoneNumberInput name="phone" placeholder="Phone Number" />
-          <AddressInput name="address" placeholder="Street Address" />
+          <AddressInput name="address" id="requesterAddress" placeholder="Street Address" />
           <TextInput
             maxLength="256"
             isRequired={false}
