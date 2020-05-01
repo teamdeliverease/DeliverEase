@@ -1,7 +1,15 @@
 import { useState, useEffect } from 'react';
 import GoogleMapReact from 'google-map-react';
 import PropTypes from 'prop-types';
+import * as firebase from 'firebase/app';
+import useAxios from '../hooks/useAxios';
 import { MAPS_API_KEY } from '../constants';
+import 'firebase/database';
+import 'firebase/auth';
+import initFirebase from '../utils/auth/initFirebase';
+
+// Init the Firebase app.
+initFirebase();
 
 const options = {
   styles: [
@@ -18,6 +26,7 @@ const options = {
 
 const GoogleMap = ({ zoom, defaultCenter }) => {
   const [center, setCenter] = useState(null);
+  // const { response, error, loading } = useAxios('api/volunteers');
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -30,6 +39,28 @@ const GoogleMap = ({ zoom, defaultCenter }) => {
       });
     }
   }, []);
+
+  useEffect(() => {
+    firebase
+      .database()
+      .ref('volunteers')
+      .once(
+        'value',
+        (snapshot) => {
+          console.log(snapshot.val());
+          // res.status(200).json(snapshot.val());
+        },
+        (err) => {
+          console.error(err);
+          // res.status(500).send(err.message);
+        },
+      );
+  }, []);
+
+  // if (loading) return <div>Loading...</div>;
+  // if (error) return <div>{error.message}</div>;
+
+  // console.log(response);
 
   return (
     <div style={{ height: '100vh', width: '100%' }}>

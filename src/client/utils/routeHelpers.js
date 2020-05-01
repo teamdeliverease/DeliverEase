@@ -83,7 +83,6 @@ const getFromFirebase = (ref, res) => {
     .once(
       'value',
       (snapshot) => {
-        console.log(snapshot.val());
         res.status(200);
         return snapshot.val();
       },
