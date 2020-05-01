@@ -6,8 +6,9 @@ const WelcomeSection = () => {
   return (
     <section className="welcome-section">
       <div className="container">
-        <div className="row">
-          <div className="col-12 col-md-7 pt-5 mb-5 align-self-center">
+        <div className="row pt-5 pb-7">
+          {/* pt-5 mb-5 */}
+          <div className="col-12 col-md-7 align-self-center">
             <div className="promo pr-md-3 pr-lg-5">
               <h1 className="headline mb-3">Welcome to DeliverEase!</h1>
               <div className="subheadline mb-4">
@@ -25,7 +26,7 @@ const WelcomeSection = () => {
                   text="Become a Volunteer"
                   href="#volunteer"
                   type="secondary"
-                  classes="mb-2"
+                  classes="mb-2 ml-1"
                 />
               </div>
               <div className="mt-5">
@@ -37,7 +38,8 @@ const WelcomeSection = () => {
               </div>
             </div>
           </div>
-          <div className="col-12 col-md-5 mb-5 align-self-center">
+          {/* mb-5 mt-4 */}
+          <div className="col-12 col-md-5 align-self-center">
             <div className="book-cover-holder">
               <img
                 className="img-fluid book-cover"
