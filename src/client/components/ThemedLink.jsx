@@ -1,4 +1,4 @@
-const ThemedLink = ({ children, color = 'theme', bold = true, href, ...props }) => {
+const ThemedLink = ({ children, color = 'theme', bold = true, ...props }) => {
   // TODO make this a styled component?
 
   let elementClass = '';
@@ -18,7 +18,7 @@ const ThemedLink = ({ children, color = 'theme', bold = true, href, ...props }) 
   if (bold) elementClass += ' font-weight-bold';
 
   return (
-    <a href={href || '#'} className={elementClass} {...props}>
+    <a className={elementClass} {...props}>
       {children}
     </a>
   );
