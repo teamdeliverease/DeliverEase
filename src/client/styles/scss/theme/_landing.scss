@@ -6,7 +6,7 @@
   font-size: 1.25rem;
 }
 
-.hero-section {
+.welcome-section {
   .headline {
     font-size: 2.5rem;
     font-weight: bold;
@@ -16,71 +16,7 @@
   }
 }
 
-.hero-quotes {
-  .quote {
-    position: relative;
-    border-left: 4px solid lighten($theme-color-primary, 20%);
-    font-style: italic;
-
-    &:after {
-      content: '';
-      display: block;
-      width: 0;
-      height: 0;
-      border-left: 10px solid transparent;
-      border-right: 10px solid transparent;
-      border-top: 10px solid $theme-bg-light;
-      position: absolute;
-      bottom: -10px;
-      margin-left: -10px;
-      left: 2rem;
-    }
-  }
-  .source {
-    vertical-align: middle;
-    color: $theme-text-color-light;
-    font-size: 0.875rem;
-  }
-  .source-profile {
-    width: 60px;
-    height: 60px;
-  }
-  .carousel-indicators {
-    bottom: -4rem;
-    li {
-      border: none;
-      background-color: $theme-text-color-secondary;
-      width: 10px;
-      height: 10px;
-      @include border-radius(50%);
-      margin-left: 5px;
-      margin-right: 5px;
-    }
-  }
-}
-
-.book-cover-holder {
-  position: relative;
-  .book-badge {
-    position: absolute;
-    right: 0;
-    top: -2rem;
-    width: 120px;
-    height: 120px;
-    background: $theme-color-badge;
-    @include border-radius(50%);
-    text-align: center;
-    color: #fff;
-    font-weight: bold;
-    font-family: 'Quicksand', sans-serif;
-    padding-top: 34px;
-    font-size: 1.375rem;
-    line-height: 1;
-    font-weight: bold;
-  }
-}
-
-.benefits-section {
+.howItWorks-section {
   .item-inner {
     height: 100%;
   }
@@ -93,68 +29,7 @@
   }
 }
 
-.content-section {
-  .key-points-list {
-    font-size: 1.125rem;
-
-    li {
-      margin-bottom: 1rem;
-    }
-  }
-
-  .fa-check-circle {
-    color: $theme-color-tick;
-  }
-}
-
-.audience-section {
-  .audience {
-    max-width: 500px;
-  }
-  .item {
-    margin-bottom: 1.5rem;
-  }
-  .item-title {
-    font-size: 1.125rem;
-  }
-  .item-icon {
-    font-size: 1.25rem;
-    color: $theme-color-tick;
-  }
-}
-
-.reviews-section {
-  .item-inner {
-    height: 100%;
-    position: relative;
-  }
-
-  .icon-holder {
-    position: absolute;
-    left: 50%;
-    top: -18px;
-    margin-left: -18px;
-    display: inline-block;
-    width: 36px;
-    height: 36px;
-    background: lighten($theme-color-primary, 20%);
-    color: #fff;
-    text-align: center;
-    border-radius: 50%;
-    padding-top: 6px;
-  }
-  .source-profile {
-    width: 60px;
-  }
-  .source-info {
-    font-size: 0.875rem;
-  }
-  .quote {
-    font-style: italic;
-  }
-}
-
-.author-section {
+.aboutUs-section {
   color: #fff;
 
   .author-pic {
