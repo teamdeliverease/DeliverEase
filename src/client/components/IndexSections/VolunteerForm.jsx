@@ -30,7 +30,6 @@ const VolunteerForm = ({ onSubmit, submitDisabled }) => {
         language: '',
       }}
       onSubmit={(values, { setSubmitting }) => {
-        console.log(JSON.stringify(values, null, 2));
         setSubmitting(false);
         onSubmit(values);
       }}

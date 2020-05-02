@@ -11,8 +11,6 @@ class AddressSearch extends Component {
       query: '',
     };
 
-    this.id = props.id;
-
     this.onChange = this.onChange.bind(this);
   }
 
@@ -22,7 +20,7 @@ class AddressSearch extends Component {
 
   handleScriptLoad = () => {
     // Initialize Google Autocomplete
-    this.autocomplete = new google.maps.places.Autocomplete(document.getElementById(this.id));
+    this.autocomplete = new google.maps.places.Autocomplete(document.getElementById(this.props.id));
 
     this.autocomplete.setFields(['formatted_address']);
     this.autocomplete.setTypes(['address']);

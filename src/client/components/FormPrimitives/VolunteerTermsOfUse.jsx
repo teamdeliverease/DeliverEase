@@ -1,6 +1,6 @@
 import ThemedLink from '../ThemedLink';
 
-const RequestTermsOfUse = () => {
+const VolunteerTermsOfUse = () => {
   return (
     <>
       This is a volunteer effort. As such, deliveries are completed entirely by volunteers and not
@@ -64,4 +64,4 @@ const RequestTermsOfUse = () => {
   );
 };
 
-export default RequestTermsOfUse;
+export default VolunteerTermsOfUse;
