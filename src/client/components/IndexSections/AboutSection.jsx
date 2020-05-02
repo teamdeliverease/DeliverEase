@@ -5,7 +5,7 @@ import ThemedLink from '../ThemedLink';
 
 const AboutSection = () => {
   return (
-    <section className="author-section section theme-bg-primary py-5">
+    <section className="aboutUs-section section theme-bg-primary py-5">
       <div className="container py-3">
         <h2 className="section-heading text-center text-white mb-3">About Us</h2>
         <div className="author-bio single-col-max mx-auto text-center">
