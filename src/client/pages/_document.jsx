@@ -5,6 +5,7 @@ import { get } from 'lodash/object';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import FacebookPixel from '../components/FacebookPixel';
 import MetaTags from '../components/MetaTags';
+import { MAPS_API_KEY } from '../constants';
 
 class CustomDocument extends Document {
   render() {
@@ -30,6 +31,9 @@ class CustomDocument extends Document {
             href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
             integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             crossOrigin="anonymous"
+          />
+          <script
+            src={`https://maps.google.com/maps/api/js?key=${MAPS_API_KEY}&libraries=places`}
           />
           <MetaTags />
           <FacebookPixel />
