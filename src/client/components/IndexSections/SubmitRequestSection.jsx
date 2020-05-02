@@ -39,7 +39,7 @@ const SubmitRequestSection = () => {
   };
 
   return (
-    <section className="request-section">
+    <section id="request-section" className="request-section">
       <div className="container">
         <div className="single-col-max mx-auto">
           <h2 className="section-heading text-center mb-3">Submit a Request</h2>

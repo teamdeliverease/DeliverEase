@@ -39,7 +39,7 @@ const VolunteerSection = () => {
   };
 
   return (
-    <section className="volunteer-section py-5">
+    <section id="volunteer-section" className="volunteer-section py-5">
       <div className="container">
         <div className="single-col-max mx-auto">
           <h2 className="section-heading text-center mb-3">Become a Volunteer</h2>

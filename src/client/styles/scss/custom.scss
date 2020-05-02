@@ -115,30 +115,36 @@ a[href^='tel'] {
   display: flex !important;
 }
 
-.link-themed {
+.link-themed,
+a:not([href]).link-theme {
   color: $theme-primary;
 }
 
-.link-themed:hover {
+.link-themed:hover,
+a:not([href]).link-theme:hover {
   color: $theme-primary;
   text-decoration: underline;
   cursor: pointer;
 }
 
-.link-white {
+.link-white,
+a:not([href]).link-white {
   color: white;
 }
-.link-white:hover {
+.link-white:hover,
+a:not([href]).link-white:hover {
   color: white;
   text-decoration: underline;
   cursor: pointer;
 }
 
-.link-blue {
+.link-blue,
+a:not([href]).link-blue {
   color: $text-blue;
 }
 
-.link-blue:hover {
+.link-blue:hover,
+a:not([href]).link-blue:hover {
   color: $text-blue;
   text-decoration: underline;
   cursor: pointer;

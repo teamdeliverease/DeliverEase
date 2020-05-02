@@ -49,7 +49,13 @@ const AboutSection = () => {
             </p>
           </div>
           <div className="text-center pt-4">
-            <Modal button=" Privacy Statement " linkText="Privacy Statement" linkColor="white" bold>
+            <Modal
+              button=" Privacy Statement "
+              linkText="Privacy Statement"
+              title="Privacy Statement"
+              linkColor="white"
+              bold
+            >
               Your privacy is incredibly important to us. We store your address and contact
               information only to more accurately match you with a volunteer in your given area. The
               only point at which contact information is shared is upon a volunteer’s agreement to
