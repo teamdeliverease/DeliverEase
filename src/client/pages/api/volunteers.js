@@ -1,6 +1,3 @@
-import * as firebase from 'firebase/app';
-import * as admin from 'firebase-admin';
-import axios from 'axios';
 import {
   submitFormPostRequest,
   addLocationPayload,
@@ -10,8 +7,7 @@ import {
 import validationMiddleware from '../../utils/middleware/validationMiddleware';
 import { volunteer as volunteerSchema } from '../../utils/schemas';
 import { VOLUNTEERS_REF } from '../../constants';
-import 'firebase/auth';
-import 'firebase/database';
+import { db, admin } from '../../utils/firebase/admin';
 
 export const config = {
   api: {
@@ -66,15 +62,47 @@ const get = async (req, res) => {
       authToken = null;
     }
 
-    await admin.auth().verifyIdToken(authToken);
+    await admin
+      .auth()
+      .verifyIdToken(authToken)
+      .then((decodedToken) => {
+        req.user = decodedToken;
+      })
+      .catch((err) => {
+        console.error('Error while verifying token ', err);
+        return res.status(403).json(err);
+      });
 
-    const response = await axios.get(
-      `${process.env.FIREBASE_CONFIG.databaseURL}/volunteers.json?auth=${authToken}`,
-    );
+    await admin
+      .auth()
+      .getUser(req.user.uid)
+      .then((userRecord) => {
+        // The claims can be accessed on the user record.
+        console.log(userRecord);
+      });
 
-    console.log(response.data);
-    res.status(200).json(response.data);
-  } catch (e) {
+    try {
+      db.ref('volunteers').once(
+        'value',
+        (snapshot) => {
+          console.log(snapshot.val());
+          res.status(200).json(snapshot.val());
+        },
+        (err) => {
+          console.error(err);
+          res.status(500).send(err.message);
+        },
+      );
+      // const data = await getFromFirebase(VOLUNTEERS_REF, res);
+      // return res.json(data);
+    } catch (err) {
+      console.error(err.message);
+      return res.send({ error: err.message });
+    }
+    // console.log(response.data);
+    // res.status(200).json(response.data);
+  } catch (err) {
+    console.error(err.message);
     return res.status(401).send({ error: 'You are not authorized to make this request' });
   }
 
@@ -101,6 +129,7 @@ const get = async (req, res) => {
   // } catch (err) {
   //   return res.send({ error: err.message });
   // }
+  return null;
 };
 
 const handler = async (req, res) => {

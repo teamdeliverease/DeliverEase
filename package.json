@@ -17,7 +17,8 @@
     "watch": "npm run watch:client & npm run watch:server",
     "predeploy": "rimraf dist/ && npm run build",
     "deploy": "NODE_ENV=production firebase deploy --only functions,hosting",
-    "test": "firebase emulators:exec --only database 'mocha --timeout=10000'"
+    "test": "firebase emulators:exec --only database 'mocha --timeout=10000'",
+    "serve": "npm run build && npm start"
   },
   "engines": {
     "node": "10"

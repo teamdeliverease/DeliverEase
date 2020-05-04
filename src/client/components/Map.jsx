@@ -1,15 +1,9 @@
 import { useState, useEffect } from 'react';
 import GoogleMapReact from 'google-map-react';
 import PropTypes from 'prop-types';
-import * as firebase from 'firebase/app';
 import useAxios from '../hooks/useAxios';
 import { MAPS_API_KEY } from '../constants';
-import 'firebase/database';
-import 'firebase/auth';
-import initFirebase from '../utils/auth/initFirebase';
-
-// Init the Firebase app.
-initFirebase();
+import firebase from '../utils/firebase/client';
 
 const options = {
   styles: [

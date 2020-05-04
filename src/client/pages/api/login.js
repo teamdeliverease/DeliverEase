@@ -28,7 +28,6 @@ const handler = (req, res) => {
   // requests in a serverless context.
   return verifyIdToken(token)
     .then((decodedToken) => {
-      console.log('req', req, req.session);
       req.session.decodedToken = decodedToken;
       req.session.token = token;
       return decodedToken;
@@ -37,7 +36,6 @@ const handler = (req, res) => {
       return res.status(200).json({ status: true, decodedToken });
     })
     .catch((error) => {
-      console.log('g', error);
       return res.status(500).json({ error });
     });
 };

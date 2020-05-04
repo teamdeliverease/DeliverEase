@@ -7,7 +7,11 @@
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
-        "source": "**/**",
+        "source": "/expressApi/**",
+        "function": "expressServer"
+      },
+      {
+        "source": "**",
         "function": "nextjs-server"
       }
     ]
