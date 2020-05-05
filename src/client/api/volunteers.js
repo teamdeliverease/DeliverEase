@@ -1,4 +1,4 @@
-import { submitForm, addLocationPayload, addNamePayload } from '../utils/routeHelpers';
+import { submitForm, addLocationPayload, addNamePayload } from '../utils/api';
 
 const VOLUNTEERS_REF = 'volunteers';
 
