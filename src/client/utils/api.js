@@ -1,7 +1,7 @@
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 import { Client } from '@googlemaps/google-maps-services-js';
-import { GENERIC_ERROR_MESSAGE, FULFILLMENT_STATUS } from '../constants';
+import { FULFILLMENT_STATUS } from '../constants';
 
 const geocode = (address) => {
   const mapsClient = new Client({});
@@ -26,7 +26,7 @@ const addToFirebase = (ref, data) => {
       });
   } catch (err) {
     console.error(err);
-    throw new Error();
+    throw err;
   }
 };
 
@@ -44,7 +44,7 @@ const prepareAndAddToFirebase = async (ref, data, prepare) => {
     }
   } catch (err) {
     console.error(err);
-    throw new Error(GENERIC_ERROR_MESSAGE);
+    throw err;
   }
 };
 
