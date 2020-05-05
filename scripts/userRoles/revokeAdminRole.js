@@ -1,5 +1,5 @@
 const firebaseAdmin = require('firebase-admin');
-const customClaims = require('./customClaims');
+const helpers = require('./helpers');
 const serviceAccount = require('../../serviceAccountKey.json');
 
 if (!serviceAccount) {
@@ -9,7 +9,7 @@ if (!serviceAccount) {
 }
 
 if (process.argv.length !== 3) {
-  throw Error('Invalid use of grantAdminRole. Usage: node grantAdminRole.js <email>');
+  throw Error('Invalid use of revokeAdminRole. Usage: node grantAdminRole.js <email>');
 }
 
 firebaseAdmin.initializeApp({
@@ -17,13 +17,13 @@ firebaseAdmin.initializeApp({
 });
 
 const email = process.argv[2];
-customClaims
-  .grantAdminRole(firebaseAdmin, email)
+helpers
+  .revokeAdminRole(firebaseAdmin, email)
   .then(() => {
-    console.log(`User ${email} has been given admin role`);
+    console.log(`Admin role has been revoked for ${email}`);
     process.exit(0);
   })
   .catch((err) => {
-    console.log(`Failed to grant user admin role: ${err.message}`);
+    console.log(`Failed to revoke admin role for: ${err.message}`);
     process.exit(1);
   });
