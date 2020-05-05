@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Head from 'next/head';
-import { MAPS_API_KEY } from '../../constants';
 
 class AddressSearch extends Component {
   // Define Constructor
@@ -21,9 +20,7 @@ class AddressSearch extends Component {
 
   handleScriptLoad = () => {
     // Initialize Google Autocomplete
-    this.autocomplete = new google.maps.places.Autocomplete(
-      document.getElementById('autocomplete'),
-    );
+    this.autocomplete = new google.maps.places.Autocomplete(document.getElementById(this.props.id));
 
     this.autocomplete.setFields(['formatted_address']);
     this.autocomplete.setTypes(['address']);
@@ -55,15 +52,9 @@ class AddressSearch extends Component {
 
     return (
       <div>
-        <Head>
-          <script
-            src={`https://maps.google.com/maps/api/js?key=${MAPS_API_KEY}&libraries=places`}
-          ></script>
-        </Head>
         <input
           required
           onChange={this.onChange}
-          id="autocomplete"
           value={this.state.query}
           style={{
             margin: '0 auto',

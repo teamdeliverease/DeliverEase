@@ -5,8 +5,9 @@ import PhoneNumberInput from '../FormPrimitives/PhoneNumberInput';
 import AddressInput from '../FormPrimitives/AddressInput';
 import SelectInput from '../FormPrimitives/SelectInput';
 import CheckBoxInput from '../FormPrimitives/CheckBoxInput';
+import RadioInput from '../FormPrimitives/RadioInput';
 import Modal from '../Modal';
-import RequestTermsOfUse from '../FormPrimitives/RequestTermsOfUse';
+import VolunteerTermsOfUse from '../FormPrimitives/VolunteerTermsOfUse';
 
 const languageOptions = [
   { value: 'English', label: 'English' },
@@ -16,7 +17,7 @@ const languageOptions = [
   { value: 'Other', label: 'Other' },
 ];
 
-const RequestForm = ({ onSubmit, submitDisabled }) => {
+const VolunteerForm = ({ onSubmit, submitDisabled }) => {
   return (
     <Formik
       initialValues={{
@@ -25,11 +26,10 @@ const RequestForm = ({ onSubmit, submitDisabled }) => {
         phone: '',
         address: '',
         email: '',
-        list: '',
+        car: '',
         language: '',
       }}
       onSubmit={(values, { setSubmitting }) => {
-        console.log(JSON.stringify(values, null, 2));
         setSubmitting(false);
         onSubmit(values);
       }}
@@ -41,31 +41,19 @@ const RequestForm = ({ onSubmit, submitDisabled }) => {
             <TextInput colWidth="6" maxLength="64" name="lastName" placeholder="Last Name" />
           </div>
           <PhoneNumberInput name="phone" placeholder="Phone Number" />
-          <AddressInput name="address" id="requesterAddress" placeholder="Street Address" />
-          <TextInput
-            maxLength="256"
-            isRequired={false}
-            type="email"
-            name="email"
-            placeholder="Email"
-          />
+          <AddressInput name="address" id="volunteerAddress" placeholder="Street Address" />
+          <TextInput maxLength="256" type="email" name="email" placeholder="Email" />
           <SelectInput name="language" options={languageOptions} placeholder="Languages Spoken" />
-          <TextInput
-            inputType="long"
-            maxLength="1024"
-            rows="4"
-            name="list"
-            placeholder="Enter shopping list here"
-          />
+          <RadioInput name="car">Do you have a car you&apos;d be willing to drive?</RadioInput>
           <CheckBoxInput name="termsOfUse">
             <>
-              I agree to the{' '}
+              I agree and certify to the{' '}
               <Modal
-                title="Requester Terms and Conditions"
+                title="Volunteer Terms and Conditions"
                 linkText="Terms of Use"
                 linkColor="blue"
               >
-                <RequestTermsOfUse />
+                <VolunteerTermsOfUse />
               </Modal>
             </>
           </CheckBoxInput>
@@ -82,4 +70,4 @@ const RequestForm = ({ onSubmit, submitDisabled }) => {
   );
 };
 
-export default RequestForm;
+export default VolunteerForm;

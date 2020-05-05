@@ -1,6 +1,26 @@
 import { useField } from 'formik';
 import Select from 'react-select';
 
+const customStyles = {
+  control: (styles) => ({
+    ...styles,
+    border: 'none',
+    margin: '-.3rem 0 0 0',
+    boxShadow: 'none',
+  }),
+  multiValue: (styles) => ({
+    ...styles,
+    'font-size': '1.1rem',
+  }),
+  multiValueRemove: (styles) => ({
+    ...styles,
+    '&:hover': { color: '#404040', 'background-color': '#D3D3D3' },
+  }),
+  menu: (styles) => ({
+    ...styles,
+    'margin-left': '-0.7rem',
+  }),
+};
 const noop = () => {
   // no operation (do nothing real quick)
 };
@@ -20,12 +40,13 @@ const SelectInput = ({ label, isRequired = true, colWidth = '13', ...props }) =>
 
       <Select
         isMulti
+        styles={customStyles}
         defaultValue={[]}
         name={props.name}
         instanceId={props.name}
         options={props.options}
         placeholder={props.placeholder}
-        className="basic-multi-select"
+        className="basic-multi-select form-control"
         classNamePrefix="select"
         onChange={(selectedOptions) =>
           helpers.setValue((selectedOptions || []).map((option) => option.value))

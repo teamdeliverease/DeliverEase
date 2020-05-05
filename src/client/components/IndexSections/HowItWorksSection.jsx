@@ -2,7 +2,7 @@ import InfoCard from '../InfoCard';
 
 const HowItWorksSection = () => {
   return (
-    <section id="benefits-section" className="benefits-section theme-bg-light-gradient py-5">
+    <section className="howItWorks-section theme-bg-light-gradient py-5">
       <div className="container">
         <h2 className="section-heading text-center">How It Works</h2>
         <div className="section-intro single-col-max mx-auto text-center mb-3">
@@ -31,6 +31,7 @@ const HowItWorksSection = () => {
           />
           <InfoCard
             image="/assets/images/piggyBank.png"
+            imageWidth="65"
             title=" Zero fees "
             text="No service or delivery fees!
             That means $0. Payments for groceries and purchased goods will be arranged between the
