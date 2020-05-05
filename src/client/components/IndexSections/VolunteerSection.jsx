@@ -3,8 +3,8 @@ import axios from 'axios';
 import VolunteerForm from './VolunteerForm';
 import ShareCard from '../ShareCard';
 import {
-  REQUESTER_SHARE_CONTENT as shareContent,
-  REQUESTER_SHARE_MESSAGE as shareMessage,
+  VOLUNTEER_SHARE_CONTENT as shareContent,
+  VOLUNTEER_SHARE_MESSAGE as shareMessage,
   GENERIC_ERROR_MESSAGE,
 } from '../../constants';
 import 'firebase/analytics';
@@ -17,11 +17,7 @@ const VolunteerSection = () => {
     try {
       // disable submit button while waiting on api call
       setSubmitting(true);
-      const response = await axios.post('/api/volunteers', {
-        ...formData,
-        phone: '+19162061598',
-        termsAgreement: true,
-      });
+      const response = await axios.post('/api/volunteers', formData);
 
       if (response.status === 200) {
         setSubmitted(true);

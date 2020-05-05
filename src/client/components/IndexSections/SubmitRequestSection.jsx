@@ -17,11 +17,7 @@ const SubmitRequestSection = () => {
     try {
       // disable submit button while waiting on api call
       setSubmitting(true);
-      const response = await axios.post('/api/requesters', {
-        ...formData,
-        phone: '+19162061598',
-        termsAgreement: true,
-      });
+      const response = await axios.post('/api/requesters', formData);
 
       if (response.status === 200) {
         setSubmitted(true);
