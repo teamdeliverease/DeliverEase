@@ -35,7 +35,7 @@ const prepareAndAddToFirebase = async (ref, data, prepare) => {
     const result = await geocode(data.address);
     const { results, status } = result.data;
     if (status === 'OK') {
-      prepare(results[0], data);
+      prepare(results[0]);
       addToFirebase(ref, data);
     } else {
       const mapsError = new Error(`Geocode was not successful for the following reason: ${status}`);
@@ -48,14 +48,8 @@ const prepareAndAddToFirebase = async (ref, data, prepare) => {
   }
 };
 
-const submitFormPostRequest = async (ref, req, res, prepare) => {
-  const data = req.body;
-  try {
-    await prepareAndAddToFirebase(ref, data, prepare);
-    res.status(200).end();
-  } catch (err) {
-    res.status(500).send(err.message);
-  }
+const submitForm = async (ref, data, prepare) => {
+  await prepareAndAddToFirebase(ref, data, prepare);
 };
 
 const addLocationPayload = (geocodeResult, data) => {
@@ -76,7 +70,7 @@ const addNamePayload = (data) => {
 };
 
 export {
-  submitFormPostRequest,
+  submitForm,
   addLocationPayload,
   addFulfillmentStatusPayload,
   addNamePayload,
