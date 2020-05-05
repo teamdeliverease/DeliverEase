@@ -1,6 +1,6 @@
 {
   "rules": {
-    ".read": false,
+    ".read": "auth.token.admin === true",
     "volunteers": {
       "$uid": {
         ".validate": "newData.hasChildren(['address', 'lat', 'lng', 'name', 'phone', 'email', 'timestamp'])",
