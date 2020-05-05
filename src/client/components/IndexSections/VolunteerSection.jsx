@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import axios from 'axios';
 import VolunteerForm from './VolunteerForm';
 import ShareCard from '../ShareCard';
 import {
@@ -8,6 +7,7 @@ import {
   GENERIC_ERROR_MESSAGE,
 } from '../../constants';
 import 'firebase/analytics';
+import { postVolunteer } from '../../api/volunteers';
 
 const VolunteerSection = () => {
   const [submitted, setSubmitted] = useState(false);
@@ -17,7 +17,7 @@ const VolunteerSection = () => {
     try {
       // disable submit button while waiting on api call
       setSubmitting(true);
-      const response = await axios.post('/api/volunteers', {
+      const response = await postVolunteer({
         ...formData,
         phone: '+19162061598',
         termsAgreement: true,
