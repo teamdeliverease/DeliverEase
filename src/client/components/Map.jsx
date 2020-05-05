@@ -1,7 +1,14 @@
 import { useState, useEffect } from 'react';
 import GoogleMapReact from 'google-map-react';
 import PropTypes from 'prop-types';
+import * as firebase from 'firebase/app';
 import { MAPS_API_KEY } from '../constants';
+import 'firebase/database';
+import 'firebase/auth';
+import initFirebase from '../utils/auth/initFirebase';
+
+// Init the Firebase app.
+initFirebase();
 
 const options = {
   styles: [
@@ -29,6 +36,23 @@ const GoogleMap = ({ zoom, defaultCenter }) => {
         setCenter(pos);
       });
     }
+  }, []);
+
+  useEffect(() => {
+    firebase
+      .database()
+      .ref('volunteers')
+      .once(
+        'value',
+        (snapshot) => {
+          console.log(snapshot.val());
+          // res.status(200).json(snapshot.val());
+        },
+        (err) => {
+          console.error(err);
+          // res.status(500).send(err.message);
+        },
+      );
   }, []);
 
   return (
