@@ -7,16 +7,20 @@
   "private": true,
   "main": "dist/server/index.js",
   "scripts": {
-    "start": "NODE_ENV=production firebase emulators:start",
+    "dev": "npm run watch:client & npm run watch:server",
+    "start": "npm run build && npm run start:emulators",
+    "test": "firebase emulators:exec --only database 'mocha --timeout=10000'",
+    "deploy": "NODE_ENV=production firebase deploy -P staging --only functions,hosting",
+    "deploy:prod": "NODE_ENV=production firebase deploy -P production --only functions,hosting",
+    "start:emulators": "NODE_ENV=production firebase emulators:start",
     "build:client": "next build src/client",
     "build:server": "babel src/server --out-dir dist/server --source-maps",
     "build:public": "cpx \"src/client/public/**/*.*\" \"dist/public\" -C",
     "build": "npm run build:client && npm run build:server && npm run build:public",
     "watch:client": "next src/client",
     "watch:server": "babel src/server --out-dir dist/server --source-maps --watch",
-    "watch": "npm run watch:client & npm run watch:server",
-    "predeploy": "rimraf dist/ && npm run build",
-    "deploy": "NODE_ENV=production firebase deploy --only functions,hosting"
+    "clean": "rimraf dist/",
+    "predeploy": "npm run clean && npm run build"
   },
   "engines": {
     "node": "10"
