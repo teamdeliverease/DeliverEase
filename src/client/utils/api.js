@@ -1,6 +1,6 @@
-import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 import { Client } from '@googlemaps/google-maps-services-js';
+import firebase from './firebase/client';
 import { FULFILLMENT_STATUS } from '../constants';
 
 const geocode = (address) => {
@@ -15,8 +15,8 @@ const geocode = (address) => {
 
 const addToFirebase = (ref, data) => {
   try {
-    data.timestamp = admin.database.ServerValue.TIMESTAMP;
-    admin
+    data.timestamp = firebase.database.ServerValue.TIMESTAMP;
+    firebase
       .database()
       .ref(ref)
       .push(data, (err) => {
@@ -61,7 +61,7 @@ const addLocationPayload = (geocodeResult, data) => {
 
 const addFulfillmentStatusPayload = (data) => {
   data.fulfillment_status = FULFILLMENT_STATUS.NEW;
-  data.fulfillment_status_timestamp = admin.database.ServerValue.TIMESTAMP;
+  data.fulfillment_status_timestamp = firebase.database.ServerValue.TIMESTAMP;
 };
 
 const addNamePayload = (data) => {
