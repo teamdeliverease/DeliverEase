@@ -17,10 +17,12 @@ const VolunteerSection = () => {
     try {
       // disable submit button while waiting on api call
       setSubmitting(true);
+      // TODO: change this to just take in formData when forms are properly hooked up
       const response = await postVolunteer({
         ...formData,
         phone: '+19162061598',
         termsAgreement: true,
+        hasCar: true,
       });
 
       if (response.status === 200) {
