@@ -5,26 +5,35 @@ import { Loader } from '@googlemaps/js-api-loader';
 import firebase from './firebase/client';
 import { FULFILLMENT_STATUS, MAPS_API_KEY } from '../constants';
 
-const geocode = (address) => {
-  const loader = new Loader({
-    apiKey: MAPS_API_KEY,
-  });
+const geocode = async (address, onComplete) => {
+  try {
+    // eslint-disable-next-line no-undef
+    const geocoder = new google.maps.Geocoder();
 
-  return loader
-    .load()
-    .then(() => {
-      // eslint-disable-next-line no-undef
-      const geocoder = new google.maps.Geocoder();
-
-      return geocoder.geocode({ address }, function (results, status) {
-        console.log(results, status);
-        return { results, status };
-      });
-    })
-    .catch((err) => {
-      console.error(err);
+    geocoder.geocode({ address }, (results, status) => {
+      onComplete({ results, status });
     });
+  } catch (err) {
+    console.error(err);
+    throw new Error('error geocoding');
+  }
 };
+
+// return loader
+//   .load()
+//   .then(() => {
+//     // eslint-disable-next-line no-undef
+//     const geocoder = new google.maps.Geocoder();
+
+//     return geocoder.geocode({ address }, function (results, status) {
+//       console.log(results, status);
+//       return { results, status };
+//     });
+//   })
+//   .catch((err) => {
+//     console.error(err);
+//   });
+// };
 
 const addToFirebase = (ref, data) => {
   try {
@@ -47,15 +56,18 @@ const addToFirebase = (ref, data) => {
 const prepareAndAddToFirebase = async (ref, data, prepare) => {
   try {
     // const result = geocode(data.address);
-    const { results, status } = geocode(data.address);
-    if (status === 'OK') {
-      prepare(results[0]);
-      addToFirebase(ref, data);
-    } else {
-      const mapsError = new Error(`Geocode was not successful for the following reason: ${status}`);
-      console.error(mapsError);
-      addToFirebase(ref, data);
-    }
+    geocode(data.address, (results, status) => {
+      if (status === 'OK') {
+        prepare(results[0]);
+        addToFirebase(ref, data);
+      } else {
+        const mapsError = new Error(
+          `Geocode was not successful for the following reason: ${status}`,
+        );
+        console.error(mapsError);
+        addToFirebase(ref, data);
+      }
+    });
   } catch (err) {
     console.error(err);
     throw err;
@@ -63,7 +75,6 @@ const prepareAndAddToFirebase = async (ref, data, prepare) => {
 };
 
 const submitForm = async (ref, data, prepare) => {
-  console.log(data);
   await prepareAndAddToFirebase(ref, data, prepare);
 };
 
