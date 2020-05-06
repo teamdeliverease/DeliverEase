@@ -1,17 +1,12 @@
-// import * as functions from 'firebase-functions';
-// import { Client } from '@googlemaps/google-maps-services-js';
-import { Loader } from '@googlemaps/js-api-loader';
-// import GoogleMapsApi from './googleMaps';
 import firebase from './firebase/client';
-import { FULFILLMENT_STATUS, MAPS_API_KEY } from '../constants';
+import { FULFILLMENT_STATUS } from '../constants';
 
-const geocode = async (address, onComplete) => {
+const geocode = async (address, onSuccess) => {
   try {
     // eslint-disable-next-line no-undef
     const geocoder = new google.maps.Geocoder();
-
     geocoder.geocode({ address }, (results, status) => {
-      onComplete({ results, status });
+      onSuccess({ results, status });
     });
   } catch (err) {
     console.error(err);
@@ -19,25 +14,10 @@ const geocode = async (address, onComplete) => {
   }
 };
 
-// return loader
-//   .load()
-//   .then(() => {
-//     // eslint-disable-next-line no-undef
-//     const geocoder = new google.maps.Geocoder();
-
-//     return geocoder.geocode({ address }, function (results, status) {
-//       console.log(results, status);
-//       return { results, status };
-//     });
-//   })
-//   .catch((err) => {
-//     console.error(err);
-//   });
-// };
-
 const addToFirebase = (ref, data) => {
   try {
     data.timestamp = firebase.database.ServerValue.TIMESTAMP;
+    console.log(data);
     firebase
       .database()
       .ref(ref)
@@ -55,7 +35,6 @@ const addToFirebase = (ref, data) => {
 
 const prepareAndAddToFirebase = async (ref, data, prepare) => {
   try {
-    // const result = geocode(data.address);
     geocode(data.address, (results, status) => {
       if (status === 'OK') {
         prepare(results[0]);
