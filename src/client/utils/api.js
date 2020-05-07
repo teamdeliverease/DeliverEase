@@ -1,67 +1,55 @@
 import firebase from './firebase/client';
 import { FULFILLMENT_STATUS } from '../constants';
 
-const geocode = async (address, onSuccess) => {
+const geocode = (address, onSuccess) => {
   try {
     // eslint-disable-next-line no-undef
     const geocoder = new google.maps.Geocoder();
     geocoder.geocode({ address }, (results, status) => {
-      onSuccess({ results, status });
+      return onSuccess(results, status);
     });
   } catch (err) {
-    console.error(err);
     throw new Error('error geocoding');
   }
 };
 
-const addToFirebase = (ref, data) => {
-  try {
-    data.timestamp = firebase.database.ServerValue.TIMESTAMP;
-    console.log(data);
-    firebase
-      .database()
-      .ref(ref)
-      .push(data, (err) => {
-        if (err) {
-          console.error(err);
-          throw new Error('error writing to database');
-        }
-      });
-  } catch (err) {
-    console.error(err);
-    throw err;
-  }
+const addToFirebase = async (ref, data) => {
+  data.timestamp = firebase.database.ServerValue.TIMESTAMP;
+  return firebase.database().ref(ref).push(data);
+  // .catch((err) => {
+  //   console.log('caught', err.message);
+  //   throw err;
+  // });
 };
 
-const prepareAndAddToFirebase = async (ref, data, prepare) => {
-  try {
-    geocode(data.address, (results, status) => {
-      if (status === 'OK') {
-        prepare(results[0]);
-        addToFirebase(ref, data);
-      } else {
-        const mapsError = new Error(
-          `Geocode was not successful for the following reason: ${status}`,
-        );
-        console.error(mapsError);
-        addToFirebase(ref, data);
-      }
-    });
-  } catch (err) {
-    console.error(err);
-    throw err;
-  }
+const prepareAndAddToFirebase = (ref, data, prepare) => {
+  geocode(data.address, (results, status) => {
+    if (status === 'OK') {
+      prepare(results[0]);
+      addToFirebase(ref, data);
+    } else {
+      const mapsError = new Error(`Geocode was not successful for the following reason: ${status}`);
+      console.error(mapsError);
+      addToFirebase(ref, data);
+    }
+  });
 };
 
 const submitForm = async (ref, data, prepare) => {
-  await prepareAndAddToFirebase(ref, data, prepare);
+  try {
+    await prepareAndAddToFirebase(ref, data, prepare);
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
 };
 
 const addLocationPayload = (geocodeResult, data) => {
+  console.log(geocodeResult);
   const { location } = geocodeResult.geometry;
   data.address = geocodeResult.formatted_address;
-  data.lat = location.lat;
-  data.lng = location.lng;
+  data.lat = location.lat();
+  data.lng = location.lng();
 };
 
 const addFulfillmentStatusPayload = (data) => {

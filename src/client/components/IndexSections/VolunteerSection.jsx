@@ -18,22 +18,15 @@ const VolunteerSection = () => {
       // disable submit button while waiting on api call
       setSubmitting(true);
       // TODO: change this to just take in formData when forms are properly hooked up
-      const response = await postVolunteer({
+      await postVolunteer({
         ...formData,
         phone: '+19162061598',
         termsAgreement: true,
         hasCar: true,
       });
 
-      if (response.status === 200) {
-        setSubmitted(true);
-        // analytics.logEvent('sign_up', { method: 'requester' });
-      } else {
-        // re-enable submit button if there's an error
-        setSubmitting(false);
-        const errorMessage = await response.text();
-        alert(errorMessage);
-      }
+      setSubmitted(true);
+      // analytics.logEvent('sign_up', { method: 'requester' });
     } catch (err) {
       setSubmitting(false);
       alert(GENERIC_ERROR_MESSAGE);

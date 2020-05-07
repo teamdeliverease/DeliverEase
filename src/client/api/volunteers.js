@@ -2,8 +2,8 @@ import { submitForm, addLocationPayload, addNamePayload } from '../utils/api';
 
 const VOLUNTEERS_REF = 'volunteers';
 
-const postVolunteer = (data) => {
-  return submitForm(VOLUNTEERS_REF, data, (geocodeResult) => {
+const postVolunteer = async (data) => {
+  await submitForm(VOLUNTEERS_REF, data, (geocodeResult) => {
     addLocationPayload(geocodeResult, data);
     addNamePayload(data);
   });
