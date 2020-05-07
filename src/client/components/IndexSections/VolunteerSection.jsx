@@ -28,6 +28,7 @@ const VolunteerSection = () => {
       setSubmitted(true);
       // analytics.logEvent('sign_up', { method: 'requester' });
     } catch (err) {
+      console.error(err);
       setSubmitting(false);
       alert(GENERIC_ERROR_MESSAGE);
     }
