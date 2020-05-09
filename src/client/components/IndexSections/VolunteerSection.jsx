@@ -26,7 +26,7 @@ const VolunteerSection = () => {
       });
 
       setSubmitted(true);
-      // analytics.logEvent('sign_up', { method: 'requester' });
+      // analytics.logEvent('sign_up', { method: 'volunteer' });
     } catch (err) {
       console.error(err);
       setSubmitting(false);

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import axios from 'axios';
 import RequestForm from './RequestForm';
 import ShareCard from '../ShareCard';
 import {
@@ -8,6 +7,7 @@ import {
   GENERIC_ERROR_MESSAGE,
 } from '../../constants';
 import 'firebase/analytics';
+import { postRequester } from '../../api/requesters';
 
 const SubmitRequestSection = () => {
   const [submitted, setSubmitted] = useState(false);
@@ -18,22 +18,16 @@ const SubmitRequestSection = () => {
       // disable submit button while waiting on api call
       setSubmitting(true);
       // TODO: change this to just take in formData when forms are properly hooked up
-      const response = await axios.post('/api/requesters', {
+      await postRequester({
         ...formData,
         phone: '+19162061598',
         termsAgreement: true,
       });
 
-      if (response.status === 200) {
-        setSubmitted(true);
-        // analytics.logEvent('sign_up', { method: 'requester' });
-      } else {
-        // re-enable submit button if there's an error
-        setSubmitting(false);
-        const errorMessage = await response.text();
-        alert(errorMessage);
-      }
+      setSubmitted(true);
+      // analytics.logEvent('sign_up', { method: 'requester' });
     } catch (err) {
+      console.error(err);
       setSubmitting(false);
       alert(GENERIC_ERROR_MESSAGE);
     }
