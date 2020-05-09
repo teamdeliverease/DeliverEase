@@ -4,34 +4,11 @@ import ShareCard from '../ShareCard';
 import {
   REQUESTER_SHARE_CONTENT as shareContent,
   REQUESTER_SHARE_MESSAGE as shareMessage,
-  GENERIC_ERROR_MESSAGE,
 } from '../../constants';
 import 'firebase/analytics';
-import { postRequester } from '../../api/requesters';
 
 const SubmitRequestSection = () => {
-  const [submitted, setSubmitted] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-
-  const handleSubmit = async (formData) => {
-    try {
-      // disable submit button while waiting on api call
-      setSubmitting(true);
-      // TODO: change this to just take in formData when forms are properly hooked up
-      await postRequester({
-        ...formData,
-        phone: '+19162061598',
-        termsAgreement: true,
-      });
-
-      setSubmitted(true);
-      // analytics.logEvent('sign_up', { method: 'requester' });
-    } catch (err) {
-      console.error(err);
-      setSubmitting(false);
-      alert(GENERIC_ERROR_MESSAGE);
-    }
-  };
+  const [hasSubmitted, setSubmitted] = useState(false);
 
   return (
     <section id="request-section" className="request-section">
@@ -45,7 +22,7 @@ const SubmitRequestSection = () => {
                   <h2 className="form-heading text-center" id="request-title">
                     DeliverEase will find you a volunteer in your neighborhood
                   </h2>
-                  {submitted ? (
+                  {hasSubmitted ? (
                     <ShareCard message={shareMessage} content={shareContent} />
                   ) : (
                     <>
@@ -53,7 +30,7 @@ const SubmitRequestSection = () => {
                         You&apos;ll get notified once we find a match for your request and a
                         volunteer will drop off your items directly to your front door.
                       </div>
-                      <RequestForm onSubmit={handleSubmit} submitDisabled={submitting} />
+                      <RequestForm onSubmitted={() => setSubmitted(true)} />
                       <div className="text-left small mt-4">
                         By clicking &quot;Submit Request&quot;, you consent to recieving text
                         messages and phone calls from the DeliverEase team and its volunteers.
