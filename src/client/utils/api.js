@@ -18,8 +18,9 @@ const geocode = (address) => {
 /* eslint-enable no-undef */
 
 const addToFirebase = (ref, data) => {
-  data.timestamp = firebase.database.ServerValue.TIMESTAMP;
-  return firebase.database().ref(ref).push(data);
+  const dataWithTimestamp = { ...data, timestamp: firebase.database.ServerValue.TIMESTAMP };
+
+  return firebase.database().ref(ref).push(dataWithTimestamp);
 };
 
 const prepareAndAddToFirebase = (ref, data, prepare) => {
@@ -42,19 +43,27 @@ const submitForm = (ref, data, prepare) => {
 
 const addLocationPayload = (geocodeResult, data) => {
   const { location } = geocodeResult.geometry;
-  data.address = geocodeResult.formatted_address;
-  data.lat = location.lat();
-  data.lng = location.lng();
+
+  return {
+    ...data,
+    address: geocodeResult.formatted_address,
+    lat: location.lat(),
+    lng: location.lng(),
+  };
 };
 
 const addFulfillmentStatusPayload = (data) => {
-  data.fulfillment_status = FULFILLMENT_STATUS.NEW;
-  data.fulfillment_status_timestamp = firebase.database.ServerValue.TIMESTAMP;
+  return {
+    ...data,
+    fulfillment_status: FULFILLMENT_STATUS.NEW,
+    fulfillment_status_timestamp: firebase.database.ServerValue.TIMESTAMP,
+  };
 };
 
 const addNamePayload = (data) => {
   const fullName = `${data.firstName} ${data.lastName}`;
-  return Object.assign(data, { name: fullName });
+
+  return { ...data, name: fullName };
 };
 
 export {
