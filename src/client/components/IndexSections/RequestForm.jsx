@@ -7,6 +7,7 @@ import SelectInput from '../FormPrimitives/SelectInput';
 import CheckBoxInput from '../FormPrimitives/CheckBoxInput';
 import Modal from '../Modal';
 import RequestTermsOfUse from '../FormPrimitives/RequestTermsOfUse';
+import { postRequest } from '../../api/requesters';
 
 const languageOptions = [
   { value: 'English', label: 'English' },
@@ -21,12 +22,11 @@ const RequestForm = ({ onSubmitted }) => {
     try {
       // disable submit button while waiting on api call
       setSubmitting(true);
-      // TODO: change this to just take in formData when forms are properly hooked up
-      // await postRequester({
-      //   ...formData,
-      //   phone: '+19162061598',
-      //   termsAgreement: true,
-      // });
+      await postRequest({
+        ...formData,
+        phone: '+19162061598',
+        termsAgreement: true,
+      });
 
       onSubmitted();
       // analytics.logEvent('sign_up', { method: 'volunteer' });

@@ -5,7 +5,6 @@ import { FULFILLMENT_STATUS } from '../constants';
 const geocode = (address) => {
   return new Promise((resolve, reject) => {
     const geocoder = new google.maps.Geocoder();
-
     geocoder.geocode({ address }, (results, status) => {
       if (status === google.maps.GeocoderStatus.OK) {
         resolve(results);
@@ -22,7 +21,6 @@ const addToFirebase = (ref, data) => {
   return firebase.database().ref(ref).push(data);
 };
 
-// TODO: Make sure we're still adding to firebase when geocode fails
 const prepareAndAddToFirebase = (ref, data, prepare) => {
   return geocode(data.address).then((results) => {
     prepare(results[0]);
