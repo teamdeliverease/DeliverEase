@@ -1,5 +1,6 @@
 import firebase from './firebase/client';
 import { FULFILLMENT_STATUS } from '../constants';
+import { GeocodeError } from '../api/errorTypes';
 
 /* eslint-disable no-undef */
 const geocode = (address) => {
@@ -10,7 +11,7 @@ const geocode = (address) => {
       if (status === google.maps.GeocoderStatus.OK) {
         resolve(results);
       } else {
-        reject(status);
+        reject(new GeocodeError(status));
       }
     });
   });
@@ -24,10 +25,17 @@ const addToFirebase = (ref, data) => {
 
 // TODO: Make sure we're still adding to firebase when geocode fails
 const prepareAndAddToFirebase = (ref, data, prepare) => {
-  return geocode(data.address).then((results) => {
-    prepare(results[0]);
-    return addToFirebase(ref, data);
-  });
+  return geocode(data.address)
+    .then((results) => {
+      prepare(results[0]);
+      return addToFirebase(ref, data);
+    })
+    .catch((err) => {
+      if (err instanceof GeocodeError) {
+        return addToFirebase(ref, data);
+      }
+      throw err;
+    });
 };
 
 const submitForm = (ref, data, prepare) => {
