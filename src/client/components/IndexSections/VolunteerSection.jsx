@@ -1,42 +1,14 @@
 import { useState } from 'react';
-import axios from 'axios';
 import VolunteerForm from './VolunteerForm';
 import ShareCard from '../ShareCard';
 import {
   REQUESTER_SHARE_CONTENT as shareContent,
   REQUESTER_SHARE_MESSAGE as shareMessage,
-  GENERIC_ERROR_MESSAGE,
 } from '../../constants';
 import 'firebase/analytics';
 
 const VolunteerSection = () => {
-  const [submitted, setSubmitted] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-
-  const handleSubmit = async (formData) => {
-    try {
-      // disable submit button while waiting on api call
-      setSubmitting(true);
-      const response = await axios.post('/api/volunteers', {
-        ...formData,
-        phone: '+19162061598',
-        termsAgreement: true,
-      });
-
-      if (response.status === 200) {
-        setSubmitted(true);
-        // analytics.logEvent('sign_up', { method: 'requester' });
-      } else {
-        // re-enable submit button if there's an error
-        setSubmitting(false);
-        const errorMessage = await response.text();
-        alert(errorMessage);
-      }
-    } catch (err) {
-      setSubmitting(false);
-      alert(GENERIC_ERROR_MESSAGE);
-    }
-  };
+  const [hasSubmitted, setSubmitted] = useState(false);
 
   return (
     <section id="volunteer-section" className="volunteer-section py-5">
@@ -50,7 +22,7 @@ const VolunteerSection = () => {
                   <h2 className="form-heading text-center" id="request-title">
                     Sign up to help your community
                   </h2>
-                  {submitted ? (
+                  {hasSubmitted ? (
                     <ShareCard message={shareMessage} content={shareContent} />
                   ) : (
                     <>
@@ -58,7 +30,7 @@ const VolunteerSection = () => {
                         Fill in your information and we&apos;ll let you know when a neighbor needs
                         help.
                       </div>
-                      <VolunteerForm onSubmit={handleSubmit} submitDisabled={submitting} />
+                      <VolunteerForm onSubmitted={() => setSubmitted(true)} />
                       <div className="text-left small mt-4">
                         By clicking &quot;Sign up&quot;, you consent to recieving text messages and
                         phone calls from the DeliverEase team. Standard messaging and data rates
