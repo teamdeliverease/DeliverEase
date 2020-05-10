@@ -62,7 +62,7 @@ const VolunteerForm = ({ onSubmit, submitDisabled }) => {
             className="btn btn-primary btn-submit mx-auto"
             type="submit"
           >
-            Submit Request
+            Sign up
           </button>
         </Form>
       </div>
