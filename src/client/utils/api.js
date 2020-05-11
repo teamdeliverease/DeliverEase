@@ -66,10 +66,20 @@ const addNamePayload = (data) => {
   return { ...data, name: fullName };
 };
 
+const get = (ref) => {
+  return firebase
+    .database()
+    .ref(ref)
+    .once('value', (snapshot) => {
+      return snapshot.val();
+    });
+};
+
 export {
   submitForm,
   addLocationPayload,
   addFulfillmentStatusPayload,
   addNamePayload,
   prepareAndAddToFirebase,
+  get,
 };

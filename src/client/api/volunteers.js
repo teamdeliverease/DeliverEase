@@ -1,4 +1,4 @@
-import { submitForm, addLocationPayload, addNamePayload } from '../utils/api';
+import { submitForm, addLocationPayload, addNamePayload, get } from '../utils/api';
 
 const VOLUNTEERS_REF = 'volunteers';
 
@@ -9,5 +9,8 @@ const postVolunteer = (data) => {
   });
 };
 
-// eslint-disable-next-line import/prefer-default-export
-export { postVolunteer };
+const getVolunteers = () => {
+  return get(VOLUNTEERS_REF);
+};
+
+export { postVolunteer, getVolunteers };
