@@ -36,7 +36,7 @@ const WelcomeSection = () => {
                 Can&apos;t volunteer but still want to help? Please spread the word by sharing our{' '}
                 <ThemedLink
                   href="assets/flyers/GeneralPromoFlyer_printerFriendly.pdf"
-                  onClick={() => trackFlyerClick('promo')}
+                  onClick={() => trackFlyerClick()}
                 >
                   flyer
                 </ThemedLink>
