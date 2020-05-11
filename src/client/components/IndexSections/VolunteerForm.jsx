@@ -9,6 +9,7 @@ import RadioInput from '../FormPrimitives/RadioInput';
 import Modal from '../Modal';
 import VolunteerTermsOfUse from '../FormPrimitives/VolunteerTermsOfUse';
 import { postVolunteer } from '../../api/volunteers';
+import { trackSignUp } from '../../utils/analytics';
 
 const languageOptions = [
   { value: 'English', label: 'English' },
@@ -32,7 +33,7 @@ const VolunteerForm = ({ onSubmitted }) => {
       });
 
       onSubmitted();
-      // analytics.logEvent('sign_up', { method: 'volunteer' });
+      trackSignUp('volunteer');
     } catch (err) {
       console.error(err);
       setSubmitting(false);
