@@ -1,0 +1,63 @@
+path /volunteers/{uid} is Volunteer{
+    write() {True}
+}
+path /requesters/{uid} is Requester{
+    write() {True}
+}
+
+type Name extends String{
+    property: String
+    validate() { this.length > 0 && this.length <= 64}
+}
+
+type Email extends String{
+    validate() { this.length > 0 && this.length <= 256 && this.includes("@")}
+}
+
+type Address extends String{
+    validate() { this.length > 0 && this.length <= 256 }
+}
+
+type Phone extends String{
+    validate() {this.test(/^\+(?:[0-9] ?){6,14}[0-9]$/)}
+}
+
+type HasCar extends Boolean{
+    validate() { this != null }
+}
+
+type TermAgreement extends Boolean{
+    validate() { this == True}
+}
+
+type List extends String{
+    validate() { this.length > 0 && this.length <= 1024}
+}
+
+type Language extends String{
+    validate() { this.includes('English') || this.includes('Spanish') || this.includes('Mandarin') || this.includes('Cantonese') || 
+    this.includes('Other')}
+}
+
+
+type Volunteer {
+    firstName: Name,
+    lastName: Name,
+    email: Email,
+    address: Address,
+    phone: Phone,
+    hasCar: HasCar,
+    termAgreement: TermAgreement,
+    language: Language
+}
+
+type Requester {
+    firstName: Name,
+    lastName: Name,
+    email: Email,
+    address: Address,
+    phone: Phone,
+    termAgreement: TermAgreement,
+    list: List,
+    language: Language
+}
