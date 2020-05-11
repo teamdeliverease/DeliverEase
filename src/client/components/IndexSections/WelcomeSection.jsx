@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import CTAButton from '../CTAButton';
 import ThemedLink from '../ThemedLink';
+import { trackCTAClick, trackFlyerClick } from '../../utils/analytics';
 
 const WelcomeSection = () => {
   return (
@@ -21,17 +22,22 @@ const WelcomeSection = () => {
                   href="#request-section"
                   type="primary"
                   classes="mr-lg-2 mb-2"
+                  onClick={() => trackCTAClick('requester')}
                 />
                 <CTAButton
                   text="Become a Volunteer"
                   href="#volunteer-section"
                   type="secondary"
                   classes="mb-2 ml-1"
+                  onClick={() => trackCTAClick('volunteer')}
                 />
               </div>
               <div className="mt-5">
                 Can&apos;t volunteer but still want to help? Please spread the word by sharing our{' '}
-                <ThemedLink href="assets/flyers/GeneralPromoFlyer_printerFriendly.pdf">
+                <ThemedLink
+                  href="assets/flyers/GeneralPromoFlyer_printerFriendly.pdf"
+                  onClick={() => trackFlyerClick()}
+                >
                   flyer
                 </ThemedLink>
                 !

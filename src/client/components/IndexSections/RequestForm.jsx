@@ -7,6 +7,7 @@ import SelectInput from '../FormPrimitives/SelectInput';
 import CheckBoxInput from '../FormPrimitives/CheckBoxInput';
 import Modal from '../Modal';
 import RequestTermsOfUse from '../FormPrimitives/RequestTermsOfUse';
+import { trackSignUp } from '../../utils/analytics';
 import { postRequest } from '../../api/requesters';
 
 const languageOptions = [
@@ -24,7 +25,7 @@ const RequestForm = ({ onSubmitted }) => {
       setSubmitting(true);
       await postRequest(formData);
       onSubmitted();
-      // analytics.logEvent('sign_up', { method: 'volunteer' });
+      trackSignUp('requester');
     } catch (err) {
       console.error(err);
       setSubmitting(false);
