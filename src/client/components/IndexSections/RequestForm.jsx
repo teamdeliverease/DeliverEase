@@ -23,13 +23,7 @@ const RequestForm = ({ onSubmitted }) => {
     try {
       // disable submit button while waiting on api call
       setSubmitting(true);
-      // TODO: change this to just take in formData when forms are properly hooked up
-      await postRequest({
-        ...formData,
-        phone: '+19162061598',
-        termsAgreement: true,
-      });
-
+      await postRequest(formData);
       onSubmitted();
       trackSignUp('requester');
     } catch (err) {
@@ -48,7 +42,8 @@ const RequestForm = ({ onSubmitted }) => {
         address: '',
         email: '',
         list: '',
-        language: '',
+        language: [],
+        termsAgreement: false,
       }}
       onSubmit={(values, { setSubmitting }) => {
         handleSubmit(values, setSubmitting);

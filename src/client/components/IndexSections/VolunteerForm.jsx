@@ -24,14 +24,7 @@ const VolunteerForm = ({ onSubmitted }) => {
     try {
       // disable submit button while waiting on api call
       setSubmitting(true);
-      // TODO: change this to just take in formData when forms are properly hooked up
-      await postVolunteer({
-        ...formData,
-        phone: '+19162061598',
-        termsAgreement: true,
-        hasCar: true,
-      });
-
+      await postVolunteer(formData);
       onSubmitted();
       trackSignUp('volunteer');
     } catch (err) {
@@ -49,8 +42,9 @@ const VolunteerForm = ({ onSubmitted }) => {
         phone: '',
         address: '',
         email: '',
-        car: '',
-        language: '',
+        language: [],
+        hasCar: null,
+        termsAgreement: false,
       }}
       onSubmit={(values, { setSubmitting }) => {
         handleSubmit(values, setSubmitting);
@@ -67,7 +61,7 @@ const VolunteerForm = ({ onSubmitted }) => {
             <AddressInput name="address" id="volunteerAddress" placeholder="Street Address" />
             <TextInput maxLength="256" type="email" name="email" placeholder="Email" />
             <SelectInput name="language" options={languageOptions} placeholder="Languages Spoken" />
-            <RadioInput name="car">Do you have a car you&apos;d be willing to drive?</RadioInput>
+            <RadioInput name="hasCar">Do you have a car you&apos;d be willing to drive?</RadioInput>
             <CheckBoxInput name="termsOfUse">
               <>
                 I agree and certify to the{' '}

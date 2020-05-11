@@ -1,23 +1,23 @@
 import { useField } from 'formik';
 
 const RadioOptions = (groupName, isRequired, inline, onSelect, options) => {
-  let allOptions = [];
+  const allOptions = [];
   const groupClass = inline ? 'form-check form-check-inline' : 'form-check';
 
-  options.forEach((option) => {
+  options.forEach(({ label, value }) => {
     allOptions.push(
-      <div className={groupClass} key={`topDiv-${option}`}>
+      <div className={groupClass} key={`topDiv-${label}`}>
         <input
-          key={`input-${option}`}
+          key={`input-${label}`}
           required={isRequired}
           name={groupName}
           className="form-check-input"
           type="radio"
-          value={option}
-          onClick={() => onSelect(option)}
+          value={label}
+          onClick={() => onSelect(value)}
         />
-        <label className="form-check-label" htmlFor={groupName + option} key={`label-${option}`}>
-          {option}
+        <label className="form-check-label" htmlFor={groupName + label} key={`label-${label}`}>
+          {label}
         </label>
       </div>,
     );
@@ -31,7 +31,10 @@ const RadioInput = ({
   isRequired = true,
   inline = true,
   colWidth = '13',
-  options = ['Yes', 'No'],
+  options = [
+    { label: 'Yes', value: true },
+    { label: 'No', value: false },
+  ],
   ...props
 }) => {
   const [field, meta, helpers] = useField(props);
