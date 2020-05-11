@@ -62,6 +62,9 @@ a.theme-link {
   &:focus {
     background: darken($theme-color-primary, 5%);
   }
+  &:disabled {
+    background: darken($theme-color-primary, 10%);
+  }
 }
 
 .btn-secondary {

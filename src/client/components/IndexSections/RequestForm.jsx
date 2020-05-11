@@ -22,12 +22,7 @@ const RequestForm = ({ onSubmitted }) => {
     try {
       // disable submit button while waiting on api call
       setSubmitting(true);
-      await postRequest({
-        ...formData,
-        phone: '+19162061598',
-        termsAgreement: true,
-      });
-
+      await postRequest(formData);
       onSubmitted();
       // analytics.logEvent('sign_up', { method: 'volunteer' });
     } catch (err) {
@@ -46,7 +41,8 @@ const RequestForm = ({ onSubmitted }) => {
         address: '',
         email: '',
         list: '',
-        language: '',
+        language: [],
+        termsAgreement: false,
       }}
       onSubmit={(values, { setSubmitting }) => {
         handleSubmit(values, setSubmitting);
