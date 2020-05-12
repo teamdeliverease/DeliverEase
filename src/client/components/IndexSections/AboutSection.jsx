@@ -16,11 +16,12 @@ const AboutSection = () => {
             connection.
           </p>
           <br />
-          <h3 className="text-center text-white">Looking for open grocery stores?</h3>
+          <br />
+          <h4 className="text-center text-white">Looking for open grocery stores?</h4>
           <p>
-            <a href="https://wosostories.com/" className="text-white" target="_blank">
-              Check out our friends at WOSO who are putting together a map of local restaurants and
-              stores that are still open during COVID-19.
+            <a href="https://www.supportlocalsf.com/" className="text-white" target="_blank">
+              Check out our friends at Support Local SF who are putting together a map of local
+              restaurants and stores that are still open during COVID-19.
             </a>
           </p>
           <div className="author-links text-center pt-5">

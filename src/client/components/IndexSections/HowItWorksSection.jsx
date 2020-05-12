@@ -6,7 +6,8 @@ const HowItWorksSection = () => {
       <div className="container">
         <h2 className="section-heading text-center">How It Works</h2>
         <div className="section-intro single-col-max mx-auto text-center mb-3">
-          Turning the quarantine into a quaranteam
+          Our mission is to help neighbors in need personally connect with local volunteers in the
+          face of COVID-19.
         </div>
         <div className="row text-center">
           <InfoCard
