@@ -62,7 +62,7 @@ const VolunteerForm = ({ onSubmitted }) => {
             <TextInput maxLength="256" type="email" name="email" placeholder="Email" />
             <SelectInput name="language" options={languageOptions} placeholder="Languages Spoken" />
             <RadioInput name="hasCar">Do you have a car you&apos;d be willing to drive?</RadioInput>
-            <CheckBoxInput name="termsOfUse">
+            <CheckBoxInput name="termsAgreement">
               <>
                 I agree and certify to the{' '}
                 <Modal
