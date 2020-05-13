@@ -1,8 +1,8 @@
 path /volunteers/{uid} is Volunteer{
-    write() {True}
+    write() {true}
 }
 path /requesters/{uid} is Requester{
-    write() {True}
+    write() {true}
 }
 
 type Name extends String{
