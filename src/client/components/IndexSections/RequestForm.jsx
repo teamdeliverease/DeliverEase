@@ -73,7 +73,7 @@ const RequestForm = ({ onSubmitted }) => {
               name="list"
               placeholder="Enter shopping list here"
             />
-            <CheckBoxInput name="termsOfUse">
+            <CheckBoxInput name="termsAgreement">
               <>
                 I agree to the{' '}
                 <Modal
