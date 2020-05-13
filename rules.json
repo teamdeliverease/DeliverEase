@@ -2,7 +2,7 @@
   "rules": {
     "volunteers": {
       "$uid": {
-        ".validate": "newData.hasChildren(['firstName', 'lastName', 'name', 'email', 'address', 'phone', 'hasCar', 'termsAgreement', 'language', 'lat', 'lng', 'timestamp'])",
+        ".validate": "newData.hasChildren(['firstName', 'lastName', 'name', 'email', 'address', 'phone', 'hasCar', 'termsAgreement', 'lat', 'lng', 'timestamp'])",
         "firstName": {
           ".validate": "((newData.isString() && newData.val().length > 0) && newData.val().length <= 64)"
         },
@@ -28,7 +28,10 @@
           ".validate": "(newData.isBoolean() && newData.val() == true)"
         },
         "language": {
-          ".validate": "(newData.isString() && ((((newData.val().contains('English') || newData.val().contains('Spanish')) || newData.val().contains('Mandarin')) || newData.val().contains('Cantonese')) || newData.val().contains('Other')))"
+          "$key1": {
+            ".validate": "newData.isString()"
+          },
+          ".validate": "(newData.hasChildren() && ((((newData.val().contains('English') || newData.val().contains('Spanish')) || newData.val().contains('Mandarin')) || newData.val().contains('Cantonese')) || newData.val().contains('Other')))"
         },
         "lat": {
           ".validate": "((newData.isNumber() && newData.val() >= -180) && newData.val() <= 180)"
@@ -47,7 +50,7 @@
     },
     "requesters": {
       "$uid": {
-        ".validate": "newData.hasChildren(['firstName', 'lastName', 'name', 'address', 'phone', 'termsAgreement', 'list', 'lat', 'lng', 'language', 'timestamp', 'fulfillment_status', 'fulfillment_status_timestamp'])",
+        ".validate": "newData.hasChildren(['firstName', 'lastName', 'name', 'address', 'phone', 'termsAgreement', 'list', 'lat', 'lng', 'timestamp', 'fulfillment_status', 'fulfillment_status_timestamp'])",
         "firstName": {
           ".validate": "((newData.isString() && newData.val().length > 0) && newData.val().length <= 64)"
         },
@@ -79,7 +82,10 @@
           ".validate": "((newData.isNumber() && newData.val() >= -90) && newData.val() <= 90)"
         },
         "language": {
-          ".validate": "(newData.isString() && ((((newData.val().contains('English') || newData.val().contains('Spanish')) || newData.val().contains('Mandarin')) || newData.val().contains('Cantonese')) || newData.val().contains('Other')))"
+          "$key1": {
+            ".validate": "newData.isString()"
+          },
+          ".validate": "(newData.hasChildren() && ((((newData.val().contains('English') || newData.val().contains('Spanish')) || newData.val().contains('Mandarin')) || newData.val().contains('Cantonese')) || newData.val().contains('Other')))"
         },
         "timestamp": {
           ".validate": "(newData.isNumber() && newData.val() == (data.val() == null ? now : data.val()))"
