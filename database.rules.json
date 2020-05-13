@@ -8,17 +8,6 @@
       }
     },
     "requesters": {
-      "name": {
-        ".validate": "newData.isString() && newData.val().length() > 0 g&& newData.val().length <= 128"
-      }
-      "address": {
-        ".validate": "newData.isString() && newData.length() > 0 && newData.length() < 256"
-
-      }
-
-      "phone": {
-        ".validate": "newData."
-      }
       "$uid": {
         ".validate": "newData.hasChildren(['address', 'lat', 'lng', 'name', 'phone', 'timestamp', 'list'])",
         ".write": true

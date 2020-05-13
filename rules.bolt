@@ -6,7 +6,6 @@ path /requesters/{uid} is Requester{
 }
 
 type Name extends String{
-    property: String
     validate() { this.length > 0 && this.length <= 64}
 }
 
