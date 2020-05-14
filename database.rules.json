@@ -19,7 +19,7 @@
           ".validate": "((newData.isString() && newData.val().length > 0) && newData.val().length <= 256)"
         },
         "phone": {
-          ".validate": "(newData.isString() && newData.val().matches(/.*/))"
+          ".validate": "((newData.isString() && newData.val().length > 0) && newData.val().length <= 15)"
         },
         "hasCar": {
           ".validate": "(newData.isBoolean() && newData.val() != null)"
@@ -29,14 +29,15 @@
         },
         "language": {
           "$key1": {
-            ".validate": "(newData.isString() && (newData.val() == 'Spanish' || newData.val() == 'English' || newData.val() == 'Mandarin' || newData.val() == 'Cantonese' || newData.val() == 'Other' ))"
-          }
+            ".validate": "newData.isString()"
+          },
+          ".validate": "(newData.hasChildren() && ((((newData.val().contains('English') || newData.val().contains('Spanish')) || newData.val().contains('Mandarin')) || newData.val().contains('Cantonese')) || newData.val().contains('Other')))"
         },
         "lat": {
-          ".validate": "((newData.isNumber() && newData.val() >= -90) && newData.val() <= 90)"
+          ".validate": "((newData.isNumber() && newData.val() >= -180) && newData.val() <= 180)"
         },
         "lng": {
-          ".validate": "((newData.isNumber() && newData.val() >= -180) && newData.val() <= 180)"
+          ".validate": "((newData.isNumber() && newData.val() >= -90) && newData.val() <= 90)"
         },
         "timestamp": {
           ".validate": "(newData.isNumber() && newData.val() == (data.val() == null ? now : data.val()))"
@@ -66,7 +67,7 @@
           ".validate": "((newData.isString() && newData.val().length > 0) && newData.val().length <= 256)"
         },
         "phone": {
-          ".validate": "(newData.isString() && newData.val().matches(/.*/))"
+          ".validate": "((newData.isString() && newData.val().length > 0) && newData.val().length <= 15)"
         },
         "termsAgreement": {
           ".validate": "(newData.isBoolean() && newData.val() == true)"
@@ -75,15 +76,16 @@
           ".validate": "((newData.isString() && newData.val().length > 0) && newData.val().length <= 1024)"
         },
         "lat": {
-          ".validate": "((newData.isNumber() && newData.val() >= -90) && newData.val() <= 90)"
+          ".validate": "((newData.isNumber() && newData.val() >= -180) && newData.val() <= 180)"
         },
         "lng": {
-          ".validate": "((newData.isNumber() && newData.val() >= -180) && newData.val() <= 180)"
+          ".validate": "((newData.isNumber() && newData.val() >= -90) && newData.val() <= 90)"
         },
         "language": {
           "$key1": {
-            ".validate": "(newData.isString() && (newData.val() == 'Spanish' || newData.val() == 'English' || newData.val() == 'Mandarin' || newData.val() == 'Cantonese' || newData.val() == 'Other' ))"
-          }
+            ".validate": "newData.isString()"
+          },
+          ".validate": "(newData.hasChildren() && ((((newData.val().contains('English') || newData.val().contains('Spanish')) || newData.val().contains('Mandarin')) || newData.val().contains('Cantonese')) || newData.val().contains('Other')))"
         },
         "timestamp": {
           ".validate": "(newData.isNumber() && newData.val() == (data.val() == null ? now : data.val()))"
