@@ -26,8 +26,7 @@ const addToFirebase = (ref, data) => {
 const prepareAndAddToFirebase = (ref, data, prepare) => {
   return geocode(data.address)
     .then((results) => {
-      prepare(results[0]);
-      return addToFirebase(ref, data);
+      return addToFirebase(ref, prepare(results[0]));
     })
     .catch((err) => {
       if (err instanceof GeocodeError) {
@@ -41,29 +40,27 @@ const submitForm = (ref, data, prepare) => {
   return prepareAndAddToFirebase(ref, data, prepare);
 };
 
-const addLocationPayload = (geocodeResult, data) => {
+const getLocationPayload = (geocodeResult) => {
   const { location } = geocodeResult.geometry;
 
   return {
-    ...data,
     address: geocodeResult.formatted_address,
     lat: location.lat(),
     lng: location.lng(),
   };
 };
 
-const addFulfillmentStatusPayload = (data) => {
+const getFulfillmentStatusPayload = () => {
   return {
-    ...data,
     fulfillment_status: FULFILLMENT_STATUS.NEW,
     fulfillment_status_timestamp: firebase.database.ServerValue.TIMESTAMP,
   };
 };
 
-const addNamePayload = (data) => {
+const getNamePayload = (data) => {
   const fullName = `${data.firstName} ${data.lastName}`;
 
-  return { ...data, name: fullName };
+  return { name: fullName };
 };
 
 const get = (ref) => {
@@ -77,9 +74,9 @@ const get = (ref) => {
 
 export {
   submitForm,
-  addLocationPayload,
-  addFulfillmentStatusPayload,
-  addNamePayload,
+  getLocationPayload,
+  getFulfillmentStatusPayload,
+  getNamePayload,
   prepareAndAddToFirebase,
   get,
 };

@@ -1,17 +1,20 @@
 import {
   submitForm,
-  addLocationPayload,
-  addNamePayload,
-  addFulfillmentStatusPayload,
+  getLocationPayload,
+  getNamePayload,
+  getFulfillmentStatusPayload,
 } from '../utils/api';
 
 const REQUESTERS_REF = 'requesters';
 
 const postRequest = (data) => {
   return submitForm(REQUESTERS_REF, data, (geocodeResult) => {
-    addLocationPayload(geocodeResult, data);
-    addFulfillmentStatusPayload(data);
-    addNamePayload(data);
+    return {
+      ...data,
+      ...getLocationPayload(geocodeResult),
+      ...getFulfillmentStatusPayload(),
+      ...getNamePayload(data),
+    };
   });
 };
 

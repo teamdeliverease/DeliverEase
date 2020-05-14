@@ -1,11 +1,14 @@
-import { submitForm, addLocationPayload, addNamePayload, get } from '../utils/api';
+import { get, submitForm, getLocationPayload, getNamePayload } from '../utils/api';
 
 const VOLUNTEERS_REF = 'volunteers';
 
 const postVolunteer = (data) => {
   return submitForm(VOLUNTEERS_REF, data, (geocodeResult) => {
-    addLocationPayload(geocodeResult, data);
-    addNamePayload(data);
+    return {
+      ...data,
+      ...getLocationPayload(geocodeResult),
+      ...getNamePayload(data),
+    };
   });
 };
 
