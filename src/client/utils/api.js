@@ -26,8 +26,7 @@ const addToFirebase = (ref, data) => {
 const prepareAndAddToFirebase = (ref, data, prepare) => {
   return geocode(data.address)
     .then((results) => {
-      const processedData = prepare(results[0]);
-      return addToFirebase(ref, processedData);
+      return addToFirebase(ref, prepare(results[0]));
     })
     .catch((err) => {
       if (err instanceof GeocodeError) {
