@@ -1,0 +1,99 @@
+path /volunteers/{uid} is Volunteer {
+  write() { true }
+}
+path /requesters/{uid} is Requester {
+  write() { true }
+}
+
+type Name extends String {
+  validate() { this.length > 0 && this.length <= 64}
+}
+
+type FullName extends String {
+  validate() { this.length > 0 && this.length <= 128}
+}
+
+type Email extends String {
+  validate() { this.length > 0 && this.length <= 256 && this.includes("@")}
+}
+
+type Address extends String {
+  validate() { this.length > 0 && this.length <= 256 }
+}
+
+type Phone extends String {
+  validate() { this.length > 0 && this.length <= 15 }
+}
+
+type HasCar extends Boolean {
+  validate() { this != null }
+}
+
+type TermsAgreement extends Boolean {
+  validate() { this == true}
+}
+
+type List extends String {
+  validate() { this.length > 0 && this.length <= 1024}
+}
+
+type Latitude extends Number {
+  validate() { this >= -90 && this <= 90 }
+}
+
+type Longitude extends Number {
+  validate() { this >= -180 && this <= 180 }
+}
+
+type FulfillmentStatus extends String {
+  validate() { this == 'new' || this == 'sourcing_volunteer' || this == 'pending_fullfilment' || this == 'fulfilling' || this == 'complete' }
+}
+
+type Language extends String[] {
+  validate() { this.includes('English') || this.includes('Spanish') || this.includes('Mandarin') || this.includes('Cantonese') || 
+  this.includes('Other')}
+}
+
+type Volunteer {
+  firstName: Name,
+  lastName: Name,
+  name: FullName,
+  email: Email,
+  address: Address,
+  phone: Phone,
+  hasCar: HasCar,
+  termsAgreement: TermsAgreement,
+  language: Language,
+  lat: Longitude,
+  lng: Latitude,
+  timestamp: InitialTimestamp
+}
+
+type Requester {
+  firstName: Name,
+  lastName: Name,
+  name: FullName,
+  email: Email | Null,
+  address: Address,
+  phone: Phone,
+  termsAgreement: TermsAgreement,
+  list: List,
+  lat: Longitude,
+  lng: Latitude,
+  language: Language,
+  timestamp: InitialTimestamp,
+  fulfillment_status: FulfillmentStatus,
+  fulfillment_status_timestamp: CurrentTimestamp
+}
+
+type CurrentTimestamp extends Number {
+  validate() { this == now }
+}
+
+type InitialTimestamp extends Number {
+  validate() { initial(this, now) }
+}
+
+// Returns true if the value is intialized to init, or if it retains it's prior
+// value, otherwise.
+initial(value, init) { value == (prior(value) == null ? init : prior(value)) }
