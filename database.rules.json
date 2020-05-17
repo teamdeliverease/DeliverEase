@@ -33,10 +33,10 @@
           }
         },
         "lat": {
-          ".validate": "((newData.isNumber() && newData.val() >= -180) && newData.val() <= 180)"
+          ".validate": "((newData.isNumber() && newData.val() >= -90) && newData.val() <= 90)"
         },
         "lng": {
-          ".validate": "((newData.isNumber() && newData.val() >= -90) && newData.val() <= 90)"
+          ".validate": "((newData.isNumber() && newData.val() >= -180) && newData.val() <= 180)"
         },
         "timestamp": {
           ".validate": "(newData.isNumber() && newData.val() == (data.val() == null ? now : data.val()))"
@@ -75,10 +75,10 @@
           ".validate": "((newData.isString() && newData.val().length > 0) && newData.val().length <= 1024)"
         },
         "lat": {
-          ".validate": "((newData.isNumber() && newData.val() >= -180) && newData.val() <= 180)"
+          ".validate": "((newData.isNumber() && newData.val() >= -90) && newData.val() <= 90)"
         },
         "lng": {
-          ".validate": "((newData.isNumber() && newData.val() >= -90) && newData.val() <= 90)"
+          ".validate": "((newData.isNumber() && newData.val() >= -180) && newData.val() <= 180)"
         },
         "language": {
           "$key1": {

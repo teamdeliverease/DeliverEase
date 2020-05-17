@@ -68,8 +68,8 @@ type Volunteer {
   hasCar: HasCar,
   termsAgreement: TermsAgreement,
   language: Language,
-  lat: Longitude | Null,
-  lng: Latitude | Null,
+  lat: Latitude | Null,
+  lng: Longitude | Null,
   timestamp: InitialTimestamp
 }
 
@@ -82,8 +82,8 @@ type Requester {
   phone: Phone,
   termsAgreement: TermsAgreement,
   list: List,
-  lat: Longitude | Null,
-  lng: Latitude | Null,
+  lat: Latitude | Null,
+  lng: Longitude | Null,
   language: Language,
   timestamp: InitialTimestamp,
   fulfillment_status: FulfillmentStatus,
