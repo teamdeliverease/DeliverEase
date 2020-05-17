@@ -33,6 +33,14 @@ Store config locally
 ```
 firebase functions:config:get > .runtimeconfig.json
 ```
+
+Get the following files from team members
+
+```
+serviceAccountKey.json
+.env.local
+```
+
 Install project dependencies
 ```
 npm install
