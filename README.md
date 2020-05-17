@@ -14,8 +14,6 @@ node > 10: https://nodejs.org/en/download/
 
 ### Installing
 
-⚠️ All commands should be run from within the `functions` folder. ⚠️
-
 Install firebase cli
 
 ```
@@ -45,8 +43,19 @@ Install project dependencies
 ```
 npm install
 ```
+### For development where testing db & auth is not required:
 
-Start the firebase local server
+Start the nextjs local server
+
+```
+npm run dev
+```
+
+Check out the project at `http://localhost:3000`
+
+### For development where testing db & auth is required:
+
+Start the firebase emulator
 
 ```
 npm start
@@ -61,11 +70,20 @@ Check out the database at `http://localhost:9000/path/to/data.json?ns=delivereas
 
 Use the following npm scripts to deploy hosting and functions to firebase
 ```
-npm run deploy-staging
-npm run deploy-prod
+npm run deploy
+npm run deploy:prod -- -m "deployment message"
 ```
 
 🚨 Only run `deploy-prod` with approval of all team members 🚨
+
+### Adding admin users
+
+Use the grant-admin and revoke admin scripts with a user's email to grant/revoke permissions
+Example:
+```
+grant-admin matt@gmail.com
+revoke-admin felix@gmail.com
+```
 
 ### Contributing
 1) checkout and pull master: `git checkout master && git pull`
@@ -77,3 +95,10 @@ npm run deploy-prod
 7) checkout and pull master: `git checkout master && git pull`
 8) delete local branch: `git branch -d <branch_name>`
 9) prune deleted branches: `git remote prune origin`
+
+### npm scripts reference
+`dev`: for UI development (runs next, hot reloading, but no firebase db/auth - runs on port 3000)
+`start`: for testing UI + firebase (runs firebase emulators, no hot reloading - runs on port 5000)
+`test`: for running our database rules tests (and more eventually)
+`deploy`: for deploying to staging
+`deploy:prod`: for deploying to production
