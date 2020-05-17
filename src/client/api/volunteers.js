@@ -4,11 +4,15 @@ const VOLUNTEERS_REF = 'volunteers';
 
 const postVolunteer = (data) => {
   return submitForm(VOLUNTEERS_REF, data, (geocodeResult) => {
-    return {
+    const preparedData = {
       ...data,
-      ...getLocationPayload(geocodeResult),
       ...getNamePayload(data),
     };
+
+    if (geocodeResult) {
+      return { ...preparedData, ...getLocationPayload(geocodeResult) };
+    }
+    return preparedData;
   });
 };
 
