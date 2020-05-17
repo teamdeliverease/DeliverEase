@@ -9,12 +9,16 @@ const REQUESTERS_REF = 'requesters';
 
 const postRequest = (data) => {
   return submitForm(REQUESTERS_REF, data, (geocodeResult) => {
-    return {
+    const preparedData = {
       ...data,
-      ...getLocationPayload(geocodeResult),
       ...getFulfillmentStatusPayload(),
       ...getNamePayload(data),
     };
+
+    if (geocodeResult) {
+      return { ...preparedData, ...getLocationPayload(geocodeResult) };
+    }
+    return preparedData;
   });
 };
 
