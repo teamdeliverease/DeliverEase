@@ -2,7 +2,7 @@
   "rules": {
     "volunteers": {
       "$uid": {
-        ".validate": "newData.hasChildren(['firstName', 'lastName', 'name', 'email', 'address', 'phone', 'hasCar', 'termsAgreement', 'lat', 'lng', 'timestamp'])",
+        ".validate": "newData.hasChildren(['firstName', 'lastName', 'name', 'email', 'address', 'phone', 'hasCar', 'termsAgreement', 'timestamp'])",
         "firstName": {
           ".validate": "((newData.isString() && newData.val().length > 0) && newData.val().length <= 64)"
         },
@@ -49,7 +49,7 @@
     },
     "requesters": {
       "$uid": {
-        ".validate": "newData.hasChildren(['firstName', 'lastName', 'name', 'address', 'phone', 'termsAgreement', 'list', 'lat', 'lng', 'timestamp', 'fulfillment_status', 'fulfillment_status_timestamp'])",
+        ".validate": "newData.hasChildren(['firstName', 'lastName', 'name', 'email', 'address', 'phone', 'termsAgreement', 'list', 'timestamp', 'fulfillment_status', 'fulfillment_status_timestamp'])",
         "firstName": {
           ".validate": "((newData.isString() && newData.val().length > 0) && newData.val().length <= 64)"
         },
@@ -60,7 +60,7 @@
           ".validate": "((newData.isString() && newData.val().length > 0) && newData.val().length <= 128)"
         },
         "email": {
-          ".validate": "(((newData.isString() && newData.val().length > 0) && newData.val().length <= 256) && newData.val().contains('@'))"
+          ".validate": "(newData.isString() && (newData.val() == '' || ((newData.val().length > 0 && newData.val().length <= 256) && newData.val().contains('@'))))"
         },
         "address": {
           ".validate": "((newData.isString() && newData.val().length > 0) && newData.val().length <= 256)"

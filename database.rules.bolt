@@ -13,6 +13,10 @@ type FullName extends String {
   validate() { this.length > 0 && this.length <= 128}
 }
 
+type NullableEmail extends String {
+  validate() { this == '' || (this.length > 0 && this.length <= 256 && this.includes("@"))}
+}
+
 type Email extends String {
   validate() { this.length > 0 && this.length <= 256 && this.includes("@")}
 }
@@ -64,8 +68,8 @@ type Volunteer {
   hasCar: HasCar,
   termsAgreement: TermsAgreement,
   language: Language,
-  lat: Longitude,
-  lng: Latitude,
+  lat: Latitude | Null,
+  lng: Longitude | Null,
   timestamp: InitialTimestamp
 }
 
@@ -73,13 +77,13 @@ type Requester {
   firstName: Name,
   lastName: Name,
   name: FullName,
-  email: Email | Null,
+  email: NullableEmail,
   address: Address,
   phone: Phone,
   termsAgreement: TermsAgreement,
   list: List,
-  lat: Longitude,
-  lng: Latitude,
+  lat: Latitude | Null,
+  lng: Longitude | Null,
   language: Language,
   timestamp: InitialTimestamp,
   fulfillment_status: FulfillmentStatus,
