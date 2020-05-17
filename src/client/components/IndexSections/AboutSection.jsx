@@ -39,10 +39,14 @@ const AboutSection = () => {
               </li>
             </ul>
             <p>
-              (415) 633-6261&nbsp;&nbsp;|&nbsp;&nbsp;
+              <ThemedLink color="white" bold={false} href="tel:415-633-6261">
+                (415) 633-6261
+              </ThemedLink>
+              &nbsp;&nbsp;|&nbsp;&nbsp;
               <ThemedLink
                 color="white"
                 bold={false}
+                target="_blank"
                 href="mailto:teamdeliverease@gmail.com?Subject=Website%20Inquiry"
               >
                 teamdeliverease@gmail.com
@@ -63,10 +67,12 @@ const AboutSection = () => {
               fulfill a delivery. At that point, the requester’s name, phone number, and address
               will be shared for the volunteer to better communicate about the request and know
               where to deliver it. You can reach out to us at{' '}
-              <ThemedLink>
-                <a href="mailto:teamdeliverease@gmail.com?Subject=Website%20Inquiry">
-                  teamdeliverease@gmail.com
-                </a>{' '}
+              <ThemedLink
+                bold={false}
+                target="_blank"
+                href="mailto:teamdeliverease@gmail.com?Subject=Website%20Inquiry"
+              >
+                teamdeliverease@gmail.com{' '}
               </ThemedLink>
               if you have any questions about how we share your information with volunteers or if
               you would like your information removed from our database.
