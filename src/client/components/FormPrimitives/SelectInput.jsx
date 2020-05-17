@@ -10,15 +10,15 @@ const customStyles = {
   }),
   multiValue: (styles) => ({
     ...styles,
-    'font-size': '1.1rem',
+    fontSize: '1.1rem',
   }),
   multiValueRemove: (styles) => ({
     ...styles,
-    '&:hover': { color: '#404040', 'background-color': '#D3D3D3' },
+    '&:hover': { color: '#404040', backgroundColor: '#D3D3D3' },
   }),
   menu: (styles) => ({
     ...styles,
-    'margin-left': '-0.7rem',
+    marginLeft: '-0.7rem',
   }),
 };
 const noop = () => {
