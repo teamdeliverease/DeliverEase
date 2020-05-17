@@ -37,14 +37,6 @@ type List extends String {
   validate() { this.length > 0 && this.length <= 1024}
 }
 
-type Latitude extends Number {
-  validate() { this >= -90 && this <= 90 }
-}
-
-type Longitude extends Number {
-  validate() { this >= -180 && this <= 180 }
-}
-
 type FulfillmentStatus extends String {
   validate() { this == 'new' || this == 'sourcing_volunteer' || this == 'pending_fullfilment' || this == 'fulfilling' || this == 'complete' }
 }
@@ -64,8 +56,6 @@ type Volunteer {
   hasCar: HasCar,
   termsAgreement: TermsAgreement,
   language: Language,
-  lat: Longitude,
-  lng: Latitude,
   timestamp: InitialTimestamp
 }
 
@@ -78,8 +68,6 @@ type Requester {
   phone: Phone,
   termsAgreement: TermsAgreement,
   list: List,
-  lat: Longitude,
-  lng: Latitude,
   language: Language,
   timestamp: InitialTimestamp,
   fulfillment_status: FulfillmentStatus,

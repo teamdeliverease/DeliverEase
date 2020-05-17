@@ -32,12 +32,6 @@
             ".validate": "(newData.isString() && (newData.val() == 'Spanish' || newData.val() == 'English' || newData.val() == 'Mandarin' || newData.val() == 'Cantonese' || newData.val() == 'Other' ))"
           }
         },
-        "lat": {
-          ".validate": "((newData.isNumber() && newData.val() >= -90) && newData.val() <= 90)"
-        },
-        "lng": {
-          ".validate": "((newData.isNumber() && newData.val() >= -180) && newData.val() <= 180)"
-        },
         "timestamp": {
           ".validate": "(newData.isNumber() && newData.val() == (data.val() == null ? now : data.val()))"
         },
@@ -73,12 +67,6 @@
         },
         "list": {
           ".validate": "((newData.isString() && newData.val().length > 0) && newData.val().length <= 1024)"
-        },
-        "lat": {
-          ".validate": "((newData.isNumber() && newData.val() >= -90) && newData.val() <= 90)"
-        },
-        "lng": {
-          ".validate": "((newData.isNumber() && newData.val() >= -180) && newData.val() <= 180)"
         },
         "language": {
           "$key1": {
