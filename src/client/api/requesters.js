@@ -3,6 +3,7 @@ import {
   getLocationPayload,
   getNamePayload,
   getFulfillmentStatusPayload,
+  get,
 } from '../utils/api';
 
 const REQUESTERS_REF = 'requesters';
@@ -18,5 +19,8 @@ const postRequest = (data) => {
   });
 };
 
-// eslint-disable-next-line import/prefer-default-export
-export { postRequest };
+const getRequests = () => {
+  get(REQUESTERS_REF);
+};
+
+export { postRequest, getRequests };
