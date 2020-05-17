@@ -34,7 +34,7 @@ Store config locally
 firebase functions:config:get > .runtimeconfig.json
 ```
 
-Get the following files from team members
+Get the following files from team members and store them at the root of DeliverEase
 
 ```
 serviceAccountKey.json
