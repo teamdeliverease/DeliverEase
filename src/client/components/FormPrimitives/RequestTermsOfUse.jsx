@@ -33,7 +33,10 @@ const RequestTermsOfUse = () => {
       DeliverEase is not an authority on health or medical practices. Before helping your community,
       be sure to familiarize and follow all local government guidelines. Health and safety guidance
       from the CDC can be found{' '}
-      <ThemedLink href="https://www.cdc.gov/coronavirus/2019-ncov/prepare/disinfecting-your-home.html">
+      <ThemedLink
+        target="_blank"
+        href="https://www.cdc.gov/coronavirus/2019-ncov/prepare/disinfecting-your-home.html"
+      >
         here
       </ThemedLink>
       .
