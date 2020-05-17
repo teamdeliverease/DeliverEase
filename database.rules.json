@@ -44,6 +44,7 @@
         "$other": {
           ".validate": "false"
         },
+        ".read": "auth.token.admin == true",
         ".write": "true"
       }
     },
@@ -97,6 +98,7 @@
         "$other": {
           ".validate": "false"
         },
+        ".read": "auth.token.admin == true",
         ".write": "true"
       }
     }
