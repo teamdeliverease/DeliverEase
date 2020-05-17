@@ -43,7 +43,7 @@ Install project dependencies
 ```
 npm install
 ```
-### For development where testing db & auth is not required:
+### For most development (writes to staging DB):
 
 Start the nextjs local server
 
@@ -53,7 +53,7 @@ npm run dev
 
 Check out the project at `http://localhost:3000`
 
-### For development where testing db & auth is required:
+### For development where running a local database is required:
 
 Start the firebase emulator
 
