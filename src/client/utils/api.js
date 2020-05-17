@@ -30,7 +30,7 @@ const prepareAndAddToFirebase = (ref, data, prepare) => {
     })
     .catch((err) => {
       if (err instanceof GeocodeError) {
-        return addToFirebase(ref, data);
+        return addToFirebase(ref, prepare());
       }
       throw err;
     });
