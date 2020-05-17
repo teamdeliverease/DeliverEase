@@ -13,6 +13,10 @@ type FullName extends String {
   validate() { this.length > 0 && this.length <= 128}
 }
 
+type NullableEmail extends String {
+  validate() { this == '' || (this.length > 0 && this.length <= 256 && this.includes("@"))}
+}
+
 type Email extends String {
   validate() { this.length > 0 && this.length <= 256 && this.includes("@")}
 }
@@ -37,6 +41,14 @@ type List extends String {
   validate() { this.length > 0 && this.length <= 1024}
 }
 
+type Latitude extends Number {
+  validate() { this >= -90 && this <= 90 }
+}
+
+type Longitude extends Number {
+  validate() { this >= -180 && this <= 180 }
+}
+
 type FulfillmentStatus extends String {
   validate() { this == 'new' || this == 'sourcing_volunteer' || this == 'pending_fullfilment' || this == 'fulfilling' || this == 'complete' }
 }
@@ -56,6 +68,8 @@ type Volunteer {
   hasCar: HasCar,
   termsAgreement: TermsAgreement,
   language: Language,
+  lat: Longitude | Null,
+  lng: Latitude | Null,
   timestamp: InitialTimestamp
 }
 
@@ -63,11 +77,13 @@ type Requester {
   firstName: Name,
   lastName: Name,
   name: FullName,
-  email: Email | Null,
+  email: NullableEmail,
   address: Address,
   phone: Phone,
   termsAgreement: TermsAgreement,
   list: List,
+  lat: Longitude | Null,
+  lng: Latitude | Null,
   language: Language,
   timestamp: InitialTimestamp,
   fulfillment_status: FulfillmentStatus,
