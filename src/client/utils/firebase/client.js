@@ -4,19 +4,21 @@ import 'firebase/auth';
 import 'firebase/analytics';
 import 'firebase/database';
 
-const clientCredentials = {
-  apiKey: process.env.FIREBASE_PUBLIC_API_KEY,
-  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-  databaseURL: process.env.FIREBASE_DATABASE_URL,
-  projectId: process.env.FIREBASE_PROJECT_ID,
-  appId: process.env.FIREBASE_APP_ID,
-  measurementId: process.env.FIREBASE_MEASUREMENT_ID,
-};
-
 // Check that `window` is in scope for the analytics module!
 if (typeof window !== 'undefined' && !firebase.apps.length) {
-  firebase.initializeApp(clientCredentials);
-  if ('measurementId' in clientCredentials) firebase.analytics();
+  // THESE ARE THE PRODUCTION CONFIGS, DON'T USE THESE LOCALLY
+  firebase.initializeApp({
+    projectId: 'deliverease-f9eec',
+    appId: '1:436542528471:web:90e09ee2379187a34c4992',
+    databaseURL: 'https://deliverease-f9eec.firebaseio.com',
+    storageBucket: 'deliverease-f9eec.appspot.com',
+    locationId: 'us-central',
+    apiKey: 'AIzaSyCdINEXNyFJrqzAlIG06Xd5XhT6Q-iZ0-c',
+    authDomain: 'deliverease-f9eec.firebaseapp.com',
+    messagingSenderId: '436542528471',
+    measurementId: 'G-KVEMXD2KHE',
+  });
+  firebase.analytics();
 }
 
 export default firebase;
