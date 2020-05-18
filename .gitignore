@@ -1,3 +1,11 @@
+# custom
+serviceAccountKey.json
+.runtimeconfig.json
+.DS_Store
+.next
+# next
+dist
+
 # Logs
 logs
 *.log
@@ -61,10 +69,9 @@ node_modules/
 # Yarn Integrity file
 .yarn-integrity
 
-# dotenv environment variables file
-.env
+# Local dotenv files. We're following the file structure used in
+# create-react-app and documented in the Ruby dotenv:
+# https://github.com/bkeepers/dotenv#what-other-env-files-can-i-use
+.env.*local
 
-.DS_Store
-
-# firebase service key
-serviceAccountKey.json
+credentials

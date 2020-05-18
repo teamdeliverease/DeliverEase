@@ -1,0 +1,172 @@
+$theme-primary: #e55712;
+$text-blue: #007bff;
+
+.full-width {
+  width: 100% !important;
+}
+
+.language-dropdown {
+  border-radius: 0;
+  background-color: white;
+  padding: 0.375rem 0.75rem !important;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgb(227, 233, 246);
+  border-radius: 0.25rem;
+}
+
+.language-dropdown .filter-option-inner-inner {
+  color: #7f84b1;
+}
+
+.dropdown-item:hover {
+  background-color: #f8f9fa !important;
+}
+
+.dropdown-item:active {
+  color: black;
+}
+
+.full-width button {
+  width: 30%;
+}
+
+.navbar-brand {
+  margin-right: 0;
+}
+
+.site-logo {
+  display: flex;
+  align-items: center;
+}
+
+.title-container {
+  display: flex;
+}
+
+.title-container a:hover {
+  text-decoration: none;
+}
+
+.title-container .title {
+  margin-right: 5px;
+}
+
+.title-container .title::after {
+  margin-left: 5px;
+  content: '|';
+}
+
+.logo-icon {
+  height: 65px;
+  width: 65px;
+}
+
+@media only screen and (max-width: 600px) {
+  .title-container {
+    flex-direction: column;
+  }
+
+  .title-container .title::after {
+    content: '';
+  }
+
+  .full-width button {
+    width: 100%;
+  }
+
+  .logo-text {
+    font-size: 1.3rem !important;
+  }
+}
+
+.terms-link {
+  color: #007bff !important;
+}
+
+.confirmation-message h4 {
+  color: #008000 !important;
+}
+
+.form-wrapper {
+  max-height: 1000px;
+}
+
+.hidden {
+  visibility: hidden;
+  display: none;
+}
+
+.visible {
+  visibility: visible;
+  display: block;
+}
+
+/* Prevents iOS Safari from making phone number orange */
+a[href^='tel'] {
+  text-decoration: inherit;
+  color: inherit;
+}
+
+.iti {
+  display: flex !important;
+}
+
+.link-themed,
+a:not([href]).link-theme {
+  color: $theme-primary;
+}
+
+.link-themed:hover,
+a:not([href]).link-theme:hover {
+  color: $theme-primary;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.link-white,
+a:not([href]).link-white {
+  color: white;
+}
+.link-white:hover,
+a:not([href]).link-white:hover {
+  color: white;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.link-blue,
+a:not([href]).link-blue {
+  color: $text-blue;
+}
+
+.link-blue:hover,
+a:not([href]).link-blue:hover {
+  color: $text-blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.PhoneInputInput {
+  border: none;
+}
+
+.PhoneInputCountryIcon--border {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.PhoneInputCountryIcon {
+  height: 100%;
+}
+
+.pb-6 {
+  margin-bottom: 4.5rem;
+}
+
+.pb-7 {
+  margin-bottom: 6rem;
+}

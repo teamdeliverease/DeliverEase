@@ -1,6 +1,5 @@
 {
   "projects": {
-    "default": "deliverease-staging",
     "production": "deliverease-f9eec",
     "staging": "deliverease-staging"
   }
