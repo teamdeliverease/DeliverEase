@@ -7,11 +7,11 @@
   "private": true,
   "main": "dist/server/index.js",
   "scripts": {
-    "dev": "npm run watch:client & npm run watch:server",
-    "start": "npm run build && npm run start:emulators",
+    "dev": "FIREBASE_ENV=local npm run watch:client & npm run watch:server",
+    "start": "FIREBASE_ENV=local npm run build && NODE_ENV=production npm run start:emulators",
     "test": "firebase emulators:exec --only database 'mocha --timeout=10000'",
-    "deploy": "NODE_ENV=production firebase deploy -P staging --only functions,hosting",
-    "deploy:prod": "NODE_ENV=production firebase deploy -P production --only functions,hosting",
+    "deploy": "npm run clean && npm run build:staging && NODE_ENV=production firebase deploy -P staging --only functions,hosting",
+    "deploy:prod": "npm run clean && npm run build:prod && NODE_ENV=production firebase deploy -P production --only functions,hosting",
     "grant-admin": "node scripts/userRoles/grantAdminRole.js",
     "revoke-admin": "node scripts/userRoles/revokeAdminRole.js",
     "start:emulators": "NODE_ENV=production firebase emulators:start",
@@ -19,10 +19,11 @@
     "build:server": "babel src/server --out-dir dist/server --source-maps",
     "build:public": "cpx \"src/client/public/**/*.*\" \"dist/public\" -C",
     "build": "npm run build:client && npm run build:server && npm run build:public",
+    "build:staging": "FIREBASE_ENV=staging npm run build",
+    "build:prod": "FIREBASE_ENV=production npm run build",
     "watch:client": "next src/client",
     "watch:server": "babel src/server --out-dir dist/server --source-maps --watch",
-    "clean": "rimraf dist/",
-    "predeploy": "npm run clean && npm run build"
+    "clean": "rimraf dist/"
   },
   "engines": {
     "node": "10"
