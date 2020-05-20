@@ -102,8 +102,8 @@ revoke-admin felix@gmail.com
 
 ### npm scripts reference
 
-`dev`: for UI development (runs next, hot reloading, but no firebase db/auth - runs on port 3000)
-`start`: for testing UI + firebase (runs firebase emulators, no hot reloading - runs on port 5000)
-`test`: for running our database rules tests (and more eventually)
-`deploy`: for deploying to staging
-`deploy:prod`: for deploying to production
+`dev`: for UI development (runs next, hot reloading, but no firebase db/auth - runs on port 3000)  
+`start`: for testing UI + firebase (runs firebase emulators, no hot reloading - runs on port 5000)  
+`test`: for running our database rules tests (and more eventually)  
+`deploy`: for deploying to staging  
+`deploy:prod`: for deploying to production  
