@@ -5,7 +5,6 @@ import {
   REQUESTER_SHARE_CONTENT as shareContent,
   REQUESTER_SHARE_MESSAGE as shareMessage,
 } from '../../constants';
-import 'firebase/analytics';
 
 const VolunteerSection = () => {
   const [hasSubmitted, setSubmitted] = useState(false);
