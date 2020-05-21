@@ -1,4 +1,4 @@
-const axios = require('axios');
+const fetch = require('node-fetch');
 const functions = require('firebase-functions');
 const nodemailer = require('nodemailer');
 const mondaySDK = require('monday-sdk-js');
@@ -108,10 +108,11 @@ function sendEmail(mailOptions) {
 }
 
 function createAvochatoContact(contactInfo) {
-  axios
-    .post('https://www.avochato.com/v1/contacts', { contactInfo })
-    .then((res) => res.json())
-    .catch((err) => console.error(err));
+  fetch('https://www.avochato.com/v1/contacts', {
+    method: 'POST',
+    body: JSON.stringify(contactInfo),
+    headers: { 'Content-Type': 'application/json' },
+  });
 }
 
 const stagingSubject = `${isStagingEnvironment() ? '[STAGING] ' : ''}`;
@@ -183,9 +184,9 @@ exports.volunteerPostProcess = functions.database
   .ref('/volunteers/{volunteer}')
   .onCreate((snapshot) => {
     const volunteerMailOptions = getVolunteerConfirmationMailOptions(snapshot);
-    const volunteerAvochatoContactInfo = getAvochatoContactInfo(snapshot, 'Volunteer');
     sendEmail(volunteerMailOptions);
     if (isProductionEnvironment()) {
+      const volunteerAvochatoContactInfo = getAvochatoContactInfo(snapshot, 'Volunteer');
       createAvochatoContact(volunteerAvochatoContactInfo);
       createVolunteerMondayItem(snapshot);
     }
@@ -197,10 +198,10 @@ exports.requesterPostProcess = functions.database
   .onCreate((snapshot) => {
     const requesterMailOptions = getRequestConfirmationToRequesterMailOptions(snapshot);
     const deliverEaseMailOptions = getRequestConfirmationToDeliverEaseMailOptions(snapshot);
-    const requestAvochatoContactInfo = getAvochatoContactInfo(snapshot, 'Requester');
     sendEmail(requesterMailOptions);
     sendEmail(deliverEaseMailOptions);
     if (isProductionEnvironment()) {
+      const requestAvochatoContactInfo = getAvochatoContactInfo(snapshot, 'Requester');
       createAvochatoContact(requestAvochatoContactInfo);
       createRequesterMondayItem(snapshot);
     }
