@@ -2,8 +2,8 @@ import { useState } from 'react';
 import VolunteerForm from './VolunteerForm';
 import ShareCard from '../ShareCard';
 import {
-  REQUESTER_SHARE_CONTENT as shareContent,
-  REQUESTER_SHARE_MESSAGE as shareMessage,
+  VOLUNTEER_SHARE_CONTENT as shareContent,
+  VOLUNTEER_SHARE_MESSAGE as shareMessage,
 } from '../../constants';
 import 'firebase/analytics';
 
