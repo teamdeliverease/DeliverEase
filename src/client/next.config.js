@@ -1,4 +1,4 @@
-require('../../env.js');
+// require('../../env.js');
 
 module.exports = {
   distDir: '../../dist/client',
