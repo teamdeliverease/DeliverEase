@@ -33,6 +33,8 @@ class CustomDocument extends Document {
             crossOrigin="anonymous"
           />
           <script
+            async
+            defer
             src={`https://maps.google.com/maps/api/js?key=${MAPS_API_KEY}&libraries=places`}
           />
           <MetaTags />
