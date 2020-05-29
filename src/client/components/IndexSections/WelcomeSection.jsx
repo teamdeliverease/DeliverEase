@@ -45,7 +45,7 @@ const WelcomeSection = () => {
             </div>
           </div>
           {/* mb-5 mt-4 */}
-          <div className="col-12 col-md-5 align-self-center">
+          <div className="col-12 col-md-5 align-self-center welcome-image">
             <div className="book-cover-holder">
               <img
                 className="img-fluid book-cover"
