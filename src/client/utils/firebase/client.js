@@ -7,7 +7,7 @@ import 'firebase/database';
 // Check that `window` is in scope for the analytics module!
 if (typeof window !== 'undefined' && !firebase.apps.length) {
   firebase.initializeApp({
-    apiKey: process.env.FIREBASE_API_KEY,
+    apiKey: process.env.FIREBASE_PUBLIC_API_KEY,
     appId: process.env.FIREBASE_APP_ID,
     authDomain: process.env.FIREBASE_AUTH_DOMAIN,
     databaseURL: process.env.FIREBASE_DATABASE_URL,
