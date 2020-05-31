@@ -1,65 +1,64 @@
-import firebase from 'firebase/app';
+import PropTypes from 'prop-types';
+import { get } from 'lodash/object';
 import { useEffect, useState } from 'react';
+// import admin from '../utils/firebase/admin';
 import Map from '../components/Map';
-
-const isLoggedIn = () => {
-  if (typeof window === 'undefined') {
-    return false;
-  }
-  if (!firebase.auth().currentUser) {
-    return false;
-  }
-  return true;
-};
-
-const isAdminUser = async () => {
-  try {
-    // if we're on the server
-    if (typeof window === 'undefined') {
-      return false;
-    }
-    const result = await firebase.auth().currentUser.getIdTokenResult();
-    return result.claims.admin;
-  } catch (err) {
-    console.log(err);
-    return false;
-  }
-};
+import withAuthUser from '../utils/pageWrappers/withAuthUser';
+import withAuthUserInfo from '../utils/pageWrappers/withAuthUserInfo';
 
 const home = { lat: 37.7545, lng: -122.4425 };
 
-const MapPage = () => {
+const isAdminUser = async (user) => {
+  if (!user) return null;
+  if (typeof user.getIdTokenResult !== 'function') return null;
+  try {
+    const result = await user.getIdTokenResult();
+    return result.claims.admin;
+  } catch (err) {
+    console.log(err);
+    return null;
+  }
+};
+
+const MapPage = (props) => {
   const [isLoading, setLoading] = useState(true);
   const [shouldRender, setShouldRender] = useState(false);
+  const { AuthUserInfo } = props;
+  const user = get(AuthUserInfo, 'AuthUser.user');
 
   useEffect(() => {
     async function shouldRenderPage() {
-      const loggedIn = isLoggedIn();
-      if (!loggedIn) {
-        setShouldRender(false);
-        setLoading(false);
-        return;
-      }
-      const isAdmin = await isAdminUser();
-
+      const isAdmin = await isAdminUser(user);
       setShouldRender(isAdmin);
-      setLoading(false);
+
+      if (isAdmin === true || isAdmin === false) {
+        setLoading(false);
+      }
     }
 
     shouldRenderPage();
-  }, []);
+  }, [user]);
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
-  if (!shouldRender) {
-    console.log('YOU ARE NOT LOGGED IN');
-    return;
-    // router.push('/login');
-  }
-
-  return <Map defaultCenter={home} />;
+  return shouldRender ? <Map defaultCenter={home} /> : <div>Unauthorized</div>;
 };
 
-export default MapPage;
+MapPage.propTypes = {
+  AuthUserInfo: PropTypes.shape({
+    AuthUser: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      email: PropTypes.string.isRequired,
+      emailVerified: PropTypes.bool.isRequired,
+    }),
+    token: PropTypes.string,
+  }),
+};
+
+MapPage.defaultProps = {
+  AuthUserInfo: null,
+};
+
+export default withAuthUser(withAuthUserInfo(MapPage));

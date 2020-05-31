@@ -1,6 +1,6 @@
 import * as admin from 'firebase-admin';
 
-const verifyIdToken = (token) => {
+export const verifyIdToken = (token) => {
   const firebasePrivateKey = process.env.FIREBASE_PRIVATE_KEY;
 
   if (!admin.apps.length) {
@@ -22,5 +22,3 @@ const verifyIdToken = (token) => {
       throw error;
     });
 };
-
-export default verifyIdToken;

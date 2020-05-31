@@ -1,8 +1,7 @@
-/* globals window */
 import firebase from 'firebase/app';
 import 'firebase/auth';
 
-export default async () => {
+export default async function logout() {
   return firebase
     .auth()
     .signOut()
@@ -24,4 +23,4 @@ export default async () => {
       console.error(e);
       return false;
     });
-};
+}

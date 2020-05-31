@@ -1,4 +1,5 @@
-/* eslint-disable react/jsx-props-no-spreading */
+/* eslint react/jsx-props-no-spreading: 0 */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { get, set } from 'lodash/object';
@@ -8,7 +9,7 @@ import { createAuthUser, createAuthUserInfo } from '../auth/user';
 // Gets the authenticated user from the Firebase JS SDK, when client-side,
 // or from the request object, when server-side. Add the AuthUserInfo to
 // context.
-export default (ComposedComponent) => {
+export default function withAuthUser(ComposedComponent) {
   const WithAuthUserComp = (props) => {
     const { AuthUserInfo, ...otherProps } = props;
 
@@ -46,7 +47,7 @@ export default (ComposedComponent) => {
     } else {
       // If client-side, get AuthUserInfo from stored data. We store it
       // in _document.js. See:
-      // https://github.com/zeit/next.js/issues/2252#issuecomment-353992669
+      // https://github.com/vercel/next.js/issues/2252#issuecomment-353992669
       try {
         const jsonData = JSON.parse(
           window.document.getElementById('__MY_AUTH_USER_INFO').textContent,
@@ -95,4 +96,4 @@ export default (ComposedComponent) => {
   WithAuthUserComp.defaultProps = {};
 
   return WithAuthUserComp;
-};
+}

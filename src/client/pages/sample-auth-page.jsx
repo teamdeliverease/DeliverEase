@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import { get } from 'lodash/object';
 import Link from 'next/link';
@@ -18,7 +17,7 @@ const Index = (props) => {
       {!AuthUser ? (
         <p>
           You are not signed in.{' '}
-          <Link href={'/login'}>
+          <Link href="/login">
             <a>Sign in</a>
           </Link>
         </p>

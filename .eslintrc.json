@@ -10,7 +10,8 @@
     "no-param-reassign": "warn",
     "react/jsx-props-no-spreading": "off",
     "global-require": "off",
-    "no-alert": "off"
+    "no-alert": "off",
+    "import/prefer-default-export": "off"
   },
   "globals": {
     "React": "writable"
