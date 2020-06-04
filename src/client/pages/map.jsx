@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { get } from 'lodash/object';
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import Map from '../components/Map';
 import withAuthUser from '../utils/pageWrappers/withAuthUser';
 import withAuthUserInfo from '../utils/pageWrappers/withAuthUserInfo';
@@ -39,10 +40,20 @@ const MapPage = (props) => {
   }, [user]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div style={{ margin: '15px', fontSize: '24px' }}>
+        Log in <Link href="/login">here</Link>
+      </div>
+    );
   }
 
-  return shouldRender ? <Map defaultCenter={home} /> : <div>Unauthorized</div>;
+  return shouldRender ? (
+    <Map defaultCenter={home} />
+  ) : (
+    <div>
+      Unauthorized. Try logging in <Link href="/login">here</Link>
+    </div>
+  );
 };
 
 MapPage.propTypes = {

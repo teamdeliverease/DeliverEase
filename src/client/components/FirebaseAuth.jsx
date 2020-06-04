@@ -18,7 +18,7 @@ const firebaseAuthConfig = {
       requireDisplayName: false,
     },
   ],
-  signInSuccessUrl: '/',
+  signInSuccessUrl: '/map',
   credentialHelper: 'none',
 };
 
