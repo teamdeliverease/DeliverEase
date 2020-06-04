@@ -2,21 +2,22 @@ import InfoCard from '../InfoCard';
 
 const HowItWorksSection = () => {
   return (
-    <section id="benefits-section" className="benefits-section theme-bg-light-gradient py-5">
+    <section className="howItWorks-section theme-bg-light-gradient py-5">
       <div className="container">
         <h2 className="section-heading text-center">How It Works</h2>
         <div className="section-intro single-col-max mx-auto text-center mb-3">
-          Turning the quarantine into a quaranteam
+          Our mission is to help neighbors in need personally connect with local volunteers in the
+          face of COVID-19.
         </div>
         <div className="row text-center">
           <InfoCard
-            image="/assets/images/lightbulb.png"
+            image="/assets/images/lightbulb.webp"
             title=" Volunteers sign up to make deliveries "
             text="Volunteers rock! They’ll fulfill requests whenever they were originally planning on
             going to a store themselves, making it convenient to pick up requested items."
           />
           <InfoCard
-            image="/assets/images/notepad.png"
+            image="/assets/images/notepad.webp"
             title=" Anyone who could use help can submit a request below "
             text="Whether you have a particular vulnerability or are a healthcare practitioner
             intentionally staying away from public areas, we’re here to help."
@@ -24,13 +25,14 @@ const HowItWorksSection = () => {
         </div>
         <div className="row text-center">
           <InfoCard
-            image="/assets/images/heart.png"
+            image="/assets/images/heart.webp"
             title=" We’ll pass requests to volunteers in your neighborhood "
             text="They’ll let us know when they can fulfill your request, and we’ll let you know when
             to expect your delivery."
           />
           <InfoCard
-            image="/assets/images/piggyBank.png"
+            image="/assets/images/piggyBank.webp"
+            imageWidth="65"
             title=" Zero fees "
             text="No service or delivery fees!
             That means $0. Payments for groceries and purchased goods will be arranged between the

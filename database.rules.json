@@ -1,16 +1,105 @@
 {
   "rules": {
-    ".read": false,
     "volunteers": {
       "$uid": {
-        ".validate": "newData.hasChildren(['address', 'lat', 'lng', 'name', 'phone', 'email', 'timestamp'])",
-        ".write": true
+        ".validate": "newData.hasChildren(['firstName', 'lastName', 'name', 'email', 'address', 'phone', 'hasCar', 'termsAgreement', 'timestamp'])",
+        "firstName": {
+          ".validate": "((newData.isString() && newData.val().length > 0) && newData.val().length <= 64)"
+        },
+        "lastName": {
+          ".validate": "((newData.isString() && newData.val().length > 0) && newData.val().length <= 64)"
+        },
+        "name": {
+          ".validate": "((newData.isString() && newData.val().length > 0) && newData.val().length <= 128)"
+        },
+        "email": {
+          ".validate": "(((newData.isString() && newData.val().length > 0) && newData.val().length <= 256) && newData.val().contains('@'))"
+        },
+        "address": {
+          ".validate": "((newData.isString() && newData.val().length > 0) && newData.val().length <= 256)"
+        },
+        "phone": {
+          ".validate": "((newData.isString() && newData.val().length > 0) && newData.val().length <= 15)"
+        },
+        "hasCar": {
+          ".validate": "(newData.isBoolean() && newData.val() != null)"
+        },
+        "termsAgreement": {
+          ".validate": "(newData.isBoolean() && newData.val() == true)"
+        },
+        "language": {
+          "$key1": {
+            ".validate": "(newData.isString() && (newData.val() == 'Spanish' || newData.val() == 'English' || newData.val() == 'Mandarin' || newData.val() == 'Cantonese' || newData.val() == 'Other' ))"
+          }
+        },
+        "lat": {
+          ".validate": "((newData.isNumber() && newData.val() >= -90) && newData.val() <= 90)"
+        },
+        "lng": {
+          ".validate": "((newData.isNumber() && newData.val() >= -180) && newData.val() <= 180)"
+        },
+        "timestamp": {
+          ".validate": "(newData.isNumber() && newData.val() == (data.val() == null ? now : data.val()))"
+        },
+        "$other": {
+          ".validate": "false"
+        },
+        ".read": "auth.token.admin == true",
+        ".write": "true"
       }
     },
     "requesters": {
       "$uid": {
-        ".validate": "newData.hasChildren(['address', 'lat', 'lng', 'name', 'phone', 'timestamp', 'list'])",
-        ".write": true
+        ".validate": "newData.hasChildren(['firstName', 'lastName', 'name', 'email', 'address', 'phone', 'termsAgreement', 'list', 'timestamp', 'fulfillment_status', 'fulfillment_status_timestamp'])",
+        "firstName": {
+          ".validate": "((newData.isString() && newData.val().length > 0) && newData.val().length <= 64)"
+        },
+        "lastName": {
+          ".validate": "((newData.isString() && newData.val().length > 0) && newData.val().length <= 64)"
+        },
+        "name": {
+          ".validate": "((newData.isString() && newData.val().length > 0) && newData.val().length <= 128)"
+        },
+        "email": {
+          ".validate": "(newData.isString() && (newData.val() == '' || ((newData.val().length > 0 && newData.val().length <= 256) && newData.val().contains('@'))))"
+        },
+        "address": {
+          ".validate": "((newData.isString() && newData.val().length > 0) && newData.val().length <= 256)"
+        },
+        "phone": {
+          ".validate": "((newData.isString() && newData.val().length > 0) && newData.val().length <= 15)"
+        },
+        "termsAgreement": {
+          ".validate": "(newData.isBoolean() && newData.val() == true)"
+        },
+        "list": {
+          ".validate": "((newData.isString() && newData.val().length > 0) && newData.val().length <= 1024)"
+        },
+        "lat": {
+          ".validate": "((newData.isNumber() && newData.val() >= -90) && newData.val() <= 90)"
+        },
+        "lng": {
+          ".validate": "((newData.isNumber() && newData.val() >= -180) && newData.val() <= 180)"
+        },
+        "language": {
+          "$key1": {
+            ".validate": "(newData.isString() && (newData.val() == 'Spanish' || newData.val() == 'English' || newData.val() == 'Mandarin' || newData.val() == 'Cantonese' || newData.val() == 'Other' ))"
+          }
+        },
+        "timestamp": {
+          ".validate": "(newData.isNumber() && newData.val() == (data.val() == null ? now : data.val()))"
+        },
+        "fulfillment_status": {
+          ".validate": "(newData.isString() && ((((newData.val() == 'new' || newData.val() == 'sourcing_volunteer') || newData.val() == 'pending_fullfilment') || newData.val() == 'fulfilling') || newData.val() == 'complete'))"
+        },
+        "fulfillment_status_timestamp": {
+          ".validate": "(newData.isNumber() && newData.val() == now)"
+        },
+        "$other": {
+          ".validate": "false"
+        },
+        ".read": "auth.token.admin == true",
+        ".write": "true"
       }
     }
   }

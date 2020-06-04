@@ -1,3 +1,6 @@
+$theme-primary: #e55712;
+$text-blue: #007bff;
+
 .full-width {
   width: 100% !important;
 }
@@ -78,14 +81,18 @@
   .logo-text {
     font-size: 1.3rem !important;
   }
+
+  .welcome-image {
+    display: none;
+  }
+
+  .welcome-section {
+    text-align: center;
+  }
 }
 
 .terms-link {
   color: #007bff !important;
-}
-
-.confirmation-message {
-  display: none;
 }
 
 .confirmation-message h4 {
@@ -116,6 +123,58 @@ a[href^='tel'] {
   display: flex !important;
 }
 
-.text-orange {
-  color: #e55712;
+.link-themed,
+a:not([href]).link-theme {
+  color: $theme-primary;
+}
+
+.link-themed:hover,
+a:not([href]).link-theme:hover {
+  color: $theme-primary;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.link-white,
+a:not([href]).link-white {
+  color: white;
+}
+.link-white:hover,
+a:not([href]).link-white:hover {
+  color: white;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.link-blue,
+a:not([href]).link-blue {
+  color: $text-blue;
+}
+
+.link-blue:hover,
+a:not([href]).link-blue:hover {
+  color: $text-blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.PhoneInputInput {
+  border: none;
+}
+
+.PhoneInputCountryIcon--border {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.PhoneInputCountryIcon {
+  height: 100%;
+}
+
+.pb-6 {
+  margin-bottom: 4.5rem;
+}
+
+.pb-7 {
+  margin-bottom: 6rem;
 }

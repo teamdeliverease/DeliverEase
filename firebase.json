@@ -19,8 +19,10 @@
       ".firebaserc",
       "firebase.json",
       "**/node_modules/**",
-      "**/public/**"
-    ],
-    "predeploy": ["npm --prefix \"$RESOURCE_DIR\" run lint"]
+      "**/public/**",
+      ".env.*",
+      ".git",
+      ".gitignore"
+    ]
   }
 }
