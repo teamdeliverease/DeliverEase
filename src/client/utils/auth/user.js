@@ -14,9 +14,11 @@ export const createAuthUser = (firebaseUser) => {
   if (!firebaseUser || !firebaseUser.uid) {
     return null;
   }
+
   return {
     id: get(firebaseUser, 'uid'),
     email: get(firebaseUser, 'email'),
+    user: firebaseUser,
     emailVerified: has(firebaseUser, 'emailVerified')
       ? get(firebaseUser, 'emailVerified') // Firebase JS SDK
       : get(firebaseUser, 'email_verified'), // Firebase admin SDK
@@ -31,7 +33,7 @@ export const createAuthUser = (firebaseUser) => {
  * @return {Object|null} AuthUserInfo - The auth user info object.
  * @return {String} AuthUserInfo.AuthUser - An AuthUser object (see
  *   `createAuthUser` above).
- * @return {String} AuthUser.token - The user's encoded Firebase token.
+ * @return {String} AuthUserInfo.token - The user's encoded Firebase token.
  */
 export const createAuthUserInfo = ({ firebaseUser = null, token = null } = {}) => {
   return {

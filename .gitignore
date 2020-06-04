@@ -70,3 +70,5 @@ node_modules/
 .yarn-integrity
 
 credentials
+
+.env.local
