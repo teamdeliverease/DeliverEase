@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import GoogleMapReact from 'google-map-react';
-import firebase from 'firebase/app';
 import PropTypes from 'prop-types';
-import { useRouter } from 'next/router';
 import { MAPS_API_KEY } from '../constants';
 
 const options = {
@@ -20,7 +18,6 @@ const options = {
 
 const GoogleMap = ({ zoom, defaultCenter }) => {
   const [center, setCenter] = useState(null);
-  const router = useRouter();
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -33,12 +30,6 @@ const GoogleMap = ({ zoom, defaultCenter }) => {
       });
     }
   }, []);
-
-  // const shouldRenderPage = isLoggedIn() && isAdminUser();
-
-  // if (typeof window !== 'undefined' && !shouldRenderPage) {
-  //   // router.push('/login');
-  // }
 
   return (
     <div style={{ height: '100vh', width: '100%' }}>

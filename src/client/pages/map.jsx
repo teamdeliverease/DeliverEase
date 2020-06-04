@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import { get } from 'lodash/object';
 import { useEffect, useState } from 'react';
-// import admin from '../utils/firebase/admin';
 import Map from '../components/Map';
 import withAuthUser from '../utils/pageWrappers/withAuthUser';
 import withAuthUserInfo from '../utils/pageWrappers/withAuthUserInfo';
