@@ -21,4 +21,4 @@ const createMarker = (map, maps, userData, icon = null) => {
   return { marker, infoWindow };
 };
 
-export default createMarker;
+export { createMarker };
