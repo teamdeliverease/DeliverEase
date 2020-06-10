@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import GoogleMapReact from 'google-map-react';
 import PropTypes from 'prop-types';
+import isEmpty from 'lodash/isEmpty';
 import { MAPS_API_KEY } from '../constants';
 import { getVolunteers } from '../api/volunteers';
-import { createMarker } from '../utils/markerUtils';
+import { createMarker, Marker } from '../utils/markerUtils';
 
 const options = {
   styles: [
@@ -18,20 +19,20 @@ const options = {
   ],
 };
 
-const handleApiLoaded = (map, maps, volunteers) => {
-  const markers = [];
-  const infoWindows = [];
+// const handleApiLoaded = (map, maps, volunteers) => {
+//   const markers = [];
+//   const infoWindows = [];
 
-  volunteers.forEach((volunteer) => {
-    const { marker, infoWindow } = createMarker(map, maps, volunteer);
-    markers.push(marker);
-    infoWindows.push(infoWindow);
-  });
-};
+//   Object.values(volunteers).forEach((volunteer) => {
+//     const { marker, infoWindow } = createMarker(map, maps, volunteer);
+//     markers.push(marker);
+//     infoWindows.push(infoWindow);
+//   });
+// };
 
 const GoogleMap = ({ zoom, defaultCenter }) => {
   const [center, setCenter] = useState(null);
-  const [volunteers, setVolunteers] = useState(null);
+  const [volunteers, setVolunteers] = useState({});
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -51,7 +52,6 @@ const GoogleMap = ({ zoom, defaultCenter }) => {
       try {
         // disable submit button while waiting on api call
         const volunteerResult = await getVolunteers();
-        console.log('result from map:', volunteerResult.val());
         setVolunteers(volunteerResult.val());
       } catch (err) {
         console.error(err);
@@ -62,15 +62,27 @@ const GoogleMap = ({ zoom, defaultCenter }) => {
 
   return (
     <div style={{ height: '100vh', width: '100%' }}>
-      <GoogleMapReact
-        bootstrapURLKeys={{ key: MAPS_API_KEY }}
-        defaultCenter={defaultCenter}
-        center={center}
-        defaultZoom={zoom}
-        options={options}
-        yesIWantToUseGoogleMapApiInternals
-        onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps, volunteers)}
-      />
+      {!isEmpty(volunteers) && (
+        <GoogleMapReact
+          bootstrapURLKeys={{ key: MAPS_API_KEY }}
+          defaultCenter={defaultCenter}
+          center={center}
+          defaultZoom={zoom}
+          options={options}
+          // yesIWantToUseGoogleMapApiInternals
+          // onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps, volunteers)}
+        >
+          {Object.entries(volunteers).map(([key, volunteer], idx) => (
+            <Marker
+              userData={volunteer}
+              icon=""
+              lat={volunteer.lat}
+              lng={volunteer.lng}
+              key={key}
+            />
+          ))}
+        </GoogleMapReact>
+      )}
     </div>
   );
 };
