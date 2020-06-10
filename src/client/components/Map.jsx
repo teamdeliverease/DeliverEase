@@ -52,7 +52,13 @@ const GoogleMap = ({ zoom, defaultCenter }) => {
       try {
         // disable submit button while waiting on api call
         const volunteerResult = await getVolunteers();
-        setVolunteers(volunteerResult.val());
+        const volunteerArray = Object.entries(volunteerResult.val()).map(([id, volunteer]) => ({
+          ...volunteer,
+          id,
+        }));
+
+        console.log(volunteerArray);
+        setVolunteers(volunteerArray);
       } catch (err) {
         console.error(err);
       }
@@ -72,13 +78,12 @@ const GoogleMap = ({ zoom, defaultCenter }) => {
           // yesIWantToUseGoogleMapApiInternals
           // onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps, volunteers)}
         >
-          {Object.entries(volunteers).map(([key, volunteer], idx) => (
+          {volunteers.map((volunteer) => (
             <Marker
               userData={volunteer}
-              icon=""
               lat={volunteer.lat}
               lng={volunteer.lng}
-              key={key}
+              key={volunteer.id}
             />
           ))}
         </GoogleMapReact>
