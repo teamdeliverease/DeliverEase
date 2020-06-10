@@ -24,7 +24,7 @@ const postRequest = (data) => {
 };
 
 const getRequests = () => {
-  get(REQUESTERS_REF);
+  return get(REQUESTERS_REF);
 };
 
 export { postRequest, getRequests };
