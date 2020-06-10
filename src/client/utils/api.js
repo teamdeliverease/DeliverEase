@@ -68,7 +68,6 @@ const get = (ref) => {
     .database()
     .ref(ref)
     .once('value', (snapshot) => {
-      console.log('snapshot from api:', snapshot.val());
       return snapshot.val();
     });
 };
