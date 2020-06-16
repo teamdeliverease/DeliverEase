@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import GoogleMapReact from 'google-map-react';
 import PropTypes from 'prop-types';
 import isEmpty from 'lodash/isEmpty';
-import { MAPS_API_KEY } from '../constants';
+import { MAPS_API_KEY, FULFILLMENT_STATUS } from '../constants';
 import { getVolunteers } from '../api/volunteers';
 import { getRequests } from '../api/requesters';
 import { Marker } from '../utils/markerUtils';
@@ -82,15 +82,24 @@ const GoogleMap = ({ zoom, defaultCenter }) => {
         >
           {volunteers.map((volunteer) => (
             <Marker
+              type="volunteer"
               userData={volunteer}
               lat={volunteer.lat}
               lng={volunteer.lng}
               key={volunteer.id}
             />
           ))}
-          {requests.map((request) => (
-            <Marker userData={request} lat={request.lat} lng={request.lng} key={request.id} />
-          ))}
+          {requests
+            .filter(({ fulfillment_status }) => fulfillment_status !== FULFILLMENT_STATUS.COMPLETE)
+            .map((request) => (
+              <Marker
+                type="request"
+                userData={request}
+                lat={request.lat}
+                lng={request.lng}
+                key={request.id}
+              />
+            ))}
         </GoogleMapReact>
       )}
     </div>

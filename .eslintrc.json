@@ -11,7 +11,8 @@
     "react/jsx-props-no-spreading": "off",
     "global-require": "off",
     "no-alert": "off",
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+    "camelcase": "off"
   },
   "globals": {
     "React": "writable"

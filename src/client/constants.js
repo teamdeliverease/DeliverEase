@@ -1,10 +1,18 @@
 export const FULFILLMENT_STATUS = {
   NEW: 'new',
   SOURCING_VOLUNTEER: 'sourcing_volunteer',
-  PENDING_FULFILLMENT: 'pending_fullfilment',
+  PENDING_FULFILLMENT: 'pending_fulfillment',
   FULFILLING: 'fulfilling',
   COMPLETE: 'complete',
 };
+
+export const CLIENT_FULFILLMENT_STATUSES = [
+  { value: FULFILLMENT_STATUS.NEW, label: 'New' },
+  { value: FULFILLMENT_STATUS.SOURCING_VOLUNTEER, label: 'Sourcing Volunteer' },
+  { value: FULFILLMENT_STATUS.PENDING_FULFILLMENT, label: 'Pending Fulfillment' },
+  { value: FULFILLMENT_STATUS.FULFILLING, label: 'Fulfilling' },
+  { value: FULFILLMENT_STATUS.COMPLETE, label: 'Complete' },
+];
 
 export const GENERIC_ERROR_MESSAGE =
   'Whoops! Something went wrong, sorry about that. If this problem continues, please call us at (415) 633-6261';

@@ -30,7 +30,7 @@ const getRequests = () => {
 };
 
 const updateRequestStatus = (requestId, status) => {
-  update(REQUESTERS_REF.requestId, {
+  update(`${REQUESTERS_REF}/${requestId}`, {
     fulfillment_status: status,
     fulfillment_status_timestamp: firebase.database.ServerValue.TIMESTAMP,
   });
