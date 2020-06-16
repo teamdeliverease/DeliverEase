@@ -15,7 +15,6 @@ const geocode = (address) => {
     });
   });
 };
-/* eslint-enable no-undef */
 
 const addToFirebase = (ref, data) => {
   const dataWithTimestamp = { ...data, timestamp: firebase.database.ServerValue.TIMESTAMP };
@@ -72,6 +71,10 @@ const get = (ref) => {
     });
 };
 
+const update = (ref, data) => {
+  return firebase.database().ref(ref).update(data);
+};
+
 export {
   submitForm,
   getLocationPayload,
@@ -79,4 +82,5 @@ export {
   getNamePayload,
   prepareAndAddToFirebase,
   get,
+  update,
 };
