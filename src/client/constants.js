@@ -32,15 +32,6 @@ export const RESOLUTION_STATUSES = [
   { value: RESOLUTIONS.DUPLICATE, label: 'Duplicate' },
 ];
 
-export const RESOLUTION_COLORS = {
-  [RESOLUTIONS.DELIVERED]: '#00C875',
-  [RESOLUTIONS.NO_VOLUNTEER_FOUND]: '#E2445C',
-  [RESOLUTIONS.REQUESTER_NOT_COMMUNICATING]: '#579BFC',
-  [RESOLUTIONS.REJECTED]: '#9AADBD',
-  [RESOLUTIONS.CANCELLED]: '#FAA1F1',
-  [RESOLUTIONS.DUPLICATE]: '#CBB641',
-};
-
 export const GENERIC_ERROR_MESSAGE =
   'Whoops! Something went wrong, sorry about that. If this problem continues, please call us at (415) 633-6261';
 
