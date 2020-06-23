@@ -71,6 +71,16 @@ const get = (ref) => {
     });
 };
 
+const listen = (ref, callback) => {
+  firebase
+    .database()
+    .ref(ref)
+    .on('value', (snapshot) => {
+      console.log(snapshot.val());
+      callback(snapshot.val());
+    });
+};
+
 const update = (ref, data) => {
   return firebase.database().ref(ref).update(data);
 };
@@ -82,5 +92,6 @@ export {
   getNamePayload,
   prepareAndAddToFirebase,
   get,
+  listen,
   update,
 };

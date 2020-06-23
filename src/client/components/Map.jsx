@@ -3,8 +3,8 @@ import GoogleMapReact from 'google-map-react';
 import PropTypes from 'prop-types';
 import isEmpty from 'lodash/isEmpty';
 import { MAPS_API_KEY, FULFILLMENT_STATUS } from '../constants';
-import { getVolunteers } from '../api/volunteers';
-import { getRequests } from '../api/requesters';
+import { listenForVolunteers } from '../api/volunteers';
+import { listenForRequests } from '../api/requesters';
 import { Marker } from '../utils/markerUtils';
 
 const options = {
@@ -37,17 +37,17 @@ const GoogleMap = ({ zoom, defaultCenter }) => {
     }
   }, []);
 
-  // We want this to update when volunteers updates but that requires listening to db changes
   useEffect(() => {
     async function loadVolunteers() {
       try {
         // disable submit button while waiting on api call
-        const volunteerResult = await getVolunteers();
-        const volunteerArray = Object.entries(volunteerResult.val()).map(([id, volunteer]) => ({
-          ...volunteer,
-          id,
-        }));
-        setVolunteers(volunteerArray);
+        await listenForVolunteers((snapshot) => {
+          const volunteerArray = Object.entries(snapshot).map(([id, volunteer]) => ({
+            ...volunteer,
+            id,
+          }));
+          setVolunteers(volunteerArray);
+        });
       } catch (err) {
         console.error(err);
       }
@@ -55,12 +55,13 @@ const GoogleMap = ({ zoom, defaultCenter }) => {
     async function loadRequests() {
       try {
         // disable submit button while waiting on api call
-        const requestResult = await getRequests();
-        const requestArray = Object.entries(requestResult.val()).map(([id, request]) => ({
-          ...request,
-          id,
-        }));
-        setRequests(requestArray);
+        await listenForRequests((snapshot) => {
+          const requestArray = Object.entries(snapshot).map(([id, request]) => ({
+            ...request,
+            id,
+          }));
+          setRequests(requestArray);
+        });
       } catch (err) {
         console.error(err);
       }
@@ -90,7 +91,7 @@ const GoogleMap = ({ zoom, defaultCenter }) => {
             />
           ))}
           {requests
-            .filter(({ fulfillment_status }) => fulfillment_status !== FULFILLMENT_STATUS.COMPLETE)
+            .filter(({ fulfillment_status }) => fulfillment_status !== FULFILLMENT_STATUS.RESOLVED)
             .map((request) => (
               <Marker
                 type="request"

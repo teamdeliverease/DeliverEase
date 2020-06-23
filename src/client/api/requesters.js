@@ -3,7 +3,7 @@ import {
   getLocationPayload,
   getNamePayload,
   getFulfillmentStatusPayload,
-  get,
+  listen,
   update,
 } from '../utils/api';
 import firebase from '../utils/firebase/client';
@@ -25,8 +25,8 @@ const postRequest = (data) => {
   });
 };
 
-const getRequests = () => {
-  return get(REQUESTERS_REF);
+const listenForRequests = (callback) => {
+  listen(REQUESTERS_REF, callback);
 };
 
 const updateRequestStatus = (requestId, status) => {
@@ -36,4 +36,4 @@ const updateRequestStatus = (requestId, status) => {
   });
 };
 
-export { postRequest, getRequests, updateRequestStatus };
+export { postRequest, listenForRequests, updateRequestStatus };
