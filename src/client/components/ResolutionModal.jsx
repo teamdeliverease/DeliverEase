@@ -1,10 +1,19 @@
 import Modal from 'react-bootstrap/Modal';
 import PropTypes from 'prop-types';
-import { RESOLUTION_COLORS, RESOLUTION_STATUSES } from '../constants';
+import { RESOLUTIONS, RESOLUTION_STATUSES } from '../constants';
 
-function ResolutionModal({ show, onComplete, onClose, onUpdate, title, id }) {
+export const RESOLUTION_COLORS = {
+  [RESOLUTIONS.DELIVERED]: '#00C875',
+  [RESOLUTIONS.NO_VOLUNTEER_FOUND]: '#E2445C',
+  [RESOLUTIONS.REQUESTER_NOT_COMMUNICATING]: '#579BFC',
+  [RESOLUTIONS.REJECTED]: '#9AADBD',
+  [RESOLUTIONS.CANCELLED]: '#FAA1F1',
+  [RESOLUTIONS.DUPLICATE]: '#CBB641',
+};
+
+function ResolutionModal({ show, onComplete, onClose, title, id }) {
   const handleUpdate = (newResolution) => {
-    onUpdate(id, newResolution);
+    onComplete(id, newResolution);
     onClose();
   };
 
@@ -33,7 +42,6 @@ function ResolutionModal({ show, onComplete, onClose, onUpdate, title, id }) {
 
 ResolutionModal.propTypes = {
   id: PropTypes.string.isRequired,
-  onUpdate: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
   show: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,

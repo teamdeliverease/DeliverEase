@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
 import { CLIENT_FULFILLMENT_STATUSES, FULFILLMENT_STATUS } from '../constants';
@@ -6,9 +6,13 @@ import { updateRequestStatus, updateResolution } from '../api/requesters';
 import ResolutionModal from './ResolutionModal';
 
 function InfoWindow({ userData, isRequest }) {
-  const { name, phone, address, fulfillment_status, id } = userData;
+  const { name, phone, address, fulfillment_status: dbFulfillmentStatus, id } = userData;
   const [showModal, setShowModal] = useState(false);
-  const previousStatus = fulfillment_status;
+  const [fulfillmentStatus, setFulfillmentStatus] = useState(dbFulfillmentStatus);
+
+  useEffect(() => {
+    setFulfillmentStatus(dbFulfillmentStatus);
+  }, [dbFulfillmentStatus]);
 
   const handleChangeRequestStatus = (newStatus) => {
     if (newStatus === FULFILLMENT_STATUS.RESOLVED) {
@@ -19,7 +23,7 @@ function InfoWindow({ userData, isRequest }) {
   };
 
   const handleCloseModal = () => {
-    // updateRequestStatus(id, previousStatus);
+    setFulfillmentStatus(dbFulfillmentStatus);
     setShowModal(false);
   };
 
@@ -37,9 +41,7 @@ function InfoWindow({ userData, isRequest }) {
       Address: {address}
       {isRequest && (
         <Select
-          defaultValue={CLIENT_FULFILLMENT_STATUSES.find(
-            ({ value }) => value === fulfillment_status,
-          )}
+          value={CLIENT_FULFILLMENT_STATUSES.find(({ value }) => value === fulfillmentStatus)}
           options={CLIENT_FULFILLMENT_STATUSES}
           className="basic-multi-select"
           classNamePrefix="select"
