@@ -91,7 +91,7 @@ const GoogleMap = ({ zoom, defaultCenter }) => {
             />
           ))}
           {requests
-            .filter(({ fulfillment_status }) => fulfillment_status !== FULFILLMENT_STATUS.RESOLVED)
+            // .filter(({ fulfillment_status }) => fulfillment_status !== FULFILLMENT_STATUS.RESOLVED)
             .map((request) => (
               <Marker
                 type="request"

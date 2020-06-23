@@ -14,6 +14,33 @@ export const CLIENT_FULFILLMENT_STATUSES = [
   { value: FULFILLMENT_STATUS.RESOLVED, label: 'Resolved' },
 ];
 
+export const RESOLUTIONS = {
+  DELIVERED: 'delivered',
+  NO_VOLUNTEER_FOUND: 'no_volunteer_found',
+  REQUESTER_NOT_COMMUNICATING: 'requester_not_communicating',
+  REJECTED: 'rejected',
+  CANCELLED: 'cancelled',
+  DUPLICATE: 'duplicate',
+};
+
+export const RESOLUTION_STATUSES = [
+  { value: RESOLUTIONS.DELIVERED, label: 'Delivered' },
+  { value: RESOLUTIONS.NO_VOLUNTEER_FOUND, label: 'No volunteer found' },
+  { value: RESOLUTIONS.REQUESTER_NOT_COMMUNICATING, label: 'Requester not communicating' },
+  { value: RESOLUTIONS.REJECTED, label: 'Rejected' },
+  { value: RESOLUTIONS.CANCELLED, label: 'Cancelled' },
+  { value: RESOLUTIONS.DUPLICATE, label: 'Duplicate' },
+];
+
+export const RESOLUTION_COLORS = {
+  [RESOLUTIONS.DELIVERED]: '#00C875',
+  [RESOLUTIONS.NO_VOLUNTEER_FOUND]: '#E2445C',
+  [RESOLUTIONS.REQUESTER_NOT_COMMUNICATING]: '#579BFC',
+  [RESOLUTIONS.REJECTED]: '#9AADBD',
+  [RESOLUTIONS.CANCELLED]: '#FAA1F1',
+  [RESOLUTIONS.DUPLICATE]: '#CBB641',
+};
+
 export const GENERIC_ERROR_MESSAGE =
   'Whoops! Something went wrong, sorry about that. If this problem continues, please call us at (415) 633-6261';
 

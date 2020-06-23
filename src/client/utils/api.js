@@ -76,7 +76,6 @@ const listen = (ref, callback) => {
     .database()
     .ref(ref)
     .on('value', (snapshot) => {
-      console.log(snapshot.val());
       callback(snapshot.val());
     });
 };

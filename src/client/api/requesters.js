@@ -36,4 +36,10 @@ const updateRequestStatus = (requestId, status) => {
   });
 };
 
-export { postRequest, listenForRequests, updateRequestStatus };
+const updateResolution = (requestId, resolution) => {
+  update(`${REQUESTERS_REF}/${requestId}`, {
+    resolution,
+  });
+};
+
+export { postRequest, listenForRequests, updateRequestStatus, updateResolution };

@@ -2,18 +2,30 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
 import { CLIENT_FULFILLMENT_STATUSES, FULFILLMENT_STATUS } from '../constants';
-import { updateRequestStatus } from '../api/requesters';
+import { updateRequestStatus, updateResolution } from '../api/requesters';
 import ResolutionModal from './ResolutionModal';
 
 function InfoWindow({ userData, isRequest }) {
   const { name, phone, address, fulfillment_status, id } = userData;
   const [showModal, setShowModal] = useState(false);
+  const previousStatus = fulfillment_status;
 
   const handleChangeRequestStatus = (newStatus) => {
     if (newStatus === FULFILLMENT_STATUS.RESOLVED) {
       setShowModal(true);
+    } else {
+      updateRequestStatus(id, newStatus);
     }
-    updateRequestStatus(id, newStatus);
+  };
+
+  const handleCloseModal = () => {
+    // updateRequestStatus(id, previousStatus);
+    setShowModal(false);
+  };
+
+  const handleComplete = () => {
+    updateRequestStatus(id, FULFILLMENT_STATUS.RESOLVED);
+    setShowModal(false);
   };
 
   return (
@@ -35,12 +47,13 @@ function InfoWindow({ userData, isRequest }) {
         />
       )}
       <ResolutionModal
-        title="Select a resolution"
+        id={id}
+        onClose={handleCloseModal}
+        onComplete={handleComplete}
+        onUpdate={updateResolution}
         show={showModal}
-        handleClose={() => setShowModal(false)}
-      >
-        Test Modal
-      </ResolutionModal>
+        title="Select a resolution"
+      />
     </div>
   );
 }

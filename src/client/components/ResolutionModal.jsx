@@ -1,24 +1,43 @@
 import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
-import ThemedLink from './ThemedLink';
+import { RESOLUTION_COLORS, RESOLUTION_STATUSES } from '../constants';
 
-function ResolutionModal({ show, handleClose, children, title }) {
+function ResolutionModal({ show, onComplete, onClose, onUpdate, title, id }) {
+  const handleUpdate = (newResolution) => {
+    onUpdate(id, newResolution);
+    onClose();
+  };
+
   return (
-    <Modal show={show} onHide={handleClose}>
+    <Modal show={show} onHide={onClose}>
       <Modal.Header closeButton>
         <Modal.Title>{title}</Modal.Title>
       </Modal.Header>
-      <Modal.Body>{children}</Modal.Body>
+      <Modal.Body>
+        <div className="resolutionContainer">
+          {RESOLUTION_STATUSES.map(({ label, value }) => (
+            <button
+              className="resolutionButton"
+              style={{ backgroundColor: RESOLUTION_COLORS[value] }}
+              type="button"
+              onClick={() => handleUpdate(value)}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+      </Modal.Body>
     </Modal>
   );
 }
 
 ResolutionModal.propTypes = {
+  id: PropTypes.string.isRequired,
+  onUpdate: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
   show: PropTypes.bool.isRequired,
-  handleClose: PropTypes.func.isRequired,
-  children: PropTypes.node.isRequired,
+  onClose: PropTypes.func.isRequired,
+  onComplete: PropTypes.func.isRequired,
 };
 
 export default ResolutionModal;
