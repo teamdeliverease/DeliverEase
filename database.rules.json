@@ -95,6 +95,9 @@
         "fulfillment_status_timestamp": {
           ".validate": "(newData.isNumber() && newData.val() == now)"
         },
+        "resolution": {
+          ".validate": "(newData.isString() && (((((newData.val() == 'delivered' || newData.val() == 'no_volunteer_found') || newData.val() == 'requester_not_communicating') || newData.val() == 'rejected') || newData.val() == 'cancelled') || newData.val() == 'duplicate'))"
+        },
         "$other": {
           ".validate": "false"
         },
