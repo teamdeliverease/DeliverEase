@@ -1,7 +1,17 @@
 import { useState } from 'react';
 import Select from 'react-select';
-import { CLIENT_FULFILLMENT_STATUSES } from '../constants';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingCart, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import { FULFILLMENT_STATUS, CLIENT_FULFILLMENT_STATUSES } from '../constants';
 import { updateRequestStatus } from '../api/requesters';
+
+const FULFILLMENT_STATUS_COLORS = {
+  [FULFILLMENT_STATUS.NEW]: '#FF158A',
+  [FULFILLMENT_STATUS.SOURCING_VOLUNTEER]: '#FDAB3B',
+  [FULFILLMENT_STATUS.PENDING_FULFILLMENT]: '#784BD1',
+  [FULFILLMENT_STATUS.FULFILLING]: '#579BFC',
+  [FULFILLMENT_STATUS.RESOLVED]: '#00C875',
+};
 
 const addInfoWindow = (map, maps, userData, marker) => {
   const infoWindow = new maps.InfoWindow({
@@ -40,11 +50,13 @@ const InfoWindow = ({ userData, isRequest }) => {
 
 const Marker = ({ userData, type }) => {
   const [isVisible, setVisible] = useState(true);
-
+  const isRequest = type === 'request';
+  const icon = isRequest ? faMapMarkerAlt : faShoppingCart;
+  const color = isRequest ? FULFILLMENT_STATUS_COLORS[userData.fulfillment_status] : '#E55712';
   return (
     <div>
-      <img src="assets/images/felixMarker.webp" alt="Felix" />
-      {isVisible && <InfoWindow userData={userData} isRequest={type === 'request'} />}
+      <FontAwesomeIcon icon={icon} color={color} size="3x" />
+      {isVisible && <InfoWindow userData={userData} isRequest={isRequest} />}
     </div>
   );
 };
