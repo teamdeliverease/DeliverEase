@@ -1,4 +1,4 @@
-import { get, submitForm, getLocationPayload, getNamePayload } from '../utils/api';
+import { listen, submitForm, getLocationPayload, getNamePayload } from '../utils/api';
 
 const VOLUNTEERS_REF = 'volunteers';
 
@@ -16,8 +16,8 @@ const postVolunteer = (data) => {
   });
 };
 
-const getVolunteers = () => {
-  return get(VOLUNTEERS_REF);
+const listenForVolunteers = (callback) => {
+  listen(VOLUNTEERS_REF, callback);
 };
 
-export { postVolunteer, getVolunteers };
+export { postVolunteer, listenForVolunteers };

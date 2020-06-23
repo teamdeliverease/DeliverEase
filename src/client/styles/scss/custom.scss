@@ -189,3 +189,15 @@ a:not([href]).link-blue:hover {
   border: 1px solid gray;
   border-radius: 5px;
 }
+
+.resolutionContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.resolutionButton {
+  width: 60%;
+  margin-bottom: 10px;
+}

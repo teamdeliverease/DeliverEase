@@ -52,7 +52,11 @@ type Longitude extends Number {
 }
 
 type FulfillmentStatus extends String {
-  validate() { this == 'new' || this == 'sourcing_volunteer' || this == 'pending_fullfilment' || this == 'fulfilling' || this == 'complete' }
+  validate() { this == 'new' || this == 'sourcing_volunteer' || this == 'pending_fulfillment' || this == 'fulfilling' || this == 'resolved' }
+}
+
+type Resolution extends String {
+  validate() { this == 'delivered' || this == 'no_volunteer_found' || this == 'requester_not_communicating' || this == 'rejected' || this == 'cancelled' || this == 'duplicate' }
 }
 
 type Language extends String[] {
@@ -89,6 +93,7 @@ type Requester {
   language: Language,
   timestamp: InitialTimestamp,
   fulfillment_status: FulfillmentStatus,
+  resolution: Resolution,
   fulfillment_status_timestamp: CurrentTimestamp
 }
 
