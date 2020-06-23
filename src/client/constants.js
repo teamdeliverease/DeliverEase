@@ -3,7 +3,7 @@ export const FULFILLMENT_STATUS = {
   SOURCING_VOLUNTEER: 'sourcing_volunteer',
   PENDING_FULFILLMENT: 'pending_fulfillment',
   FULFILLING: 'fulfilling',
-  COMPLETE: 'complete',
+  RESOLVED: 'resolved',
 };
 
 export const CLIENT_FULFILLMENT_STATUSES = [
@@ -11,7 +11,7 @@ export const CLIENT_FULFILLMENT_STATUSES = [
   { value: FULFILLMENT_STATUS.SOURCING_VOLUNTEER, label: 'Sourcing Volunteer' },
   { value: FULFILLMENT_STATUS.PENDING_FULFILLMENT, label: 'Pending Fulfillment' },
   { value: FULFILLMENT_STATUS.FULFILLING, label: 'Fulfilling' },
-  { value: FULFILLMENT_STATUS.COMPLETE, label: 'Complete' },
+  { value: FULFILLMENT_STATUS.RESOLVED, label: 'Resolved' },
 ];
 
 export const GENERIC_ERROR_MESSAGE =

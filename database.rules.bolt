@@ -52,7 +52,7 @@ type Longitude extends Number {
 }
 
 type FulfillmentStatus extends String {
-  validate() { this == 'new' || this == 'sourcing_volunteer' || this == 'pending_fulfillment' || this == 'fulfilling' || this == 'complete' }
+  validate() { this == 'new' || this == 'sourcing_volunteer' || this == 'pending_fulfillment' || this == 'fulfilling' || this == 'resolved' }
 }
 
 type Language extends String[] {
