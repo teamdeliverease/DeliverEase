@@ -5,7 +5,7 @@ import isEmpty from 'lodash/isEmpty';
 import { MAPS_API_KEY, FULFILLMENT_STATUS } from '../constants';
 import { listenForVolunteers } from '../api/volunteers';
 import { listenForRequests } from '../api/requesters';
-import { Marker } from '../utils/markerUtils';
+import Marker from './Marker';
 
 const options = {
   styles: [
