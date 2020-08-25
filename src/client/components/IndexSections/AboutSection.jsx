@@ -39,10 +39,6 @@ const AboutSection = () => {
               </li>
             </ul>
             <p>
-              <ThemedLink color="white" bold={false} href="tel:415-633-6261">
-                (415) 633-6261
-              </ThemedLink>
-              &nbsp;&nbsp;|&nbsp;&nbsp;
               <ThemedLink
                 color="white"
                 bold={false}
