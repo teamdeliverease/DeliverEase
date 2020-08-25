@@ -11,13 +11,13 @@ const HowItWorksSection = () => {
         </div>
         <div className="row text-center">
           <InfoCard
-            image="/assets/images/lightbulb.webp"
+            image="/assets/images/lightbulb.png"
             title=" Volunteers sign up to make deliveries "
             text="Volunteers rock! They’ll fulfill requests whenever they were originally planning on
             going to a store themselves, making it convenient to pick up requested items."
           />
           <InfoCard
-            image="/assets/images/notepad.webp"
+            image="/assets/images/notepad.png"
             title=" Anyone who could use help can submit a request below "
             text="Whether you have a particular vulnerability or are a healthcare practitioner
             intentionally staying away from public areas, we’re here to help."
@@ -25,13 +25,13 @@ const HowItWorksSection = () => {
         </div>
         <div className="row text-center">
           <InfoCard
-            image="/assets/images/heart.webp"
+            image="/assets/images/heart.png"
             title=" We’ll pass requests to volunteers in your neighborhood "
             text="They’ll let us know when they can fulfill your request, and we’ll let you know when
             to expect your delivery."
           />
           <InfoCard
-            image="/assets/images/piggyBank.webp"
+            image="/assets/images/piggyBank.png"
             imageWidth="65"
             title=" Zero fees "
             text="No service or delivery fees!

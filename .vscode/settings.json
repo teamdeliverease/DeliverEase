@@ -2,5 +2,13 @@
   "editor.formatOnSave": true,
   "search.exclude": {
     "**/*_legacy": true
+  },
+  "workbench.colorCustomizations": {
+    "statusBar.background": "#1A1A1A",
+    "statusBar.noFolderBackground": "#cc1d06",
+    "statusBar.debuggingBackground": "#FF7F0E",
+    "activityBar.background": "#06351D",
+    "titleBar.activeBackground": "#094A29",
+    "titleBar.activeForeground": "#EEFDF5"
   }
 }
