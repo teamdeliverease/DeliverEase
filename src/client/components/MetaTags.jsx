@@ -11,7 +11,7 @@ const MetaTags = () => (
     />
     <meta property="og:title" content="DeliverEase" />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="assets/images/shareThumbnail.webp" />
+    <meta property="og:image" content="assets/images/shareThumbnail.png" />
     <meta
       property="og:description"
       content="Helping connect local volunteers with community members in need."

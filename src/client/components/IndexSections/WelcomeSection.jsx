@@ -49,7 +49,7 @@ const WelcomeSection = () => {
             <div className="book-cover-holder">
               <img
                 className="img-fluid book-cover"
-                src="assets/images/pumpkin.webp"
+                src="assets/images/pumpkin.png"
                 alt="book cover"
               />
             </div>
