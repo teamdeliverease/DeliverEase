@@ -76,18 +76,6 @@ npm run deploy
 npm run deploy:prod -- -m "deployment message"
 ```
 
-🚨 Only run `deploy-prod` with approval of all team members 🚨
-
-### Adding admin users
-
-Use the grant-admin and revoke admin scripts with a user's email to grant/revoke permissions
-Example:
-
-```
-grant-admin matt@gmail.com
-revoke-admin felix@gmail.com
-```
-
 ### Contributing
 
 1. checkout and pull master: `git checkout master && git pull`
