@@ -75,7 +75,8 @@ const VolunteerForm = ({ onSubmitted }) => {
               </>
             </CheckBoxInput>
             <button
-              disabled={props.isSubmitting}
+              disabled
+              style={{ cursor: 'not-allowed' }}
               className="btn btn-primary btn-submit mx-auto"
               type="submit"
             >

@@ -17,9 +17,6 @@ const Header = () => (
                   DeliverEase
                 </a>
               </Link>
-              <a href="tel:415-633-6261">
-                <span className="logo-text">(415) 633-6261</span>
-              </a>
             </div>
           </div>
         </div>

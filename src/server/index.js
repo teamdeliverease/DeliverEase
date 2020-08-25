@@ -1,7 +1,6 @@
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 import next from 'next';
-import dbTriggers from './dbTriggers';
 
 admin.initializeApp();
 
@@ -21,4 +20,4 @@ const server = functions.https.onRequest((req, res) => {
 
 const nextjs = { server };
 
-export { nextjs, dbTriggers };
+export { nextjs };
