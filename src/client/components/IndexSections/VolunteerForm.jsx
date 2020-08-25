@@ -2,7 +2,6 @@ import { Formik, Form } from 'formik';
 import { GENERIC_ERROR_MESSAGE } from '../../constants';
 import TextInput from '../FormPrimitives/TextInput';
 import PhoneNumberInput from '../FormPrimitives/PhoneNumberInput';
-import AddressInput from '../FormPrimitives/AddressInput';
 import SelectInput from '../FormPrimitives/SelectInput';
 import CheckBoxInput from '../FormPrimitives/CheckBoxInput';
 import RadioInput from '../FormPrimitives/RadioInput';
@@ -58,7 +57,7 @@ const VolunteerForm = ({ onSubmitted }) => {
               <TextInput colWidth="6" maxLength="64" name="lastName" placeholder="Last Name" />
             </div>
             <PhoneNumberInput name="phone" placeholder="Phone Number" />
-            <AddressInput name="address" id="volunteerAddress" placeholder="Street Address" />
+            <TextInput maxLength="256" name="address" placeholder="Address" />
             <TextInput maxLength="256" type="email" name="email" placeholder="Email" />
             <SelectInput name="language" options={languageOptions} placeholder="Languages Spoken" />
             <RadioInput name="hasCar">Do you have a car you&apos;d be willing to drive?</RadioInput>

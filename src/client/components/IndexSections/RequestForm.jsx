@@ -2,7 +2,6 @@ import { Formik, Form } from 'formik';
 import { GENERIC_ERROR_MESSAGE } from '../../constants';
 import TextInput from '../FormPrimitives/TextInput';
 import PhoneNumberInput from '../FormPrimitives/PhoneNumberInput';
-import AddressInput from '../FormPrimitives/AddressInput';
 import SelectInput from '../FormPrimitives/SelectInput';
 import CheckBoxInput from '../FormPrimitives/CheckBoxInput';
 import Modal from '../Modal';
@@ -57,7 +56,7 @@ const RequestForm = ({ onSubmitted }) => {
               <TextInput colWidth="6" maxLength="64" name="lastName" placeholder="Last Name" />
             </div>
             <PhoneNumberInput name="phone" placeholder="Phone Number" />
-            <AddressInput name="address" id="requesterAddress" placeholder="Street Address" />
+            <TextInput maxLength="256" name="address" placeholder="Address" />
             <TextInput
               maxLength="256"
               isRequired={false}
