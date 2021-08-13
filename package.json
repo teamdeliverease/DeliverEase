@@ -50,7 +50,7 @@
     "joi-phone-number": "^4.1.0",
     "lodash": "^4.17.15",
     "monday-sdk-js": "0.0.13",
-    "next": "9.4.4",
+    "next": "11.1.0",
     "nodemailer": "^6.4.6",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
