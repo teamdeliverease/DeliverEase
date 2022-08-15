@@ -2,6 +2,9 @@
 
 We connect helpful volunteers with individuals who have a hard time accessing food and other essentials.
 
+![deliverease_website_desktop](https://user-images.githubusercontent.com/5590876/184742478-b2f6f257-1c3d-499d-94b2-4bb95aa6c164.png)
+
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
