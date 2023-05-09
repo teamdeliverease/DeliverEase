@@ -80,7 +80,7 @@
     "firebase-tools": "^7.16.2",
     "husky": "^4.2.3",
     "lint-staged": "^10.0.10",
-    "mocha": "^7.1.2",
+    "mocha": "^10.2.0",
     "prettier": "^2.0.2",
     "rimraf": "^2.6.3"
   },
